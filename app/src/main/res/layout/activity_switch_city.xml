@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+           android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:background="#faF35B81" >
+	
+    <RelativeLayout
+        android:background="@drawable/bg_title_shape"
+        android:id="@+id/switch_city_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+       >
+
+        <TextView
+            android:id="@+id/switch_city_back"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawableLeft="@drawable/icon_arrow_left_white"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:onClick="goBack"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_32px" />
+
+        <TextView
+            android:id="@+id/head_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxWidth="250dp"
+            android:singleLine="true"
+            android:text="切换城市"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40px" />
+    </RelativeLayout>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/switch_city_title"
+        android:background="#F0F0F0"
+        >
+
+    <EditText
+        android:id="@+id/sh"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_margin="10dip"
+        android:drawableLeft="@drawable/wb_search_icon"
+        android:drawablePadding="5dp"
+        android:hint="@string/input_city_or_pinyin"
+        android:padding="10dip"
+        android:textColor="#515151"
+        android:textSize="@dimen/text_size_26px" >
+    </EditText>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sh"
+        android:layout_marginTop="7dp"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+
+    <ListView
+        android:id="@+id/search_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sh"
+        android:layout_marginTop="7dp"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_noresult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sh"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/no_search_city"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <com.show.specialshow.view.MyLetterListView
+        android:id="@+id/MyLetterListView01"
+        android:layout_width="25dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/sh"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="7dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+package com.easemob.chatuidemo.utils;
+
+import android.text.TextUtils;
+import android.widget.TextView;
+
+import com.easemob.applib.controller.HXSDKHelper;
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.domain.User;
+
+public class UserUtils {
+    /**
+     * 根据username获取相应user，由于demo没有真实的用户数据，这里给的模拟的数据；
+     * @param username
+     * @return
+     */
+    public static User getUserInfo(String username){
+        User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getContactList().get(username);
+        if(user == null){
+            user = new User(username);
+        }
+            
+        if(user != null){
+            //demo没有这些数据，临时填充
+        	if(TextUtils.isEmpty(user.getNick()))
+        		user.setNick(username);
+        }
+        return user;
+    }
+    
+//    /**
+//     * 设置用户头像
+//     * @param username
+//     */
+//    public static void setUserAvatar(Context context, String username, ImageView imageView){
+//    	User user = getUserInfo(username);
+//        if(user != null && user.getIcon()!= null){
+//            Picasso.with(context).load(user.getIcon()).placeholder(R.drawable.ic_launcher).into(imageView);
+//        }else{
+//            Picasso.with(context).load(R.drawable.ic_launcher).into(imageView);
+//        }
+//    }
+    
+//    /**
+//     * 设置当前用户头像
+//     */
+//	public static void setCurrentUserAvatar(Context context, ImageView imageView) {
+//		User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
+//		if (user != null && user.getIcon()!= null) {
+//			Picasso.with(context).load(user.getIcon()).placeholder(R.drawable.ic_launcher).into(imageView);
+//		} else {
+//			Picasso.with(context).load(R.drawable.ic_launcher).into(imageView);
+//		}
+//	}
+    
+    /**
+     * 设置用户昵称
+     */
+    public static void setUserNick(String username,TextView textView){
+    	User user = getUserInfo(username);
+    		textView.setText(user.getUsername());
+    }
+    
+    /**
+     * 设置当前用户昵称
+     */
+    public static void setCurrentUserNick(TextView textView){
+    	User user = ((DemoHXSDKHelper)HXSDKHelper.getInstance()).getUserProfileManager().getCurrentUserInfo();
+    	if(textView != null){
+    		textView.setText(user.getNick());
+    	}
+    }
+    
+    /**
+     * 保存或更新某个用户
+     * @param user
+     */
+	public static void saveUserInfo(User newUser) {
+		if (newUser == null || newUser.getUsername() == null) {
+			return;
+		}
+		((DemoHXSDKHelper) HXSDKHelper.getInstance()).saveContact(newUser);
+	}
+    
+}

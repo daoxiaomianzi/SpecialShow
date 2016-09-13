@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/color_ffffff"
+    tools:context=".UploadWorkActivity" >
+	<include 
+	    android:id="@+id/upload_head_include"
+	    layout="@layout/view_common_head"
+	    />
+	
+	    <LinearLayout
+        android:id="@+id/upload_work_picture_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upload_head_include"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+         >
+
+        <GridView
+            android:id="@+id/upload_work_picture_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="2dp" >
+        </GridView>
+    </LinearLayout>
+    
+        <ImageView
+        android:id="@+id/upload_work_add_img_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:visibility="gone"
+        android:src="@drawable/icon_add_img" />
+
+</RelativeLayout>

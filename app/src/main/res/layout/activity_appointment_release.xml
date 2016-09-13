@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/color_ffffff"
+	android:orientation="vertical"
+    tools:context=".AppointmentReleaseActivity" >
+
+    <include
+        android:id="@+id/appoint_release_head"
+        layout="@layout/view_common_head" />
+    
+	    <LinearLayout
+        android:id="@+id/appoint_release_describe_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_10px"
+         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/appoint_release_head"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <EditText
+            android:id="@+id/appoint_release_describe_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="请输入文字，最多可输入500个汉字"
+            android:textSize="@dimen/text_size_26px"
+            android:maxLines="6"
+            android:minLines="6" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/appoint_release_describe_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="0/500" />
+    </LinearLayout>
+    
+
+          
+        <LinearLayout
+        android:id="@+id/appoint_release_picture_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+         android:layout_below="@+id/appoint_release_describe_llt"
+         >
+        <GridView
+            android:id="@+id/appoint_release_picture_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="2dp" >
+        </GridView>
+    </LinearLayout>
+              <TextView
+        android:id="@+id/appoint_release_publish_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_title_bg"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="发布"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:textSize="@dimen/text_size_32px"
+        android:textColor="@color/white" />
+
+
+</RelativeLayout>

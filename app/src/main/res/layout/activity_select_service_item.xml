@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_ffffff"
+    >
+	<RelativeLayout
+	    android:id="@+id/rl_selectc_service"
+   style="@style/user_info_container"
+   android:layout_height="wrap_content"
+    >
+            <TextView
+                android:layout_marginTop="@dimen/text_size_36px"
+                android:singleLine="true"
+                android:layout_centerVertical="true"
+            android:id="@+id/select_service_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="嘉里酒店健身中心"
+            android:textSize="@dimen/text_size_30px" />
+               <RelativeLayout
+                   android:paddingRight="@dimen/text_size_28px"
+                   android:layout_alignParentRight="true"
+            android:id="@+id/rll_select_service_old_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            >
+
+            <TextView
+                android:id="@+id/select_service_old_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥4600.00"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_30px" />
+
+            <View
+                android:id="@+id/select_service_price_vi"
+                android:layout_width="wrap_content"
+                android:layout_height="1.0dp"
+                android:layout_alignLeft="@id/select_service_old_price"
+                android:layout_alignRight="@id/select_service_old_price"
+                android:layout_centerInParent="true"
+                android:background="@color/color_656565" />
+        </RelativeLayout>
+             <TextView
+                 android:layout_centerVertical="true"
+            android:id="@+id/select_service_cheap_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/rll_select_service_old_price"
+            android:layout_marginLeft="@dimen/text_size_10px"
+            android:layout_marginRight="@dimen/text_size_10px"
+            android:text="￥1088.00"
+            android:textColor="@color/color_F46a84"
+            android:textSize="@dimen/text_size_32px" />
+             
+  <View
+      android:layout_marginTop="@dimen/text_size_36px"
+      android:layout_alignParentBottom="true"
+      style="@style/split_iv_horizontal"
+      
+      />
+
+</RelativeLayout>
+</RelativeLayout>

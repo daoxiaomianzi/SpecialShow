@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pull_to_refresh_header"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_bg"
+    android:gravity="center"
+    android:paddingBottom="10dip"
+    android:paddingTop="10dip" >
+    <TextView
+        android:text="ssss"
+        android:id="@+id/pull_to_load_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_size_26px"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="normal" />
+    <ProgressBar
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@id/pull_to_load_text"
+        android:id="@+id/pull_to_load_progress"
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="30dip"
+        android:layout_height="30dp"
+        android:layout_marginLeft="-40dip"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_alignLeft="@id/pull_to_load_text"
+        android:id="@+id/pull_to_load_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="-40dip"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:visibility="visible" />
+
+
+
+</RelativeLayout>

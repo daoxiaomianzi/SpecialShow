@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center"
+    android:minHeight="40dp"
+    android:orientation="horizontal" >
+    
+    <TextView 
+        android:id="@+id/invite_user_name" 
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       	android:gravity="left"
+        android:textColor="@color/color_656565"
+        android:layout_weight="1"
+        android:paddingLeft="16dp"
+        />
+    <TextView
+        android:id="@+id/invite_add_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_656565"
+        android:layout_weight="2"
+        android:gravity="center"
+        />
+    <TextView
+        android:id="@+id/invite_investor_capital"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_656565"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:paddingRight="16dp"
+        />
+
+</LinearLayout>

@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    tools:context=".activity.SendCardActivity" >
+
+    <include
+        android:id="@+id/include_head"
+        layout="@layout/view_common_head" />
+
+    <LinearLayout
+        android:id="@+id/send_card_addtion_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/include_head"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp" >
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/send_card_addtion_slogan_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可用门店:" />
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/send_card_select_label_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:drawableRight="@drawable/icon_arrow_right"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:gravity="center|right"
+            android:text="请选择" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/send_card_describe_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_card_addtion_llt"
+        android:layout_marginTop="22dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <EditText
+            android:textColor="@color/color_555555"
+            android:paddingTop="@dimen/text_size_6px"
+            android:id="@+id/send_card_describe_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="请输入文字，最多可输入500个汉字"
+            android:textSize="@dimen/text_size_26px"
+            android:maxLines="6"
+            android:minLines="6" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/send_card_describe_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="0/500" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/send_card_picture_llt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/send_card_describe_llt"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="10dp"
+         >
+
+        <GridView
+            android:id="@+id/send_card_picture_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="2dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="2dp" >
+        </GridView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_card_picture_llt"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="5dp"
+        android:text="上传高清图片，吸引更多好友关注" />
+        <TextView
+        android:id="@+id/send_card_publish_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_send_selector"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="发布"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:textSize="@dimen/text_size_32px"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/send_card_add_img_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_card_describe_llt"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onClick"
+        android:clickable="true"
+        android:visibility="gone"
+        android:src="@drawable/icon_add_img" />
+
+</RelativeLayout>

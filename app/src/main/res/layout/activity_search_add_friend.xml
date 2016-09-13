@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.show.specialshow.activity.SearchAddFriendActivity" >
+
+<include 
+    layout="@layout/view_common_head"
+    />
+<FrameLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    >
+<include 
+    layout="@layout/view_commom_listview"
+    />    
+            <RelativeLayout
+            android:id="@+id/search_add_friend_nodata_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/search_add_friend_nodata_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px"
+                android:text="暂无结果" />
+            
+        </RelativeLayout>
+    
+    
+    
+</FrameLayout>
+
+</LinearLayout>

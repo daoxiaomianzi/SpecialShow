@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ShowerDetailsActivity" >
+    <include 
+        android:id="@+id/shower_details_head"
+        layout="@layout/view_common_head"
+        />
+<TextView 
+    android:id="@+id/shower_details_chat"
+    android:onClick="onClick"
+    android:clickable="true"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/text_size_114px"
+    android:gravity="center"
+    android:text="@string/chat"
+    android:background="@drawable/bg_send_selector"
+    android:layout_alignParentBottom="true"
+    android:textSize="@dimen/text_size_34px"
+    android:textColor="@color/color_ffffff"
+    />
+    <View
+        android:id="@+id/shower_details_bottom_vi"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/shower_details_chat"
+        android:background="@color/color_999999" />
+    <FrameLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:layout_below="@id/shower_details_head"
+         android:layout_above="@id/shower_details_bottom_vi"
+        >
+    <ListView 
+        android:scrollbars="none"
+		   android:id="@+id/shower_details_shopcard_lv"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:listSelector="#00000000"
+		    android:cacheColorHint="#000000"
+		    android:divider="@color/color_ffffff"
+		    android:dividerHeight="0dp"
+		        ></ListView>
+    <LinearLayout 
+    android:visibility="gone"
+    android:id="@+id/shower_details_rg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+          		<RadioGroup
+          		    android:background="@color/color_ffffff"
+		    android:layout_width="fill_parent"
+		    android:layout_height="@dimen/text_size_90px"
+		    android:orientation="horizontal"
+		    >
+		    <RadioButton
+				android:id="@+id/shower_details_dynamic_hover"
+
+				android:onClick="onClick"
+		        android:checked="true"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="动态(0)"
+		        android:textColor="@drawable/main_table_text_selector"
+		        />
+		    <RadioButton
+				android:id="@+id/shower_details_showcard_hover"
+
+				android:onClick="onClick"
+		        android:gravity="center"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="秀卡(0)"
+		        />
+		    <RadioButton
+				android:id="@+id/shower_details_cengcard_hover"
+
+				android:onClick="onClick"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="蹭卡(0)"
+		        />
+		</RadioGroup>
+				<View 
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:background="@color/app_line_bg"
+		    />
+
+</LinearLayout>
+     
+    
+    </FrameLayout>
+
+</RelativeLayout>

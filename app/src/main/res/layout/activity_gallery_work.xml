@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/plugin_camera_black"
+	android:orientation="vertical"
+    tools:context=".GalleryWorkActivity" >
+	<include 
+	    layout="@layout/view_common_head"
+	    />
+	<com.show.specialshow.view.ViewPagerFixed
+        android:id="@+id/gallerywork_content_vpf"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/plugin_camera_black"
+        android:unselectedAlpha="1" >
+    </com.show.specialshow.view.ViewPagerFixed>
+</LinearLayout>

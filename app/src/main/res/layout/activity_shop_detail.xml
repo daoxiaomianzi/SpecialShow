@@ -1,0 +1,466 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    >
+
+      <include 
+          android:id="@+id/stores_details_head"
+          layout="@layout/view_common_head" />
+    <LinearLayout
+        android:id="@+id/stores_details_bottom_ll"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+           android:id="@+id/rl_bottom_show_card"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                style="@style/main_menu_btn"
+                android:text="@string/show_card"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_bottom_ceng_card"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                style="@style/main_menu_btn"
+                android:text="@string/ceng_card"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_bottom_review"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                style="@style/main_menu_btn"
+                android:text="@string/review"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_bottom_collection"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                style="@style/main_menu_btn"
+                android:text="@string/collection"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/stores_details_bottom_vi"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/stores_details_bottom_ll"
+        android:background="@color/color_999999" />
+
+    <com.show.specialshow.view.MyScrollView
+        android:id="@+id/scroll_stores_details"
+        android:layout_below="@id/stores_details_head"
+        android:layout_above="@id/stores_details_bottom_vi"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/ll_stores_details_content"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_ffffff"
+            android:orientation="vertical" >
+
+
+            <RelativeLayout
+                style="@style/stores_rll"
+                android:layout_height="100dp"
+                android:layout_marginTop="@dimen/text_size_36px" >
+
+                <ImageView
+                    android:id="@+id/stores_iv"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/stores_details_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_size_8px"
+                    android:layout_marginTop="@dimen/text_size_4px"
+                    android:layout_toRightOf="@id/stores_iv"
+                    android:text="嘉里酒店健身中心"
+                    android:textSize="@dimen/text_size_32px" />
+                        <GridView 
+                    android:numColumns="3"
+                    android:id="@+id/stores_details_label_gv"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"  
+                  android:listSelector="#00000000"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/text_size_8px"
+                    android:layout_toRightOf="@id/stores_iv"
+                    android:horizontalSpacing="@dimen/text_size_16px"
+                    android:descendantFocusability="blocksDescendants"
+                    ></GridView>
+
+<!--                 <TextView
+                    android:id="@+id/stores_details_label_tv1"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/text_size_8px"
+                    android:layout_toRightOf="@id/stores_iv"
+                    android:background="@drawable/bg_label"
+                    android:gravity="center"
+                    android:text="美甲"
+                    android:textColor="#7588EF" />
+
+                <TextView
+                    android:id="@+id/stores_details_label_tv2"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/stores_details_label_tv1"
+                    android:background="@drawable/bg_label"
+                    android:gravity="center"
+                    android:text="美妆"
+                    android:textColor="#7588EF" />
+
+                <TextView
+                    android:id="@+id/stores_details_label_tv3"
+                    android:layout_width="70dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/stores_details_label_tv2"
+                    android:background="@drawable/bg_label"
+                    android:gravity="center"
+                    android:text="美发"
+                    android:textColor="#7588EF" /> -->
+
+                <TextView
+                    android:id="@+id/stores_details_show_card_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/text_size_4px"
+                    android:layout_marginLeft="@dimen/text_size_8px"
+                    android:layout_toRightOf="@id/stores_iv"
+                    android:text="秀卡(8)"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_24px" />
+
+                <TextView
+                    android:id="@+id/stores_details_ceng_card_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/text_size_4px"
+                    android:layout_marginLeft="@dimen/text_size_36px"
+                    android:layout_toRightOf="@id/stores_details_show_card_num"
+                    android:text="蹭卡(8)"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_24px" />
+
+                <TextView
+                    android:id="@+id/stores_details_moods_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/text_size_4px"
+                    android:layout_marginLeft="@dimen/text_size_40px"
+                    android:layout_toRightOf="@id/stores_details_ceng_card_num"
+                    android:drawableLeft="@drawable/icon_moods"
+                    android:text="1458人气"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_24px" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_stores_details_address"
+                android:layout_height="@dimen/height_50"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_address"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/address" />
+                <TextView 
+                    android:id="@+id/tv_stores_details_address_name"
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/tv_stores_details_address"
+                    style="@style/user_info_tv"
+                    android:text="浦东新区张杨路628号东明广场6号"
+                    />
+                <ImageView style="@style/user_info_split" 
+                    android:layout_marginRight="@dimen/text_size_28px"
+                    />
+
+                <ImageView
+                    style="@style/list_menu_next" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_height="@dimen/height_50"
+                android:id="@+id/rl_stores_details_phone"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_phone"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/phone" />
+                <TextView 
+                    android:id="@+id/tv_stores_details_phone_name"
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/tv_stores_details_phone"
+                    style="@style/user_info_tv"
+                    android:text="021-58351777"
+                    />
+                <ImageView style="@style/user_info_split" 
+                    android:layout_marginRight="@dimen/text_size_28px"/>
+
+                <ImageView
+                    style="@style/list_menu_next" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_height="@dimen/height_50"
+                android:id="@+id/rl_stores_details_opening_time"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_opening_time"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/opening_time" />
+                <TextView 
+                    android:id="@+id/tv_stores_details_opening_time_name"
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    android:singleLine="true"
+                    android:layout_toRightOf="@id/tv_stores_details_opening_time"
+                    style="@style/user_info_tv"
+                    android:text="08:30-21:30"
+                    />
+                <ImageView
+                    style="@style/list_menu_next" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_height="@dimen/height_50"
+                android:id="@+id/rl_stores_details_introduction"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_introduction"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/show_fang_introduction" />
+                <ImageView
+                    style="@style/list_menu_next"
+                    android:visibility="gone" />
+            </RelativeLayout>
+            <TextView 
+                android:id="@+id/show_stores_details_introduction"
+                android:paddingLeft="@dimen/text_size_26px"
+                android:paddingRight="@dimen/text_size_16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="很多人都喜欢少女时代金泰妍的容貌，可爱中带点小性感，非常迷人。她的眼妆是妆容中的重点，金棕色的眼影让眼睛看起来闪亮又大"
+                android:textSize="@dimen/text_size_24px"
+                />
+              <RelativeLayout
+                android:layout_height="@dimen/height_50"
+                android:id="@+id/rl_stores_details_branch_stores"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_branch_stores"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/branch_stores" />
+                <TextView 
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    style="@style/user_info_tv"
+                    android:layout_toRightOf="@id/tv_stores_details_branch_stores"
+                    android:text="在上海共有24家分店"
+                    />
+                <ImageView
+                    style="@style/list_menu_next"
+                     />
+            </RelativeLayout>
+            
+              <RelativeLayout
+                android:id="@+id/rl_stores_details_related_services"
+                android:layout_height="@dimen/height_50"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_related_services"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/related_services" />
+
+                <ImageView
+                    style="@style/list_menu_next"
+                     />
+              <ImageView style="@style/user_info_split"
+                  android:layout_marginRight="@dimen/text_size_28px" />
+            </RelativeLayout>
+		<ListView
+		    android:id="@+id/stores_details_service_lv"
+		    android:listSelector="#00000000"
+		    android:cacheColorHint="#00000000"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:scrollbars="none"
+		    android:divider="@color/app_line_bg"
+		    android:dividerHeight="0dp"
+		    ></ListView>
+
+		       <RelativeLayout
+                android:layout_height="@dimen/height_50"
+                android:id="@+id/rl_stores_details_craftsman_people"
+                style="@style/user_info_container" >
+
+                <TextView
+                    android:id="@+id/tv_stores_details_craftsman_people"
+                    style="@style/user_info_tv"
+                    android:textColor="@color/color_999999"
+                    android:text="@string/craftsman_people" />
+
+                <ImageView
+                    style="@style/list_menu_next"
+                     />
+              <ImageView style="@style/user_info_split"
+                  android:layout_marginRight="@dimen/text_size_28px" />
+            </RelativeLayout>
+            <com.show.specialshow.view.MyGridView 
+                android:paddingLeft="@dimen/text_size_16px"
+                android:paddingRight="@dimen/text_size_16px"
+                android:layout_marginTop="@dimen/text_size_16px"
+                android:id="@+id/stores_details_crafstm_gv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:numColumns="4"
+                android:listSelector="#00000000"
+		    android:horizontalSpacing="20dp"
+		    android:verticalSpacing="10dp"
+                ></com.show.specialshow.view.MyGridView >
+                		<RadioGroup
+    		    android:background="@color/color_ffffff"
+		    android:layout_width="fill_parent"
+		    android:layout_height="@dimen/text_size_114px"
+		    android:orientation="horizontal"
+		    >
+		    <RadioButton 
+		        android:onClick="onClick"
+		        android:id="@+id/stores_details_showcard"
+		        android:checked="true"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="秀卡(0)"
+		        android:textColor="@drawable/main_table_text_selector"
+		        />
+		    <RadioButton 
+		        android:onClick="onClick"
+		        android:id="@+id/stores_details_cengcard"
+		        android:gravity="center"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="蹭卡(0)"
+		        />
+		    <RadioButton 
+		        android:onClick="onClick"
+		        android:id="@+id/stores_details_review"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="点评(0)"
+		        />
+		</RadioGroup>
+		<View 
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:background="@color/app_line_bg"
+		    android:layout_marginRight="@dimen/text_size_28px"
+		    android:layout_marginLeft="16dp"
+		    />
+	<!--  <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="10000dp" /> -->
+                 <FrameLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+     <com.show.specialshow.view.MyListView
+         android:scrollbars="none"
+		            android:id="@+id/stores_details_shopcard_lv"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:listSelector="#00000000"
+		    android:cacheColorHint="#000000"
+		    android:divider="@color/color_ffffff"
+		    android:dividerHeight="0dp"
+		        ></com.show.specialshow.view.MyListView>
+     <com.show.specialshow.view.MyListView 
+         android:visibility="invisible"
+         android:scrollbars="none"
+		            android:id="@+id/stores_details_review_lv"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:listSelector="#00000000"
+		    android:cacheColorHint="#000000"
+		    android:divider="@color/color_ffffff"
+		    android:dividerHeight="0dp"
+		        ></com.show.specialshow.view.MyListView>
+
+     
+     </FrameLayout>
+
+        </LinearLayout>
+    </com.show.specialshow.view.MyScrollView>
+
+
+</RelativeLayout>

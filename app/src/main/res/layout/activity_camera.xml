@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <SurfaceView
+        android:id="@+id/preview_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.zxing.view.ViewfinderView
+        android:id="@+id/viewfinder_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:paddingTop="@dimen/text_size_16px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/openLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btnflash"
+            android:onClick="IfOpenLight" />
+
+        <Button
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/btnpicture"
+            android:onClick="pickPictureFromAblum"
+            android:layout_alignTop="@+id/openLight"
+            android:layout_centerHorizontal="true">
+        </Button>
+        <RelativeLayout
+            android:layout_alignTop="@+id/openLight"
+            android:id="@+id/btn_cancel_scan"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="35dp">
+            <Button
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_arrow_left_white"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    android:orientation="vertical"
+    tools:context=".ServiceListActivity" >
+    <include 
+        layout="@layout/view_common_head"
+        />
+    <ListView
+        android:id="@+id/service_list_lv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:listSelector="#00000000"
+        android:cacheColorHint="#00000000"
+        android:scrollbars="none"
+		    android:divider="@color/app_line_bg"
+		    android:dividerHeight="0dp"
+        ></ListView>
+
+
+
+</LinearLayout>

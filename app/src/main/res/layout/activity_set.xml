@@ -1,0 +1,146 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg"
+    tools:context=".activity.SetActivity" >
+
+    <include 
+        layout="@layout/view_common_head"
+        />
+    <View 
+        android:layout_marginTop="@dimen/text_size_26px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+    <RelativeLayout 
+        android:id="@+id/rl_set_info"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        >
+        <TextView 
+            style="@style/user_info_tv"
+            android:text="@string/my_info"
+            android:textColor="@color/color_656565"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_marginLeft="@dimen/text_size_26px"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ling_0.8"
+            android:background="@color/color_ededed"
+            />
+        </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_set_clean"
+        style="@style/user_info_container"
+        android:layout_height="45dp">
+
+        <TextView
+            style="@style/user_info_tv"
+            android:text="@string/clear_data"
+            android:textColor="@color/color_656565" />
+        <!--   <TextView
+              android:id="@+id/set_mb"
+              style="@style/user_info_iv"
+              android:text="MB"
+              android:layout_alignParentRight="true"
+              android:textColor="@color/color_999999"
+              /> -->
+        <TextView
+            android:id="@+id/set_mb_num"
+            style="@style/user_info_tv"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/text_size_26px"
+            android:text="0"
+            android:textColor="@color/color_999999" />
+    </RelativeLayout>
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+     <View 
+         android:layout_marginLeft="@dimen/text_size_26px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+    </LinearLayout>
+    <RelativeLayout 
+        android:id="@+id/rl_set_informaton"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        >
+        <TextView 
+            style="@style/user_info_tv"
+            android:text="@string/system_information"
+            android:textColor="@color/color_656565"
+            />
+      <!--   <TextView 
+            android:id="@+id/set_mb"
+            style="@style/user_info_iv"
+            android:text="MB"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/color_999999"
+            /> -->
+    </RelativeLayout>
+        <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+        <View 
+            android:layout_marginTop="@dimen/text_size_40px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+    <RelativeLayout 
+        android:id="@+id/rl_set_abouts_us"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        >
+        <TextView 
+            style="@style/user_info_tv"
+            android:text="@string/abouts_us"
+            android:textColor="@color/color_656565"
+            />
+    </RelativeLayout>
+      <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+      <View 
+        android:layout_marginTop="@dimen/text_size_40px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+    <RelativeLayout 
+        android:id="@+id/rl_finish_login"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        >
+        <TextView 
+            android:layout_centerInParent="true"
+            android:textColor="#FF4040"
+            style="@style/user_info_tv"
+            android:text="@string/finish_login"
+            />
+        
+    </RelativeLayout>
+      <View 
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed"
+        />
+
+</LinearLayout>

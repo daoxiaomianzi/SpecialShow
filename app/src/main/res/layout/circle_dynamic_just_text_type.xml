@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dynamic_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/app_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.show.specialshow.utils.RoundImageView
+                android:id="@+id/dynamic_type_just_text_portrait_riv"
+                android:layout_width="@dimen/text_size_114px"
+                android:layout_height="@dimen/text_size_114px"
+               />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1.0"
+                android:gravity="center_vertical"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/dynamic_type_just_text_user_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="长发豌豆花"
+                    android:textSize="@dimen/text_size_28px" />
+
+                <TextView
+                    android:id="@+id/dynamic_type_just_text_send_time_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:paddingLeft="2dp"
+                    android:text="01.12\t15:30"
+                    android:textColor="@color/dynamic_text_c2_color"
+                    android:textSize="@dimen/text_size_24px" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dynamic_type_just_text_attention_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_dynami_attention_selecter"
+                android:gravity="center"
+                android:minEms="3"
+                android:paddingBottom="1dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="1dp"
+                android:text="关注"
+                android:textColor="@drawable/text_attention_color_check_selector"
+                android:textSize="@dimen/text_size_22px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dynamic_type_just_text_card_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/app_bg" >
+
+            <TextView
+                android:id="@+id/dynamic_type_just_text_label_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/color_f9469b"
+                android:drawableLeft="@drawable/icon_card"
+                android:drawablePadding="2dp"
+                android:paddingBottom="@dimen/text_size_4px"
+                android:paddingLeft="@dimen/text_size_8px"
+                android:paddingRight="@dimen/text_size_8px"
+                android:paddingTop="@dimen/text_size_4px"
+                android:text="话题"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_24px" />
+
+            <TextView
+                android:id="@+id/dynamic_type_just_text_user_shop_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/text_size_16px"
+                android:text="可用门店:"
+                android:textColor="@color/color_b699ab"
+                android:textSize="@dimen/text_size_26px" />
+
+            <TextView
+                android:id="@+id/dynamic_type_just_text_describe_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/text_size_16px"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="啊啊啊啊"
+                android:textSize="@dimen/text_size_26px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp" >
+
+            <TextView
+                android:id="@+id/dynamic_type_just_text_relation_me_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="我关注了此话题"
+                android:textColor="@color/color_565656"
+                android:textSize="@dimen/text_size_28px" />
+        </LinearLayout>
+
+        <com.show.specialshow.view.MyGridView
+            android:id="@+id/dynamic_type_just_text_label_gv"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_size_16px"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:horizontalSpacing="@dimen/text_size_16px"
+            android:listSelector="#00000000"
+            android:numColumns="3" >
+        </com.show.specialshow.view.MyGridView>
+
+        <ImageView
+            style="@style/split_iv_horizontal"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+            android:layout_marginRight="18dp"
+             >
+
+            <LinearLayout
+                android:onClick="onClick"
+                android:id="@+id/dynamic_type_just_text_thumbs_count_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_like_comment"
+                 >
+
+                <TextView
+                    android:id="@+id/dynamic_type_just_text_thumbs_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_like"
+                    android:drawablePadding="@dimen/text_size_8px"
+                    android:paddingLeft="@dimen/text_size_26px"
+                    android:paddingRight="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:text="1256"
+                    android:minWidth="60dp"
+                    android:textSize="@dimen/text_size_22px"
+                    android:textColor="@color/dynamic_text_c2_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:onClick="onClick"
+                android:id="@+id/dynamic_type_just_text_comment_count_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_like_comment"
+                 >
+
+                <TextView
+                    android:minWidth="60dp"
+                    android:id="@+id/dynamic_type_just_text_comment_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_comment"
+                    android:drawablePadding="@dimen/text_size_8px"
+                    android:text="1256"
+                          android:paddingLeft="@dimen/text_size_26px"
+                    android:paddingRight="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:textSize="@dimen/text_size_22px"
+                    android:textColor="@color/dynamic_text_c2_color" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <ImageView
+        android:background="@color/app_bg"
+        style="@style/split_iv_horizontal"
+        android:layout_height="10dp" />
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.show.specialshow.activity.LatestDynamicActivity">
+    <include
+        layout="@layout/view_common_head"
+        />
+
+    <View
+        android:layout_marginTop="@dimen/text_size_36px"
+        android:layout_width="fill_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/app_line_bg"
+        />
+
+    <RelativeLayout
+        android:layout_height="45dp"
+        android:id="@+id/rl_my_topic"
+        style="@style/user_info_container" >
+
+        <ImageView
+            android:id="@+id/my_topic_iv"
+            style="@style/user_info_iv"
+            android:src="@drawable/icon_topic" />
+
+        <TextView
+            android:textColor="@color/color_656565"
+            style="@style/user_info_tv"
+            android:layout_toRightOf="@id/my_topic_iv"
+            android:text="@string/my_topic" />
+
+        <ImageView style="@style/user_info_split" />
+
+        <ImageView
+            android:id="@+id/my_topic_iv_right_iv"
+            style="@style/list_menu_next" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_height="45dp"
+        android:id="@+id/rl_photo_albums_dynamic"
+        style="@style/user_info_container" >
+
+        <ImageView
+            android:id="@+id/photo_albums_dynamic_iv"
+            style="@style/user_info_iv"
+            android:src="@drawable/icon_albums_dynamic" />
+
+        <TextView
+            android:textColor="@color/color_656565"
+            style="@style/user_info_tv"
+            android:layout_toRightOf="@id/photo_albums_dynamic_iv"
+            android:text="@string/photo_albums_dynamic" />
+
+        <ImageView style="@style/user_info_split" />
+
+        <ImageView
+            android:id="@+id/photo_albums_dynamic_iv_right_iv"
+            style="@style/list_menu_next" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_height="45dp"
+        android:id="@+id/rl_my_collect"
+        style="@style/user_info_container" >
+
+        <ImageView
+            android:id="@+id/my_collect_iv"
+            style="@style/user_info_iv"
+            android:src="@drawable/icon_my_collect" />
+
+        <TextView
+            android:textColor="@color/color_656565"
+            style="@style/user_info_tv"
+            android:layout_toRightOf="@id/my_collect_iv"
+            android:text="@string/my_collect" />
+
+        <ImageView
+            android:id="@+id/my_collect_iv_right_iv"
+            style="@style/list_menu_next" />
+    </RelativeLayout>
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/app_line_bg"
+        />
+
+</LinearLayout>

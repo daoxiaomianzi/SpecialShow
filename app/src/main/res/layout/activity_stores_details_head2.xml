@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical" >
+    <View 
+    		    android:layout_marginTop="@dimen/text_size_30px"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/ling_0.8"
+                android:background="@color/app_line_bg"
+                />
+    		<RadioGroup
+    		    android:background="@color/color_ffffff"
+		    android:layout_width="fill_parent"
+		    android:layout_height="@dimen/text_size_90px"
+		    android:orientation="horizontal"
+		    >
+		    <RadioButton
+				android:id="@+id/stores_details_review"
+
+				android:onClick="onClick"
+		        android:checked="true"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="点评(0)"
+		        android:textColor="@drawable/main_table_text_selector"
+		        />
+		    <RadioButton
+				android:id="@+id/stores_details_showcard"
+
+				android:onClick="onClick"
+		        android:gravity="center"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="秀卡(0)"
+		        />
+		    <RadioButton
+				android:id="@+id/stores_details_cengcard"
+
+				android:onClick="onClick"
+		        android:textColor="@drawable/main_table_text_selector"
+		        android:gravity="center"
+		        android:button="@null"
+		        android:layout_width="0dp"
+		        android:layout_height="fill_parent"
+		        android:layout_weight="1"
+		        android:text="蹭卡(0)"
+		        />
+		</RadioGroup>
+		<View 
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:background="@color/app_line_bg"
+		    android:layout_marginRight="@dimen/text_size_28px"
+		    android:layout_marginLeft="16dp"
+		    />
+    
+
+</LinearLayout>

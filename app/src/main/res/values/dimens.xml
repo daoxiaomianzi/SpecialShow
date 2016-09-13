@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="circle_dynamic_portrait">50dp</dimen>
+
+    <!-- 字体114px -->
+    <dimen name="text_size_114px">45dp</dimen>
+
+
+    <!-- 字体86px -->
+    <dimen name="text_size_90px">40dp</dimen>
+    <!-- 字体86px -->
+    <dimen name="text_size_86px">35dp</dimen>
+    <!-- 字体68px -->
+    <dimen name="text_size_68px">28dp</dimen>
+
+    <!-- 字体60px -->
+    <dimen name="text_size_60px">27dp</dimen>
+    <!-- 字体52px -->
+    <dimen name="text_size_52px">26dp</dimen>
+    <!-- 字体48px -->
+    <dimen name="text_size_48px">25dp</dimen>
+    <!-- 字体44px -->
+    <dimen name="text_size_44px">24dp</dimen>
+    <!-- 字体38px -->
+    <dimen name="text_size_40px">22dp</dimen>
+    <!-- 字体38px -->
+    <dimen name="text_size_38px">21dp</dimen>
+    <!-- 字体36px -->
+    <dimen name="text_size_36px">20dp</dimen>
+    <!-- 字体34px -->
+    <dimen name="text_size_34px">19dp</dimen>
+    <!-- 字体32px -->
+    <dimen name="text_size_32px">18dp</dimen>
+    <!-- 字体30px -->
+    <dimen name="text_size_30px">17dp</dimen>
+    <!-- 字体28px -->
+    <dimen name="text_size_28px">16dp</dimen>
+    <!-- 字体26px -->
+    <dimen name="text_size_26px">15dp</dimen>
+    <!-- 字体24px -->
+    <dimen name="text_size_24px">14dp</dimen>
+    <!-- 字体22px -->
+    <dimen name="text_size_22px">13dp</dimen>
+    <!-- 字体20px -->
+    <dimen name="text_size_20px">12dp</dimen>
+    <!-- 字体18px -->
+    <dimen name="text_size_18px">11dp</dimen>
+    <!-- 字体16px -->
+    <dimen name="text_size_16px">10dp</dimen>
+    <!-- 字体16px -->
+    <dimen name="text_size_10px">8dp</dimen>
+    <!-- 字体 -->
+    <dimen name="text_size_8px">6dp</dimen>
+    <dimen name="ling_0.8">0.8dp</dimen>
+    <dimen name="ling_0.6">0.6dp</dimen>
+    <dimen name="ling_0.7">0.7dp</dimen>
+    <dimen name="ling_0.5">0.5dp</dimen>
+
+    <!-- 字体 -->
+    <dimen name="text_size_4px">3dp</dimen>
+    <dimen name="text_size_1px">1dp</dimen>
+    <dimen name="text_size_3px">2dp</dimen>
+    <dimen name="text_size_6px">5dp</dimen>
+
+    <dimen name="ui_10_dip">10dip</dimen>
+    <dimen name="height_50">50dp</dimen>
+
+
+    <dimen name="height_top_bar">46dp</dimen>
+    <dimen name="padding_search_bar">5dp</dimen>
+    <dimen name="height_row_weixin">59dp</dimen>
+    <dimen name="size_avatar">45dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="field_textsize">14sp</dimen>
+    <dimen name="field_margin_right">5dp</dimen>
+    <dimen name="call_button_padding_vertical">10dp</dimen>
+    <dimen name="call_button_padding_left">25dp</dimen>
+    <dimen name="call_button_padding_right">25dp</dimen>
+    <dimen name="sidebar_text_size">10dp</dimen>
+    <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_spacing">1dp</dimen>
+
+</resources>

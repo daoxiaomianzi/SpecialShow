@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DynamicImagePagerActivity" >
+
+    <com.show.specialshow.view.ViewPagerFixed
+        android:id="@+id/dynamic_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/plugin_camera_black"
+        android:unselectedAlpha="1"
+        >
+    </com.show.specialshow.view.ViewPagerFixed>
+
+    <TextView
+        android:id="@+id/dynamic_img_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="@string/viewpager_indicator"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</FrameLayout>

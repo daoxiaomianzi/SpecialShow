@@ -1,0 +1,383 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    tools:context=".activity.OrderActivity">
+
+    <include
+        android:id="@+id/order_head"
+        layout="@layout/view_common_head" />
+
+    <TextView
+        android:id="@+id/free_order"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_send_selector"
+        android:clickable="true"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/free_order"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/text_size_30px" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/free_order"
+        android:layout_below="@id/order_head"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_order_switch_service"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px"
+                android:layout_marginTop="@dimen/text_size_10px">
+
+                <TextView
+                    android:id="@+id/tv_order_switch_service"
+                    style="@style/user_info_tv"
+                    android:text="@string/switch_service"
+                    android:textColor="@color/color_999999" />
+
+                <ImageView style="@style/list_menu_next" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_marginRight="@dimen/text_size_16px" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_order_service"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/text_size_10px"
+                android:paddingLeft="@dimen/text_size_28px"
+                android:paddingTop="@dimen/text_size_16px">
+
+                <TextView
+                    android:id="@+id/order_service_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="嘉里酒店健身中心"
+                    android:textSize="@dimen/text_size_30px" />
+
+                <TextView
+                    android:id="@+id/order_service_cheap_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/order_service_name"
+                    android:layout_marginTop="@dimen/text_size_4px"
+                    android:text="￥1088.00"
+                    android:textColor="@color/color_F47183"
+                    android:textSize="@dimen/text_size_32px" />
+
+                <RelativeLayout
+                    android:id="@+id/rll_order_service_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/order_service_cheap_price"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/text_size_4px"
+                    android:layout_toRightOf="@id/order_service_cheap_price">
+
+                    <TextView
+                        android:id="@+id/order_service_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥4600.00"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_size_30px" />
+
+                    <View
+                        android:id="@+id/order_service_price_vi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1.0dp"
+                        android:layout_alignLeft="@id/order_service_price"
+                        android:layout_alignRight="@id/order_service_price"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_656565" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/order_service_price_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/order_service_cheap_price"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/rll_order_service_price"
+                    android:background="@drawable/bg_order_privilege"
+                    android:paddingBottom="4dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="4dp"
+                    android:text="优惠￥1800.00"
+                    android:textColor="@color/color_F47183"
+                    android:textSize="@dimen/text_size_26px" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/order_service_vi"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ling_0.8"
+                android:background="@color/app_line_bg" />
+
+            <View
+                android:layout_width="match_parent"
+
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/text_size_36px"
+                android:background="@color/app_line_bg" />
+
+            <RelativeLayout
+                android:id="@+id/rl_order_time"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px">
+
+                <TextView
+                    android:id="@+id/tv_order_time"
+                    style="@style/user_info_tv"
+                    android:text="@string/time"
+                    android:textColor="@color/color_999999" />
+
+                <ImageView
+                    android:id="@+id/iv_order_time_right"
+                    style="@style/list_menu_next" />
+
+                <TextView
+                    android:id="@+id/order_time"
+                    style="@style/user_info_tv"
+                    android:layout_marginRight="@dimen/text_size_10px"
+                    android:layout_toLeftOf="@id/iv_order_time_right"
+                    android:text="选择时间"
+                    android:textColor="@color/color_555555" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_marginRight="@dimen/text_size_16px" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_order_people_num"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px">
+
+                <TextView
+                    android:id="@+id/tv_order_people_num"
+                    style="@style/user_info_tv"
+                    android:text="@string/people_num"
+                    android:textColor="@color/color_999999" />
+
+                <ImageView
+                    android:id="@+id/iv_order_people_num_right"
+                    style="@style/list_menu_next" />
+
+                <TextView
+                    android:id="@+id/order_people_num_tv"
+                    style="@style/user_info_tv"
+                    android:layout_marginRight="@dimen/text_size_10px"
+                    android:layout_toLeftOf="@id/iv_order_people_num_right"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/order_people_num"
+                    style="@style/user_info_tv"
+                    android:layout_toLeftOf="@id/order_people_num_tv"
+                    android:text="选择人数"
+                    android:textColor="@color/color_555555" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_marginRight="@dimen/text_size_16px" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_order_craftsman_people"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px">
+
+                <TextView
+                    android:id="@+id/tv_order_craftsman_people"
+                    style="@style/user_info_tv"
+                    android:text="@string/switch_craftsman_people"
+                    android:textColor="@color/color_999999" />
+
+                <ImageView
+                    android:id="@+id/iv_order_craftsman_people_right"
+                    style="@style/list_menu_next" />
+
+                <TextView
+                    android:id="@+id/order_craftseman_people"
+                    style="@style/user_info_tv"
+                    android:layout_marginRight="@dimen/text_size_10px"
+                    android:layout_toLeftOf="@id/iv_order_craftsman_people_right"
+                    android:text="选择手艺人"
+                    android:textColor="@color/color_555555" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/text_size_36px"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_order_contact"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px"
+
+                >
+
+                <TextView
+                    android:id="@+id/tv_order_contact"
+                    style="@style/user_info_tv"
+                    android:text="@string/contact"
+                    android:textColor="@color/color_999999" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:id="@+id/order_contact"
+                    style="@style/user_info_tv"
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    android:layout_marginRight="@dimen/text_size_10px"
+                    android:layout_toRightOf="@id/tv_order_contact"
+                    android:text="18516031684"
+                    android:textColor="@color/color_555555" />
+
+                <ImageView
+                    style="@style/list_menu_next"
+                    android:visibility="gone" />
+            </RelativeLayout>
+<LinearLayout
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+            <ImageView
+                android:layout_height="@dimen/ling_0.8"
+                style="@style/user_info_split"
+                android:layout_marginLeft="@dimen/text_size_16px"
+                android:layout_marginRight="@dimen/text_size_16px" />
+</LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_order_name"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_90px">
+
+                <TextView
+                    android:id="@+id/tv_order_name"
+                    style="@style/user_info_tv"
+                    android:text="@string/name"
+                    android:textColor="@color/color_999999" />
+
+                <EditText
+                    android:id="@+id/order_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_toRightOf="@id/tv_order_name"
+                    android:background="@color/color_ffffff"
+                    android:hint="@string/input_name"
+                    android:paddingLeft="@dimen/text_size_16px"
+                    android:textColorHint="@color/umeng_comm_color_c5"
+                    android:textSize="@dimen/text_size_26px" />
+            </RelativeLayout>
+<LinearLayout
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+            <ImageView
+                android:layout_height="@dimen/ling_0.8"
+                style="@style/user_info_split"
+                android:layout_marginLeft="@dimen/text_size_16px"
+                android:layout_marginRight="@dimen/text_size_16px" />
+</LinearLayout>
+            <RelativeLayout
+                android:id="@+id/rl_order_remark"
+                style="@style/user_info_container"
+                android:layout_height="@dimen/text_size_114px"
+                >
+
+                <TextView
+                    android:id="@+id/tv_order_remark"
+                    style="@style/user_info_tv"
+                    android:layout_centerVertical="true"
+                    android:text="@string/remark"
+                    android:textColor="@color/color_999999" />
+
+                <EditText
+                    android:textColor="@color/color_555555"
+                    android:singleLine="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/order_remark"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/tv_order_remark"
+                    android:background="@color/color_ffffff"
+                    android:hint="@string/other_requre_service"
+                    android:paddingLeft="@dimen/text_size_16px"
+                    android:textColorHint="@color/umeng_comm_color_c5"
+                    android:textSize="@dimen/text_size_26px" />
+            </RelativeLayout>
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_height="@dimen/ling_0.8"
+                    style="@style/user_info_split"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

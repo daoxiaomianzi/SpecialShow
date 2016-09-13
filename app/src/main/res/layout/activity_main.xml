@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/color_ffffff" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/main_bottom_rll"
+            android:padding="0dip" >
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+            </FrameLayout>
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@android:id/tabcontent"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/main_bottom_rll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_ededed" >
+
+                <RelativeLayout
+                    android:id="@+id/menu_special_show_circle_rll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:padding="3dp" >
+
+                    <TextView
+                        android:id="@+id/menu_special_show_circle_tv"
+                        style="@style/main_menu_btn"
+                        android:drawableTop="@drawable/main_table_icon_special_show_selector"
+                        android:text="@string/special_show_circle" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menu_find_rll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:padding="3dp" >
+
+                    <TextView
+                        android:id="@+id/menu_find_tv"
+                        style="@style/main_menu_btn"
+                        android:drawableTop="@drawable/main_table_icon_find_selector"
+                        android:text="@string/find" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="3dp" >
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menu_chat_rll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:padding="3dp" >
+
+                    <TextView
+                        android:id="@+id/menu_chat_tv"
+                        style="@style/main_menu_btn"
+                        android:drawableTop="@drawable/main_table_icon_chat_selector"
+                        android:text="@string/chat" />
+                                <TextView
+                android:id="@+id/unread_msg_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/unread_count_bg"
+                android:gravity="center"
+                android:text="7"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="invisible" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menu_my_rll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:padding="3dp" >
+
+                    <TextView
+                        android:id="@+id/menu_my_tv"
+                        style="@style/main_menu_btn"
+                        android:drawableTop="@drawable/main_table_icon_my_seclector"
+                        android:text="@string/my" />
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/my_circle_red_small"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/text_size_36px"
+                        android:layout_width="@dimen/text_size_16px"
+                        android:layout_height="@dimen/text_size_16px"
+                        android:background="@drawable/circle_red_small"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menu_add_rll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/text_size_10px"
+            android:onClick="onClick" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_add" 
+                android:clickable="false"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</TabHost>

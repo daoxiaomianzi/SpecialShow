@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageFileActivity" >
+
+    <include
+        android:id="@+id/image_file_head_include"
+        layout="@layout/view_common_head" />
+
+    <GridView
+        android:id="@+id/image_file_content_gv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/image_file_head_include"
+        android:layout_centerInParent="true"
+        android:background="@color/album_back"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp" >
+    </GridView>
+
+</RelativeLayout>

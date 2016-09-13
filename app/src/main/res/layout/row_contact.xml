@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_efefef"
+        android:paddingBottom="1dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="1dp"
+        android:textColor="#8a99ac"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:paddingTop="@dimen/text_size_10px"
+        android:paddingBottom="@dimen/text_size_10px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mm_listitem"
+        android:duplicateParentState="true" >
+
+        <com.show.specialshow.utils.RoundImageView
+            android:id="@+id/avatar"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/text_size_26px"
+            android:layout_toLeftOf="@+id/unread_msg_number"
+            android:layout_toRightOf="@id/avatar"
+            android:gravity="center_vertical"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_size_10px"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:paddingLeft="@dimen/text_size_8px"
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#8C8C8C"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/row_contact_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:background="@drawable/bg_dynami_attention_selecter"
+                    android:singleLine="true"
+                    android:paddingLeft="@dimen/text_size_10px"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="@dimen/text_size_10px"
+                    android:textColor="@color/color_ffffff"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size_22px" />
+                <TextView
+                    android:id="@+id/row_contact_xingzuo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:ellipsize="end"
+                    android:background="@drawable/bg_dynami_attention_selecter"
+                    android:singleLine="true"        android:paddingLeft="@dimen/text_size_10px"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:minEms="2"
+                    android:paddingRight="@dimen/text_size_10px"
+                    android:textColor="@color/color_ffffff"
+                    android:gravity="center"
+                    android:textSize="@dimen/text_size_22px" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/unread_msg_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/unread_dot"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</LinearLayout>

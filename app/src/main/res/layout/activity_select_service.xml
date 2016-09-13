@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="@color/app_bg"
+	android:orientation="vertical"
+    tools:context=".activity.SelectServiceActivity" >
+    <include 
+        layout="@layout/view_common_head"
+        />
+	<ListView
+		android:layout_marginTop="@dimen/text_size_10px"
+	    android:id="@+id/lv_select_service"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:listSelector="#00000000"
+	    android:cacheColorHint="#00000000"
+	         android:scrollbars="none"
+		    android:divider="@color/app_line_bg"
+		    android:dividerHeight="0dp"
+	    ></ListView>
+	<!--<RelativeLayout-->
+        <!--android:id="@+id/rl_select_service_other"-->
+        <!--style="@style/user_info_container"-->
+        <!--android:layout_height="@dimen/height_50" >-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_select_service_other"-->
+            <!--style="@style/user_info_tv"-->
+            <!--android:text="@string/other_service"-->
+            <!--android:textSize="@dimen/text_size_32px"-->
+             <!--/>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_shop_select_service_other"-->
+            <!--style="@style/user_info_tv"-->
+            <!--android:layout_marginLeft="@dimen/text_size_10px"-->
+            <!--android:layout_marginRight="@dimen/text_size_10px"-->
+            <!--android:layout_toRightOf="@id/tv_select_service_other"-->
+            <!--android:text="本店的其他服务"-->
+            <!--android:textColor="@color/color_999999"-->
+            <!--android:textSize="@dimen/text_size_26px" />-->
+
+        <!--<ImageView-->
+            <!--style="@style/list_menu_next"-->
+            <!--android:visibility="gone" />-->
+    <!--</RelativeLayout>-->
+
+
+</LinearLayout>

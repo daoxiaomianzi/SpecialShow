@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_corner_gray"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/confirm_dialog_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/btn_border_press"
+        android:textSize="@dimen/text_size_28px"
+        android:paddingTop="10dp"
+        android:layout_marginTop="@dimen/text_size_8px"
+        android:text="提示" />
+
+    <TextView
+        android:id="@+id/confirm_dialog_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ems="17"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="5dp"
+        android:maxEms="17"
+        android:text="sdfsfsfsfsfsf"
+        android:paddingTop="@dimen/text_size_10px"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="@dimen/text_size_10px"
+        android:maxLines="3"
+        android:minLines="1"
+        android:textColor="@color/btn_border_press"
+        android:textSize="@dimen/text_size_24px" />
+
+  <!--   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text=""
+        android:textColor="@color/text_color_dark"
+        android:textSize="@dimen/text_size_22px" /> -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        <ImageView
+            style="@style/split_iv_horizontal"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/contest_cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="取消"
+            android:textColor="@color/btn_border_press" />
+
+        <ImageView
+            android:id="@+id/split_iv_vertical"
+            style="@style/split_iv_vertical"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" />
+
+        <TextView
+            android:id="@+id/contest_confirm_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="确定"
+            android:textColor="@color/main_menu_text_selected" />
+    </LinearLayout>
+
+</LinearLayout>

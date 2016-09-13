@@ -1,0 +1,326 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    tools:context=".activity.SelectLabelActivity" >
+
+    <include
+        android:id="@+id/select_label_head_include"
+        layout="@layout/view_common_head" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/select_label_head_include"
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
+
+        <TextView
+            android:textColor="@color/color_999999"
+            android:id="@+id/select_label_limit_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:text="选择内容标签(最多三项)"
+            android:textSize="@dimen/text_size_26px" />
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="16dp"
+        android:numColumns="3"
+        android:padding="10dp">
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:padding="10dp">
+        <RelativeLayout
+            android:id="@+id/rll_select_label1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:onClick="onClick"
+            android:layout_marginRight="36dp"
+            >
+            <TextView
+                android:layout_marginTop="@dimen/text_size_3px"
+                android:padding="3dp"
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_select_labels"
+                android:gravity="center"
+                 android:textColor="@color/color_F46a84"
+                android:text="美发" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/circle_red_small1"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/text_size_16px"
+                android:layout_height="@dimen/text_size_16px"
+                android:background="@drawable/circle_red_small"
+                />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label2"
+                android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_marginRight="36dp"
+                >
+
+            <TextView
+                android:layout_marginTop="@dimen/text_size_3px"
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_select_labels"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textColor="@color/color_F46a84"
+                android:text="美容" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small2"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label3"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/color_F46a84"
+
+                    android:text="美甲" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small3"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label4"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_marginRight="36dp"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/color_F46a84"
+
+                    android:text="瑜伽" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small4"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label5"
+                android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_marginRight="36dp"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/color_F46a84"
+
+                    android:text="美睫" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small5"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label6"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/color_F46a84"
+
+                    android:text="美体" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small6"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:padding="10dp">
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label7"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_marginRight="36dp"
+                >
+
+                <TextView
+                    android:textColor="@color/color_F46a84"
+
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="纹绣" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small7"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rll_select_label8"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:layout_marginRight="36dp"
+                >
+
+                <TextView
+                    android:textColor="@color/color_F46a84"
+
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="养生" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small8"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rll_select_label9"
+android:onClick="onClick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                >
+
+                <TextView
+                    android:textColor="@color/color_F46a84"
+
+                    android:layout_marginTop="@dimen/text_size_3px"
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_select_labels"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:text="光电" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/circle_red_small9"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/text_size_16px"
+                    android:layout_height="@dimen/text_size_16px"
+                    android:background="@drawable/circle_red_small"
+                    />
+            </RelativeLayout>
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

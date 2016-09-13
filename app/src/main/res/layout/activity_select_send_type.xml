@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".SelectSendTypeActivity" >
+
+    <include
+        layout="@layout/view_common_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+
+        <RelativeLayout
+            android:id="@+id/send_show_card_rll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                android:id="@+id/send_show_card_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/icon_send_show_card"
+                android:gravity="center"
+                android:text="@string/send_show_card_tv_show"
+                android:textColor="@color/main_menu_text_unselected"
+                android:textSize="@dimen/text_size_28px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/send_loiter_card_rll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                android:id="@+id/send_loiter_card_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/icon_send_loiter_card"
+                android:gravity="center"
+                android:text="@string/send_loiter_card_tv_show"
+                android:textColor="@color/main_menu_text_unselected"
+                android:textSize="@dimen/text_size_28px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/send_dynamic_rll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:clickable="true"
+            android:onClick="onClick" >
+
+            <TextView
+                android:id="@+id/send_dynamic_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="5dp"
+                android:drawableTop="@drawable/icon_send_dynamic"
+                android:gravity="center"
+                android:text="@string/send_dynamic_tv_show"
+                android:textColor="@color/main_menu_text_unselected"
+                android:textSize="@dimen/text_size_28px" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

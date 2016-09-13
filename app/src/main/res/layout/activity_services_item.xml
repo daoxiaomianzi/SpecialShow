@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    			<RelativeLayout
+    			    android:id="@+id/service_item_rl"
+    android:descendantFocusability="blocksDescendants"
+    			    android:clickable="true"
+    			    android:paddingTop="@dimen/text_size_16px"
+    			    android:paddingBottom="@dimen/text_size_16px"
+                style="@style/stores_rll"
+                android:layout_height="70dp"
+               >
+
+                <ImageView
+					android:scaleType="fitXY"
+                    android:id="@+id/service_item_iv"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                     />
+
+                <TextView
+					android:textColor="@color/color_333333"
+                    android:id="@+id/service_items_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/service_item_iv"
+                    android:text="澳斯迈健身游泳培训班"
+                    android:textSize="@dimen/text_size_26px" />
+
+                <TextView
+                    android:id="@+id/service_items_cheap_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/text_size_4px"
+                    android:layout_marginLeft="@dimen/text_size_8px"
+                    android:layout_toRightOf="@id/service_item_iv"
+                    android:text="￥1088.00"
+                    android:textColor="@color/color_F47183"
+                    android:textSize="@dimen/text_size_30px" />
+				<RelativeLayout 
+				    android:id="@+id/rll_service_items_price"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@id/service_items_cheap_price"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="@dimen/text_size_4px"
+				    >
+                <TextView
+                    android:id="@+id/service_items_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥4600.00"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_26px" />
+                <View 
+                    android:id="@+id/service_items_price_vi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1.0dp"
+                    android:layout_alignLeft="@id/service_items_price"
+                    android:layout_alignRight="@id/service_items_price"
+                    android:background="@color/color_656565"
+                    android:layout_centerInParent="true"
+                    />
+			</RelativeLayout>
+			<Button 
+			    android:focusable="false"
+			    android:clickable="true"
+			    android:id="@+id/service_item_reservation"
+			    android:layout_width="65dp"
+			    android:layout_height="27dp"
+			    android:layout_alignBottom="@id/rll_service_items_price"
+			    android:layout_alignParentRight="true"
+			    android:background="@color/color_F47183"
+			    android:text="@string/reservation"
+			    android:textColor="@color/color_ffffff"
+			    android:textSize="@dimen/text_size_24px"
+			    />
+
+            </RelativeLayout>
+          <View 
+              android:layout_below="@id/service_item_rl"
+		    android:layout_width="fill_parent"
+		    android:layout_height="1dp"
+		    android:background="@color/app_line_bg"
+		    />
+    
+
+</RelativeLayout>

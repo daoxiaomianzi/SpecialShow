@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/show_visitor_item_rll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:paddingBottom="@dimen/text_size_6px"
+        android:id="@+id/show_visitor_item_rl"
+        style="@style/shopList_rll"
+        android:layout_height="75dp" >
+
+        <com.show.specialshow.utils.RoundImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/show_visitor_item_iv"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginRight="10dp"
+            imagecontrol:border_thickness="2dp" />
+
+        <RelativeLayout
+            android:layout_alignTop="@id/show_visitor_item_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/show_visitor_item_iv"
+            >
+
+            <TextView
+                android:textColor="@color/color_555555"
+                android:id="@+id/show_visitor_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/text_size_8px"
+                android:text="长发"
+                android:textSize="@dimen/text_size_26px" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:visibility="gone"
+
+
+            android:id="@+id/show_visitor_item_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_8px"
+            android:layout_toRightOf="@id/show_visitor_item_iv"
+            android:text="女"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px" />
+
+        <TextView
+            android:gravity="center"
+            android:paddingLeft="@dimen/text_size_8px"
+            android:paddingRight="@dimen/text_size_8px"
+            android:id="@+id/show_visitor_item_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_8px"
+            android:layout_toRightOf="@id/show_visitor_item_sex"
+            android:text="21"
+            android:minWidth="@dimen/text_size_90px"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_22px" />
+
+        <TextView
+            android:gravity="center"
+            android:paddingLeft="@dimen/text_size_4px"
+            android:paddingRight="@dimen/text_size_4px"
+            android:background="@drawable/bg_xingzuo"
+            android:id="@+id/show_visitor_item_constellation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_10px"
+            android:layout_toRightOf="@id/show_visitor_item_age"
+            android:text="射手座"
+            android:drawablePadding="@dimen/text_size_1px"
+            android:textColor="@color/white"
+            android:minWidth="@dimen/text_size_90px"
+            android:textSize="@dimen/text_size_22px" />
+        <TextView
+                android:id="@+id/show_visitor_item_attention_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_show_visitor_attention_selector"
+                android:gravity="center"
+                android:minEms="3"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingBottom="1dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="1dp"
+                android:text="关注"
+                android:textColor="@drawable/text_attention_color_check_selector"
+                android:textSize="@dimen/text_size_20px" />
+
+        <TextView
+            android:id="@+id/show_visitor_item_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/text_size_4px"
+            android:layout_marginLeft="@dimen/text_size_8px"
+            android:layout_toRightOf="@id/show_visitor_item_iv"
+            android:text="鱼柳包里面的鱼柳变咗就唔系鱼柳包"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px" />
+
+
+
+        <TextView
+            android:id="@+id/show_visitor_item_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:text="0.24km"
+            android:layout_marginRight="@dimen/text_size_4px"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_26px" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/show_visitor_item_rl"
+        android:layout_marginLeft="@dimen/text_size_16px"
+        android:layout_marginRight="@dimen/text_size_16px"
+        android:background="@color/color_ededed" />
+
+</RelativeLayout>

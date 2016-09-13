@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/text_size_26px"
+    android:paddingTop="@dimen/text_size_26px"
+    android:paddingRight="@dimen/text_size_26px"
+    android:background="@color/color_ffffff"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <com.show.specialshow.utils.RoundImageView 
+            android:id="@+id/craftsman_details_comment_roundiv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/girl"
+            />
+        <TextView 
+            android:id="@+id/craftsman_details_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="01.12 15:30"
+            android:textSize="@dimen/text_size_26px"
+            android:textColor="@color/color_999999"
+            />
+        <TextView 
+            android:id="@+id/craftsman_details_comment_name"
+            android:layout_toRightOf="@id/craftsman_details_comment_roundiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="红too"
+            android:textSize="@dimen/text_size_28px"
+            android:textColor="@color/color_999999"
+            android:layout_marginLeft="@dimen/text_size_8px"
+            />
+    </RelativeLayout>
+    <TextView 
+        android:id="@+id/craftsman_details_comment_content"
+        android:layout_marginLeft="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/text_size_30px"
+        android:text="有形馆年卡一张，现在因为工作地点换到岛外所以去不方便，要的话可以联系，便宜转了"
+        />
+    <com.show.specialshow.view.MyGridView 
+        android:layout_marginTop="@dimen/text_size_10px"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="5dp"
+        android:id="@+id/craftsman_details_comment_picgv"
+        android:layout_marginLeft="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="#00000000"
+        android:cacheColorHint="#00000000"
+        ></com.show.specialshow.view.MyGridView>
+    <View 
+        android:layout_marginTop="@dimen/text_size_10px"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="56dp"
+        android:background="@color/color_ededed"
+        />
+    
+
+</LinearLayout>

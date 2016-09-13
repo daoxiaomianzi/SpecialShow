@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingLeft="@dimen/text_size_20px"
+    android:paddingRight="@dimen/text_size_20px"
+    android:paddingTop="@dimen/text_size_8px"
+    android:paddingBottom="@dimen/text_size_8px"
+    android:background="@color/ablue"
+    android:orientation="vertical">
+
+    <TextView
+        android:textSize="@dimen/text_size_30px"
+        android:id="@+id/map_shop"
+        android:text="测试"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:textSize="@dimen/text_size_24px"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:id="@+id/map_address"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="上海市东方路710号"-->
+        <!--/>-->
+
+</LinearLayout>

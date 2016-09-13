@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/craftsm_rl"
+     android:descendantFocusability="blocksDescendants"
+    android:background="@color/color_ffffff" >
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:id="@+id/craftsm_head_pro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/craftsm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_4px"
+        android:text="奥斯曼"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_size_24px" />
+
+    <TextView
+        android:id="@+id/craftsm_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_4px"
+        android:text="游泳教练"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_size_24px" />
+
+    <TextView
+        android:id="@+id/craftsm_moods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_4px"
+        android:text="124人气"
+        android:drawableLeft="@drawable/icon_moods"
+        android:drawablePadding="@dimen/text_size_4px"
+        android:textColor="@color/color_F15884"
+        android:textSize="@dimen/text_size_24px" />
+
+</LinearLayout>

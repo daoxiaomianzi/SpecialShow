@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/color_ffffff"
+    android:paddingLeft="@dimen/text_size_26px"
+    android:paddingRight="@dimen/text_size_26px"
+    android:paddingTop="@dimen/text_size_16px"
+    android:paddingBottom="@dimen/text_size_8px"
+    android:layout_height="match_parent" >
+    <TextView
+        android:textColor="@color/color_555555"
+        android:id="@+id/item_shower_details_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/12月"
+        android:textSize="@dimen/text_size_30px"
+         />
+    <LinearLayout 
+        android:layout_marginLeft="@dimen/text_size_16px"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/item_shower_details_time"
+        android:orientation="vertical"
+        >
+        <com.show.specialshow.view.MyGridView 
+            android:numColumns="3"
+            android:id="@+id/item_shower_details_gv"
+            android:listSelector="#00000000"
+            android:cacheColorHint="#00000000"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none"
+            android:visibility="gone"
+            android:horizontalSpacing="@dimen/text_size_16px"
+            android:verticalSpacing="@dimen/text_size_4px"
+            ></com.show.specialshow.view.MyGridView>
+        <TextView 
+            android:id="@+id/item_shower_details_content_tv"
+            android:layout_marginTop="@dimen/text_size_4px"
+            style="@style/user_info_tv"
+            android:text=""
+            android:textSize="@dimen/text_size_28px"
+            android:textColor="@color/color_555555"
+            />
+        <TextView 
+            android:id="@+id/item_shower_cdetails_activity"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/text_size_10px"
+            style="@style/user_info_tv"
+            android:text=""
+            android:textSize="@dimen/text_size_26px"
+            android:textColor="@color/color_555555"
+            />
+        <View 
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_ededed"
+            />
+        
+    </LinearLayout>
+    
+
+</RelativeLayout>

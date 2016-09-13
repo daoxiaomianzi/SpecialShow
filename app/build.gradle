@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion '24.0.0'
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+    defaultConfig {
+        applicationId "com.show.specialshow"
+        minSdkVersion 14
+        targetSdkVersion 21
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+    lintOptions {
+        disable "ResourceType"
+    }
+    sourceSets {
+        main() {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+}
+
+dependencies {
+    compile files('libs/bolts-android-1.2.0.jar')
+    compile files('libs/commons-lang3-3.3.jar')
+    compile files('libs/easemobchat_2.2.9.jar')
+    compile files('libs/fastjson-1.1.33.jar')
+    compile files('libs/google-play-services.jar')
+    compile files('libs/MiPush_SDK_Client_2_2_19.jar')
+    compile files('libs/Parse-1.9.4.jar')
+    compile files('libs/pinyin4android1.0.jar')
+    compile files('libs/pinyin4j-2.5.0.jar')
+    compile files('libs/xUtils-2.6.14.jar')
+    compile project(':umeng_community_discuss_library_project')
+    compile files('libs/AMap_Search_V3.4.0_20160811.jar')
+    compile files('libs/AMap3DMap_3.3.3_AMapNavi_1.9.1_20160726.jar')
+    compile files('libs/Msc.jar')
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'com.android.support:multidex:1.0.0'
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+        android:paddingRight="@dimen/text_size_28px"
+         android:paddingLeft="@dimen/text_size_28px"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:paddingTop="@dimen/text_size_16px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <com.show.specialshow.utils.RoundImageView
+            android:id="@+id/roundImage_shop_review"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/girl"
+            imagecontrol:border_thickness="2dp" />
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/roundImage_shop_review"
+            android:layout_centerVertical="true"
+            
+            >
+        <TextView 
+            android:id="@+id/shop_review_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="长发万毒花"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_size_36px"
+            android:layout_marginTop="@dimen/text_size_4px"
+            />
+        <TextView 
+            android:layout_marginTop="@dimen/text_size_8px"
+            android:layout_below="@id/shop_review_name"
+            android:id="@+id/shop_review_createtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="01.12 15:30"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_size_28px"
+            />
+        <TextView 
+            android:id="@+id/shop_review_chat"
+            android:paddingTop="@dimen/text_size_8px"
+            android:paddingBottom="@dimen/text_size_8px"
+            android:paddingLeft="@dimen/text_size_32px"
+            android:paddingRight="@dimen/text_size_32px"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="聊天"
+            android:background="@drawable/bg_order_privilege"
+            android:textColor="#7588EF"
+            />
+        </RelativeLayout>
+    </RelativeLayout>
+        <TextView 
+        android:id="@+id/shop_review_content"
+        android:paddingLeft="@dimen/text_size_16px"
+        android:paddingRight="@dimen/text_size_16px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/text_size_30px"
+        />
+             <com.show.specialshow.ninegridlayout.NineGridlayout
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="@dimen/text_size_28px"
+        	android:layout_marginRight="@dimen/text_size_28px"
+                android:id="@+id/iv_ngrid_layout_review"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+
+            <com.show.specialshow.ninegridlayout.CustomImageView
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="@dimen/text_size_28px"
+        android:layout_marginRight="@dimen/text_size_28px"
+                android:id="@+id/iv_oneimage_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+    <View 
+        android:layout_marginTop="@dimen/text_size_10px"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+android:background="@color/app_line_bg"        />
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="158dp"
+            android:orientation="vertical" >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/dynamic_banner_show_vp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:id="@+id/dynamic_banner_show_adddot"
+                android:layout_width="fill_parent"
+                android:layout_height="13dip"
+                android:layout_alignBottom="@+id/dynamic_banner_show_vp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="3dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <RelativeLayout
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" >
+
+                <TextView
+                    android:id="@+id/dynamic_banner_describe_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/half_transparency"
+                    android:padding="8dp"
+                    android:textSize="@dimen/text_size_26px"
+                    android:textColor="@color/white"
+                    android:text="JS造型 仅售100元，价值160元染发套餐！" />
+               
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    
+
+</RelativeLayout>

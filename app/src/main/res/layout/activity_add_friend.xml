@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_ffffff"
+    android:orientation="vertical"
+  >
+  <include layout="@layout/view_common_head"/>
+    <EditText
+        android:id="@+id/add_friend_et"
+        android:singleLine="true"
+        android:layout_marginLeft="@dimen/text_size_68px"
+        android:layout_marginRight="@dimen/text_size_68px"
+        android:layout_marginTop="@dimen/text_size_40px"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/editshape"
+        android:textColorHint="@color/color_b5b5b5"
+        android:textSize="@dimen/text_size_28px"
+        android:hint="@string/input_number_or_nick"
+        />
+    <Button 
+        android:id="@+id/add_friend_btn"
+        android:onClick="onClick"
+        android:layout_marginTop="@dimen/text_size_48px"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addfriend"
+        android:textColor="@color/color_ffffff"
+        android:background="@color/color_F47183"
+        android:textSize="@dimen/text_size_30px"
+        />
+
+</LinearLayout>

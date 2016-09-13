@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.show.specialshow.activity.MessageDetailActivity">
+    <include
+        layout="@layout/view_common_head"
+        />
+    <TextView
+        android:id="@+id/message_detail_tv"
+        android:paddingLeft="@dimen/text_size_26px"
+        android:paddingRight="@dimen/text_size_26px"
+        android:layout_marginTop="@dimen/text_size_26px"
+        style="@style/user_info_tv"
+        android:text="HHHHH"
+        />
+
+</LinearLayout>

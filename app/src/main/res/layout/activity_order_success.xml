@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrderSuccessActivity" >
+    <include
+        android:id="@+id/order_success_head_include"
+         layout="@layout/view_common_head"/>
+    <TextView 
+        android:onClick="onClick"
+        android:id="@+id/look_my_reservation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_send_selector"
+        android:text="@string/look_my_reservation"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_30px"
+        android:textColor="@color/color_ffffff"
+        />
+    
+    <ImageView 
+        android:id="@+id/apply_for_iv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/text_size_114px"
+        android:layout_below="@+id/order_success_head_include"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_apply_for"
+        />
+   <TextView 
+       android:id="@+id/submit_booking"
+       android:layout_marginTop="@dimen/text_size_60px"
+       android:textStyle="bold"
+       android:textSize="@dimen/text_size_40px"
+       android:textColor="@color/color_999999"
+       android:layout_centerHorizontal="true"
+       android:layout_below="@id/apply_for_iv"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/submit_booking"
+       
+       />
+   <TextView 
+       android:textSize="@dimen/text_size_32px"
+       android:textColor="@color/color_F47183"
+       android:layout_marginTop="@dimen/text_size_52px"
+       android:text="@string/sms_to_clear"
+       android:layout_below="@id/submit_booking"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       />
+
+
+
+</RelativeLayout>

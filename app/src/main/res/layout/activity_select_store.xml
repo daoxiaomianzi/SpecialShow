@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_F47183"
+    android:layout_height="match_parent"
+    tools:context=".activity.SelectStoreActivity" >
+
+    <include
+        android:id="@+id/select_store_head_include"
+        layout="@layout/view_common_head" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/select_store_head_include" >
+
+        <include
+            layout="@layout/view_commom_listview"
+            android:background="@color/app_bg" />
+    </FrameLayout>
+
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.show.specialshow.activity.AppStartActivity">
+    <com.show.specialshow.view.MyScrollLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/img_guide1" >
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/img_guide2" >
+            <TextView
+                android:text="立即开启"
+                android:id="@+id/start_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="70dp"
+                android:clickable="true"
+                android:paddingLeft="@dimen/text_size_36px"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_32px"
+                android:paddingRight="@dimen/text_size_36px"
+                android:paddingTop="@dimen/text_size_10px"
+                android:paddingBottom="@dimen/text_size_10px"
+                android:background="@drawable/bg_start_iv"
+                 />
+        </RelativeLayout>
+        <!--         <RelativeLayout
+                        android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                   >
+
+                    <ImageView
+                                android:id="@+id/start_iv"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="33dp"
+                        android:clickable="true"
+                        android:padding="10.0dip"
+                        android:src="@drawable/start_iv" />
+                </RelativeLayout> -->
+    </com.show.specialshow.view.MyScrollLayout>
+    <LinearLayout
+        android:id="@+id/adddot"
+        android:layout_width="fill_parent"
+        android:layout_height="13dip"
+        android:layout_alignBottom="@+id/ScrollLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dip"
+        android:gravity="center"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+</RelativeLayout>

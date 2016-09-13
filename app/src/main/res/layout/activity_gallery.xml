@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GalleryActivity" >
+
+    <include 
+        android:id="@+id/gallery_title_include"
+         layout="@layout/view_common_head" />
+
+    <RelativeLayout
+        android:id="@+id/gallery_bottom_rll"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_title_shape" >
+
+        <Button
+            android:id="@+id/gallery_ok_btn"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:onClick="onClick"
+            android:text="@string/finish"
+            android:background="@drawable/plugin_camera_ok_btn_state"
+            />
+    </RelativeLayout>
+
+    <com.show.specialshow.view.ViewPagerFixed
+        android:id="@+id/gallery_content_vpf"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/gallery_bottom_rll"
+        android:layout_below="@id/gallery_title_include"
+        android:layout_centerHorizontal="true"
+        android:background="@color/plugin_camera_black"
+        android:unselectedAlpha="1" >
+    </com.show.specialshow.view.ViewPagerFixed>
+
+</RelativeLayout>
