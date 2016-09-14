@@ -41,9 +41,19 @@ import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMCallStateChangeListener;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMVideoCallHelper;
+import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CameraHelper;
 import com.easemob.exceptions.EMServiceNotReadyException;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
+import com.show.specialshow.model.MessageResult;
+import com.show.specialshow.utils.UIHelper;
 
 public class VideoCallActivity extends CallActivity implements OnClickListener {
 
@@ -125,8 +135,7 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
         username = getIntent().getStringExtra("username");
 
         // 设置通话人
-        nickTextView.setText(username);
-
+        getEmidData(username);
         // 显示本地图像的surfaceview
         localSurface = (SurfaceView) findViewById(R.id.local_surface);
         localSurface.setZOrderMediaOverlay(true);
@@ -171,6 +180,39 @@ public class VideoCallActivity extends CallActivity implements OnClickListener {
             ringtone = RingtoneManager.getRingtone(this, ringUri);
             ringtone.play();
         }
+    }
+    /**
+     * 获取在本应用的昵称
+     * @param username
+     */
+    private void getEmidData(String username) {
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.SPACE_GETUSERBYID;
+        params.addBodyParameter("emid", username);
+        TXApplication.post(null, this, url, params,
+                new RequestCallBack<String>() {
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+                        UIHelper.ToastMessage(VideoCallActivity.this, R.string.net_work_error);
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        MessageResult result = MessageResult
+                                .parse(responseInfo.result);
+                        if (null == result) {
+                            return;
+                        }
+                        if (1 == result.getSuccess()) {
+                            User user = User.parse(result.getData());
+                            // 设置通话人
+                            nickTextView.setText(user.getNickname());
+                        } else {
+                            UIHelper.ToastMessage(VideoCallActivity.this, R.string.net_work_error);
+                        }
+                    }
+                });
     }
 
     /**

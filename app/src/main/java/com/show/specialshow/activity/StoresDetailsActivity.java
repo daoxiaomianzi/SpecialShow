@@ -400,7 +400,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 collect();
                 break;
             case R.id.tv_stores_details_cou://优惠买单
-                UIHelper.ToastMessage(mContext,"sssss");
+//                UIHelper.ToastMessage(mContext,"sssss");
                 break;
 
             default:

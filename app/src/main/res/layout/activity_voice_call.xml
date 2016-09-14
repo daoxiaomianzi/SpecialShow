@@ -59,13 +59,13 @@
         android:orientation="vertical"
         android:layout_weight="2" >
 
-        <ImageView
+        <com.show.specialshow.utils.RoundImageView
             android:id="@+id/swing_card"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="fitXY"
             android:layout_marginTop="10dp"
-            android:src="@drawable/default_avatar" />
+             />
         
         <TextView
             android:id="@+id/tv_nick"
@@ -74,7 +74,7 @@
             android:layout_marginTop="10dp"
               android:textColor="@android:color/white"
               android:textSize="20sp"
-              android:text="张三"
+              android:text=""
              />
     </LinearLayout>
 

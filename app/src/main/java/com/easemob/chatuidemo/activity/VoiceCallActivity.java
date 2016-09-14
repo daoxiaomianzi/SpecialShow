@@ -14,6 +14,7 @@
 
 package com.easemob.chatuidemo.activity;
 
+import java.util.Map;
 import java.util.UUID;
 
 import android.media.AudioManager;
@@ -38,8 +39,21 @@ import android.widget.Toast;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMCallStateChangeListener;
 import com.easemob.chat.EMChatManager;
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.domain.RobotUser;
+import com.easemob.chatuidemo.domain.User;
 import com.easemob.exceptions.EMServiceNotReadyException;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
+import com.show.specialshow.model.MessageResult;
+import com.show.specialshow.model.UserMessage;
+import com.show.specialshow.utils.UIHelper;
 
 /**
  * 语音通话页面
@@ -105,11 +119,10 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 		msgid = UUID.randomUUID().toString();
 
 		username = getIntent().getStringExtra("username");
+		getEmidData(username);
 		// 语音电话是否为接收的
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
 
-		// 设置通话人
-		nickTextView.setText(username);
 		if (!isInComingCall) {// 拨打电话
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.outgoing, 1);
@@ -143,6 +156,41 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 			ringtone = RingtoneManager.getRingtone(this, ringUri);
 			ringtone.play();
 		}
+	}
+
+	/**
+	 * 获取在本应用的昵称
+	 * @param username
+     */
+	private void getEmidData(String username) {
+		RequestParams params = TXApplication.getParams();
+		String url = URLs.SPACE_GETUSERBYID;
+		params.addBodyParameter("emid", username);
+		TXApplication.post(null, this, url, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onFailure(HttpException error, String msg) {
+						UIHelper.ToastMessage(VoiceCallActivity.this, R.string.net_work_error);
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> responseInfo) {
+						MessageResult result = MessageResult
+								.parse(responseInfo.result);
+						if (null == result) {
+							return;
+						}
+						if (1 == result.getSuccess()) {
+							User user = User.parse(result.getData());
+							// 设置通话人
+							nickTextView.setText(user.getNickname());
+							ImageLoader.getInstance().displayImage(user.getIcon(), (ImageView) findViewById(R.id.swing_card));
+						} else {
+							UIHelper.ToastMessage(VoiceCallActivity.this, R.string.net_work_error);
+						}
+					}
+				});
 	}
 
 	/**

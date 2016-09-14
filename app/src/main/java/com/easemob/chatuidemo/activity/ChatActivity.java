@@ -771,7 +771,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
                 } else {
                     String st = getResources().getString(
                             R.string.unable_to_get_loaction);
-                    Toast.makeText(this, st, 0).show();
+                    UIHelper.ToastMessage(mContext,st);
                 }
                 // 重发消息
             } else if (requestCode == REQUEST_CODE_TEXT
@@ -846,7 +846,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
             selectFileFromLocal();
         } else if (id == R.id.btn_voice_call) { // 点击语音电话图标
             if (!EMChatManager.getInstance().isConnected())
-                Toast.makeText(this, st1, 0).show();
+            UIHelper.ToastMessage(mContext,st1);
             else {
                 startActivity(new Intent(ChatActivity.this,
                         VoiceCallActivity.class).putExtra("username",
@@ -856,7 +856,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
             }
         } else if (id == R.id.btn_video_call) { // 视频通话
             if (!EMChatManager.getInstance().isConnected())
-                Toast.makeText(this, st1, 0).show();
+            UIHelper.ToastMessage(mContext,st1);
             else {
                 startActivity(new Intent(this, VideoCallActivity.class)
                         .putExtra("username", toChatUsername).putExtra(
@@ -958,7 +958,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
         if (!CommonUtils.isExitsSdcard()) {
             String st = getResources().getString(
                     R.string.sd_card_does_not_exist);
-            Toast.makeText(getApplicationContext(), st, 0).show();
+            UIHelper.ToastMessage(mContext,st);
             return;
         }
 
@@ -1250,13 +1250,13 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
         File file = new File(filePath);
         if (file == null || !file.exists()) {
             String st7 = getResources().getString(R.string.File_does_not_exist);
-            Toast.makeText(getApplicationContext(), st7, 0).show();
+            UIHelper.ToastMessage(getApplicationContext(),st7);
             return;
         }
         if (file.length() > 10 * 1024 * 1024) {
             String st6 = getResources().getString(
                     R.string.The_file_is_not_greater_than_10_m);
-            Toast.makeText(getApplicationContext(), st6, 0).show();
+            UIHelper.ToastMessage(getApplicationContext(),st6);
             return;
         }
 
@@ -1370,8 +1370,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
      */
     public void toGroupDetails(View view) {
         if (room == null && group == null) {
-            Toast.makeText(getApplicationContext(), R.string.gorup_not_found, 0)
-                    .show();
+            UIHelper.ToastMessage(getApplicationContext(),R.string.gorup_not_found);
             return;
         }
         if (chatType == CHATTYPE_GROUP) {
@@ -1733,9 +1732,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
                     runOnUiThread(new Runnable() {
                         public void run() {
                             pd.dismiss();
-                            Toast.makeText(getApplicationContext(),
-                                    R.string.Move_into_blacklist_success, 0)
-                                    .show();
+                            UIHelper.ToastMessage(getApplicationContext(),R.string.Move_into_blacklist_success);
                         }
                     });
                 } catch (EaseMobException e) {
@@ -1743,9 +1740,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
                     runOnUiThread(new Runnable() {
                         public void run() {
                             pd.dismiss();
-                            Toast.makeText(getApplicationContext(),
-                                    R.string.Move_into_blacklist_failure, 0)
-                                    .show();
+                            UIHelper.ToastMessage(getApplicationContext(),R.string.Move_into_blacklist_failure);
                         }
                     });
                 }
@@ -1898,7 +1893,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
 
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(ChatActivity.this, st13, 1).show();
+                        UIHelper.ToastLogMessage(mContext,st13);
                         if (GroupDetailsActivity.instance != null)
                             GroupDetailsActivity.instance.finish();
                         finish();
@@ -1916,7 +1911,7 @@ public class ChatActivity extends BaseActivity implements OnClickListener,
 
                 public void run() {
                     if (toChatUsername.equals(groupId)) {
-                        Toast.makeText(ChatActivity.this, st14, 1).show();
+                        UIHelper.ToastMessage(mContext,st14);
                         if (GroupDetailsActivity.instance != null)
                             GroupDetailsActivity.instance.finish();
                         finish();
