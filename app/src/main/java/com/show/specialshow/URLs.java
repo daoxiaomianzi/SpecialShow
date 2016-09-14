@@ -226,5 +226,9 @@ public interface URLs {
 	 * 手艺人列表数据
 	 */
 	String SPACE_STAFFLIST=BASE_URL+"/Space/staffList";
+	/**
+	 * 更新用户当前坐标
+	 */
+	String USER_UPDATEXY=BASE_URL+"/user/updateXy";
 }
 

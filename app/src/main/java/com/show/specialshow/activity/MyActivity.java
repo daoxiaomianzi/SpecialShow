@@ -101,7 +101,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 	}
 	public void registerBoradcastReceiver() {
 		IntentFilter myIntentFilter = new IntentFilter();
-		myIntentFilter.addAction(ShowerDetailsActivity.ACTION_NAME);
+		myIntentFilter.addAction(BasicInformationActivity.MY_BASIC);
 		// 注册广播
 		registerReceiver(mBroadcastReceiver, myIntentFilter);
 	}

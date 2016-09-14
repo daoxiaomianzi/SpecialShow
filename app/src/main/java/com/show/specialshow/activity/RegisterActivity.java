@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.easemob.EMCallBack;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMChatManager;
@@ -39,7 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements AMapLocationListener{
     //相关控件
     private EditText register_phonenumber;//输入手机号
     private EditText register_code;//输入验证码
@@ -51,6 +55,12 @@ public class RegisterActivity extends BaseActivity {
     private int from_login;//从哪里来的
     private String currentUsername;//环信登录用户名
     private String currentPassword;//环信登录密码
+    // 定位相关
+    private AMapLocationClient locationClient = null;
+    private AMapLocationClientOption locationOption = null;
+    // 当前定位坐标(起点)
+    private double mLat=0.0d;//纬度
+    private double mLon=0.0d;//经度
 
 
     @Override
@@ -74,6 +84,7 @@ public class RegisterActivity extends BaseActivity {
     @Override
     public void fillView() {
         isCanRegister();
+        InitLocation();
         head_title_tv.setText(R.string.register);
     }
 
@@ -115,6 +126,14 @@ public class RegisterActivity extends BaseActivity {
         params.addBodyParameter("phone", phone);
         params.addBodyParameter("code", code);
         params.addBodyParameter("password", MD5Utils.getMd5Str(password));
+        if(0.0d==mLat||0.0d==mLon){
+            InitLocation();
+            register_register.setEnabled(true);
+            return;
+        }else{
+            params.addBodyParameter("x",mLon+"");//经度
+            params.addBodyParameter("y",mLat+"");//纬度
+        }
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
             @Override
@@ -372,5 +391,56 @@ public class RegisterActivity extends BaseActivity {
             register_register.setEnabled(true);
         }
     }
-
+    /**
+     * 初始化地图定位
+     * @param
+     */
+    private void InitLocation() {
+        locationClient = new AMapLocationClient(mContext.getApplicationContext());
+        locationOption = new AMapLocationClientOption();
+        // 设置定位模式为高精度模式
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        // 设置定位监听
+        locationClient.setLocationListener(this);
+        // 设置是否需要显示地址信息
+        locationOption.setNeedAddress(true);
+        /**
+         * 设置是否优先返回GPS定位结果，如果30秒内GPS没有返回定位结果则进行网络定位
+         * 注意：只有在高精度模式下的单次定位有效，其他方式无效
+         */
+        locationOption.setGpsFirst(true);
+        // 设置是否开启缓存
+        locationOption.setLocationCacheEnable(true);
+        //设置是否等待设备wifi刷新，如果设置为true,会自动变为单次定位，持续定位时不要使用
+        locationOption.setOnceLocationLatest(true);
+        locationClient.setLocationOption(locationOption);
+        locationClient.startLocation();
+    }
+    /**
+     * 高德定位回调
+     * @param aMapLocation
+     */
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if(null==aMapLocation){
+            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+            return;
+        }
+        mLat=aMapLocation.getLatitude();
+        mLon=aMapLocation.getLongitude();
+        locationClient.stopLocation();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (null != locationClient) {
+            /**
+             * 如果AMapLocationClient是在当前Activity实例化的，
+             * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
+             */
+            locationClient.onDestroy();
+            locationClient = null;
+            locationOption = null;
+        }
+    }
 }

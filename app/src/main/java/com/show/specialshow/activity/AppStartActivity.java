@@ -12,10 +12,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
 import com.show.specialshow.listener.OnViewChangeListener;
+import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.BannerPointUtils;
 import com.show.specialshow.utils.MyBitmapUtils;
@@ -25,7 +35,7 @@ import com.show.specialshow.view.MyScrollLayout;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class AppStartActivity extends BaseActivity implements OnViewChangeListener{
+public class AppStartActivity extends BaseActivity implements OnViewChangeListener,AMapLocationListener{
     private MyScrollLayout mScrollLayout;//滑动器
     private int count;
     private int currentItem;
@@ -41,6 +51,12 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     private LinearLayout ll_point;//点的布局
     private ArrayList<ImageView> pointviews = new ArrayList<>();
     private BannerPointUtils bannerPointUtils;//小点工具类
+    // 定位相关
+    private AMapLocationClient locationClient = null;
+    private AMapLocationClientOption locationOption = null;
+    // 当前定位坐标(起点)
+    private double mLat=0.0d;//纬度
+    private double mLon=0.0d;//经度
 
 
     static class MyHandler extends Handler {
@@ -76,7 +92,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
             }
         }
 
-    };
+    }
 
     @SuppressWarnings("rawtypes")
     private void setHome(Class clazz) {
@@ -175,12 +191,6 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        MyBitmapUtils.recycleBitmap(bitmap);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) { // 让手势识别器 生效
         if (mGestureDetector == null)
             return false;
@@ -197,6 +207,9 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
 
     @Override
     public void initData() {
+        if(TXApplication.login){
+            InitLocation();
+        }
 
     }
 
@@ -218,6 +231,89 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     @Override
     public void onClick(View v) {
 
+    }
+
+    /**
+     * 更新用户当前所在坐标
+     */
+    private void updateXy(){
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.USER_UPDATEXY;
+        if(0.0d==mLat||0.0d==mLon){
+            InitLocation();
+            return;
+        }else{
+            params.addBodyParameter("x",mLon+"");//经度
+            params.addBodyParameter("y",mLat+"");//纬度
+        }
+        params.addBodyParameter("uid",TXApplication.getUserMess().getUid());
+        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                MessageResult result = MessageResult.parse(responseInfo.result);
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
+    }
+    /**
+     * 初始化地图定位
+     * @param
+     */
+    private void InitLocation() {
+        locationClient = new AMapLocationClient(mContext.getApplicationContext());
+        locationOption = new AMapLocationClientOption();
+        // 设置定位模式为高精度模式
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        // 设置定位监听
+        locationClient.setLocationListener(this);
+        // 设置是否需要显示地址信息
+        locationOption.setNeedAddress(true);
+        /**
+         * 设置是否优先返回GPS定位结果，如果30秒内GPS没有返回定位结果则进行网络定位
+         * 注意：只有在高精度模式下的单次定位有效，其他方式无效
+         */
+        locationOption.setGpsFirst(true);
+        // 设置是否开启缓存
+        locationOption.setLocationCacheEnable(true);
+        //设置是否等待设备wifi刷新，如果设置为true,会自动变为单次定位，持续定位时不要使用
+        locationOption.setOnceLocationLatest(true);
+        locationClient.setLocationOption(locationOption);
+        locationClient.startLocation();
+    }
+    /**
+     * 高德定位回调
+     * @param aMapLocation
+     */
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        if(null==aMapLocation){
+            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+            return;
+        }
+        mLat=aMapLocation.getLatitude();
+        mLon=aMapLocation.getLongitude();
+        locationClient.stopLocation();
+        updateXy();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MyBitmapUtils.recycleBitmap(bitmap);
+
+        if (null != locationClient) {
+            /**
+             * 如果AMapLocationClient是在当前Activity实例化的，
+             * 在Activity的onDestroy中一定要执行AMapLocationClient的onDestroy
+             */
+            locationClient.onDestroy();
+            locationClient = null;
+            locationOption = null;
+        }
     }
 
 
