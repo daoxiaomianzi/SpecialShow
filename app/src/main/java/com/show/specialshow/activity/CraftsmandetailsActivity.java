@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.easemob.chatuidemo.utils.SmileUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -394,8 +395,8 @@ public class CraftsmandetailsActivity extends BaseActivity {
 					position).getComment_time());
 			vh.craftsman_details_comment_name.setText(craftsmanReviews.get(
 					position).getComment_name());
-			vh.craftsman_details_comment_content.setText(craftsmanReviews.get(
-					position).getComment_total());
+			vh.craftsman_details_comment_content.setText(SmileUtils.getSmiledText(mContext,craftsmanReviews.get(
+					position).getComment_total()));
 			mComcardStaPicsMess = ShopComcardStaPicsMess.parse(craftsmanReviews
 					.get(position).getStatus_pics());
 			if (mComcardStaPicsMess != null && 4 == mComcardStaPicsMess.size()) {

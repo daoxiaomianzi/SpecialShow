@@ -504,7 +504,6 @@ public class OrderActivity extends BaseActivity {
 									: craftsmanIntroduceMess
 											.getCratsman_introduce_name()));
 			rl_order_craftsman_people.setClickable(false);
-			iv_order_craftsman_people_right.setVisibility(View.INVISIBLE);
 		}
 	}
 

@@ -104,18 +104,7 @@
                 android:textColor="@drawable/text_attention_color_check_selector"
                 android:textSize="@dimen/text_size_20px" />
 
-        <TextView
-            android:id="@+id/show_visitor_item_introduction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/text_size_4px"
-            android:layout_marginLeft="@dimen/text_size_8px"
-            android:layout_toRightOf="@id/show_visitor_item_iv"
-            android:text="鱼柳包里面的鱼柳变咗就唔系鱼柳包"
-            android:singleLine="true"
-            android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_size_24px" />
+
 
 
 
@@ -129,6 +118,20 @@
             android:layout_marginRight="@dimen/text_size_4px"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/text_size_26px" />
+        <TextView
+            android:id="@+id/show_visitor_item_introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/text_size_4px"
+            android:layout_marginLeft="@dimen/text_size_8px"
+            android:layout_toRightOf="@id/show_visitor_item_iv"
+            android:layout_toLeftOf="@id/show_visitor_item_distance"
+            android:layout_marginRight="@dimen/text_size_8px"
+            android:text="鱼柳包里面的鱼柳变咗就唔系鱼"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px" />
 
     </RelativeLayout>
 
