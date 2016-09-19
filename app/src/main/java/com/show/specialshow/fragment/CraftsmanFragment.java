@@ -1,6 +1,9 @@
 package com.show.specialshow.fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +21,15 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.adapter.CraftsmanAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopVisitorListMess;
 import com.show.specialshow.model.ShowVisitorList;
 import com.show.specialshow.model.UserMessage;
+import com.show.specialshow.receiver.MyReceiver;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
 
@@ -67,6 +73,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         mLon=aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
+        registerBoradcastReceiver();
         search_result_lv.setPullLoadEnable(true);
     }
 
@@ -78,6 +85,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         params.addBodyParameter("uid", user.getUid());
         params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
         params.addBodyParameter("index", pageIndex + "");
+        params.addBodyParameter("current_city", SPUtils.get(mContext,"city","上海").toString());
         if(0.0d==mLat||0.0d==mLon){
             InitLocation();
             return;
@@ -111,6 +119,10 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                             .getList();
                     if (null == list) {
                         changeListView(0);
+                        search_result_lv.setVisibility(View.VISIBLE);
+                        craftsman_nodata_tv
+                                .setVisibility(View.VISIBLE);
+                        search_result_lv.setPullLoadEnable(false);
                         return;
                     }
                     int size = list.size();
@@ -175,6 +187,26 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     public void fillView() {
 
     }
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
+        // 注册广播
+        mContext.registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    private MyReceiver mBroadcastReceiver = new MyReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(CircleDynamicDetailActivity.ACTION_NAME)) {
+                if(null!=mList){
+                    mList.clear();
+                }
+                getData();
+            }
+        }
+
+    };
 
     @Override
     public void onClick(View v) {
@@ -183,6 +215,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     @Override
     public void onDestroy() {
         super.onDestroy();
+        getActivity().unregisterReceiver(mBroadcastReceiver);
         if (null != locationClient) {
             /**
              * 如果AMapLocationClient是在当前Activity实例化的，

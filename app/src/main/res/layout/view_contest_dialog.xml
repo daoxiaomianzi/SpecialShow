@@ -27,11 +27,10 @@
         android:lineSpacingExtra="5dp"
         android:maxEms="17"
         android:text="sdfsfsfsfsfsf"
-        android:paddingTop="@dimen/text_size_10px"
+        android:paddingTop="@dimen/text_size_8px"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="@dimen/text_size_10px"
-        android:maxLines="3"
+        android:paddingBottom="@dimen/text_size_16px"
         android:minLines="1"
         android:textColor="@color/btn_border_press"
         android:textSize="@dimen/text_size_24px" />

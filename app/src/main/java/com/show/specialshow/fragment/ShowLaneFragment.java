@@ -1,5 +1,8 @@
 package com.show.specialshow.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,7 +27,9 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.activity.NearbyShowFangMapActivity;
+import com.show.specialshow.adapter.CircleDynamicAdapter;
 import com.show.specialshow.adapter.ShowLaneAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
@@ -32,6 +37,8 @@ import com.show.specialshow.model.ShopLaneList;
 import com.show.specialshow.model.ShopListMess;
 import com.show.specialshow.model.ShopListTagsMess;
 import com.show.specialshow.model.UserMessage;
+import com.show.specialshow.receiver.MyReceiver;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
 
@@ -228,6 +235,26 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 	public void fillView() {
 
 	}
+	public void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
+		// 注册广播
+		mContext.registerReceiver(mBroadcastReceiver, myIntentFilter);
+	}
+
+	private MyReceiver mBroadcastReceiver = new MyReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(CircleDynamicDetailActivity.ACTION_NAME)) {
+				if(null!=mList){
+					mList.clear();
+				}
+				getData();
+			}
+		}
+
+	};
 
 	@Override
 	public void onClick(View v) {
@@ -257,6 +284,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 		UserMessage user=TXApplication.getUserMess();
 		params.addBodyParameter("uid", user.getUid());
 		params.addBodyParameter("num",""+ ConstantValue.PAGE_SIZE);
+		params.addBodyParameter("city", SPUtils.get(mContext,"city","上海").toString());
 		params.addBodyParameter("index",pageIndex+"");
 		if(0.0d==mLat||0.0d==mLon){
 			InitLocation();
@@ -292,8 +320,11 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 					ShopLaneList shopLaneList = ShopLaneList.parse(result.getData());
 					List<ShopListMess> List=shopLaneList.getList();
 					if(null==List){
-
 						changeListView(0);
+						search_result_key.setVisibility(View.GONE);
+						search_result_lv.setVisibility(View.VISIBLE);
+						show_lang_nodata_tv.setVisibility(View.VISIBLE);
+						search_result_lv.setPullLoadEnable(false);
 						return;
 					}
 					int size= List.size();
@@ -307,10 +338,19 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 						mList.clear();
 					}
 					mList.addAll(List);
+					for (int i = 0; i < mList.size(); i++) {
+						for (int j = mList.size() - 1; j > i; j--) {
+							if (mList.get(j).getShop_id()
+									.equals(mList.get(i).getShop_id())) {
+								mList.remove(j);
+							}
+						}
+					}
 					if(mList==null||mList.isEmpty()){
 						search_result_key.setVisibility(View.GONE);
 						search_result_lv.setVisibility(View.VISIBLE);
 						show_lang_nodata_tv.setVisibility(View.VISIBLE);
+						search_result_lv.setPullLoadEnable(false);
 					}else{
 						search_result_key.setVisibility(View.GONE);
 						search_result_lv.setVisibility(View.VISIBLE);
@@ -370,12 +410,14 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 			mLon=aMapLocation.getLongitude();
 		locationClient.stopLocation();
 		initListView();
+		registerBoradcastReceiver();
 		search_result_lv.setPullLoadEnable(true);
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		getActivity().unregisterReceiver(mBroadcastReceiver);
 		if (null != locationClient) {
 			/**
 			 * 如果AMapLocationClient是在当前Activity实例化的，

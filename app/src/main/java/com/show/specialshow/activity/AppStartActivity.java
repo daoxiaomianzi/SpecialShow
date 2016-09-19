@@ -57,6 +57,8 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     // 当前定位坐标(起点)
     private double mLat=0.0d;//纬度
     private double mLon=0.0d;//经度
+    //当前定位城市
+    private String currentCity;
 
 
     static class MyHandler extends Handler {
@@ -245,6 +247,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
         }else{
             params.addBodyParameter("x",mLon+"");//经度
             params.addBodyParameter("y",mLat+"");//纬度
+            params.addBodyParameter("current_city",currentCity);
         }
         params.addBodyParameter("uid",TXApplication.getUserMess().getUid());
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
@@ -297,6 +300,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
         }
         mLat=aMapLocation.getLatitude();
         mLon=aMapLocation.getLongitude();
+        currentCity = aMapLocation.getCity().substring(0,aMapLocation.getCity().length()-1);
         locationClient.stopLocation();
         updateXy();
     }

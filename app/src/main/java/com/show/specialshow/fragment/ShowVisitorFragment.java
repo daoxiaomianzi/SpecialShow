@@ -20,6 +20,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
 import com.show.specialshow.adapter.ShowVisitorAdapter;
 import com.show.specialshow.contstant.ConstantValue;
@@ -28,6 +29,7 @@ import com.show.specialshow.model.ShopVisitorListMess;
 import com.show.specialshow.model.ShowVisitorList;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.receiver.MyReceiver;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
 
@@ -76,6 +78,7 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 	@Override
 	public void fillView() {
 		registerBoradcastReceiver();
+		registerMainBoradcastReceiver();
 	}
 
 	public void registerBoradcastReceiver() {
@@ -95,6 +98,26 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 		}
 
 	};
+	public void registerMainBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
+		// 注册广播
+		mContext.registerReceiver(mMainBroadcastReceiver, myIntentFilter);
+	}
+
+	private MyReceiver mMainBroadcastReceiver = new MyReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(CircleDynamicDetailActivity.ACTION_NAME)) {
+				if(null!=mList){
+					mList.clear();
+				}
+				getData();
+			}
+		}
+
+	};
 
 	@Override
 	public void onClick(View v) {
@@ -109,6 +132,8 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 		params.addBodyParameter("uid", user.getUid());
 		params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
 		params.addBodyParameter("index", pageIndex + "");
+		params.addBodyParameter("current_city", SPUtils.get(mContext,"city","上海").toString());
+
 		if(0.0d==mLat||0.0d==mLon){
 			InitLocation();
 			return;
@@ -148,6 +173,10 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 									.parse(result.getData());
 							if(null==showVisitorList){
 								changeListView(0);
+								search_result_lv.setVisibility(View.VISIBLE);
+								show_visitor_nodata_tv
+										.setVisibility(View.VISIBLE);
+								search_result_lv.setPullLoadEnable(false);
 								return;
 							}
 							List<ShopVisitorListMess> list = showVisitorList
@@ -195,6 +224,7 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 	public void onDestroy() {
 		super.onDestroy();
 		getActivity().unregisterReceiver(mBroadcastReceiver);
+		getActivity().unregisterReceiver(mMainBroadcastReceiver);
 		if (null != locationClient) {
 			/**
 			 * 如果AMapLocationClient是在当前Activity实例化的，

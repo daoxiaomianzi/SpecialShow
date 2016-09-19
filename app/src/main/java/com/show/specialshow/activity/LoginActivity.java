@@ -66,6 +66,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 	// 当前定位坐标(起点)
 	private double mLat=0.0d;//纬度
 	private double mLon=0.0d;//经度
+	private String currentCity;
 
 	@Override
 	public void initData() {
@@ -136,6 +137,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 			}else{
 				params.addBodyParameter("x",mLon+"");//经度
 				params.addBodyParameter("y",mLat+"");//纬度
+				params.addBodyParameter("current_city",currentCity);
 			}
 			TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
@@ -365,6 +367,8 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 		}
 		mLat=aMapLocation.getLatitude();
 		mLon=aMapLocation.getLongitude();
+		currentCity = aMapLocation.getCity().substring(0,aMapLocation.getCity().length()-1);
+
 		locationClient.stopLocation();
 	}
 	@Override
