@@ -250,6 +250,8 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 				if(null!=mList){
 					mList.clear();
 				}
+				pageIndex=1;
+				search_result_lv.setState(XListView.LOAD_REFRESH);
 				getData();
 			}
 		}

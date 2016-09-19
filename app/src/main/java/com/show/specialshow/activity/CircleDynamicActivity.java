@@ -122,7 +122,9 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 							int size = list.size();
 							totalRecord = circleDynamicList.getTotal();
 							if (search_result_lv.getState() == XListView.LOAD_REFRESH) {
-								mList.clear();
+								if(null!=mList){
+									mList.clear();
+								}
 							}
 							mList.addAll(list);
 							for (int i = 0; i < mList.size(); i++) {
@@ -265,10 +267,13 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			if (action.equals(CircleDynamicDetailActivity.ACTION_NAME)) {
-				// UIHelper.ToastLogMessage(mContext, "asaksajasjas");
 				CircleDynamicAdapter.cache_attention.clear();
+				if (mList != null) {
+					mList.clear();
+				}
+				pageIndex=1;
+				search_result_lv.setState(XListView.LOAD_REFRESH);
 				getData();
-				// adapter.notifyDataSetChanged();
 			}
 		}
 

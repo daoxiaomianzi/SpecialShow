@@ -147,6 +147,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                     } else {
                         search_result_lv.setVisibility(View.VISIBLE);
                         craftsman_nodata_tv.setVisibility(View.GONE);
+                        search_result_lv.setPullLoadEnable(true);
                     }
                     localRecord = mList.size();
                     changeListView(size);
@@ -202,6 +203,8 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                 if(null!=mList){
                     mList.clear();
                 }
+                pageIndex=1;
+                search_result_lv.setState(XListView.LOAD_REFRESH);
                 getData();
             }
         }

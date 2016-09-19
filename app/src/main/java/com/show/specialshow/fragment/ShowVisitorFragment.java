@@ -113,6 +113,8 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 				if(null!=mList){
 					mList.clear();
 				}
+				pageIndex=1;
+				search_result_lv.setState(XListView.LOAD_REFRESH);
 				getData();
 			}
 		}
@@ -207,6 +209,7 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 							} else {
 								search_result_lv.setVisibility(View.VISIBLE);
 								show_visitor_nodata_tv.setVisibility(View.GONE);
+								search_result_lv.setPullLoadEnable(true);
 							}
 							localRecord = mList.size();
 							changeListView(size);
