@@ -8,5 +8,5 @@ import android.content.Intent;
  * 
  */  
 public interface OnTabActivityResultListener {  
-    public void onTabActivityResult(int requestCode, int resultCode, Intent data);
+    void onTabActivityResult(int requestCode, int resultCode, Intent data);
 }

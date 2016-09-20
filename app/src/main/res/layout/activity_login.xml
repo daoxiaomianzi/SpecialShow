@@ -68,7 +68,7 @@
 	    android:textColor="@color/color_ffffff"
 	    android:textSize="@dimen/text_size_26px"
 	    />
-		<RelativeLayout 
+		<RelativeLayout
 	    android:layout_marginTop="@dimen/text_size_48px"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
@@ -113,5 +113,77 @@
 	        android:textColor="@color/main_menu_text_unselected"
 	        />
 	</RelativeLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="30dp"
+		android:id="@+id/layout4"
+		android:layout_marginTop="40dp"
+		android:gravity="center"
+		android:orientation="horizontal">
+		<ImageView
+			android:layout_width="120dp"
+			android:layout_height="1dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@color/umeng_comm_color_l_99"/>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:textColor="@color/umeng_comm_black_l_color"
+			android:text="@string/umeng_comm_other_l_login"/>
+		<ImageView
+			android:layout_width="120dp"
+			android:layout_height="1dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@color/umeng_comm_color_l_99"/>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/layout4"
+		android:layout_marginTop="30dp"
+		android:gravity="center"
+		android:id="@+id/layout5"
+		android:orientation="horizontal">
+		<ImageView
+			android:visibility="gone"
+			android:id="@+id/sina_platform_btn"
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:background="@drawable/umeng_comm_sina_bt"
+
+			android:contentDescription="@string/umeng_socialize_login" >
+		</ImageView>
+
+		<ImageView
+			android:onClick="onClick"
+			android:id="@+id/qq_platform_btn"
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="30dp"
+			android:layout_toRightOf="@id/sina_platform_btn"
+			android:background="@drawable/umeng_comm_qq_bt"
+
+			android:contentDescription="@string/umeng_socialize_login" >
+		</ImageView>
+
+		<ImageView
+			android:onClick="onClick"
+			android:id="@+id/weixin_platform_btn"
+			android:layout_width="60dp"
+			android:layout_height="60dp"
+			android:layout_marginLeft="30dp"
+			android:layout_marginRight="10dp"
+			android:layout_toRightOf="@id/qq_platform_btn"
+			android:background="@drawable/umeng_comm_wechat_bt"
+			android:contentDescription="@string/umeng_socialize_login" >
+		</ImageView>
+	</LinearLayout>
 
 </LinearLayout>

@@ -2,10 +2,14 @@ package com.show.specialshow.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
@@ -47,6 +51,18 @@ import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.IsMatcher;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.UIHelper;
+import com.umeng.comm.core.beans.CommUser;
+import com.umeng.comm.core.beans.Source;
+import com.umeng.comm.core.constants.Constants;
+import com.umeng.comm.core.login.LoginListener;
+import com.umeng.comm.core.utils.ResFinder;
+import com.umeng.community.login.CustomDialog;
+import com.umeng.community.login.DefaultLoginActivity;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.common.ResContainer;
+import com.umeng.socialize.utils.SocializeUtils;
 
 public class LoginActivity extends BaseActivity implements AMapLocationListener {
 	private EditText login_phonenumber;
@@ -67,12 +83,16 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 	private double mLat=0.0d;//纬度
 	private double mLon=0.0d;//经度
 	private String currentCity;
-
+	//三方登陆相关
+	private UMShareAPI mShareAPI = null;
+	String uid = "";
 	@Override
 	public void initData() {
 		activityFlag=1;
 		from_login=getIntent().getIntExtra(FROM_LOGIN, 0);
 		setContentView(R.layout.activity_login);
+		this.mShareAPI = UMShareAPI.get(this);
+
 	}
 
 	@Override
@@ -115,9 +135,144 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 			bundle.putInt(FROM_LOGIN, from_login);
 			UIHelper.startActivity(mContext, RegisterActivity.class,bundle);
 			break;
+			case R.id.qq_platform_btn://qq登陆
+				loginThree(mContext,SHARE_MEDIA.QQ);
+				break;
+			case R.id.weixin_platform_btn://微信登陆
+				break;
 		default:
 			break;
 		}
+	}
+	private void loginThree(final Context context, final SHARE_MEDIA platform) {
+		this.mShareAPI.doOauthVerify(this, platform, new UMAuthListener() {
+			public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+				LoginActivity.this.uid = map.get("uid");
+				if(TextUtils.isEmpty(LoginActivity.this.uid)) {
+					LoginActivity.this.uid = (String)map.get("openid");
+				}
+
+				if(share_media == SHARE_MEDIA.WEIXIN) {
+					Constants.WX_UID = map.get("unionid");
+				}
+
+				LoginActivity.this.fetchLoginedUserInfo(context, platform, DefaultLoginActivity.mLoginListener);
+			}
+
+			public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+				if(DefaultLoginActivity.mLoginListener != null) {
+					Bundle data = new Bundle();
+					data.putString("msg", throwable.getMessage());
+					DefaultLoginActivity.mLoginListener.onComplete(0, new CommUser());
+				}
+
+			}
+
+			public void onCancel(SHARE_MEDIA share_media, int i) {
+				if(DefaultLoginActivity.mLoginListener != null) {
+					DefaultLoginActivity.mLoginListener.onComplete('鱀', new CommUser());
+				}
+
+			}
+		});
+	}
+	private void fetchLoginedUserInfo(final Context context, final SHARE_MEDIA platform, final LoginListener listener) {
+		final CustomDialog progressDialog = new CustomDialog(this, ResFinder.getString("umeng_socialize_load_userinfo"));
+		progressDialog.setCancelable(true);
+		progressDialog.setCanceledOnTouchOutside(false);
+		progressDialog.setOwnerActivity(this);
+		SocializeUtils.safeShowDialog(progressDialog);
+		this.mShareAPI.getPlatformInfo((Activity)context, platform, new UMAuthListener() {
+			public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+				com.umeng.socialize.utils.Log.d("login", "logged in");
+				LoginActivity.this.showMapInfo(map);
+				SocializeUtils.safeCloseDialog(progressDialog);
+				LoginActivity.this.finish();
+				if(listener != null) {
+					com.umeng.socialize.utils.Log.d("login", "logged in");
+					CommUser user = LoginActivity.this.createNewUser(map, platform);
+					listener.onComplete(200, user);
+				}
+
+			}
+
+			public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+				String msg = ResContainer.getString(context, "umeng_socialize_fetch_info_failed");
+				UIHelper.ToastMessage(mContext,msg+":"+throwable.getClass());
+				SocializeUtils.safeCloseDialog(progressDialog);
+			}
+
+			public void onCancel(SHARE_MEDIA share_media, int i) {
+				com.umeng.comm.core.utils.Log.d("loggin", "log in cancel");
+			}
+		});
+	}
+	private void showMapInfo(Map<String, String> info) {
+		Set entries = info.entrySet();
+		Iterator var3 = entries.iterator();
+
+		while(var3.hasNext()) {
+			Map.Entry entry = (Map.Entry)var3.next();
+			com.umeng.comm.core.utils.Log.d("", "###" + (String)entry.getKey() + "=" + (String)entry.getValue());
+		}
+
+	}
+	private CommUser createNewUser(Map<String, String> info, SHARE_MEDIA platform) {
+		com.umeng.socialize.utils.Log.d("userinfo", info.toString());
+		CommUser currentUser = new CommUser();
+		if(info != null && info.size() != 0) {
+			currentUser.id = String.valueOf(info.get("uid"));
+			if(platform == SHARE_MEDIA.SINA) {
+				currentUser.source = Source.SINA;
+				currentUser.iconUrl = this.getString(info, "profile_image_url");
+			} else if(platform == SHARE_MEDIA.WEIXIN) {
+				currentUser.source = Source.WEIXIN;
+				currentUser.id = this.uid;
+				currentUser.iconUrl = this.getString(info, "headimgurl");
+			} else if(platform == SHARE_MEDIA.QQ) {
+				currentUser.source = Source.QQ;
+				currentUser.id = this.uid;
+				currentUser.iconUrl = this.getString(info, "icon_url");
+			}
+
+			com.umeng.comm.core.utils.Log.e("xxxxxx", "info = " + info);
+			com.umeng.comm.core.utils.Log.d("", "### login source : " + currentUser.source == null?"selfAccount":currentUser.source.toString());
+			currentUser.name = this.getString(info, "screen_name");
+			if(TextUtils.isEmpty(currentUser.name)) {
+				currentUser.name = this.getString(info, "nickname");
+			}
+
+			if(TextUtils.isEmpty(currentUser.name)) {
+				currentUser.name = this.getString(info, "name");
+			}
+
+			com.umeng.comm.core.utils.Log.e("xxxxxxxx", "info=" + info);
+			currentUser.gender = this.getGender(info);
+			return currentUser;
+		} else {
+			return currentUser;
+		}
+	}
+	private String getString(Map<String, String> info, String key) {
+		return info.containsKey(key)?(String)info.get(key):"";
+	}
+	private CommUser.Gender getGender(Map<String, String> info) {
+		if(!info.containsKey("sex") && !info.containsKey("gender")) {
+			return CommUser.Gender.MALE;
+		} else {
+			String gender = null;
+			if(info.containsKey("sex")) {
+				gender = ((String)info.get("sex")).toString();
+			} else {
+				gender = ((String)info.get("gender")).toString();
+			}
+
+			return !gender.equals("1") && !"男".equals(gender)?(!gender.equals("0") && !"女".equals(gender)? CommUser.Gender.MALE: CommUser.Gender.FEMALE): CommUser.Gender.MALE;
+		}
+	}
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		this.mShareAPI.onActivityResult(requestCode, resultCode, data);
 	}
 	/**
 	 * 登录
