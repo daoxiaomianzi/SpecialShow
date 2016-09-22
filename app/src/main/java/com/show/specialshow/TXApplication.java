@@ -113,7 +113,7 @@ public class TXApplication extends MultiDexApplication {
         //豆瓣RENREN平台目前只能在服务器端配置
         //新浪微博
 //        PlatformConfig.setSinaWeibo("275392174", "d96fb6b323c60a42ed9f74bfab1b4f7a");
-        PlatformConfig.setQQZone("1105395549", "sO3TKQQzg6zBb69e");
+        PlatformConfig.setQQZone("1105582014", "4I0F1bO5cMqymzeF");
         PushAgent.getInstance(this).setDebugMode(true);
         PushAgent.getInstance(this).setMessageHandler(new UmengMessageHandler() {
             @Override
