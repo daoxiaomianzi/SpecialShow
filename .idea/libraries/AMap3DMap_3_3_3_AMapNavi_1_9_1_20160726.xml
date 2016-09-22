@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="AMap3DMap_3.3.3_AMapNavi_1.9.1_20160726">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/AMap3DMap_3.3.3_AMapNavi_1.9.1_20160726.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
