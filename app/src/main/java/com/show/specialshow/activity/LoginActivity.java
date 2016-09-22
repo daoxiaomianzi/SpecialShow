@@ -295,10 +295,18 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 				params.addBodyParameter("current_city",currentCity);
 			}
 			TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+				@Override
+				public void onStart() {
+					super.onStart();
+					loadIng("登录中...",false);
+				}
 
 				@Override
 				public void onFailure(HttpException error, String mag) {
 					UIHelper.ToastMessage(mContext, R.string.net_work_error);
+					if (dialog != null) {
+						dialog.dismiss();
+					}
 					login_login.setEnabled(true);
 				}
 				@Override
@@ -311,6 +319,9 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 						UserMessage info=UserMessage.parse(result.getData());
 						loginHX(info);
 					}else{
+						if (dialog != null) {
+							dialog.dismiss();
+						}
 						createAffirmDialog(result.getMessage(),DIALOG_SINGLE_STPE,true);
 						login_login.setEnabled(true);
 					}
@@ -330,6 +341,9 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 	public void loginHX(final UserMessage info) {
 		if (!CommonUtils.isNetWorkConnected(this)) {
 			Toast.makeText(this, R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
+			if (dialog != null) {
+				dialog.dismiss();
+			}
 			login_login.setEnabled(true);
 			return;
 		}
@@ -340,11 +354,17 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 
 		if (TextUtils.isEmpty(currentUsername)) {
 			Toast.makeText(this, R.string.User_name_cannot_be_empty, Toast.LENGTH_SHORT).show();
+			if (dialog != null) {
+				dialog.dismiss();
+			}
 			login_login.setEnabled(true);
 			return;
 		}
 		if (TextUtils.isEmpty(currentPassword)) {
 			Toast.makeText(this, R.string.Password_cannot_be_empty, Toast.LENGTH_SHORT).show();
+			if (dialog != null) {
+				dialog.dismiss();
+			}
 			login_login.setEnabled(true);
 			return;
 		}
@@ -361,6 +381,9 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 						info.setPhone(phone);
 						info.setLogin(true);
 						TXApplication.loginSuccess(info);
+						if (dialog != null) {
+							dialog.dismiss();
+						}
 						login_login.setEnabled(true);
 						UIHelper.ToastMessage(mContext, "登录成功");
 						loginSuccess();
@@ -377,6 +400,9 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 						public void run() {
 							DemoHXSDKHelper.getInstance().logout(true,null);
 							UIHelper.ToastMessage(mContext, R.string.net_work_error);
+							if (dialog != null) {
+								dialog.dismiss();
+							}
 							login_login.setEnabled(true);
 						}
 					});
@@ -395,6 +421,9 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 				runOnUiThread(new Runnable() {
 					public void run() {
 						UIHelper.ToastMessage(mContext, getString(R.string.Login_failed) + message);
+						if (dialog != null) {
+							dialog.dismiss();
+						}
 						login_login.setEnabled(true);
 					}
 				});
