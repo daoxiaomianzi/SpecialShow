@@ -203,6 +203,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent1105582014" />
             </intent-filter>
         </activity>
@@ -461,12 +462,10 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustPan" />
         <!-- 地图 -->
-            <activity
+        <activity
             android:name="com.easemob.chatuidemo.activity.MapActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide">
-        </activity>
-
+            android:theme="@style/horizontal_slide"></activity>
 
         <!-- 新的朋友邀请消息页面 -->
         <activity
@@ -855,7 +854,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.ShopBranchActivity" />
-
+        <activity android:name=".activity.ShowIntroductActivity"></activity>
     </application>
 
 </manifest>

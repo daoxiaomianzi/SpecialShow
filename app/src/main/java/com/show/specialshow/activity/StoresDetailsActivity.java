@@ -98,6 +98,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
     public static final int SHOP_REVIEW = 6;
     // 相关控件
     private ImageView stores_iv;// 图片
+    private TextView stores_counts;//秀坊图片数
     private TextView stores_details_name;// 秀坊名
     private GridView stores_details_label_gv;// 标签
     private TextView stores_details_show_card_num;// 秀卡数
@@ -129,6 +130,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
     private CommendCardAdapter adapter;
     private CommendCardAdapter adapterReview;
     private List<ShopComcardStaPicsMess> mComcardStaPicsMess;// 图片
+    private List<ShopComcardStaPicsMess> mIntroducePicMess;//秀坊集合图片
 
     private String shop_id;// 商户id
     private TextView collect;// 收藏
@@ -198,6 +200,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
         stores_details_moods_num = (TextView) stores_details
                 .findViewById(R.id.stores_details_moods_num);
         stores_iv = (ImageView) stores_details.findViewById(R.id.stores_iv);
+        stores_counts= (TextView) stores_details.findViewById(R.id.stores_counts);
         stores_details_name = (TextView) stores_details
                 .findViewById(R.id.stores_details_name);
         stores_details_vi = stores_details.findViewById(R.id.stores_details_vi);
@@ -400,7 +403,18 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 collect();
                 break;
             case R.id.tv_stores_details_cou://优惠买单
-//                UIHelper.ToastMessage(mContext,"sssss");
+                break;
+            case R.id.rl_stores_details_introduction://秀坊简介
+                if (shopShopMess != null) {
+                    bundle.putString("introduce",shopShopMess.getShow_shop_introduce());
+                }
+                UIHelper.startActivity(mContext,ShowIntroductActivity.class,bundle);
+                break;
+            case R.id.stores_iv://秀坊图片
+                if (mIntroducePicMess != null&&!mIntroducePicMess.isEmpty()) {
+                    bundle.putSerializable("work_pics", (Serializable) mIntroducePicMess);
+                    UIHelper.startActivity(mContext,WorkActivity.class,bundle);
+                }
                 break;
 
             default:
@@ -755,8 +769,16 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
         if (mShopListMess != null) {
             head_title_tv.setVisibility(View.VISIBLE);
             head_title_tv.setText(mShopListMess.getTitle());
-            ImageLoader.getInstance().displayImage(mShopListMess.getPic_urls(),
-                    stores_iv);
+            mIntroducePicMess=ShopComcardStaPicsMess.parse(mShopListMess.getPic_urls());
+            if(mIntroducePicMess==null||mIntroducePicMess.isEmpty()
+                    ){
+                stores_iv.setImageResource(R.drawable.ic_launcher);
+                stores_counts.setText("0张图片");
+            }else{
+                ImageLoader.getInstance().displayImage(mIntroducePicMess.get(0).getThumbnail_pic(),
+                        stores_iv);
+                stores_counts.setText(mIntroducePicMess.size()+"张图片");
+            }
             stores_details_name.setText(mShopListMess.getTitle());
             stores_details_show_card_num.setText(mShopListMess.getShowCard());
             stores_details_ceng_card_num.setText(mShopListMess.getNeedCard());

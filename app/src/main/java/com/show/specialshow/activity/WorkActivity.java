@@ -13,6 +13,8 @@ import com.show.specialshow.adapter.MyWorkAdapter;
 import com.show.specialshow.model.ShopComcardStaPicsMess;
 import com.show.specialshow.utils.UIHelper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 
 public class WorkActivity extends BaseActivity {
@@ -36,7 +38,11 @@ public class WorkActivity extends BaseActivity {
 
 	@Override
 	public void fillView() {
-		head_title_tv.setText(nickname+"的作品");
+		if(StringUtils.isEmpty(nickname)){
+			head_title_tv.setText("店铺图片");
+		}else{
+			head_title_tv.setText(nickname+"的作品");
+		}
 //		head_right_tv.setVisibility(View.VISIBLE);
 //		head_right_tv.setText("添加");
 		myWorkAdapter=new MyWorkAdapter(mContext, myWorkPhoto,1);

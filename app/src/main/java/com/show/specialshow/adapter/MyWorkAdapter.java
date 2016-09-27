@@ -58,7 +58,7 @@ public class MyWorkAdapter extends BaseAdapter {
 		switch (flag) {
 		case 1:
 			vh.work_item_iv.setLayoutParams(new LayoutParams((width-DensityUtil.dip2px(context, 10))/2, (width-DensityUtil.dip2px(context, 10))/2));
-			ImageLoader.getInstance().displayImage(myWorkPhoto.get(position).getThumbnail_pic(), vh.work_item_iv);
+			ImageLoader.getInstance().displayImage(myWorkPhoto.get(position).getBig_pic(), vh.work_item_iv);
 			break;
 		case 2:
 			vh.work_item_iv.setLayoutParams(new LayoutParams((width-DensityUtil.dip2px(context, 40))/3, (width-DensityUtil.dip2px(context, 40))/3));
