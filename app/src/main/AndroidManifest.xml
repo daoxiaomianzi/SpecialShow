@@ -778,6 +778,7 @@
         <activity
             android:name=".activity.ShowerDetailsActivity"
             android:label="@string/title_activity_shower_details" />
+
         <activity
             android:name=".activity.AttenFansPeoActivity"
             android:label="@string/title_activity_atten_fans_peo" />

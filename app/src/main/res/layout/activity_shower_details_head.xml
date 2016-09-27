@@ -5,17 +5,19 @@
     android:background="@color/app_bg"
     android:orientation="vertical" >
 
+
     <RelativeLayout
         android:background="@color/color_ffffff"
         android:layout_width="fill_parent"
         android:paddingBottom="@dimen/text_size_16px"
-        android:layout_height="145dp" >
+        android:layout_height="215dp" >
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:background="#F47183" >
-            <TextView 
+            android:layout_height="170dp"
+            android:background="@drawable/bg_shower" >
+
+            <TextView
                 android:id="@+id/shower_details_often_in_tv"
                 style="@style/user_info_tv"
                 android:layout_alignParentRight="true"
@@ -28,7 +30,7 @@
                 android:maxEms="6"
                 android:text="上海"
                 />
-            <TextView 
+            <TextView
                 android:id="@+id/shower_details_often_in"
                 android:layout_marginRight="@dimen/text_size_10px"
                 android:textSize="@dimen/text_size_24px"
@@ -38,7 +40,7 @@
                 style="@style/user_info_tv"
                 android:text="@string/often_in"
                 />
-            <TextView 
+            <TextView
                 android:id="@+id/shower_details_nickname_tv"
                 android:textColor="@color/color_ffffff"
                 android:layout_alignBottom="@id/shower_details_often_in_tv"
@@ -46,7 +48,11 @@
                 android:text="js造型"
                 android:layout_marginLeft="85dp"
                 />
-            
+            <include
+                android:id="@+id/shower_details_head_2"
+                layout="@layout/view_common_head"
+                />
+
 	</RelativeLayout>
         <com.show.specialshow.utils.RoundImageView
             android:id="@+id/shower_details_roundImageView"
@@ -55,6 +61,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="@dimen/text_size_26px"
+            android:src="@drawable/girl"
              />
 
         <TextView

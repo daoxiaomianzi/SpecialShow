@@ -1,7 +1,9 @@
 package com.show.specialshow.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -43,12 +45,15 @@ import com.show.specialshow.model.ShowerMess;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DensityUtil;
+import com.show.specialshow.utils.ImmersedStatusbarUtils;
 import com.show.specialshow.utils.RoundImageView;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public class ShowerDetailsActivity extends BaseActivity {
@@ -58,6 +63,8 @@ public class ShowerDetailsActivity extends BaseActivity {
 	public static final String ATTEN_FANS = "atten_fans";
 	public static final String TITLE = "title";
 	// 相关控件
+	private View shower_details_head_include;//导航栏
+	private View shower_details_head_include_2;//导航栏2
 	private LinearLayout shower_details_content;// 下面视图
 	private ListView shower_details_shopcard_lv;
 	private TextView shower_details_chat;// 聊天按钮
@@ -123,6 +130,13 @@ public class ShowerDetailsActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		shower_details_head_include=findViewById(R.id.shower_details_head);
+		shower_details_head_include_2=shower_details_head.findViewById(R.id.shower_details_head_2);
+		shower_details_head.findViewById(R.id.head_title_tv).setVisibility(View.GONE);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			ImmersedStatusbarUtils.initAfterSetContentView(mContext,shower_details_head_include_2);
+		}
+		shower_details_head_include_2.getBackground().setAlpha(0);
 		shower_details_rg = (LinearLayout) findViewById(R.id.shower_details_rg);
 		shower_details_showcard_hover = (RadioButton) findViewById(R.id.shower_details_showcard_hover);
 		shower_details_cengcard_hover = (RadioButton) findViewById(R.id.shower_details_cengcard_hover);
@@ -184,6 +198,7 @@ public class ShowerDetailsActivity extends BaseActivity {
 		goneView();
 		getViewData();
 	}
+
 
 	// 隐藏
 	private void goneView() {
@@ -264,7 +279,12 @@ public class ShowerDetailsActivity extends BaseActivity {
 			UIHelper.startActivity(mContext, AttenFansPeoActivity.class, bundle);
 			break;
 		case R.id.shower_details_attention_btn:// 关注
-			attention(user_id, shower_details_attention_btn);
+			if (TXApplication.login) {
+				attention(user_id, shower_details_attention_btn);
+			}else{
+				bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
+				UIHelper.startActivity(mContext,LoginActivity.class,bundle);
+			}
 			break;
 		case R.id.shower_details_crafstman_rll:// 名片信息内容
 			bundle.putString("user_id", user_id);
@@ -595,7 +615,9 @@ public class ShowerDetailsActivity extends BaseActivity {
 
 	}
 
+	Dictionary<Integer, Integer> listViewItemHeights = new Hashtable<Integer, Integer>();
 	private void hvoverView() {
+
 		shower_details_shopcard_lv.setOnScrollListener(new OnScrollListener() {
 
 			@Override
@@ -606,6 +628,35 @@ public class ShowerDetailsActivity extends BaseActivity {
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
+				View c = view.getChildAt(0); //this is the first visible row
+				if (c != null) {
+					int scrollY = -c.getTop();
+					listViewItemHeights.put(view.getFirstVisiblePosition(), c.getHeight());
+					for (int i = 0; i < view.getFirstVisiblePosition(); ++i) {
+						if (listViewItemHeights.get(i) != null) // (this is a sanity check)
+							scrollY += listViewItemHeights.get(i); //add all heights of the views that are gone
+
+					}
+					Log.i("tag", "the scrollY of the listview is==========" + scrollY);
+					// 滑动改变标题栏的透明度和文字透明度，图标
+//					if (crafstman_details_headbackground == null) {
+//						return;
+//					}
+					if (scrollY< 0) {
+						return;
+					}
+					int lHeight = DensityUtil.dip2px(mContext,100);
+					if (scrollY<= lHeight) {
+						RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext,0));
+
+						shower_details_head_include.setLayoutParams(layoutParams);
+					} else {
+						RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dip2px(mContext,45)+ImmersedStatusbarUtils.getStatusBarHeight(mContext));
+
+						shower_details_head_include.setLayoutParams(layoutParams);
+					}
+
+				}
 				if (firstVisibleItem >= 1) {
 					shower_details_rg.setVisibility(View.VISIBLE);
 					shower_details_showcard_hover

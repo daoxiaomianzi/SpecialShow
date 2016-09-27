@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ShowerDetailsActivity" >
-    <include 
-        android:id="@+id/shower_details_head"
-        layout="@layout/view_common_head"
-        />
-<TextView 
+
+	<include
+		android:id="@+id/shower_details_head"
+		layout="@layout/view_common_head"
+		/>
+<TextView
     android:id="@+id/shower_details_chat"
     android:onClick="onClick"
     android:clickable="true"
@@ -32,7 +33,7 @@
          android:layout_below="@id/shower_details_head"
          android:layout_above="@id/shower_details_bottom_vi"
         >
-    <ListView 
+    <ListView
         android:scrollbars="none"
 		   android:id="@+id/shower_details_shopcard_lv"
 		    android:layout_width="fill_parent"
@@ -42,7 +43,7 @@
 		    android:divider="@color/color_ffffff"
 		    android:dividerHeight="0dp"
 		        ></ListView>
-    <LinearLayout 
+    <LinearLayout
     android:visibility="gone"
     android:id="@+id/shower_details_rg"
     android:layout_width="wrap_content"
@@ -99,8 +100,8 @@
 		    />
 
 </LinearLayout>
-     
-    
+
+
     </FrameLayout>
 
 </RelativeLayout>

@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.LoginActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopVisitorListMess;
@@ -193,8 +194,13 @@ public class ShowVisitorAdapter extends BaseAdapter {
                             ShowerDetailsActivity.class, bundle);
                     break;
                 case R.id.show_visitor_item_attention_btn:// 关注
-                    attention(mList.get(holder.getPostion()).getUser_id(),
-                            holder.show_visitor_item_attention_btn);
+                    if (TXApplication.login) {
+                        attention(mList.get(holder.getPostion()).getUser_id(),
+                                holder.show_visitor_item_attention_btn);
+                    }else{
+                        bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
+                        UIHelper.startActivity((Activity) mContext,LoginActivity.class,bundle);
+                    }
                     break;
             }
         }

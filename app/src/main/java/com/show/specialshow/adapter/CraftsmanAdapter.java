@@ -20,6 +20,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.CraftsmandetailsActivity;
+import com.show.specialshow.activity.LoginActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopVisitorListMess;
@@ -190,8 +191,14 @@ public class CraftsmanAdapter extends BaseAdapter {
                             CraftsmandetailsActivity.class, bundle);
                     break;
                 case R.id.craftsman_item_attention_btn:// 关注
-                    attention(mList.get(holder.getPostion()).getUser_id(),
-                            holder.craftsman_item_attention_btn);
+
+                    if (TXApplication.login) {
+                        attention(mList.get(holder.getPostion()).getUser_id(),
+                                holder.craftsman_item_attention_btn);
+                    }else{
+                        bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
+                        UIHelper.startActivity((Activity) mContext,LoginActivity.class,bundle);
+                    }
                     break;
             }
         }
