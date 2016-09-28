@@ -48,6 +48,7 @@
                 android:text="js造型"
                 android:layout_marginLeft="85dp"
                 />
+
             <include
                 android:id="@+id/shower_details_head_2"
                 layout="@layout/view_common_head"
@@ -61,8 +62,41 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="@dimen/text_size_26px"
-            android:src="@drawable/girl"
              />
+        <LinearLayout
+            android:layout_alignBottom="@id/shower_details_roundImageView"
+android:orientation="horizontal"
+            android:layout_toRightOf="@id/shower_details_roundImageView"
+android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/shower_details_sex_age"
+            style="@style/user_info_tv"
+        android:gravity="center"
+            android:text="dd"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/bg_dynami_attention_selecter"
+            android:paddingLeft="@dimen/text_size_10px"
+            android:paddingRight="@dimen/text_size_10px"
+            android:textSize="@dimen/text_size_20px"
+            android:textColor="@color/white"
+            android:minEms="3"
+            />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:id="@+id/shower_details_xinzuo"
+            style="@style/user_info_tv"
+            android:layout_alignTop="@id/shower_details_sex_age"
+            android:layout_alignBottom="@id/shower_details_sex_age"
+            android:layout_toRightOf="@id/shower_details_sex_age"
+            android:gravity="center"
+            android:minEms="3"
+            android:text="dd"
+            android:textColor="@color/color_555555"
+            android:textSize="@dimen/text_size_24px" />
+        </LinearLayout>
 
         <TextView
              android:onClick="onClick"
@@ -85,7 +119,7 @@
             android:textColor="@drawable/text_attention_color_check_selector"
             android:textSize="@dimen/text_size_22px" />
     </RelativeLayout>
-    <LinearLayout 
+    <LinearLayout
         android:id="@+id/shower_details_content"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"

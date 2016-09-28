@@ -117,7 +117,7 @@ public class ShowVisitorAdapter extends BaseAdapter {
                     R.drawable.icon_sex_boy, mContext,
                     vh.show_visitor_item_age);
             vh.show_visitor_item_age.setBackgroundResource(R.drawable.bg_sex_man);
-        } else if ("女".equals(user.getSex())) {
+        } else if ("女".equals(mList.get(position).getUser_sex())) {
             vh.show_visitor_item_age.setVisibility(View.VISIBLE);
             UIHelper.leftDrawable(
                     R.drawable.icon_sex_girl, mContext,

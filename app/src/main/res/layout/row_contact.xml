@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/header"
@@ -18,12 +18,12 @@
         android:visibility="gone" />
 
     <RelativeLayout
-        android:paddingTop="@dimen/text_size_10px"
-        android:paddingBottom="@dimen/text_size_10px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/mm_listitem"
-        android:duplicateParentState="true" >
+        android:duplicateParentState="true"
+        android:paddingBottom="@dimen/text_size_10px"
+        android:paddingTop="@dimen/text_size_10px">
 
         <com.show.specialshow.utils.RoundImageView
             android:id="@+id/avatar"
@@ -31,8 +31,7 @@
             android:layout_height="47dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:scaleType="fitXY"
-            />
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,75 +40,78 @@
             android:layout_toLeftOf="@+id/unread_msg_number"
             android:layout_toRightOf="@id/avatar"
             android:gravity="center_vertical"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/text_size_10px"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:paddingLeft="@dimen/text_size_8px"
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
                     android:ellipsize="end"
+                    android:paddingLeft="@dimen/text_size_8px"
                     android:singleLine="true"
                     android:textColor="#8C8C8C"
                     android:textSize="16sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/row_contact_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
-                    android:ellipsize="end"
                     android:background="@drawable/bg_dynami_attention_selecter"
-                    android:singleLine="true"
-                    android:paddingLeft="@dimen/text_size_10px"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:paddingRight="@dimen/text_size_10px"
-                    android:textColor="@color/color_ffffff"
+                    android:ellipsize="end"
                     android:gravity="center"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="@dimen/text_size_10px"
+                    android:paddingRight="@dimen/text_size_10px"
+                    android:paddingTop="1dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_ffffff"
                     android:textSize="@dimen/text_size_22px" />
+
                 <TextView
                     android:id="@+id/row_contact_xingzuo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="4dp"
-                    android:ellipsize="end"
                     android:background="@drawable/bg_dynami_attention_selecter"
-                    android:singleLine="true"        android:paddingLeft="@dimen/text_size_10px"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:minEms="2"
-                    android:paddingRight="@dimen/text_size_10px"
-                    android:textColor="@color/color_ffffff"
+                    android:ellipsize="end"
                     android:gravity="center"
+                    android:minEms="2"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="@dimen/text_size_10px"
+                    android:paddingRight="@dimen/text_size_10px"
+                    android:paddingTop="1dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_ffffff"
                     android:textSize="@dimen/text_size_22px" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
-            android:layout_centerVertical="true"
             android:id="@+id/unread_msg_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="20dp"
             android:background="@drawable/unread_dot"
             android:gravity="center"
-            android:visibility="invisible"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="invisible" />
     </RelativeLayout>
 
 </LinearLayout>

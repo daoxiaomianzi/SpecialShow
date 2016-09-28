@@ -138,8 +138,8 @@ public class MyCollectActivity extends BaseSearchActivity implements AMapLocatio
 	@Override
 	public void initData() {
 		setContentView(R.layout.activity_my_collect);
-		View head = findViewById(R.id.head_rl);
-		ImmersedStatusbarUtils.initAfterSetContentView(mContext, head);
+//		View head = findViewById(R.id.head_rl);
+//		ImmersedStatusbarUtils.initAfterSetContentView(mContext, head);
 	}
 
 	@Override
