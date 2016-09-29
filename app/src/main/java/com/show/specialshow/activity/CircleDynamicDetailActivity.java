@@ -112,6 +112,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
     private boolean isFavs = true;//是否点击的是点赞
     private boolean isComments = true;//是否点击的是评论
     public static final String ACTION_NAME = "发送广播到动态页";
+    public static final String ACTION_NAME_DETAIL = "发送广播到动态详情页";
 
     // 只有文本布局
 
@@ -936,7 +937,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
     }
 
     private void onBack() {
-        Intent mIntent = new Intent(ACTION_NAME);
+        Intent mIntent = new Intent(ACTION_NAME_DETAIL);
         // 发送广播
         sendBroadcast(mIntent);
     }

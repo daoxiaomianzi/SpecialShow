@@ -198,7 +198,7 @@ public abstract class HXSDKHelper {
         
         if(hxModel.isDebugMode()){
             // set debug mode in development process
-            EMChat.getInstance().setDebugMode(true);    
+            EMChat.getInstance().setDebugMode(true);
         }
 
         Log.d(TAG, "initialize EMChat SDK");

@@ -12,11 +12,68 @@ android {
         targetSdkVersion 21
         multiDexEnabled true
     }
+    //签名
+    signingConfigs{
+        release{
+            storeFile file('/Users/xuyong/特秀美妆工作/特秀美妆正式签名文件/beauty_manage_texiu_android.jks')
+            storePassword '^na*(@$o!_t'
+            keyAlias 'yinlaicfmoneymanagetx'
+            keyPassword '$$8c6a33@9#t'
+        }
+        debug {
+            storeFile file('/Users/xuyong/特秀美妆工作/特秀美妆正式签名文件/beauty_manage_texiu_android.jks')
+            storePassword '^na*(@$o!_t'
+            keyAlias 'yinlaicfmoneymanagetx'
+            keyPassword '$$8c6a33@9#t'
+        }
+    }
 
     buildTypes {
-        release {
+//        debug{
+//            // 不显示Log
+//            buildConfigField "boolean", "LOG_DEBUG", "true"
+//
+//            minifyEnabled false
+//            zipAlignEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources true
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.debug
+//
+//            applicationVariants.all { variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        // 输出apk名称为特秀美妆channelx.apk
+////                        def fileName = "特秀美妆${variant.productFlavors[0].name}.apk"
+//                        def fileName = "特秀美妆debug.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+//            }
+//        }
+       release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为特秀美妆channelx.apk
+//                        def fileName = "特秀美妆${variant.productFlavors[0].name}.apk"
+                        def fileName = "特秀美妆.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
     }
     lintOptions {

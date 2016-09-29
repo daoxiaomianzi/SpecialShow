@@ -1,18 +1,8 @@
 package com.show.specialshow.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -31,9 +21,7 @@ import com.easemob.EMCallBack;
 import com.easemob.applib.controller.HXSDKHelper;
 import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
-import com.easemob.chatuidemo.DemoApplication;
 import com.easemob.chatuidemo.DemoHXSDKHelper;
-import com.easemob.chatuidemo.activity.MainHxActivity;
 import com.easemob.chatuidemo.db.UserDao;
 import com.easemob.chatuidemo.domain.User;
 import com.easemob.chatuidemo.utils.CommonUtils;
@@ -64,6 +52,13 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.common.ResContainer;
 import com.umeng.socialize.utils.SocializeUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 public class LoginActivity extends BaseActivity implements AMapLocationListener {
 	private EditText login_phonenumber;
 	private EditText login_password;
@@ -86,6 +81,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 	//三方登陆相关
 	private UMShareAPI mShareAPI = null;
 	String uid = "";
+	private List<String> mQQMessages=new ArrayList<>();
 	@Override
 	public void initData() {
 		activityFlag=1;
@@ -139,6 +135,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 				loginThree(mContext,SHARE_MEDIA.QQ);
 				break;
 			case R.id.weixin_platform_btn://微信登陆
+				loginThree(mContext,SHARE_MEDIA.WEIXIN);
 				break;
 		default:
 			break;
@@ -149,7 +146,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 			public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
 				LoginActivity.this.uid = map.get("uid");
 				if(TextUtils.isEmpty(LoginActivity.this.uid)) {
-					LoginActivity.this.uid = (String)map.get("openid");
+					LoginActivity.this.uid = map.get("openid");
 				}
 
 				if(share_media == SHARE_MEDIA.WEIXIN) {
@@ -184,12 +181,12 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 		SocializeUtils.safeShowDialog(progressDialog);
 		this.mShareAPI.getPlatformInfo((Activity)context, platform, new UMAuthListener() {
 			public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-				com.umeng.socialize.utils.Log.d("login", "logged in");
+				Log.i("login", "logged in");
 				LoginActivity.this.showMapInfo(map);
 				SocializeUtils.safeCloseDialog(progressDialog);
 				LoginActivity.this.finish();
 				if(listener != null) {
-					com.umeng.socialize.utils.Log.d("login", "logged in");
+					Log.i("login", "logged in");
 					CommUser user = LoginActivity.this.createNewUser(map, platform);
 					listener.onComplete(200, user);
 				}
@@ -203,7 +200,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 			}
 
 			public void onCancel(SHARE_MEDIA share_media, int i) {
-				com.umeng.comm.core.utils.Log.d("loggin", "log in cancel");
+				Log.i("loggin", "log in cancel");
 			}
 		});
 	}
@@ -213,7 +210,8 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 
 		while(var3.hasNext()) {
 			Map.Entry entry = (Map.Entry)var3.next();
-			com.umeng.comm.core.utils.Log.d("", "###" + (String)entry.getKey() + "=" + (String)entry.getValue());
+			Log.i("", "###" + entry.getKey() + "=" + entry.getValue());
+			mQQMessages.add((String) entry.getValue());
 		}
 
 	}
@@ -235,8 +233,8 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 				currentUser.iconUrl = this.getString(info, "icon_url");
 			}
 
-			com.umeng.comm.core.utils.Log.e("xxxxxx", "info = " + info);
-			com.umeng.comm.core.utils.Log.d("", "### login source : " + currentUser.source == null?"selfAccount":currentUser.source.toString());
+			Log.i("xxxxxx", "info = " + info);
+		Log.i("", "### login source : " + currentUser.source == null?"selfAccount":currentUser.source.toString());
 			currentUser.name = this.getString(info, "screen_name");
 			if(TextUtils.isEmpty(currentUser.name)) {
 				currentUser.name = this.getString(info, "nickname");
@@ -246,7 +244,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
 				currentUser.name = this.getString(info, "name");
 			}
 
-			com.umeng.comm.core.utils.Log.e("xxxxxxxx", "info=" + info);
+			Log.i("xxxxxxxx", "info=" + info);
 			currentUser.gender = this.getGender(info);
 			return currentUser;
 		} else {

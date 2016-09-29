@@ -193,11 +193,19 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 								mList.clear();
 							}
 							mList.addAll(list);
-							for (int i = 0; i < mList.size(); i++) {
-								for (int j = mList.size() - 1; j > i; j--) {
-									if (mList.get(j).getUser_id()
-											.equals(mList.get(i).getUser_id())) {
+//							for (int i = 0; i < mList.size(); i++) {
+//								for (int j = mList.size() - 1; j > i; j--) {
+//									if (mList.get(j).getUser_id()
+//											.equals(mList.get(i).getUser_id())) {
+//										mList.remove(j);
+//									}
+//								}
+//							}
+							for(int i = mList.size() - 1; i > 0; i--) {
+								for(int j = i - 1; j >= 0; j--) {
+									if(mList.get(j).getUser_id().equals(mList.get(i).getUser_id())) {
 										mList.remove(j);
+										break;
 									}
 								}
 							}

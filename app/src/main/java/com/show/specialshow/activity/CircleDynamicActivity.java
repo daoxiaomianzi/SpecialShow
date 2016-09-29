@@ -127,11 +127,19 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 								}
 							}
 							mList.addAll(list);
-							for (int i = 0; i < mList.size(); i++) {
-								for (int j = mList.size() - 1; j > i; j--) {
-									if (mList.get(j).getIdStr()
-											.equals(mList.get(i).getIdStr())) {
+//							for (int i = 0; i < mList.size(); i++) {
+//								for (int j = mList.size() - 1; j > i; j--) {
+//									if (mList.get(j).getIdStr()
+//											.equals(mList.get(i).getIdStr())) {
+//										mList.remove(j);
+//									}
+//								}
+//							}
+							for(int i = mList.size() - 1; i > 0; i--) {
+								for(int j = i - 1; j >= 0; j--) {
+									if(mList.get(j).getIdStr().equals(mList.get(i).getIdStr())) {
 										mList.remove(j);
+										break;
 									}
 								}
 							}
@@ -253,8 +261,31 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 	public void fillView() {
 		initListView();
 		registerBoradcastReceiver();
+		registerDetailBoradcastReceiver();
 	}
 	
+	public void registerDetailBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME_DETAIL);
+		// 注册广播
+		mContext.registerReceiver(mDetailBroadcastReceiver, myIntentFilter);
+	}
+
+	private MyReceiver mDetailBroadcastReceiver = new MyReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(CircleDynamicDetailActivity.ACTION_NAME_DETAIL)) {
+				CircleDynamicAdapter.cache_attention.clear();
+//				if (mList != null) {
+//					mList.clear();
+//				}
+				getData();
+			}
+		}
+
+	};
+
 	public void registerBoradcastReceiver() {
 		IntentFilter myIntentFilter = new IntentFilter();
 		myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
@@ -271,7 +302,7 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 				if (mList != null) {
 					mList.clear();
 				}
-				pageIndex=1;
+				pageIndex = 1;
 				search_result_lv.setState(XListView.LOAD_REFRESH);
 				getData();
 			}
@@ -282,6 +313,7 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		mContext.unregisterReceiver(mBroadcastReceiver);
+		mContext.unregisterReceiver(mDetailBroadcastReceiver);
 	}
 
 	@Override

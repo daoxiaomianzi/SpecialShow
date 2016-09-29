@@ -250,6 +250,7 @@
             <!--<ImageView-->
                 <!--style="@style/list_menu_next" />-->
             <TextView
+                android:visibility="gone"
                 android:onClick="onClick"
                 android:id="@+id/tv_stores_details_cou"
                 android:paddingRight="@dimen/text_size_26px"
