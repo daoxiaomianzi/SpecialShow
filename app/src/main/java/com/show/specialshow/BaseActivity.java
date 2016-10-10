@@ -54,7 +54,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	public int activityFlag=0;
 	public TextView contest_confirm_tv;
 	// 创建一个以当前系统时间为名称的文件，防止重复
-	protected static File tempFile; /*= new File(
+	protected  File tempFile; /*= new File(
 			Environment.getExternalStorageDirectory(), getPhotoFileName());*/
 
 	// 使用系统当前日期加以调整作为照片的名称
@@ -171,6 +171,7 @@ public abstract class BaseActivity extends FragmentActivity {
 				(int) (TXApplication.WINDOW_WIDTH * 0.7),
 				LayoutParams.WRAP_CONTENT);
 		content_ll.setLayoutParams(params);
+		confirm_dialog_content_tv.setLayoutParams(params);
 		affirmDialog.setContentView(view);
 		affirmDialog.setCancelable(isCancel);
 		affirmDialog.show();
@@ -210,6 +211,7 @@ public abstract class BaseActivity extends FragmentActivity {
 				(int) (TXApplication.WINDOW_WIDTH * 0.7),
 				LayoutParams.WRAP_CONTENT);
 		content_ll.setLayoutParams(params);
+		confirm_dialog_content_tv.setLayoutParams(params);
 		affirmDialog.setContentView(view);
 		affirmDialog.setCancelable(isCancel);
 		affirmDialog.show();
@@ -260,6 +262,9 @@ public abstract class BaseActivity extends FragmentActivity {
 		intent.putExtra("showActionIcons", false);
 		// 指定调用相机拍照后照片的存储路径
 		tempFile=new File(FileUtils.SDPATH,getPhotoFileName());
+		if(!tempFile.getParentFile().exists()){
+			tempFile.getParentFile().mkdirs();
+		}
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
 		startActivityForResult(intent, cameracode);
 	}
@@ -290,7 +295,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	// 将裁剪后的图片显示在ImageView上
-	protected static void setPicToView(Bundle bundle, ImageView imageview) {
+	protected  void setPicToView(Bundle bundle, ImageView imageview) {
 		if (null != bundle) {
 			final Bitmap bmp = bundle.getParcelable("data");
 			imageview.setImageBitmap(bmp);
@@ -299,11 +304,14 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	// 把裁剪后的图片保存到sdcard上
-	private static void saveCropPic(Bitmap bmp) {
+	private  void saveCropPic(Bitmap bmp) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		FileOutputStream fis = null;
 		bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
 		tempFile=new File(FileUtils.SDPATH,getPhotoFileName());
+		if(!tempFile.getParentFile().exists()){
+			tempFile.getParentFile().mkdirs();
+		}
 		try {
 			fis = new FileOutputStream(tempFile);
 			fis.write(baos.toByteArray());

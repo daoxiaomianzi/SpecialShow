@@ -1,28 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="@color/color_ffffff"
-	android:orientation="vertical"
-    >
-	<include 
-	    layout="@layout/view_common_head"
-	    />
-	
-    <GridView
-        android:paddingLeft="@dimen/text_size_26px"
-        android:paddingRight="@dimen/text_size_26px"
-        android:layout_marginTop="@dimen/text_size_16px"
-        android:scrollbars="none"
-        android:listSelector="#00000000"
-        android:id="@+id/craftsman_gv"
+    android:background="@color/color_ffffff"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_common_head" />
+
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_ffffff"
-        android:horizontalSpacing="20dp"
-        android:numColumns="2"
-        android:verticalSpacing="20dp" >
-    </GridView>
+        android:background="@color/white">
+
+        <GridView
+            android:id="@+id/craftsman_gv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/text_size_16px"
+            android:background="@color/color_ffffff"
+            android:horizontalSpacing="20dp"
+            android:listSelector="#00000000"
+            android:numColumns="2"
+            android:paddingLeft="@dimen/text_size_26px"
+            android:paddingRight="@dimen/text_size_26px"
+            android:scrollbars="none"
+            android:verticalSpacing="20dp"></GridView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/craftsman_no_data_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="暂无手艺人"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </FrameLayout>
 
 
 </LinearLayout>

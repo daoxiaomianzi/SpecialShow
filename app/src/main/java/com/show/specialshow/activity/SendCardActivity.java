@@ -509,7 +509,7 @@ public class SendCardActivity extends BaseActivity {
             i--;
             ImageItem imageItem = iterator.next();
             Bitmap bm=imageFactory.ratio(imageItem.getImagePath(),480f,800f);
-            String newFilePath = FileUtils.saveBitmap(bm,String.valueOf(System.currentTimeMillis())
+            String newFilePath = FileUtils.saveBitmap(bm,"/TX_PHOTO/"+String.valueOf(System.currentTimeMillis())
                    ,
                     mContext);
             File tempFile = new File(newFilePath);
@@ -551,7 +551,9 @@ public class SendCardActivity extends BaseActivity {
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         fileName = "/TX_PHOTO/"+String.valueOf(System.currentTimeMillis());
         out= new File(FileUtils.SDPATH,fileName+ ".JPEG");
-//        out.getParentFile().mkdir();
+        if(!out.getParentFile().exists()){
+            out.getParentFile().mkdirs();
+        }
         Uri uri = Uri.fromFile(out);
         openCameraIntent.
                putExtra(MediaStore.EXTRA_OUTPUT, uri);// 获取拍照后未压缩的原图片，并保存在uri路径中

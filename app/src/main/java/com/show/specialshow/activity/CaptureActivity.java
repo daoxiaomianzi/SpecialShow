@@ -37,6 +37,8 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.zxing.camera.CameraManager;
 import com.zxing.decoding.CaptureActivityHandler;
@@ -106,7 +108,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 				mContext.finish();
 				break;
 			case R.id.contest_confirm_tv:
-				bundle.putString("result",resultString);
+				bundle.putString("result",resultString+"&uid="+ SPUtils.get(mContext,"uid",""));
 				UIHelper.startActivity(mContext,ScanResultActivity.class,bundle);
 				affirmDialog.dismiss();
 				break;
@@ -178,16 +180,16 @@ public class CaptureActivity extends BaseActivity implements Callback {
 					.show();
 		} else {
 //			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
+//			Bundle bundle = new Bundle();
 			Matrix matrix = new Matrix();
 			matrix.postScale(0.5f, 0.5f);
 			Bitmap bit = Bitmap.createBitmap(barcode, 0, 0, barcode.getWidth(),
 					barcode.getHeight(), matrix, true);
-			bundle.putString("result", resultString);
-			Log.i("result",resultString);
+//			bundle.putString("result", resultString+"&uid="+ SPUtils.get(mContext,"uid",""));
+//			Log.i("result",resultString);
 //			bundle.putParcelable("bitmap", bit);
 //			resultIntent.putExtras(bundle);
-			createAffirmDialog(resultString,DIALOG_DOUBLE_STPE,"即将前往",false);
+			createAffirmDialog(resultString+"&uid="+ SPUtils.get(mContext,"uid",""),DIALOG_DOUBLE_STPE,"即将前往",false);
 		}
 	}
 
@@ -292,12 +294,12 @@ public class CaptureActivity extends BaseActivity implements Callback {
 					} else {
 						// System.out.println("Result:"+resultString);
 //						Intent resultIntent = new Intent();
-						Bundle bundle = new Bundle();
-						bundle.putString("result", resultString);
+//						Bundle bundle = new Bundle();
+//						bundle.putString("result", resultString);
 //						bundle.putParcelable("bitmap", scanBitmap);
 //						resultIntent.putExtras(bundle);
 //						CaptureActivity.this.setResult(RESULT_OK, resultIntent);
-						createAffirmDialog(resultString,DIALOG_DOUBLE_STPE,"即将前往",false);
+						createAffirmDialog(resultString+"&uid="+ SPUtils.get(mContext,"uid",""),DIALOG_DOUBLE_STPE,"即将前往",false);
 					}
 //					CaptureActivity.this.finish();
 					break;

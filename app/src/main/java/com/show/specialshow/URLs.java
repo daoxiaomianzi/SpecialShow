@@ -175,6 +175,10 @@ public interface URLs {
 	 */
 	String BUSINESS_CENTER=BASE_IMAGE_URL+"index.php?g=User&m=Merchant&a=merchant&uid=";
 	/**
+	 * 成为手艺人链接
+	 */
+	String BECOME_CRAFTSMAN=BASE_IMAGE_URL+"index.php?g=User&m=Merchant&a=type";
+	/**
 	 * 获取聊过天的人的头像和昵称等数据
 	 */
 	String SPACE_GETUSERBYID=BASE_URL+"/space/getUserById";
@@ -230,5 +234,9 @@ public interface URLs {
 	 * 更新用户当前坐标
 	 */
 	String USER_UPDATEXY=BASE_URL+"/user/updateXy";
+	/**
+	 * qq,weixin第三方登陆接口
+	 */
+	String QQ_LOGIN=BASE_URL+"/Qq/login";
 }
 

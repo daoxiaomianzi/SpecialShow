@@ -86,7 +86,7 @@ public class BasicInformationActivity extends BaseActivity {
     private int basic_mode = 0;
     public static final String MY_BASIC = "我的资料";
 
-    static class BasicHandler extends Handler {
+     class BasicHandler extends Handler {
         WeakReference<BasicInformationActivity> mActivity;
 
         BasicHandler(BasicInformationActivity activity) {

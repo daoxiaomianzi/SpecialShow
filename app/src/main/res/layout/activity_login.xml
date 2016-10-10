@@ -114,6 +114,7 @@
 	        />
 	</RelativeLayout>
 	<LinearLayout
+		android:visibility="visible"
 		android:layout_width="match_parent"
 		android:layout_height="30dp"
 		android:id="@+id/layout4"
@@ -141,6 +142,7 @@
 			android:background="@color/umeng_comm_color_l_99"/>
 	</LinearLayout>
 	<LinearLayout
+		android:visibility="visible"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_below="@id/layout4"

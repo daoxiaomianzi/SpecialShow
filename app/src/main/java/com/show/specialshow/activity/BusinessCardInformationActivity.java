@@ -355,7 +355,7 @@ public class BusinessCardInformationActivity extends BaseActivity {
 	}
 	private BasicHandler basicHandler = new BasicHandler(this);
 
-	static class BasicHandler extends Handler {
+	 class BasicHandler extends Handler {
 		WeakReference<BusinessCardInformationActivity> mActivity;
 
 		BasicHandler(BusinessCardInformationActivity activity) {

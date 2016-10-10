@@ -15,7 +15,7 @@ public class ScanResultActivity extends BaseBusCenWebActivity {
     }
     @Override
     public void fillView() {
-        head_title_tv.setText("店铺服务");
+        head_title_tv.setText("成为手艺人");
         loadDetail();
     }
 

@@ -214,7 +214,7 @@
 
         <!-- 微信回调activity -->
         <activity
-            android:name="com.umeng.community.wxapi.WXEntryActivity"
+            android:name="com.show.specialshow.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
