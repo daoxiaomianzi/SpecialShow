@@ -11,11 +11,13 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DataCleanManager;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.utils.CommonUtils;
 
 public class SetActivity extends BaseActivity {
 	private TextView set_mb_num;
+	private TextView finish_login_tv;
 
 	@Override
 	public void initData() {
@@ -26,11 +28,13 @@ public class SetActivity extends BaseActivity {
 	@Override
 	public void initView() {
 		set_mb_num=(TextView) findViewById(R.id.set_mb_num);
+		finish_login_tv= (TextView) findViewById(R.id.finish_login_tv);
 	}
 
 	@Override
 	public void fillView() {
 		head_title_tv.setText("设置");
+		finish_login_tv.setText("退出登录（"+ SPUtils.get(mContext,"nickname","")+"）");
 		try {
 			set_mb_num.setText(DataCleanManager.getTotalCacheSize(getApplicationContext()));
 		} catch (Exception e) {

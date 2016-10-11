@@ -15,7 +15,6 @@
             android:id="@+id/craftsman_details_comment_roundiv"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/girl"
             />
         <TextView 
             android:id="@+id/craftsman_details_comment_time"

@@ -364,8 +364,6 @@
         android:background="@color/color_ededed" />
 	<LinearLayout
         android:background="@color/white"
-	    android:paddingTop="@dimen/text_size_16px"
-        android:paddingBottom="@dimen/text_size_16px"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
@@ -373,12 +371,18 @@
 	    android:paddingRight="30dp"
 	    >
 	    <ImageView
+
+            android:paddingTop="@dimen/text_size_16px"
+            android:paddingBottom="@dimen/text_size_16px"
 	        android:onClick="onClick"
 	        android:id="@+id/craftsman_details_working_iv1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        />
-	    <ImageView 
+	    <ImageView
+
+            android:paddingTop="@dimen/text_size_16px"
+            android:paddingBottom="@dimen/text_size_16px"
 	          android:onClick="onClick"
 	        android:id="@+id/craftsman_details_working_iv2"
 	        android:layout_marginLeft="@dimen/text_size_26px"

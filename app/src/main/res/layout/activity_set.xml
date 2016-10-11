@@ -124,20 +124,21 @@
         android:layout_height="@dimen/ling_0.8"
         android:background="@color/color_ededed"
         />
-    <RelativeLayout 
+    <RelativeLayout
         android:id="@+id/rl_finish_login"
         style="@style/user_info_container"
         android:layout_height="45dp"
         >
-        <TextView 
+        <TextView
+            android:id="@+id/finish_login_tv"
             android:layout_centerInParent="true"
             android:textColor="#FF4040"
             style="@style/user_info_tv"
             android:text="@string/finish_login"
             />
-        
+
     </RelativeLayout>
-      <View 
+      <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/ling_0.8"
         android:background="@color/color_ededed"

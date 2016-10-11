@@ -18,7 +18,6 @@
             android:id="@+id/roundImage_shop_comcard"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/girl"
             imagecontrol:border_thickness="2dp" />
         <RelativeLayout 
             android:layout_width="wrap_content"

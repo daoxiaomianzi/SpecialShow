@@ -51,7 +51,6 @@
                         android:layout_height="65dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:src="@drawable/girl"
                         imagecontrol:border_thickness="2dp" />
 
                     <TextView
