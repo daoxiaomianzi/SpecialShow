@@ -37,6 +37,7 @@ import com.show.specialshow.model.CircleDynamicItem;
 import com.show.specialshow.model.DynamicImage;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopListTagsMess;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.RoundImageView;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.utils.XUtilsImageLoader;
@@ -456,6 +457,9 @@ public class CircleDynamicAdapter extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
+			if (!BtnUtils.getInstance().isFastDoubleClick()) {
+				return;
+			}
 			Bundle bundle = new Bundle();
 			List<DynamicImage> list_pic = new ArrayList<DynamicImage>();
 			switch (v.getId()) {

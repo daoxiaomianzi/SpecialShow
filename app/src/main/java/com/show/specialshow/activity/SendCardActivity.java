@@ -490,7 +490,15 @@ public class SendCardActivity extends BaseActivity {
                     UIHelper.showConfirmDialog(mContext, "文字和图片不可同时为空", null, null, true);
                     return;
                 } else {
-                    sendState();
+                    if((Boolean)SPUtils.get(mContext,"ichange",true)){
+                        sendState();
+
+                    }else{
+                        UIHelper.ToastMessage(mContext,"请先完善资料");
+                        Bundle bundle =new Bundle();
+                        bundle.putInt("from_mode",1);
+                        UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                    }
                 }
             }
         } else {

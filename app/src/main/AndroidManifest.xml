@@ -214,7 +214,7 @@
 
         <!-- 微信回调activity -->
         <activity
-            android:name="com.show.specialshow.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -465,7 +465,7 @@
         <activity
             android:name="com.easemob.chatuidemo.activity.MapActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide"></activity>
+            android:theme="@style/horizontal_slide" />
 
         <!-- 新的朋友邀请消息页面 -->
         <activity
@@ -778,7 +778,6 @@
         <activity
             android:name=".activity.ShowerDetailsActivity"
             android:label="@string/title_activity_shower_details" />
-
         <activity
             android:name=".activity.AttenFansPeoActivity"
             android:label="@string/title_activity_atten_fans_peo" />
@@ -855,7 +854,9 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.ShopBranchActivity" />
-        <activity android:name=".activity.ShowIntroductActivity"></activity>
+        <activity android:name=".activity.ShowIntroductActivity" />
+        <activity android:name=".activity.OfferPayActivity" />
+        <activity android:name=".activity.PerfectDataActivity"></activity>
     </application>
 
 </manifest>

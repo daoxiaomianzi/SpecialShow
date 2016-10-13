@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_offer_pay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical"
+    tools:context="com.show.specialshow.activity.OfferPayActivity">
+
+    <include layout="@layout/view_common_head" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/text_size_68px"
+        android:paddingLeft="@dimen/text_size_26px"
+        android:paddingRight="@dimen/text_size_26px"
+        android:paddingTop="@dimen/text_size_36px">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/text_size_114px"
+            android:background="@drawable/editshape"
+            android:paddingLeft="@dimen/text_size_16px">
+
+            <TextView
+                android:id="@+id/monetary"
+                style="@style/user_info_tv"
+                android:layout_centerVertical="true"
+                android:text="@string/monetary" />
+
+            <EditText
+                android:id="@+id/et_monetary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/text_size_10px"
+                android:layout_toRightOf="@id/monetary"
+                android:background="@color/transparent"
+                android:gravity="right|center_vertical"
+                android:hint="询问服务员后输入"
+                android:inputType="numberDecimal"
+                android:paddingRight="@dimen/text_size_16px"
+                android:singleLine="true"
+                android:textColorHint="@color/color_aaaaaa"
+                android:textSize="@dimen/text_size_26px" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/user_info_tv"
+            android:layout_marginTop="@dimen/text_size_26px"
+            android:drawableLeft="@drawable/icon_consume_tips"
+            android:text="@string/consume_tips"
+            android:textColor="@color/color_999999" />
+
+        <TextView
+            style="@style/user_info_tv"
+            android:layout_marginLeft="@dimen/text_size_36px"
+            android:layout_marginTop="@dimen/text_size_10px"
+            android:text="@string/consume_introduction"
+            android:textColor="@color/color_b5b5b5" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:onClick="onClick"
+        android:id="@+id/tv_confirm_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:layout_marginLeft="@dimen/text_size_36px"
+        android:layout_marginRight="@dimen/text_size_36px"
+        android:layout_marginTop="@dimen/text_size_68px"
+        android:background="@drawable/bg_send_selector"
+        android:gravity="center"
+        android:text="@string/confirm_pay"
+        android:textColor="@color/white" />
+
+</LinearLayout>

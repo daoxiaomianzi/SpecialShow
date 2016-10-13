@@ -55,6 +55,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.OnTabActivityResultListener;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.utils.CommonUtils;
 
@@ -115,8 +116,15 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 			break;
 		case R.id.menu_chat_rll:
 			if (TXApplication.login) {
-				index = 2;
-				changeTab();
+				if((Boolean)SPUtils.get(mContext,"ichange",true)){
+					index = 2;
+					changeTab();
+				}else{
+					UIHelper.ToastMessage(mContext,"请先完善资料");
+					bundle.putInt("from_mode",1);
+					UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+				}
+
 			} else {
 				bundle.putInt(LoginActivity.FROM_LOGIN,
 						LoginActivity.FROM_OTHER);
@@ -125,8 +133,15 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 			break;
 		case R.id.menu_my_rll:
 			if (TXApplication.login) {
-				index = 3;
-				changeTab();
+				if((Boolean) SPUtils.get(mContext,"ichange",true)){
+					index = 3;
+					changeTab();
+				}else{
+					UIHelper.ToastMessage(mContext,"请先完善资料");
+					bundle.putInt("from_mode",1);
+					UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+				}
+
 			} else {
 				bundle.putInt(LoginActivity.FROM_LOGIN,
 						LoginActivity.FROM_OTHER);

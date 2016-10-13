@@ -16,6 +16,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.activity.DynamicImagePagerActivity;
 import com.show.specialshow.model.DynamicImage;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.utils.XUtilsImageLoader;
 
@@ -81,6 +82,9 @@ public class DynamicGridAdapter extends BaseAdapter {
 
 		@Override
 		public void onClick(View v) {
+			if (!BtnUtils.getInstance().isFastDoubleClick()) {
+				return;
+			}
 			Bundle bundle = new Bundle();
 			switch (v.getId()) {
 			case R.id.dynamic_gv_item_iv:

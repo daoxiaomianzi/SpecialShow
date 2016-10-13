@@ -403,6 +403,12 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 collect();
                 break;
             case R.id.tv_stores_details_cou://优惠买单
+                if (TXApplication.login) {
+                    UIHelper.startActivity(mContext,OfferPayActivity.class);
+                }else{
+                    bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext,LoginActivity.class,bundle);
+                }
                 break;
             case R.id.rl_stores_details_introduction://秀坊简介
                 if (shopShopMess != null) {
@@ -1118,10 +1124,17 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                                     UIHelper.ToastMessage(mContext,"不能和自己聊天");
 
                                 }else{
-                                    bundle.putString("userId",ShopComcardStaUserMess
-                                            .parse(mCommendcardStatusMesses.get(position)
-                                                    .getStatus_user()).getUser_id());
-                                    UIHelper.startActivity(mContext, ChatActivity.class,bundle);
+                                    if((Boolean)SPUtils.get(mContext,"ichange",true)){
+                                        bundle.putString("userId",ShopComcardStaUserMess
+                                                .parse(mCommendcardStatusMesses.get(position)
+                                                        .getStatus_user()).getUser_id());
+                                        UIHelper.startActivity(mContext, ChatActivity.class,bundle);
+                                    }else{
+                                        UIHelper.ToastMessage(mContext,"请先完善资料");
+                                        bundle.putInt("from_mode",1);
+                                        UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                                    }
+
 
                                 }
                             }else{

@@ -447,6 +447,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
+                        if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                            return;
+                        }
                         bundle.putSerializable(
                                 DynamicImagePagerActivity.EXTRA_IMAGE_URLS,
                                 (Serializable) mCircleDynamic.getStatus_pics());
@@ -466,6 +469,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
+                        if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                            return;
+                        }
                         bundle.putSerializable(
                                 DynamicImagePagerActivity.EXTRA_IMAGE_URLS,
                                 (Serializable) mCircleDynamic.getStatus_pics());
@@ -479,6 +485,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
+                        if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                            return;
+                        }
                         bundle.putSerializable(
                                 DynamicImagePagerActivity.EXTRA_IMAGE_URLS,
                                 (Serializable) mCircleDynamic.getStatus_pics());
@@ -505,6 +514,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_portrait_riv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("user_id", mCircleDynamic.getStatus_user().getUser_id());
                 UIHelper.startActivity(mContext, ShowerDetailsActivity.class, bundle);
@@ -514,6 +526,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("shop_id", mCircleDynamic.getStatus_package().getShop_id());
                 UIHelper.startActivity(mContext, StoresDetailsActivity.class, bundle);
@@ -523,6 +538,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
                 if (TXApplication.login) {
                     attention(mCircleDynamic.getStatus_user().getUser_id(), dynamic_type_attention_btn);
                 } else {

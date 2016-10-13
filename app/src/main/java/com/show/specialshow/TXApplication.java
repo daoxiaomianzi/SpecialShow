@@ -344,6 +344,7 @@ public class TXApplication extends MultiDexApplication {
 		filename.edit().putString("phone", user.getPhone()).commit();
 		filename.edit().putBoolean("loginSuccess", user.isLogin()).commit();
 		filename.edit().putInt("user_biaoshi", user.getUser_biaoshi()).commit();
+		filename.edit().putBoolean("ichange",user.isIchange()).commit();
 		login=true;
 	}
 	/**
@@ -357,6 +358,7 @@ public class TXApplication extends MultiDexApplication {
 		user.setPhone(filename.getString("phone", ""));
 		user.setLogin(filename.getBoolean("loginSuccess", false));
 		user.setUser_biaoshi(filename.getInt("user_biaoshi", 1));
+		user.setIchange(filename.getBoolean("ichange",true));
 		return user;
 	}
 	/**

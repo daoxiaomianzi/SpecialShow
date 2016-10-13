@@ -140,7 +140,8 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 	public void fillView() {
 		head_title_tv.setText(R.string.my);
 		head_title_tv.setVisibility(View.GONE);
-		head_left_tv.setVisibility(View.GONE);
+		UIHelper.leftDrawable(R.color.white,mContext,head_left_tv);
+		head_left_tv.setText("签到");
 		head_right_tv.setVisibility(View.VISIBLE);
 		Drawable rightDrawable = getResources()
 				.getDrawable(R.drawable.icon_set);
@@ -169,9 +170,14 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 	}
 
 	@Override
+	public void goBack(View v) {
+	}
+
+	@Override
 	public void setListener() {
 
 	}
+
 	/**
 	 * 加载数据
 	 */

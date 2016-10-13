@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_perfect_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_bg"
+    tools:context="com.show.specialshow.activity.PerfectDataActivity">
+    <include
+        layout="@layout/view_common_head"
+        />
+    <com.show.specialshow.utils.RoundImageView
+        android:onClick="onClick"
+        android:id="@+id/riv_perfect_data"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/icon_defaut"
+        />
+    <TextView
+        android:layout_marginTop="@dimen/text_size_36px"
+    style="@style/user_info_tv"
+        android:layout_gravity="center"
+        android:text="设置个人头像"
+        android:textSize="@dimen/text_size_30px"
+        />
+
+    <EditText
+        android:id="@+id/et_perfect_data_nickname"
+        android:paddingLeft="@dimen/text_size_6px"
+        android:textSize="@dimen/text_size_26px"
+        android:hint="请输入昵称"
+        android:textColorHint="@color/color_b5b5b5"
+        android:layout_marginLeft="@dimen/text_size_114px"
+        android:layout_marginRight="@dimen/text_size_114px"
+        android:background="@color/app_bg"
+        android:layout_marginTop="@dimen/height_50"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px" />
+    <View
+        android:layout_marginLeft="@dimen/text_size_114px"
+        android:layout_marginRight="@dimen/text_size_114px"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_F47183"
+        />
+    <Button
+        android:onClick="onClick"
+        android:id="@+id/bt_perfect_data_submit"
+        android:textSize="@dimen/text_size_28px"
+        android:textColor="@color/white"
+        android:text="@string/submit"
+        android:layout_marginLeft="@dimen/text_size_114px"
+        android:layout_marginRight="@dimen/text_size_114px"
+        android:layout_marginTop="@dimen/text_size_114px"
+        android:background="@drawable/bg_send_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px" />
+
+
+</LinearLayout>

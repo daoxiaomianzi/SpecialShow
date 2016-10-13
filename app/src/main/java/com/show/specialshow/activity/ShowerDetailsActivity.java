@@ -305,8 +305,15 @@ public class ShowerDetailsActivity extends BaseActivity {
                     if (user_id.equals(SPUtils.get(mContext, "uid", ""))) {
                         UIHelper.ToastMessage(mContext, "不能和自己聊天");
                     } else {
-                        bundle.putString("userId", user_id);
-                        UIHelper.startActivity(mContext, ChatActivity.class, bundle);
+                        if((Boolean)SPUtils.get(mContext,"ichange",true)){
+                            bundle.putString("userId", user_id);
+                            UIHelper.startActivity(mContext, ChatActivity.class, bundle);
+                        }else{
+                            UIHelper.ToastMessage(mContext,"请先完善资料");
+                            bundle.putInt("from_mode",1);
+                            UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                        }
+
                     }
                 } else {
                     bundle.putInt(LoginActivity.FROM_LOGIN,

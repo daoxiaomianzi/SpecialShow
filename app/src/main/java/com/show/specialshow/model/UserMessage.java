@@ -30,6 +30,16 @@ public class UserMessage implements Serializable {
 	private String sign_name;
 	private boolean isLogin;
 	private int user_biaoshi;//手艺人标识，1不为手艺人，2 为手艺人
+	private boolean ichange;//true为修改过头像和昵称，false没有
+
+	public boolean isIchange() {
+		return ichange;
+	}
+
+	public void setIchange(boolean ichange) {
+		this.ichange = ichange;
+	}
+
 	public int getUser_biaoshi() {
 		return user_biaoshi;
 	}

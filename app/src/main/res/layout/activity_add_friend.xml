@@ -14,6 +14,8 @@
         android:layout_marginTop="@dimen/text_size_40px"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
+        android:paddingLeft="@dimen/text_size_16px"
+        android:paddingRight="@dimen/text_size_16px"
         android:background="@drawable/editshape"
         android:textColorHint="@color/color_b5b5b5"
         android:textSize="@dimen/text_size_28px"

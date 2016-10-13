@@ -13,8 +13,8 @@ android {
         multiDexEnabled true
     }
     //签名
-    signingConfigs{
-        release{
+    signingConfigs {
+        release {
             storeFile file('/Users/xuyong/特秀美妆工作/特秀美妆正式签名文件/beauty_manage_texiu_android.jks')
             storePassword '^na*(@$o!_t'
             keyAlias 'yinlaicfmoneymanagetx'
@@ -52,7 +52,7 @@ android {
 //                }
 //            }
 //        }
-       release {
+        release {
             // 不显示Log
             buildConfigField "boolean", "LOG_DEBUG", "false"
 
@@ -104,4 +104,5 @@ dependencies {
     compile files('libs/Msc.jar')
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.3'
 }

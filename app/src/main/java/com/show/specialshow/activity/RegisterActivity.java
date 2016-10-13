@@ -255,14 +255,15 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
      * 注册成功的操作
      */
     private void loginSuccess() {
+        Bundle bundle = new Bundle();
         if (LoginActivity.FROM_MY == from_login) {
-            Bundle bundle = new Bundle();
             bundle.putInt("index", 0);
             UIHelper.startActivity(mContext, MainActivity.class, bundle);
             AppManager.getAppManager().finishActivity(3);
         } else if (LoginActivity.FROM_OTHER == from_login) {
-            UIHelper.startActivity(mContext,BasicInformationActivity.class);
-            AppManager.getAppManager().finishActivity(2);
+            bundle.putInt("from_mode",0);
+            UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+//            AppManager.getAppManager().finishActivity(2);
         }
     }
 

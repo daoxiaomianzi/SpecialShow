@@ -130,6 +130,11 @@
     <string name="address">地址:</string>
     <string name="phone">电话:</string>
     <string name="opening_time">营业时间:</string>
+    <string name="monetary">消费总额</string>
+    <string name="consume_tips">消费提示</string>
+    <string name="confirm_pay">确认支付</string>
+    <string name="submit">提交</string>
+    <string name="consume_introduction">您可以使用积分和在线支付进行消费，在线支付消费可以累积积分</string>
     <string name="show_fang_introduction">秀坊简介</string>
     <string name="branch_stores">分店:</string>
     <string name="related_services">相关服务(0)</string>
