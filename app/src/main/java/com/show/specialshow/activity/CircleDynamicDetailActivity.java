@@ -712,6 +712,15 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
                                 dialog.dismiss();
                                 UIHelper.ToastMessage(mContext,
                                         result.getMessage());
+                                ll_face_container.setVisibility(View.GONE);
+                                iv_emoticons_normal.setVisibility(View.VISIBLE);
+                                iv_emoticons_checked.setVisibility(View.GONE);
+                                detail_sv.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        detail_sv.fullScroll(ScrollView.FOCUS_DOWN);
+                                    }
+                                });
                                 commentEdit.setText("");
                                 isFrist = false;
                                 isComments = true;
