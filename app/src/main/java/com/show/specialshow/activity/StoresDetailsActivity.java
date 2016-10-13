@@ -404,7 +404,8 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 break;
             case R.id.tv_stores_details_cou://优惠买单
                 if (TXApplication.login) {
-                    UIHelper.startActivity(mContext,OfferPayActivity.class);
+                    bundle.putString("shop_title", mShopListMess.getTitle());
+                    UIHelper.startActivity(mContext,OfferPayActivity.class,bundle);
                 }else{
                     bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
                     UIHelper.startActivity(mContext,LoginActivity.class,bundle);

@@ -856,7 +856,8 @@
         <activity android:name=".activity.ShopBranchActivity" />
         <activity android:name=".activity.ShowIntroductActivity" />
         <activity android:name=".activity.OfferPayActivity" />
-        <activity android:name=".activity.PerfectDataActivity"></activity>
+        <activity android:name=".activity.PerfectDataActivity" />
+        <activity android:name=".activity.PayActivity"></activity>
     </application>
 
 </manifest>
