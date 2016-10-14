@@ -84,6 +84,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
     private TextView dynamic_type_label_tv;
     private TextView dynamic_type_describe_tv;
     private TextView dynamic_type_relation_me_tv;
+    private TextView dynamic_type_url_tv;
     private TextView dynamic_type_thumbs_count_tv;
     private TextView dynamic_type_comment_count_tv;
     private TextView dynamic_type_user_shop_tv;
@@ -294,6 +295,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_relation_me_tv);
+        dynamic_type_url_tv= (TextView) findViewById(R.id.dynamic_type_other_picture_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_other_picture_card_ll);
@@ -311,6 +313,8 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_relation_me_tv);
+        dynamic_type_url_tv= (TextView) findViewById(R.id.dynamic_type_two_picture_url_tv);
+
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_two_picture_card_ll);
@@ -329,6 +333,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_relation_me_tv);
+        dynamic_type_url_tv= (TextView) findViewById(R.id.dynamic_type_one_picture_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_one_picture_card_ll);
@@ -346,6 +351,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_just_text_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_just_text_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_just_text_relation_me_tv);
+        dynamic_type_url_tv= (TextView) findViewById(R.id.dynamic_type_just_text_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_just_text_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_just_text_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_just_text_card_ll);
@@ -511,6 +517,15 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
     }
 
     private void setOnclick() {
+        dynamic_type_url_tv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
+                UIHelper.ToastMessage(mContext,"这是一个链接");
+            }
+        });
         dynamic_type_portrait_riv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

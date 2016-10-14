@@ -3,7 +3,7 @@
     android:id="@+id/dynamic_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,17 +12,16 @@
         android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="10dp" >
+        android:paddingTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <com.show.specialshow.utils.RoundImageView
                 android:id="@+id/dynamic_type_two_picture_portrait_riv"
                 android:layout_width="@dimen/text_size_114px"
-                android:layout_height="@dimen/text_size_114px"
-                 />
+                android:layout_height="@dimen/text_size_114px" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -30,7 +29,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_weight="1.0"
                 android:gravity="center_vertical"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/dynamic_type_two_picture_user_name_tv"
@@ -74,7 +73,7 @@
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:layout_marginTop="10dp"
-            android:background="@color/app_bg" >
+            android:background="@color/app_bg">
 
             <TextView
                 android:id="@+id/dynamic_type_two_picture_label_tv"
@@ -113,12 +112,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-            android:layout_marginTop="5dp" >
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:id="@+id/dynamic_type_two_picture_content_one_iv"
@@ -142,7 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp" >
+            android:layout_marginRight="18dp">
 
             <TextView
                 android:id="@+id/dynamic_type_two_picture_relation_me_tv"
@@ -155,17 +154,35 @@
                 android:textSize="@dimen/text_size_28px" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/dynamic_type_two_picture_url_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_size_8px"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:background="@color/app_bg"
+            android:drawableLeft="@drawable/icon_link"
+            android:drawablePadding="@dimen/text_size_6px"
+            android:paddingBottom="2dp"
+            android:paddingLeft="@dimen/text_size_10px"
+            android:paddingRight="@dimen/text_size_10px"
+            android:paddingTop="2dp"
+            android:singleLine="true"
+            android:text="这是一个链接"
+            android:textColor="@color/color_565656"
+            android:textSize="@dimen/text_size_28px" />
+
         <com.show.specialshow.view.MyGridView
             android:id="@+id/dynamic_type_two_picture_label_gv"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_size_16px"
+            android:layout_marginBottom="@dimen/text_size_10px"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
             android:horizontalSpacing="@dimen/text_size_16px"
             android:listSelector="#00000000"
-            android:numColumns="3" >
-        </com.show.specialshow.view.MyGridView>
+            android:numColumns="3"></com.show.specialshow.view.MyGridView>
 
         <ImageView
             style="@style/split_iv_horizontal"
@@ -175,65 +192,63 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="18dp"
             android:layout_marginRight="18dp"
-               android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-            >
+            android:layout_marginTop="4dp">
 
             <LinearLayout
-                android:onClick="onClick"
                 android:id="@+id/dynamic_type_two_picture_thumbs_count_ll"
                 android:layout_width="wrap_content"
-                android:background="@drawable/bg_like_comment"
                 android:layout_height="wrap_content"
-               >
+                android:background="@drawable/bg_like_comment"
+                android:onClick="onClick">
 
                 <TextView
-                    android:minWidth="60dp"
                     android:id="@+id/dynamic_type_two_picture_thumbs_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_like"
                     android:drawablePadding="@dimen/text_size_8px"
-                        android:paddingLeft="@dimen/text_size_26px"
+                    android:minWidth="60dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="@dimen/text_size_26px"
                     android:paddingRight="6dp"
                     android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
                     android:text="1256"
-                    android:textSize="@dimen/text_size_22px"
-                    android:textColor="@color/dynamic_text_c2_color" />
+                    android:textColor="@color/dynamic_text_c2_color"
+                    android:textSize="@dimen/text_size_22px" />
             </LinearLayout>
 
             <LinearLayout
-                android:onClick="onClick"
                 android:id="@+id/dynamic_type_two_picture_comment_count_ll"
                 android:layout_width="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/bg_like_comment"
-                 >
+                android:onClick="onClick">
+
                 <TextView
                     android:id="@+id/dynamic_type_two_picture_comment_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_comment"
                     android:drawablePadding="@dimen/text_size_8px"
-                        android:paddingLeft="@dimen/text_size_26px"
+                    android:minWidth="60dp"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="@dimen/text_size_26px"
                     android:paddingRight="6dp"
                     android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:minWidth="60dp"
-                    android:textSize="@dimen/text_size_22px"
                     android:text="1256"
-                    android:textColor="@color/dynamic_text_c2_color" />
+                    android:textColor="@color/dynamic_text_c2_color"
+                    android:textSize="@dimen/text_size_22px" />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <ImageView
-        android:background="@color/app_bg"
         style="@style/split_iv_horizontal"
-        android:layout_height="10dp" />
+        android:layout_height="10dp"
+        android:background="@color/app_bg" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,8 @@ public class CraftsmandetailsActivity extends BaseActivity {
 	public static final String PEOPLE_DES = "people_des";
 	public static final String PEOPLE_LIST = "people_list";
 	public static final int STAFF_REVIEW = 7;
+		private static final int COMMENT=0x000002;//点评
+
 	// 数据相关
 	private CraftsmanMess craftsmanMess;//
 	private CraftsmanInfoMess craftsmanInfoMess;
@@ -206,7 +209,7 @@ public class CraftsmandetailsActivity extends BaseActivity {
 		case R.id.craftsman_details_review:// 点评
 			bundle.putInt("send_type", STAFF_REVIEW);
 			bundle.putString("user_id", user_id);
-			UIHelper.startActivity(mContext, SendCardActivity.class, bundle);
+			UIHelper.startActivityForResult(mContext, SendCardActivity.class,COMMENT,bundle);
 			break;
 		default:
 			break;
@@ -631,4 +634,15 @@ public class CraftsmandetailsActivity extends BaseActivity {
 		});
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		getShowerReview();
+		myScrollView.post(new Runnable() {
+			@Override
+			public void run() {
+				myScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+			}
+		});
+	}
 }

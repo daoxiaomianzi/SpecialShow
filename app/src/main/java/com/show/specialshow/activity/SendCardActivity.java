@@ -345,7 +345,8 @@ public class SendCardActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         switch (sendType) {
             case CraftsmandetailsActivity.STAFF_REVIEW:
-                finish();
+                Intent data = new Intent();
+                UIHelper.setResult(mContext,RESULT_OK,data);
                 break;
             case SelectSendTypeActivity.SHOW_CARD_CODE:
 //			UIHelper.startActivity(mContext, MainActivity.class,bundle);
