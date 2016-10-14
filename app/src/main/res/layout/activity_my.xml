@@ -235,6 +235,7 @@
                     style="@style/list_menu_next" />
 
                 <TextView
+                    android:id="@+id/tv_apply_merchant"
                     android:layout_marginRight="0dp"
                     style="@style/user_info_iv"
                     android:layout_toLeftOf="@+id/shop_center_iv_right_iv"

@@ -11,6 +11,24 @@ public class UserNumMess implements Serializable {
     private String attentionNum;//关注数
     private String fansNum;//粉丝数
     private String friendNum;//好友数
+    private int  isMerchant;//返回2说明此用户同时是商户，1为普通用户
+    private int userBiaoshi;//返回2说明此用户同时为手艺人，1为普通用户
+
+    public int getUserBiaoshi() {
+        return userBiaoshi;
+    }
+
+    public void setUserBiaoshi(int userBiaoshi) {
+        this.userBiaoshi = userBiaoshi;
+    }
+
+    public int getIsMerchant() {
+        return isMerchant;
+    }
+
+    public void setIsMerchant(int isMerchant) {
+        this.isMerchant = isMerchant;
+    }
 
     public String getAttentionNum() {
         return attentionNum;

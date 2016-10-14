@@ -42,6 +42,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 	private ScrollView my_scroll;
 	private RoundImageView roundImage_one_border;
 	private TextView my_name;
+	private TextView tv_apply_merchant;
 	private int height;//高度
 	private RelativeLayout rl_craftsman;
 	private LinearLayout my_craftsman_bottom_ll;
@@ -75,6 +76,25 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 						focus_on_num.setText(userNumMess.getAttentionNum()+"");
 						fans_num.setText(userNumMess.getFansNum()+"");
 						friends_num.setText(userNumMess.getFriendNum()+"");
+						if(2==userNumMess.getIsMerchant()){
+							tv_apply_merchant.setVisibility(View.GONE);
+						}else if(1==userNumMess.getIsMerchant()){
+							tv_apply_merchant.setVisibility(View.VISIBLE);
+						}
+						int user_biaoshi=userNumMess.getUserBiaoshi();
+						if(1==user_biaoshi){
+							vi_craftsman.setVisibility(View.GONE);
+							rl_craftsman.setVisibility(View.GONE);
+							my_craftsman_bottom_ll.setVisibility(View.GONE);
+						}else if(2==user_biaoshi){
+							vi_craftsman.setVisibility(View.VISIBLE);
+							rl_craftsman.setVisibility(View.VISIBLE);
+							my_craftsman_bottom_ll.setVisibility(View.VISIBLE);
+						}else{
+							vi_craftsman.setVisibility(View.GONE);
+							rl_craftsman.setVisibility(View.GONE);
+							my_craftsman_bottom_ll.setVisibility(View.GONE);
+						}
 					}
 
 				}else{
@@ -134,6 +154,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 		rl_craftsman=(RelativeLayout) findViewById(R.id.rl_craftsman);
 		my_craftsman_bottom_ll=(LinearLayout) findViewById(R.id.my_craftsman_bottom_ll);
 		vi_craftsman=findViewById(R.id.vi_craftsman);
+		tv_apply_merchant= (TextView) findViewById(R.id.tv_apply_merchant);
 	}
 
 	@Override
@@ -153,20 +174,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 		my_scroll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 				height));
 		updataview();
-		int user_biaoshi=(Integer) SPUtils.get(mContext, "user_biaoshi", 1);
-		if(1==user_biaoshi){
-			vi_craftsman.setVisibility(View.GONE);
-			rl_craftsman.setVisibility(View.GONE);
-			my_craftsman_bottom_ll.setVisibility(View.GONE);
-		}else if(2==user_biaoshi){
-			vi_craftsman.setVisibility(View.VISIBLE);
-			rl_craftsman.setVisibility(View.VISIBLE);
-			my_craftsman_bottom_ll.setVisibility(View.VISIBLE);
-		}else{
-			vi_craftsman.setVisibility(View.GONE);
-			rl_craftsman.setVisibility(View.GONE);
-			my_craftsman_bottom_ll.setVisibility(View.GONE);
-		}
+
 	}
 
 	@Override
