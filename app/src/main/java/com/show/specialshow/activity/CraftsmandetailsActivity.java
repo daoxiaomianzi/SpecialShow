@@ -242,10 +242,15 @@ public class CraftsmandetailsActivity extends BaseActivity {
 							switch (craftsmanIntroduceMess.getHit()) {
 							case 1:
 								craftsmanIntroduceMess.setHit(0);
+								craftman_details_thumbup.setText("点赞 "+(Integer.valueOf(craftman_details_thumbup.getText()
+										.toString().trim().substring(3))-1));
+
 								UIHelper.leftDrawable(R.drawable.icon_dot_no,mContext,craftsman_details_clickKlike);
 								break;
 							case 0:
 								craftsmanIntroduceMess.setHit(1);
+								craftman_details_thumbup.setText("点赞 "+(Integer.valueOf(craftman_details_thumbup.getText()
+										.toString().trim().substring(3))+1));
 								UIHelper.leftDrawable(R.drawable.icon_dot_ok,mContext,craftsman_details_clickKlike);
 								break;
 
