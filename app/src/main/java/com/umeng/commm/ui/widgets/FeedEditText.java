@@ -78,7 +78,8 @@ public class FeedEditText extends CommentEditText {
     int curTextLength = 0;
     public int mCursorIndex = 0;
 
-    private int mMaxLen = CommConfig.getConfig().mFeedLen;
+//    private int mMaxLen = CommConfig.getConfig().mFeedLen;
+    private int mMaxLen = 100000;
 
     private Context mContext;
 

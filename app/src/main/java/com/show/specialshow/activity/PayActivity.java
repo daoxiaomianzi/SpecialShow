@@ -3,16 +3,14 @@ package com.show.specialshow.activity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.lidroid.xutils.http.RequestParams;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
-import com.show.specialshow.TXApplication;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.PayRadioGroup;
 import com.show.specialshow.view.PayRadioPurified;
 
+//相关控件
 public class PayActivity extends BaseActivity {
-    //相关控件
     private PayRadioGroup genderGroup;
     private TextView pay_confirm;
     private TextView pay_shop_title;

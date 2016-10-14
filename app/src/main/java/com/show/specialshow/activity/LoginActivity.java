@@ -517,7 +517,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
             public void onError(final int code, final String message) {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        UIHelper.ToastMessage(mContext, getString(R.string.Login_failed) + message);
+                        UIHelper.ToastMessage(mContext, getString(R.string.Login_failed));
                         if (dialog != null) {
                             dialog.dismiss();
                         }

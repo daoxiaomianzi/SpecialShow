@@ -205,7 +205,7 @@ public class FeedEditText extends EditText {
     }
 
     /**
-     * 当前的位置{@link textStart}是否在某个话题名or好友名的中间</br>
+     * 当前的位置{@link ／／textStart}是否在某个话题名or好友名的中间</br>
      *
      * @param textStart 当前光标位置
      * @return true，当前光标位置在话题名or好友名的中间；否则返回false

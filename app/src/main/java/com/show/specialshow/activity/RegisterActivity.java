@@ -233,7 +233,7 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
             public void onError(final int code, final String message) {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        UIHelper.ToastMessage(mContext, getString(R.string.Login_failed) + message);
+                        UIHelper.ToastMessage(mContext, getString(R.string.Login_failed));
                         register_register.setEnabled(true);
                     }
                 });

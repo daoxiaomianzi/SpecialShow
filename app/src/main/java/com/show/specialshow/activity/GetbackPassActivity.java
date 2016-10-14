@@ -281,7 +281,7 @@ public class GetbackPassActivity extends BaseActivity {
 			public void onError(final int code, final String message) {
 				runOnUiThread(new Runnable() {
 					public void run() {
-						UIHelper.ToastMessage(mContext, getString(R.string.Login_failed) + message);
+						UIHelper.ToastMessage(mContext, getString(R.string.Login_failed));
 						getback_pass_finish.setEnabled(true);
 					}
 				});
