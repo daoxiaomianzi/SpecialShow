@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/text_size_10px"
+    android:background="@color/white"
+    >
+<RelativeLayout
+    android:paddingBottom="@dimen/text_size_10px"
+    android:paddingLeft="@dimen/text_size_10px"
+    android:id="@+id/rl_activities_img"
+    android:layout_width="140dp"
+    android:layout_height="180dp">
+
+    <ImageView
+        android:src="@drawable/bg_title_shape"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:textSize="@dimen/text_size_30px"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:text="正在进行"
+        android:background="@color/green"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_90px"
+        android:layout_alignParentBottom="true"
+        />
+
+
+</RelativeLayout>
+
+    <LinearLayout
+        android:paddingRight="@dimen/text_size_10px"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/text_size_16px"
+        android:layout_toRightOf="@id/rl_activities_img"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        >
+
+        <TextView
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_30px"
+           style="@style/user_info_tv"
+            android:text="Hanhoo 韩后"
+            />
+
+        <TextView
+            android:singleLine="true"
+            style="@style/user_info_tv"
+            android:text="秋冬季 补水直达肌底满99减10"
+            android:textSize="@dimen/text_size_30px" />
+
+        <TextView
+            android:layout_marginTop="@dimen/text_size_4px"
+            android:textColor="@color/white"
+            android:paddingTop="@dimen/text_size_1px"
+            android:paddingBottom="@dimen/text_size_1px"
+            android:paddingRight="@dimen/text_size_16px"
+            android:paddingLeft="@dimen/text_size_16px"
+            android:text="免费"
+            android:background="@drawable/bg_activities_isfree"
+            style="@style/user_info_tv"
+            />
+        <TextView
+            android:layout_marginTop="@dimen/text_size_4px"
+            android:textColor="@color/color_656565"
+            android:singleLine="true"
+            style="@style/user_info_tv"
+            android:text="时间：2016.10.14-10.26"
+
+            />
+        <TextView
+            android:textColor="@color/color_656565"
+            android:singleLine="true"
+            style="@style/user_info_tv"
+            android:text="地址：赣州市红旗大道29号美丝纺"
+            />
+        <TextView
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textColor="@color/color_656565"
+            style="@style/user_info_tv"
+            android:text="最近朋友圈里流行一个非常好玩的测试，很多妹子都放胆来测，玩的不亦乐乎！刷逼格"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_below="@id/rl_activities_img"
+        android:background="@color/app_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_20px"/>
+
+</RelativeLayout>

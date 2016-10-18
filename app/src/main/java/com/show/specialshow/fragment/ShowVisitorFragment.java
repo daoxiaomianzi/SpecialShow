@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowVisitorFragment extends BaseSearch implements AMapLocationListener{
-	
+
 
 	private List<ShopVisitorListMess> mList = new ArrayList<>();
 	// 相关控件
@@ -234,8 +234,13 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getActivity().unregisterReceiver(mBroadcastReceiver);
-		getActivity().unregisterReceiver(mMainBroadcastReceiver);
+		try{
+			getActivity().unregisterReceiver(mBroadcastReceiver);
+			getActivity().unregisterReceiver(mMainBroadcastReceiver);
+		}catch (Exception e){
+
+		}
+
 		if (null != locationClient) {
 			/**
 			 * 如果AMapLocationClient是在当前Activity实例化的，

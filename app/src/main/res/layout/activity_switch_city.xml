@@ -3,7 +3,8 @@
     android:layout_height="fill_parent"
            android:clipToPadding="true"
     android:fitsSystemWindows="true"
-    android:background="#faF35B81" >
+    android:background="#faF35B81"
+    >
 	
     <RelativeLayout
         android:background="@drawable/bg_title_shape"

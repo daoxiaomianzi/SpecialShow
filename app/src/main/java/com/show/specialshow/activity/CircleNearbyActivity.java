@@ -109,12 +109,12 @@ public class CircleNearbyActivity extends BaseActivity {
                     lp.leftMargin = (int) (offset
                             * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
                             * (TXApplication.WINDOW_WIDTH / 3));
-                }else if(currentIndex==2&&position==2){
+                } else if (currentIndex == 2 && position == 2) {
                     lp.leftMargin = (int) (offset
                             * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
                             * (TXApplication.WINDOW_WIDTH / 3));
-                }else if(currentIndex==2&&position==1){
-                    lp.leftMargin = (int) (-(1-offset)
+                } else if (currentIndex == 2 && position == 1) {
+                    lp.leftMargin = (int) (-(1 - offset)
                             * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
                             * (TXApplication.WINDOW_WIDTH / 3));
                 }

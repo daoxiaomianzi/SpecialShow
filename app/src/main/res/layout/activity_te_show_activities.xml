@@ -1,0 +1,154 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:background="#faF35B81"
+    tools:context=".activity.TeShowActivitiesActivity" >
+    <LinearLayout
+        android:background="@drawable/bg_title_shape"
+
+        android:layout_width="match_parent"
+    android:layout_height="60dp"
+        android:orientation="vertical"
+        android:baselineAligned="false"
+        >
+    <LinearLayout
+android:layout_marginRight="@dimen/height_50"
+        android:id="@+id/nearby_switch_tab_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_marginRight="25dp"
+            android:id="@+id/head_left_tv"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawableLeft="@drawable/icon_arrow_left_white"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:onClick="goBack"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_32px" />
+
+        <LinearLayout
+            android:onClick="onClick"
+            android:id="@+id/te_show_activity_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            >
+
+            <TextView
+                android:onClick="onClick"
+                android:id="@+id/te_show_activity_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="@string/texiu_activity"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_26px" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/te_show_official_event_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:saveEnabled="false" >
+
+            <TextView
+                android:id="@+id/te_show_official_event_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="2dp"
+                android:onClick="onClick"
+                android:text="@string/official_event"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_26px" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:id="@+id/te_show_industry_dynamic_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:saveEnabled="false">
+
+            <TextView
+                android:id="@+id/te_show_industry_dynamic_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="onClick"
+                android:padding="2dp"
+                android:text="@string/industry_dynamic"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_26px" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="75dp"
+
+        android:id="@+id/te_show_line_llt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <ImageView
+
+            android:id="@+id/te_show_line_iv"
+            android:layout_width="70dp"
+            android:layout_height="2dp"
+            android:background="@color/white"
+            android:contentDescription="tab" >
+        </ImageView>
+    </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/te_show_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/app_bg"
+        android:layout_weight="1" >
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

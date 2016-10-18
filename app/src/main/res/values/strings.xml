@@ -515,6 +515,8 @@
     <string name="search_topic">话题搜索</string>
     <string name="select_location">话题搜索</string>
     <string name="follow_topic">话题搜索</string>
+    <string name="official_event">官方赛事</string>
+    <string name="industry_dynamic">行业动态</string>
     <!-- 地图相关-->
     <string name="preference_default_tts_role">xiaoyan</string>
     <string name="preference_key_tts_speed">tts_speed</string>
@@ -522,5 +524,11 @@
     <string name="preference_key_tts_pitch">tts_pitch</string>
     <string name="app_id">输入您讯飞的appid</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
 
 </resources>

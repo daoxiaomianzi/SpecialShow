@@ -127,6 +127,8 @@
     <color name="grgray">#686868</color>
     <color name="gary">#898989</color>
     <color name="darkgrey"> #C0C0C0</color>
+    <color name="color_00">#8A000000</color>
+    <color name="green">#10a209</color>
 
 
 </resources>
