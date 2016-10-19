@@ -71,6 +71,7 @@ public class CircleNearbyActivity extends BaseActivity {
     public void fillView() {
         nearby_page_vp.setAdapter(mAdapter);
         nearby_page_vp.setCurrentItem(0);
+        nearby_page_vp.setOffscreenPageLimit(2);
         resetTextView(0);
     }
 

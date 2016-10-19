@@ -179,6 +179,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 
 	@Override
 	public void goBack(View v) {
+		UIHelper.startActivity(mContext,SignInActivity.class);
 	}
 
 	@Override

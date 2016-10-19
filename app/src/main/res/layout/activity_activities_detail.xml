@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_activities_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="activity.ActivitiesDetailActivity">
+    <include
+        android:id="@+id/activities_detail_head"
+        layout="@layout/view_common_head"
+        />
+    <ScrollView
+        android:layout_below="@id/activities_detail_head"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/item_te_show_activities"
+            />
+        <WebView
+            android:id="@+id/wv_activities_details_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+    </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/tv_activities_detail_sign_up"
+        android:onClick="onClick"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_send_selector"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:gravity="center"
+        android:text="@string/sign_up"
+        android:textSize="@dimen/text_size_30px"
+        />
+
+
+
+
+</RelativeLayout>

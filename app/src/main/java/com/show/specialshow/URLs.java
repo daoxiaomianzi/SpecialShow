@@ -238,5 +238,13 @@ public interface URLs {
 	 * qq,weixin第三方登陆接口
 	 */
 	String QQ_LOGIN=BASE_URL+"/Qq/login";
+	/**
+	 * 签到页
+	 */
+	String SIGN_IN=BASE_IMAGE_URL+"index.php?g=User&m=Sign&a=index&uid=";
+	/**
+	 * 特秀活动，官方赛事，行业动态数据
+	 */
+	String POSTS_POSTSLIST=BASE_URL+"/Posts/postslist";
 }
 

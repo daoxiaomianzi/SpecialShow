@@ -83,7 +83,10 @@ public class BaseWebActivity extends BaseActivity {
 			@Override
 			public boolean onJsAlert(WebView view, String url, String message,
 					JsResult result) {
-				return super.onJsAlert(view, url, message, result);
+				//				return super.onJsAlert(view, url, message, result);
+				createAffirmDialog(message, DIALOG_SINGLE_STPE,true);
+				result.confirm();
+				return true;
 			}
 		});
 		content.setWebViewClient(new WebViewClient() {

@@ -12,9 +12,11 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -173,12 +175,14 @@ public abstract class BaseActivity extends FragmentActivity {
 		content_ll.setLayoutParams(params);
 		confirm_dialog_content_tv.setLayoutParams(params);
 		affirmDialog.setContentView(view);
+
 		affirmDialog.setCancelable(isCancel);
 		affirmDialog.show();
 	}
 
 	public void createAffirmDialog(String content, int dialogStyle,boolean isCancel) {
 		affirmDialog = new Dialog(mContext, R.style.Theme_dialog);
+
 		LayoutInflater inflater = LayoutInflater.from(mContext);
 		View view = inflater.inflate(R.layout.view_contest_dialog, null);
 		View content_ll = view.findViewById(R.id.content_ll);

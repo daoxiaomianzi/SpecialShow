@@ -858,7 +858,14 @@
         <activity android:name=".activity.OfferPayActivity" />
         <activity android:name=".activity.PerfectDataActivity" />
         <activity android:name=".activity.PayActivity" />
-        <activity android:name=".activity.TeShowActivitiesActivity"></activity>
+        <activity android:name=".activity.TeShowActivitiesActivity" />
+        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.ActivitiesDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            >
+
+        </activity>
     </application>
 
 </manifest>

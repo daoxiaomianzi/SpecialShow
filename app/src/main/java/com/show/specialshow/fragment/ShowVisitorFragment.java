@@ -173,18 +173,14 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 							// changeListView(0);
 							ShowVisitorList showVisitorList = ShowVisitorList
 									.parse(result.getData());
-							if(null==showVisitorList){
+							List<ShopVisitorListMess> list = showVisitorList
+									.getList();
+							if(null==showVisitorList||null == list){
 								changeListView(0);
 								search_result_lv.setVisibility(View.VISIBLE);
 								show_visitor_nodata_tv
 										.setVisibility(View.VISIBLE);
 								search_result_lv.setPullLoadEnable(false);
-								return;
-							}
-							List<ShopVisitorListMess> list = showVisitorList
-									.getList();
-							if (null == list) {
-								changeListView(0);
 								return;
 							}
 							int size = list.size();

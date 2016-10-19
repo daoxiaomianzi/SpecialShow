@@ -104,4 +104,5 @@ dependencies {
     compile files('libs/Msc.jar')
     compile 'com.google.zxing:core:3.2.1'
     compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.3'
 }

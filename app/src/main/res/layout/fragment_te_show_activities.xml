@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="暂无赛事"
+                android:text="暂无活动"
+                android:textSize="@dimen/text_size_30px"
                 android:textColor="@color/color_656565" />
         </RelativeLayout>
     </FrameLayout>

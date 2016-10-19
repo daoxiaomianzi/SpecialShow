@@ -111,13 +111,9 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                     // changeListView(0);
                     ShowVisitorList showVisitorList = ShowVisitorList
                             .parse(result.getData());
-                    if(null==showVisitorList){
-                        changeListView(0);
-                        return;
-                    }
                     List<ShopVisitorListMess> list = showVisitorList
                             .getList();
-                    if (null == list) {
+                    if (null==showVisitorList||null == list) {
                         changeListView(0);
                         search_result_lv.setVisibility(View.VISIBLE);
                         craftsman_nodata_tv

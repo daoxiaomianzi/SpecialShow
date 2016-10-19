@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingTop="@dimen/text_size_26px"
+    android:paddingBottom="@dimen/text_size_26px"
+    android:paddingLeft="@dimen/text_size_36px"
+    android:paddingRight="@dimen/text_size_36px"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:paddingLeft="@dimen/text_size_26px">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/user_info_tv"
+            android:layout_centerVertical="true"
+            android:text="@string/name" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_10px"
+            android:layout_toRightOf="@id/name"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:inputType="numberDecimal"
+            android:paddingRight="@dimen/text_size_16px"
+            android:singleLine="true"
+            android:textColorHint="@color/color_aaaaaa"
+            android:textSize="@dimen/text_size_26px" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/umeng_comm_d2">
+
+    </View>
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/text_size_10px"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:paddingLeft="@dimen/text_size_26px">
+
+        <TextView
+            android:id="@+id/iphone"
+            style="@style/user_info_tv"
+            android:layout_centerVertical="true"
+            android:text="@string/iphone" />
+
+        <EditText
+            android:id="@+id/et_iphone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_10px"
+            android:layout_toRightOf="@id/iphone"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:inputType="numberDecimal"
+            android:paddingRight="@dimen/text_size_16px"
+            android:singleLine="true"
+            android:textColorHint="@color/color_aaaaaa"
+            android:textSize="@dimen/text_size_26px" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/umeng_comm_d2">
+
+    </View>
+    <TextView
+
+        android:layout_marginTop="@dimen/text_size_68px"
+        android:text="@string/apply_sign_up"
+        android:background="@drawable/bg_sign_up"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px" />
+
+
+</LinearLayout>

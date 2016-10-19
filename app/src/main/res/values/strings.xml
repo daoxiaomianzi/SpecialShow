@@ -99,7 +99,7 @@
     <string name="title_activity_upload_work">UploadWorkActivity</string>
     <string name="title_activity_gallery_work">GalleryWorkActivity</string>
     <string name="net_work_error">网络连接错误，请重试！</string>
-    <string name="net_server_error">获取服务器数据失败,请重试!</string>
+    <string name="net_server_error">获取数据失败,请重试!</string>
     <string name="no_data_search">没有搜索到相关秀坊</string>
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
@@ -129,6 +129,7 @@
     <string name="collection">收藏</string>
     <string name="address">地址:</string>
     <string name="phone">电话:</string>
+    <string name="iphone">手机:</string>
     <string name="opening_time">营业时间:</string>
     <string name="monetary">消费总额</string>
     <string name="consume_tips">消费提示</string>
@@ -530,5 +531,8 @@
     <string name="list_footer_loading">正在加载中…</string>
     <string name="list_footer_network_error">点击重新加载</string>
     <string name="list_footer_end">已经到底了</string>
+    <string name="sign_up">报名</string>
+    <string name="apply_sign_up">提交报名</string>
+
 
 </resources>

@@ -73,6 +73,7 @@ public class TeShowActivitiesActivity extends BaseActivity {
     public void fillView() {
         te_show_vp.setAdapter(mAdapter);
         te_show_vp.setCurrentItem(0);
+        te_show_vp.setOffscreenPageLimit(2);
         resetTextView(0);
     }
 

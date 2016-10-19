@@ -25,6 +25,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="暂无动态"
+                android:textSize="@dimen/text_size_30px"
                 android:textColor="@color/color_656565" />
         </RelativeLayout>
     </FrameLayout>

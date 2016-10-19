@@ -18,6 +18,7 @@
             android:layout_height="match_parent" >
 
             <TextView
+                android:textSize="@dimen/text_size_30px"
                 android:id="@+id/official_event_nodata_tv"
                 android:visibility="gone"
                 android:layout_width="wrap_content"

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
 import com.show.specialshow.model.TeShowActivitiesMess;
 
@@ -44,14 +46,18 @@ public class OfficialEventAdapter extends BaseAdapter {
         if(null==convertView){
             viewHolder=new ViewHolder();
             convertView=View.inflate(mContext, R.layout.item_official_event,null);
+            viewHolder.iv_official_event= (ImageView)
+                    convertView.findViewById(R.id.iv_official_event);
             convertView.setTag(viewHolder);
         }else{
             viewHolder= (ViewHolder) convertView.getTag();
         }
+        ImageLoader.getInstance().displayImage(mList.get(position).getPost_smeta(),
+                viewHolder.iv_official_event);
         return convertView;
     }
 
     class ViewHolder{
-
+        ImageView iv_official_event;
     }
 }

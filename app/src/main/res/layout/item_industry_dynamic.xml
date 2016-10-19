@@ -13,6 +13,8 @@
         android:layout_height="120dp">
 
         <ImageView
+            android:id="@+id/iv_item_industry_dynamic_img"
+            android:scaleType="fitXY"
             android:src="@drawable/bg_title_shape"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -31,6 +33,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_item_industry_dynamic_title"
             android:singleLine="true"
             android:textSize="@dimen/text_size_30px"
             style="@style/user_info_tv"
@@ -38,6 +41,7 @@
             />
 
         <TextView
+            android:id="@+id/tv_item_industry_dynamic_intro"
             android:textColor="@color/color_656565"
             android:maxLines="5"
             android:ellipsize="end"
