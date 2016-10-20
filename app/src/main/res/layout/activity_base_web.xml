@@ -1,23 +1,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BaseShakeWebActivity" >
+    android:layout_height="match_parent">
 
-  <include
+    <include
         android:id="@+id/web_head"
         layout="@layout/view_common_head" />
-  
-  <ImageView
+
+    <ImageView
         style="@style/split_iv_horizontal"
         android:layout_below="@+id/web_head" />
 
     <include
+        layout="@layout/view_source_detail_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/web_head"
-        android:layout_marginBottom="1dp"
-        layout="@layout/view_source_detail_content" />
+        android:layout_marginBottom="1dp" />
 
     <ProgressBar
         android:id="@+id/detail_load_progress_sb"

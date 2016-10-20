@@ -2,7 +2,6 @@ package com.show.specialshow.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.opengl.EGLDisplay;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,8 +12,12 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.model.TeShowActivitiesMess;
@@ -24,6 +27,22 @@ public class ActivitiesDetailActivity extends BaseActivity {
     //相关控件
     private WebView content;
     private TextView tv_activities_detail_sign_up;
+    @ViewInject(R.id.iv_item_activities_img)
+    private ImageView iv_activities_detail_img;
+    @ViewInject(R.id.tv_item_activities_progress)
+    TextView tv_detail_activities_progress;//活动状态
+    @ViewInject(R.id.tv_item_activities_title)
+    TextView tv_detail_activities_title;//标题
+    @ViewInject(R.id.tv_item_activities_slogan)
+    TextView tv_detail_activities_slogan;//副标题
+    @ViewInject(R.id.tv_item_activities_is_free)
+    TextView tv_detail_activities_is_free;//收费价格
+    @ViewInject(R.id.tv_item_activities_time)
+    TextView tv_detail_activities_time;//时间
+    @ViewInject(R.id.tv_item_activities_address)
+    TextView tv_detail_activities_address;//地点
+    @ViewInject(R.id.tv_item_activities_excerpt)
+    TextView tv_detail_activities_excerpt;//活动简介
     //数据
     private String html;
     private TeShowActivitiesMess activitiesMess;//活动信息
@@ -38,6 +57,7 @@ public class ActivitiesDetailActivity extends BaseActivity {
             html=activitiesMess.getPost_content();
         }
         setContentView(R.layout.activity_activities_detail);
+        ViewUtils.inject(mContext);
     }
 
     @Override
@@ -51,8 +71,25 @@ public class ActivitiesDetailActivity extends BaseActivity {
 
     @Override
     public void fillView() {
-
         head_title_tv.setText("详情");
+        if(activitiesMess.isPost_isprogress()){
+            tv_detail_activities_progress.setText("正在进行");
+        }else{
+            tv_activities_detail_sign_up.setVisibility(View.GONE);
+            tv_detail_activities_progress.setText("已结束");
+            tv_detail_activities_progress.setBackgroundResource(R.color.gray);
+        }
+        ImageLoader.getInstance().displayImage(activitiesMess.getPost_smeta(),iv_activities_detail_img);
+        tv_detail_activities_title.setText(activitiesMess.getPost_title());
+        tv_detail_activities_slogan.setText(activitiesMess.getPost_slogan());
+        if (0==activitiesMess.getPost_expense()) {
+            tv_detail_activities_is_free.setText("免费");
+        }else{
+            tv_detail_activities_is_free.setText(activitiesMess.getPost_expense()+"元");
+        }
+        tv_detail_activities_time.setText(activitiesMess.getPost_active_time());
+        tv_detail_activities_address.setText(activitiesMess.getPost_place());
+        tv_detail_activities_excerpt.setText(activitiesMess.getPost_excerpt());
         loadNativeDetail();
     }
 
@@ -82,7 +119,7 @@ public class ActivitiesDetailActivity extends BaseActivity {
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
         } else if (scale == 160) {
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-        } else {
+        } else if(scale==120){
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
         }
 
@@ -100,8 +137,12 @@ public class ActivitiesDetailActivity extends BaseActivity {
         } else {
             content.setInitialScale(100);
         }
+
         content.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         content.setHorizontalScrollBarEnabled(false);
+        content.getSettings().setDomStorageEnabled(true);
+//        content.getSettings().setUseWideViewPort(true);
+//        content.getSettings().setLoadWithOverviewMode(true);
         content.getSettings().setSupportZoom(false);
         content.getSettings().setBuiltInZoomControls(false);
         content.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);

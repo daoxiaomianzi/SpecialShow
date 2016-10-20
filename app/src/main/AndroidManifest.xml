@@ -860,12 +860,11 @@
         <activity android:name=".activity.PayActivity" />
         <activity android:name=".activity.TeShowActivitiesActivity" />
         <activity android:name=".activity.SignInActivity" />
-        <activity android:name=".activity.ActivitiesDetailActivity"
+        <activity
+            android:name=".activity.ActivitiesDetailActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            >
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".activity.OfficialEventAndDynamicActivity"></activity>
     </application>
 
 </manifest>

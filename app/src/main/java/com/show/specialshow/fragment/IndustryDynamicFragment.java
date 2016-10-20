@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.exception.HttpException;
@@ -14,8 +15,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.OfficialEventAndDynamicActivity;
 import com.show.specialshow.adapter.IndustryDynamicAdapter;
-import com.show.specialshow.adapter.TeShowActAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.TeShowActivitiesList;
@@ -147,7 +148,14 @@ public class IndustryDynamicFragment extends BaseSearch {
 
     @Override
     public void setListener() {
-
+        search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("event_dynamic",mList.get(position-1));
+                UIHelper.startActivity(getActivity(), OfficialEventAndDynamicActivity.class,bundle);
+            }
+        });
     }
 
     @Override
