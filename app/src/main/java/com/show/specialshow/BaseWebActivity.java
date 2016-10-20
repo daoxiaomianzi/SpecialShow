@@ -122,7 +122,9 @@ public class BaseWebActivity extends BaseActivity {
 	}
 
 	protected void hideLoadingDialog() {
-		dialog.dismiss();
+		if(null!=dialog){
+			dialog.dismiss();
+		}
 	}
 
 	private void showLoadingDialog(String info) {

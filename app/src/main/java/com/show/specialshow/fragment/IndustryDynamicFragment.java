@@ -21,6 +21,7 @@ import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.TeShowActivitiesList;
 import com.show.specialshow.model.TeShowActivitiesMess;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DensityUtil;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
@@ -33,6 +34,7 @@ public class IndustryDynamicFragment extends BaseSearch {
 
 
     private TextView industry_dynamic_nodata_tv;
+
     public static IndustryDynamicFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -47,7 +49,7 @@ public class IndustryDynamicFragment extends BaseSearch {
         View view;
         view = inflater.inflate(R.layout.fragment_indusyry_dynamic, container,
                 false);
-        search_result_lv= (XListView) view.findViewById(R.id.search_result_lv);
+        search_result_lv = (XListView) view.findViewById(R.id.search_result_lv);
 
         return view;
     }
@@ -55,34 +57,34 @@ public class IndustryDynamicFragment extends BaseSearch {
     @Override
     protected void getData() {
         RequestParams params = TXApplication.getParams();
-        String url= URLs.POSTS_POSTSLIST;
-        params.addBodyParameter("term_id","3");
-        params.addBodyParameter("pageSize", ConstantValue.PAGE_SIZE+"");
-        params.addBodyParameter("pageNow",pageIndex+"");
+        String url = URLs.POSTS_POSTSLIST;
+        params.addBodyParameter("term_id", "3");
+        params.addBodyParameter("pageSize", ConstantValue.PAGE_SIZE + "");
+        params.addBodyParameter("pageNow", pageIndex + "");
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
             public void onStart() {
-                loadIng("加载中....",true);
+                loadIng("加载中....", true);
             }
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
-                MessageResult result=MessageResult.parse(responseInfo.result);
-                if (null==result) {
+                MessageResult result = MessageResult.parse(responseInfo.result);
+                if (null == result) {
 
                     onError(getResources().getString(R.string.net_server_error));
                     return;
                 }
-                if(1==result.getSuccess()){
-                    if(null!=dialog){
+                if (1 == result.getSuccess()) {
+                    if (null != dialog) {
                         dialog.dismiss();
                     }
-                    TeShowActivitiesList teShowActivitiesList=TeShowActivitiesList.parse(result.getData());
-                    List<TeShowActivitiesMess> list=teShowActivitiesList.getList();
-                    if (null==teShowActivitiesList||null==list) {
+                    TeShowActivitiesList teShowActivitiesList = TeShowActivitiesList.parse(result.getData());
+                    List<TeShowActivitiesMess> list = teShowActivitiesList.getList();
+                    if (null == teShowActivitiesList || null == list) {
                         changeListView(0);
                         search_result_lv.setVisibility(View.VISIBLE);
                         industry_dynamic_nodata_tv.setVisibility(View.VISIBLE);
@@ -90,14 +92,14 @@ public class IndustryDynamicFragment extends BaseSearch {
                         return;
                     }
                     int size = list.size();
-                    totalRecord=teShowActivitiesList.getTotal();
-                    if (search_result_lv.getState()== XListView.LOAD_REFRESH) {
+                    totalRecord = teShowActivitiesList.getTotal();
+                    if (search_result_lv.getState() == XListView.LOAD_REFRESH) {
                         mList.clear();
                     }
                     mList.addAll(list);
-                    for(int i = mList.size() - 1; i > 0; i--) {
-                        for(int j = i - 1; j >= 0; j--) {
-                            if(mList.get(j).getPost_id()==mList.get(i).getPost_id()) {
+                    for (int i = mList.size() - 1; i > 0; i--) {
+                        for (int j = i - 1; j >= 0; j--) {
+                            if (mList.get(j).getPost_id() == mList.get(i).getPost_id()) {
                                 mList.remove(j);
                                 break;
                             }
@@ -115,7 +117,7 @@ public class IndustryDynamicFragment extends BaseSearch {
                     }
                     localRecord = mList.size();
                     changeListView(size);
-                }else{
+                } else {
                     changeListView(0);
                     UIHelper.ToastMessage(mContext, result.getMessage());
                 }
@@ -124,7 +126,7 @@ public class IndustryDynamicFragment extends BaseSearch {
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
                 onError(getResources().getString(R.string.net_work_error));
@@ -134,16 +136,16 @@ public class IndustryDynamicFragment extends BaseSearch {
 
     @Override
     public void initData() {
-        industry_dynamic_nodata_tv= (TextView) findViewById(R.id.industry_dynamic_nodata_tv);
-        adapter=new IndustryDynamicAdapter(mContext,mList);
+        industry_dynamic_nodata_tv = (TextView) findViewById(R.id.industry_dynamic_nodata_tv);
+        adapter = new IndustryDynamicAdapter(mContext, mList);
     }
 
     @Override
     public void initView() {
-            initListView();
-            search_result_lv.setDividerHeight(DensityUtil.dip2px(mContext,12));
-            search_result_lv.setBackgroundResource(R.color.app_bg);
-            search_result_lv.setPullLoadEnable(false);
+        initListView();
+        search_result_lv.setDividerHeight(DensityUtil.dip2px(mContext, 12));
+        search_result_lv.setBackgroundResource(R.color.app_bg);
+        search_result_lv.setPullLoadEnable(false);
     }
 
     @Override
@@ -151,9 +153,12 @@ public class IndustryDynamicFragment extends BaseSearch {
         search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("event_dynamic",mList.get(position-1));
-                UIHelper.startActivity(getActivity(), OfficialEventAndDynamicActivity.class,bundle);
+                bundle.putSerializable("event_dynamic", mList.get(position - 1));
+                UIHelper.startActivity(getActivity(), OfficialEventAndDynamicActivity.class, bundle);
             }
         });
     }

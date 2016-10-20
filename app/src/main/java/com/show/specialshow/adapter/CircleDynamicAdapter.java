@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.ArticleWebActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.activity.DynamicImagePagerActivity;
 import com.show.specialshow.activity.LoginActivity;
@@ -202,6 +203,12 @@ public class CircleDynamicAdapter extends BaseAdapter {
             holders[type].relation_me.setVisibility(View.VISIBLE);
             holders[type].relation_me.setText(SmileUtils.getSmiledText(mContext, item.getStatus_content()));
         }
+        if (StringUtils.isEmpty(item.getStatus_urlname())) {
+            holders[type].url_title.setVisibility(View.GONE);
+        } else {
+            holders[type].url_title.setVisibility(View.VISIBLE);
+            holders[type].url_title.setText(item.getStatus_urlname());
+        }
         holders[type].comment_count.setText(item.getStatus_comment() + "");
         holders[type].thumbs_count.setText(item.getStatus_favor() + "");
         if (null == ShopListTagsMess.parse(item.getTags()) || ShopListTagsMess.parse(item.getTags()).size() == 0) {
@@ -218,7 +225,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
         listener = new OnItemViewClickListener(holders[type]);
         holders[type].attention.setOnClickListener(listener);
         holders[type].item.setOnClickListener(listener);
-        holders[type].url.setOnClickListener(listener);
+        holders[type].url_title.setOnClickListener(listener);
         holders[type].thumbs_count_ll.setOnClickListener(listener);
         holders[type].comment_count_ll.setOnClickListener(listener);
         holders[type].portrait.setOnClickListener(listener);
@@ -294,7 +301,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 .findViewById(R.id.dynamic_type_other_picture_describe_tv);
         holder.relation_me = (TextView) convertView
                 .findViewById(R.id.dynamic_type_other_picture_relation_me_tv);
-        holder.url = (TextView) convertView.findViewById(R.id.dynamic_type_other_picture_url_tv);
+        holder.url_title = (TextView) convertView.findViewById(R.id.dynamic_type_other_picture_url_tv);
         holder.thumbs_count = (TextView) convertView
                 .findViewById(R.id.dynamic_type_other_picture_thumbs_count_tv);
         holder.comment_count = (TextView) convertView
@@ -328,7 +335,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 .findViewById(R.id.dynamic_type_two_picture_describe_tv);
         holder.relation_me = (TextView) convertView
                 .findViewById(R.id.dynamic_type_two_picture_relation_me_tv);
-        holder.url = (TextView) convertView.findViewById(R.id.dynamic_type_two_picture_url_tv);
+        holder.url_title = (TextView) convertView.findViewById(R.id.dynamic_type_two_picture_url_tv);
         holder.thumbs_count = (TextView) convertView
                 .findViewById(R.id.dynamic_type_two_picture_thumbs_count_tv);
         holder.comment_count = (TextView) convertView
@@ -364,7 +371,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 .findViewById(R.id.dynamic_type_one_picture_describe_tv);
         holder.relation_me = (TextView) convertView
                 .findViewById(R.id.dynamic_type_one_picture_relation_me_tv);
-        holder.url = (TextView) convertView.findViewById(R.id.dynamic_type_one_picture_url_tv);
+        holder.url_title = (TextView) convertView.findViewById(R.id.dynamic_type_one_picture_url_tv);
         holder.thumbs_count = (TextView) convertView
                 .findViewById(R.id.dynamic_type_one_picture_thumbs_count_tv);
         holder.comment_count = (TextView) convertView
@@ -398,7 +405,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 .findViewById(R.id.dynamic_type_just_text_describe_tv);
         holder.relation_me = (TextView) convertView
                 .findViewById(R.id.dynamic_type_just_text_relation_me_tv);
-        holder.url = (TextView) convertView.findViewById(R.id.dynamic_type_just_text_url_tv);
+        holder.url_title = (TextView) convertView.findViewById(R.id.dynamic_type_just_text_url_tv);
         holder.thumbs_count = (TextView) convertView
                 .findViewById(R.id.dynamic_type_just_text_thumbs_count_tv);
         holder.comment_count = (TextView) convertView
@@ -539,7 +546,8 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 case R.id.dynamic_type_one_picture_url_tv:
                 case R.id.dynamic_type_two_picture_url_tv:
                 case R.id.dynamic_type_other_picture_url_tv:
-                    UIHelper.ToastMessage(mContext,"这是一个链接");
+                    bundle.putString("status_url", mList.get(holder.getPosition()).getStatus_url());
+                    UIHelper.startActivity((Activity) mContext, ArticleWebActivity.class,bundle);
                     break;
                 default:
                     break;
@@ -571,7 +579,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
         protected TextView label;
         protected TextView describe;
         protected TextView relation_me;
-        protected TextView url;
+        protected TextView url_title;
         protected TextView thumbs_count;
         protected TextView comment_count;
         protected TextView user_shop_tv;

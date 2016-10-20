@@ -864,7 +864,8 @@
             android:name=".activity.ActivitiesDetailActivity"
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".activity.OfficialEventAndDynamicActivity"></activity>
+        <activity android:name=".activity.OfficialEventAndDynamicActivity" />
+        <activity android:name=".activity.ArticleWebActivity"></activity>
     </application>
 
 </manifest>

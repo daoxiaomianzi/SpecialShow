@@ -17,6 +17,7 @@ import com.show.specialshow.fragment.OfficialEventFragment;
 import com.show.specialshow.fragment.ShowLaneFragment;
 import com.show.specialshow.fragment.ShowVisitorFragment;
 import com.show.specialshow.fragment.TeShowActivitiesFragment;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DensityUtil;
 
 import java.util.ArrayList;
@@ -168,6 +169,9 @@ public class TeShowActivitiesActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        if(!BtnUtils.getInstance().isFastDoubleClick()){
+            return;
+        }
         switch (v.getId()) {
             case R.id.te_show_activity_tv:
                 te_show_vp.setCurrentItem(0);

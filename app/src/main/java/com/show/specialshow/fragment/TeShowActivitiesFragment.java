@@ -20,6 +20,7 @@ import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.TeShowActivitiesList;
 import com.show.specialshow.model.TeShowActivitiesMess;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
 
@@ -77,6 +78,9 @@ public class TeShowActivitiesFragment extends BaseSearch {
         search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(!BtnUtils.getInstance().isFastDoubleClick()){
+                    return;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("activities_data",mList.get(position-1));
                 UIHelper.startActivity(getActivity(), ActivitiesDetailActivity.class,bundle);

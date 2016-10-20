@@ -2,6 +2,7 @@ package com.show.specialshow.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,7 +21,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
 import com.show.specialshow.model.TeShowActivitiesMess;
+import com.show.specialshow.utils.BtnUtils;
+import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.SignUpDialog;
 
 public class ActivitiesDetailActivity extends BaseActivity {
@@ -100,10 +104,21 @@ public class ActivitiesDetailActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        if(!BtnUtils.getInstance().isFastDoubleClick()){
+            return;
+        }
         switch (v.getId()){
             case R.id.tv_activities_detail_sign_up://报名
-                SignUpDialog signUpDialog = new SignUpDialog(et_name,mContext,et_iphone);
-                signUpDialog.signUpDialog();
+                if(TXApplication.login){
+                    SignUpDialog signUpDialog = new SignUpDialog(et_name,mContext,et_iphone);
+                    signUpDialog.signUpDialog();
+                }else{
+                    UIHelper.ToastMessage(mContext,"请先登录");
+                    Bundle bundle =new Bundle();
+                    bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext,LoginActivity.class,bundle);
+                }
+
                 break;
         }
     }

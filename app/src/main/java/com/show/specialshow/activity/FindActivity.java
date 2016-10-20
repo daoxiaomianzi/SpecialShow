@@ -9,6 +9,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.fragment.TeShowActivitiesFragment;
 import com.show.specialshow.model.UserMessage;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.CommunitySDK;
@@ -49,6 +50,9 @@ public class FindActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        if(!BtnUtils.getInstance().isFastDoubleClick()){
+            return;
+        }
         switch (v.getId()) {
             case R.id.rll_texiu_community://特秀社区
                 if (TXApplication.login) {
