@@ -18,6 +18,15 @@ public class TeShowActivitiesMess implements Serializable {
     private boolean post_isprogress;
     private String post_active_time;
     private String post_place;
+    private int isEnter;//1:已报名，0：未报名
+
+    public int getIsEnter() {
+        return isEnter;
+    }
+
+    public void setIsEnter(int isEnter) {
+        this.isEnter = isEnter;
+    }
 
     public String getPost_content() {
         return post_content;

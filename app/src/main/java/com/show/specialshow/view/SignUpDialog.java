@@ -20,23 +20,28 @@ import com.show.specialshow.utils.DensityUtil;
  * Created by xuyong on 2016/10/19.
  */
 
-public class SignUpDialog {
-    private EditText et_name;
-    private EditText et_iphoen;
-    private Context context;
+public class SignUpDialog extends Dialog{
 
-    public SignUpDialog(EditText et_name, Context context, EditText et_iphoen) {
-        this.et_name = et_name;
-        this.context = context;
-        this.et_iphoen = et_iphoen;
+    private Context context;
+    private Dialog dialog;
+
+    public Dialog getDialog() {
+        return dialog;
     }
 
-    public void signUpDialog(){
-        final Dialog dialog=new Dialog(context,R.style.Theme_dialog);
+    public void setDialog(Dialog dialog) {
+        this.dialog = dialog;
+    }
+
+    public SignUpDialog(Context context) {
+        super(context);
+        this.context = context;
+    }
+
+    public View signUpDialog(){
+        dialog=new Dialog(context,R.style.Theme_dialog);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.view_dialog_sign_up, null);
-        et_name= (EditText) view.findViewById(R.id.et_name);
-        et_iphoen =(EditText) view.findViewById(R.id.et_iphone);
         dialog.setContentView(view);
                 Window dialogWindow = dialog.getWindow();
         dialogWindow.setGravity(Gravity.CENTER|Gravity.BOTTOM);
@@ -49,7 +54,7 @@ public class SignUpDialog {
         dialogWindow.setAttributes(lp);
         dialog.setCancelable(true);
         dialog.show();
-
+        return view;
     }
 
 }

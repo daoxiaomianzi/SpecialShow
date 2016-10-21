@@ -246,5 +246,9 @@ public interface URLs {
 	 * 特秀活动，官方赛事，行业动态数据
 	 */
 	String POSTS_POSTSLIST=BASE_URL+"/Posts/postslist";
+	/**
+	 * 提交活动报名
+	 */
+	String POSTS_ENTER=BASE_URL+"/Posts/enter";
 }
 

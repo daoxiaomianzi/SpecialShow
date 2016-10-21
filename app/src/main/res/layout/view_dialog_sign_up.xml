@@ -30,7 +30,6 @@
             android:layout_toRightOf="@id/name"
             android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:inputType="numberDecimal"
             android:paddingRight="@dimen/text_size_16px"
             android:singleLine="true"
             android:textColorHint="@color/color_aaaaaa"
@@ -65,7 +64,7 @@
             android:layout_toRightOf="@id/iphone"
             android:background="@color/transparent"
             android:gravity="center_vertical"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:paddingRight="@dimen/text_size_16px"
             android:singleLine="true"
             android:textColorHint="@color/color_aaaaaa"
@@ -79,7 +78,8 @@
 
     </View>
     <TextView
-
+        android:id="@+id/apply_sign_up"
+        android:onClick="onClick"
         android:layout_marginTop="@dimen/text_size_68px"
         android:text="@string/apply_sign_up"
         android:background="@drawable/bg_sign_up"
