@@ -866,6 +866,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.OfficialEventAndDynamicActivity" />
         <activity android:name=".activity.ArticleWebActivity"></activity>
+        <activity android:name=".activity.SetTradingPasswordActivity"></activity>
     </application>
 
 </manifest>

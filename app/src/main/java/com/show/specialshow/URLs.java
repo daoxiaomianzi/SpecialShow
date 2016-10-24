@@ -250,5 +250,9 @@ public interface URLs {
 	 * 提交活动报名
 	 */
 	String POSTS_ENTER=BASE_URL+"/Posts/enter";
+	/**
+	 * 设置支付密码
+	 */
+	String LOGIN_SETPINPASS=BASE_URL+"/Login/setpinpass";
 }
 

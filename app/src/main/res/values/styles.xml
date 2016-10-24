@@ -120,7 +120,13 @@
         <item name="android:layout_marginRight">@dimen/text_size_68px</item>
         <item name="android:background">@color/color_999999</item>
     </style>
-
+    <style name="line_view1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">@dimen/text_size_32px</item>
+        <item name="android:layout_marginRight">@dimen/text_size_68px</item>
+        <item name="android:background">@color/color_F47183</item>
+    </style>
     <style name="MyCheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_selector</item>
     </style>

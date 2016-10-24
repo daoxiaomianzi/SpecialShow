@@ -60,7 +60,8 @@ public class TXApplication extends MultiDexApplication {
 	private WindowManager.LayoutParams wmParams = new WindowManager.LayoutParams();
 	public static boolean isShowToast = true;
 	public static boolean login = false; // 登录状态
-	
+	public static boolean setTradingpassword = false;// 是否设置过交易密码
+
 	public static Context applicationContext;
 	public static DemoHXSDKHelper hxSDKHelper = new DemoHXSDKHelper();
 	
@@ -320,6 +321,8 @@ public class TXApplication extends MultiDexApplication {
 	 */
 	private void initState() {
 		login=(Boolean) SPUtils.get(getApplicationContext(), "loginSuccess", false);
+		setTradingpassword = (Boolean) SPUtils.get(getApplicationContext(),
+				"setTradingSuccess", false);
 	}
 	// 获取手机的设备号
 	public String getDeviceId(Context context) {
@@ -345,7 +348,9 @@ public class TXApplication extends MultiDexApplication {
 		filename.edit().putBoolean("loginSuccess", user.isLogin()).commit();
 		filename.edit().putInt("user_biaoshi", user.getUser_biaoshi()).commit();
 		filename.edit().putBoolean("ichange",user.isIchange()).commit();
+		filename.edit().putBoolean("setTradingSuccess",user.isSetTradingPass()).commit();
 		login=true;
+		setTradingpassword=user.isSetTradingPass();
 	}
 	/**
 	 * 获取用户信息
@@ -359,6 +364,7 @@ public class TXApplication extends MultiDexApplication {
 		user.setLogin(filename.getBoolean("loginSuccess", false));
 		user.setUser_biaoshi(filename.getInt("user_biaoshi", 1));
 		user.setIchange(filename.getBoolean("ichange",true));
+		user.setSetTradingPass(filename.getBoolean("setTradingSuccess",false));
 		return user;
 	}
 	/**
@@ -367,6 +373,7 @@ public class TXApplication extends MultiDexApplication {
 	public static void quitLogin(){
 		filename.edit().clear().commit();
 		login=false;
+		setTradingpassword=false;
 	}
 
 	@Override
