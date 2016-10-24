@@ -22,6 +22,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
+import com.show.specialshow.activity.ShowerDetailsActivity;
 import com.show.specialshow.adapter.CraftsmanAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
@@ -73,7 +74,6 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         mLon=aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
-        registerBoradcastReceiver();
         search_result_lv.setPullLoadEnable(true);
     }
 
@@ -190,8 +190,26 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void fillView() {
-
+        registerBoradcastReceiver();
+        registerShowerBoradcastReceiver();
     }
+    public void registerShowerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction(ShowerDetailsActivity.ACTION_NAME);
+        // 注册广播
+        getActivity().registerReceiver(mShowerBroadcastReceiver, myIntentFilter);
+    }
+
+    private MyReceiver mShowerBroadcastReceiver = new MyReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(ShowerDetailsActivity.ACTION_NAME)) {
+                getData();
+            }
+        }
+
+    };
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
@@ -222,6 +240,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     @Override
     public void onDestroy() {
         super.onDestroy();
+      getActivity().unregisterReceiver(mShowerBroadcastReceiver);
         getActivity().unregisterReceiver(mBroadcastReceiver);
         if (null != locationClient) {
             /**

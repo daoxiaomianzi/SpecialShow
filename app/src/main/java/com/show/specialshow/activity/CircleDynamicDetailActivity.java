@@ -982,7 +982,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
             iv_emoticons_checked.setVisibility(View.GONE);
         }else{
             super.onBackPressed();
-            onBack();
+//            onBack();
         }
     }
 

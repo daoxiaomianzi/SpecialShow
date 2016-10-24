@@ -209,6 +209,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
             holders[type].url_title.setVisibility(View.VISIBLE);
             holders[type].url_title.setText(item.getStatus_urlname());
         }
+        holders[type].attention.setVisibility(View.GONE);
         holders[type].comment_count.setText(item.getStatus_comment() + "");
         holders[type].thumbs_count.setText(item.getStatus_favor() + "");
         if (null == ShopListTagsMess.parse(item.getTags()) || ShopListTagsMess.parse(item.getTags()).size() == 0) {
@@ -230,27 +231,27 @@ public class CircleDynamicAdapter extends BaseAdapter {
         holders[type].comment_count_ll.setOnClickListener(listener);
         holders[type].portrait.setOnClickListener(listener);
         holders[type].card_ll.setOnClickListener(listener);
-        if (null != item.getStatus_user()) {
-            if (null != item.getStatus_user().getUser_id()) {
-                if (!item.getStatus_user().getUser_id()
-                        .equals(TXApplication.filename.getString("uid", ""))) {
-                    holders[type].attention.setVisibility(View.VISIBLE);
-                    if (item.getStatus_user().getAttention().equals("1")
-                            || cache_attention.contains(item.getStatus_user()
-                            .getUser_id())) {
-                        holders[type].attention.setText("已关注");
-                        holders[type].attention.setEnabled(false);
-                        holders[type].attention.setSelected(true);
-                    } else {
-                        holders[type].attention.setText("+关注");
-                        holders[type].attention.setEnabled(true);
-                        holders[type].attention.setSelected(false);
-                    }
-                } else {
-                    holders[type].attention.setVisibility(View.GONE);
-                }
-            }
-        }
+//        if (null != item.getStatus_user()) {
+//            if (null != item.getStatus_user().getUser_id()) {
+//                if (!item.getStatus_user().getUser_id()
+//                        .equals(TXApplication.filename.getString("uid", ""))) {
+//                    holders[type].attention.setVisibility(View.VISIBLE);
+//                    if (item.getStatus_user().getAttention().equals("1")
+//                            || cache_attention.contains(item.getStatus_user()
+//                            .getUser_id())) {
+//                        holders[type].attention.setText("已关注");
+//                        holders[type].attention.setEnabled(false);
+//                        holders[type].attention.setSelected(true);
+//                    } else {
+//                        holders[type].attention.setText("+关注");
+//                        holders[type].attention.setEnabled(true);
+//                        holders[type].attention.setSelected(false);
+//                    }
+//                } else {
+//                    holders[type].attention.setVisibility(View.GONE);
+//                }
+//            }
+//        }
         switch (type) {
             case JUST_TEXT:
                 break;

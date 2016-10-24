@@ -261,7 +261,7 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 	public void fillView() {
 		initListView();
 		registerBoradcastReceiver();
-		registerDetailBoradcastReceiver();
+//		registerDetailBoradcastReceiver();
 	}
 	
 	public void registerDetailBoradcastReceiver() {
@@ -313,7 +313,7 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 	public void onDestroy() {
 		super.onDestroy();
 		mContext.unregisterReceiver(mBroadcastReceiver);
-		mContext.unregisterReceiver(mDetailBroadcastReceiver);
+//		mContext.unregisterReceiver(mDetailBroadcastReceiver);
 	}
 
 	@Override
