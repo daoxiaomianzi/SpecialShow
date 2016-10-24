@@ -106,7 +106,7 @@ public class SetTradingPasswordActivity extends BaseActivity {
 				public void onStart() {
 					super.onStart();
 					set_trading_password.setEnabled(false);
-					loadIng("正在设置...",true);
+				loadIng("处理中...",true);
 				}
 
 				@Override
@@ -131,7 +131,12 @@ public class SetTradingPasswordActivity extends BaseActivity {
 						return;
 					}
 					if(result.getSuccess()==1){
-						UIHelper.ToastMessage(mContext, "支付密码设置成功");
+						if(TXApplication.setTradingpassword){
+							UIHelper.ToastMessage(mContext,"支付密码修改成功");
+						}else{
+							UIHelper.ToastMessage(mContext, "支付密码设置成功");
+
+						}
 						SPUtils.put(mContext, "setTradingSuccess", true);
 						TXApplication.setTradingpassword=true;
 						finish();

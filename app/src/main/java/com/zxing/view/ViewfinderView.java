@@ -206,7 +206,7 @@ public final class ViewfinderView extends View {
 			paint.setTextSize(TEXT_SIZE * density);
 			paint.setAlpha(0x40);
 			paint.setTypeface(Typeface.create("System", Typeface.BOLD));
-			String text = "将条码/二维码放入框内,即可自动扫描";
+			String text = "将二维码放入框内,即可自动扫描";
 			float textWidth = paint.measureText(text);
 
 			canvas.drawText(text, (width - textWidth)/2, (float) (frame.bottom + (float)TEXT_PADDING_TOP *density), paint);

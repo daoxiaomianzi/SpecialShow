@@ -179,6 +179,9 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 
 	@Override
 	public void goBack(View v) {
+		if(!BtnUtils.getInstance().isFastDoubleClick()){
+			return;
+		}
 		UIHelper.startActivity(mContext,SignInActivity.class);
 	}
 

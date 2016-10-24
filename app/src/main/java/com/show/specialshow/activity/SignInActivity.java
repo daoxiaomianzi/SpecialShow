@@ -5,6 +5,7 @@ import android.view.View;
 import com.show.specialshow.BaseWebActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.URLs;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
 
 public class SignInActivity extends BaseWebActivity {
@@ -23,6 +24,9 @@ public class SignInActivity extends BaseWebActivity {
 
     @Override
     public void onClick(View v) {
+        if(!BtnUtils.getInstance().isFastDoubleClick()){
+            return;
+        }
         switch (v.getId()){
             case R.id.contest_confirm_tv:
                 if(null!=affirmDialog){
