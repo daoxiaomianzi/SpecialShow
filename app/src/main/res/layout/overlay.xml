@@ -6,4 +6,4 @@
     android:minWidth="65dp"
     android:padding="10dip"
     android:textColor="#ffffff"
-    android:textSize="55sp" />
+    android:textSize="55sp"  android:layout_width="wrap_content"/>

@@ -194,7 +194,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //			Log.i("result",resultString);
 //			bundle.putParcelable("bitmap", bit);
 //			resultIntent.putExtras(bundle);
-            createAffirmDialog(resultString + "&uid=" + SPUtils.get(mContext, "uid", ""), DIALOG_DOUBLE_STPE, "即将前往", false);
+            createAffirmDialog("申请成为手艺人界面", DIALOG_DOUBLE_STPE, "即将前往", false);
         }
     }
 

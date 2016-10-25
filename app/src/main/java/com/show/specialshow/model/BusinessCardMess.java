@@ -11,12 +11,22 @@ public class BusinessCardMess implements Serializable {
 	private static final long serialVersionUID = 5643096806449186779L;
 	private String pic;//头像
 	private String shop;//所属秀坊
+	private String shop_id;//所属秀坊id
 	private String staffname;//手艺人名称
 	private String rank;//头衔
 	private String worktime;//从业时间
 	private String goodat;//擅长
 	private String introduction;//简介
 	private String staffid;//手艺人id
+
+	public String getShop_id() {
+		return shop_id;
+	}
+
+	public void setShop_id(String shop_id) {
+		this.shop_id = shop_id;
+	}
+
 	public String getPic() {
 		return pic;
 	}

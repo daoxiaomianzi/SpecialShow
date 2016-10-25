@@ -101,6 +101,11 @@ public class BusinessCardInformationActivity extends BaseActivity {
 		case R.id.business_modify_tv://修改
 			modifyBusiness();
 			break;
+			case R.id.rll_show_fang://所属秀坊
+				Bundle bundle = new Bundle();
+				bundle.putString("shop_id",info.getShop_id());
+				UIHelper.startActivity(mContext,StoresDetailsActivity.class,bundle);
+				break;
 
 		default:
 			break;
