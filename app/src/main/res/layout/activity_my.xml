@@ -51,7 +51,8 @@
                         android:layout_height="65dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        imagecontrol:border_thickness="2dp" />
+                        imagecontrol:border_thickness="2dp"
+                        />
 
                     <TextView
                         android:id="@+id/my_name"

@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
 import com.show.specialshow.model.ShopPeopleMess;
+import com.show.specialshow.utils.DensityUtil;
 import com.show.specialshow.utils.ImageLoderutils;
 import com.show.specialshow.utils.UIHelper;
 
@@ -33,7 +35,7 @@ public class SelectCraftsmanActivity extends BaseActivity {
 	@Override
 	public void initView() {
 		select_craftsman_gv=(GridView) findViewById(R.id.craftsman_gv);
-		select_craftsman_gv.setNumColumns(3);
+		select_craftsman_gv.setNumColumns(4);
 		select_craftsman_gv.setAdapter(new CraftsmanAdapter());
 	}
 
@@ -82,7 +84,7 @@ public class SelectCraftsmanActivity extends BaseActivity {
 			}else{
 				vhgv=(ViewHoldergv) convertView.getTag();
 			}
-//			vhgv.craftsm_head_pro.setLayoutParams(new LayoutParams(TXApplication.WINDOW_WIDTH/3, TXApplication.WINDOW_WIDTH/3));
+			vhgv.craftsm_head_pro.setLayoutParams(new LinearLayout.LayoutParams((TXApplication.WINDOW_WIDTH- DensityUtil.dip2px(mContext,90))/4, (TXApplication.WINDOW_WIDTH-DensityUtil.dip2px(mContext,90))/4));
 			ImageLoderutils imageLoderutils=new ImageLoderutils(mContext);
 			imageLoderutils.display(vhgv.craftsm_head_pro, shopPeopleMesses.get(position).getChoice_artisans_icon());
 			vhgv.craftsm_name.setText(shopPeopleMesses.get(position).getChoice_artisans_name());

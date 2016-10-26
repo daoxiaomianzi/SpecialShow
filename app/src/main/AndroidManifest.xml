@@ -372,6 +372,7 @@
             android:name="com.umeng.message.local.UmengLocalNotificationService"
             android:exported="false" />
         <!-- 友盟微社区相关 -->
+
         <!-- 环信聊天相关 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.MainHxActivity"

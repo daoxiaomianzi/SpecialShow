@@ -72,16 +72,17 @@
         android:orientation="vertical"
         >
         <RelativeLayout
-            android:background="@color/white"
+            android:background="@color/color_F47183"
             android:layout_width="fill_parent"
             android:layout_height="180dp"
             android:id="@+id/rll_craftsman_details_headbackground"
             >
-        <ImageView 
+        <com.show.specialshow.utils.RoundImageView
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
             android:id="@+id/crafstman_details_headbackground"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             />
         <TextView 
             android:id="@+id/crafstman_details_job"
