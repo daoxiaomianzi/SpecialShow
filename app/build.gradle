@@ -29,29 +29,29 @@ android {
     }
 
     buildTypes {
-//        debug{
-//            // 不显示Log
-//            buildConfigField "boolean", "LOG_DEBUG", "true"
-//
-//            minifyEnabled false
-//            zipAlignEnabled true
-//            // 移除无用的resource文件
-//            shrinkResources true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            signingConfig signingConfigs.debug
-//
-//            applicationVariants.all { variant ->
-//                variant.outputs.each { output ->
-//                    def outputFile = output.outputFile
-//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
-//                        // 输出apk名称为特秀美妆channelx.apk
-////                        def fileName = "特秀美妆${variant.productFlavors[0].name}.apk"
-//                        def fileName = "特秀美妆debug.apk"
-//                        output.outputFile = new File(outputFile.parent, fileName)
-//                    }
-//                }
-//            }
-//        }
+        debug{
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+
+            minifyEnabled true
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为特秀美妆channelx.apk
+//                        def fileName = "特秀美妆${variant.productFlavors[0].name}.apk"
+                        def fileName = "特秀美妆debug.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
         release {
             // 不显示Log
             buildConfigField "boolean", "LOG_DEBUG", "false"

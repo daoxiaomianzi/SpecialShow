@@ -251,7 +251,7 @@ public interface URLs {
 	 */
 	String POSTS_ENTER=BASE_URL+"/Posts/enter";
 	/**
-	 * 设置支付密码
+	 * 设置支付密码（重置，修改，设置三合一接口）
 	 */
 	String LOGIN_SETPINPASS=BASE_URL+"/Login/setpinpass";
 }
