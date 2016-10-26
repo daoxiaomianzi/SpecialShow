@@ -62,6 +62,7 @@
             my:orientation="vertical"
             >
             <com.show.specialshow.view.PayRadioPurified
+                android:visibility="gone"
                 android:id="@+id/p1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
                 my:logo_pay="@drawable/icon_pay_integral"
                 my:title_pay="@string/pay_integral"
                 my:desc="支付银行卡支付，支付更安全"
-                my:checked="true"
+                my:checked="false"
 
                 />
             <com.show.specialshow.view.PayRadioPurified
@@ -81,6 +82,7 @@
                 my:radio="@drawable/radio"
                 my:logo_pay="@drawable/icon_pay_wx"
                 my:title_pay="@string/pay_wx"
+                my:checked="true"
                 my:desc="本次消费可获得1000积分"
                 />
             <com.show.specialshow.view.PayRadioPurified

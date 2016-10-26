@@ -34,7 +34,7 @@ public class PayActivity extends BaseActivity {
         genderGroup = (PayRadioGroup) findViewById(R.id.genderGroup);
         pay_confirm = (TextView) findViewById(R.id.pay_confirm);
         pay_shop_title = (TextView) findViewById(R.id.pay_shop_title);
-        payRadioPurified= (PayRadioPurified) findViewById(R.id.p1);
+        payRadioPurified= (PayRadioPurified) findViewById(R.id.p2);
         tv_pay_amount= (TextView) findViewById(R.id.tv_pay_amount);
     }
 
