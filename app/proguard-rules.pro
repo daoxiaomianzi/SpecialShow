@@ -28,7 +28,7 @@
 -keepattributes *Annotation*,InnerClasses
 -keepattributes Signature
 -keepattributes SourceFile,LineNumberTable
-#-ignorewarnings
+-ignorewarnings
 #----------------------------------------------------------------------------
 
 #---------------------------------默认保留区---------------------------------
@@ -311,6 +311,9 @@
 
 
 #-----------------------------高德地图---------------------------------
+#如果有其它包有warning，在报出warning的包加入下面类似的-dontwarn 报名
+-dontwarn com.amap.api.**
+-dontwarn com.aps.**
 # 3D 地图
 -keep   class com.amap.api.mapcore.**{*;}
 -keep   class com.amap.api.maps.**{*;}
@@ -320,6 +323,7 @@
 -keep class com.amap.api.location.**{*;}
 -keep class com.amap.api.fence.**{*;}
 -keep class com.autonavi.aps.amapapi.model.**{*;}
+-keep   class com.aps.**{*;}
 
 #搜索
 -keep   class com.amap.api.services.**{*;}
@@ -331,6 +335,10 @@
 #导航
 -keep class com.amap.api.navi.**{*;}
 -keep class com.autonavi.**{*;}
+
+#讯飞语音
+-keep class com.iflytek.**{*;}
+
 #-----------------------------高德地图---------------------------------
 
 #-----------------------------环信----------------------------------------
