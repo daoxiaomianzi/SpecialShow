@@ -43,7 +43,7 @@
     <string name="user_agreement">《用户协议》</string>
     <string name="register">注册</string>
     <!-- 我的页面相关 -->
-    <string name="my_integral">我的积分</string>
+    <string name="my_integral">积分商城</string>
     <string name="focus_on">关注</string>
     <string name="fans">粉丝</string>
     <string name="friends">好友</string>
@@ -537,7 +537,7 @@
     <string name="list_footer_end">已经到底了</string>
     <string name="sign_up">报名</string>
     <string name="apply_sign_up">提交报名</string>
-<!--安全中心相关-->
+    <!--安全中心相关-->
     <string name="input_set_trading_password">请输入支付密码</string>
     <string name="input_set_login_password">请输入登录密码</string>
     <string name="input_again_set_trading_password">请确认支付密码</string>

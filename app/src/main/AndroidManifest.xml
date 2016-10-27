@@ -373,6 +373,7 @@
             android:exported="false" />
         <!-- 友盟微社区相关 -->
 
+
         <!-- 环信聊天相关 -->
         <activity
             android:name="com.easemob.chatuidemo.activity.MainHxActivity"
@@ -866,8 +867,9 @@
             android:configChanges="orientation|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".activity.OfficialEventAndDynamicActivity" />
-        <activity android:name=".activity.ArticleWebActivity"></activity>
-        <activity android:name=".activity.SetTradingPasswordActivity"></activity>
+        <activity android:name=".activity.ArticleWebActivity" />
+        <activity android:name=".activity.SetTradingPasswordActivity" />
+        <activity android:name=".activity.IntegralmMarketActivity"></activity>
     </application>
 
 </manifest>

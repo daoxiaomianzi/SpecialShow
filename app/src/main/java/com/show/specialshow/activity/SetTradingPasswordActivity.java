@@ -1,5 +1,6 @@
 package com.show.specialshow.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -21,6 +22,7 @@ import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
+import com.zxing.decoding.Intents;
 
 
 public class SetTradingPasswordActivity extends BaseActivity {
@@ -139,7 +141,8 @@ public class SetTradingPasswordActivity extends BaseActivity {
 						}
 						SPUtils.put(mContext, "setTradingSuccess", true);
 						TXApplication.setTradingpassword=true;
-						finish();
+						Intent intent = new Intent();
+						UIHelper.setResult(mContext,RESULT_OK,intent);
 					}else{
 						createAffirmDialog(result.getMessage(),DIALOG_SINGLE_STPE,true);
 					}

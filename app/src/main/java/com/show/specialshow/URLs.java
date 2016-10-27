@@ -254,5 +254,9 @@ public interface URLs {
 	 * 设置支付密码（重置，修改，设置三合一接口）
 	 */
 	String LOGIN_SETPINPASS=BASE_URL+"/Login/setpinpass";
+	/**
+	 * 积分商场链接
+	 */
+	String INTEGRAL_MARKET=BASE_IMAGE_URL+"index.php?g=User&m=Market&a=index&from=22&uid=";
 }
 

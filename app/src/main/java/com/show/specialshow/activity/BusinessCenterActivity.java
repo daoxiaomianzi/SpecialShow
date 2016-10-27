@@ -22,32 +22,6 @@ public class BusinessCenterActivity extends BaseBusCenWebActivity {
 		loadDetail();
 	}
 	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK && content.canGoBack()) {
-				content.goBack();// 返回前一个页面
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
-	}
 
-	@Override
-	public void goBack(View v) {
-		switch (v.getId()) {
-		case R.id.head_left_tv:
-			if (content.canGoBack()) {
-				content.goBack();
-			} else {
-				mContext.finish();
-			}
-			break;
-		case R.id.head_close_tv:
-			mContext.finish();
-			break;
-
-		default:
-			break;
-		}
-	}
 
 }

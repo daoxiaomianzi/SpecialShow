@@ -251,6 +251,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
 				UIHelper.startActivity(mContext,MyInviteActivity.class);
 				break;
 			case R.id.rl_my_integral://我的积分
+				UIHelper.startActivity(mContext,IntegralmMarketActivity.class);
 				break;
 			case R.id.rl_my_message://我的消息
 				UIHelper.startActivity(mContext,MessageNoticeActivity.class);
