@@ -19,6 +19,15 @@ public class ShowerInfoMess implements Serializable {
 	private String user_icon;//头像
 	private String tags;//兴趣标签
 	private int attention;//是否关注（2为没有关注）
+	private int isfriend;//是否是好友（0不为好友，1为好友）
+
+	public int getIsfriend() {
+		return isfriend;
+	}
+
+	public void setIsfriend(int isfriend) {
+		this.isfriend = isfriend;
+	}
 
 	public int getAttention() {
 		return attention;

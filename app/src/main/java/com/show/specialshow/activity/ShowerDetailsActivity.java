@@ -159,7 +159,7 @@ public class ShowerDetailsActivity extends BaseActivity {
         shower_details_xinzuo = (TextView) shower_details_head.findViewById(R.id.shower_details_xinzuo);
         shower_details_attention_btn = (TextView) shower_details_head
                 .findViewById(R.id.shower_details_attention_btn);
-        shower_details_add_friend_btn= (TextView) shower_details_head.
+        shower_details_add_friend_btn = (TextView) shower_details_head.
                 findViewById(R.id.shower_details_add_friend_btn);
         shower_details_nickname_tv = (TextView) shower_details_head
                 .findViewById(R.id.shower_details_nickname_tv);
@@ -316,13 +316,13 @@ public class ShowerDetailsActivity extends BaseActivity {
                     if (user_id.equals(SPUtils.get(mContext, "uid", ""))) {
                         UIHelper.ToastMessage(mContext, "不能和自己聊天");
                     } else {
-                        if((Boolean)SPUtils.get(mContext,"ichange",true)){
+                        if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
                             bundle.putString("userId", user_id);
                             UIHelper.startActivity(mContext, ChatActivity.class, bundle);
-                        }else{
-                            UIHelper.ToastMessage(mContext,"请先完善资料");
-                            bundle.putInt("from_mode",1);
-                            UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                        } else {
+                            UIHelper.ToastMessage(mContext, "请先完善资料");
+                            bundle.putInt("from_mode", 1);
+                            UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
                         }
 
                     }
@@ -335,7 +335,7 @@ public class ShowerDetailsActivity extends BaseActivity {
             case R.id.shower_details_add_friend_btn://加好友
                 if (TXApplication.login) {
                     addContact(Integer.valueOf(user_id));
-                }else{
+                } else {
                     bundle.putInt(LoginActivity.FROM_LOGIN,
                             LoginActivity.FROM_OTHER);
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
@@ -351,7 +351,6 @@ public class ShowerDetailsActivity extends BaseActivity {
      * 添加contact
      *
      * @param ／／i
-     *
      */
     public void addContact(final int emid) {
         if (TXApplication.getInstance().getUserName().equals(emid + "")) {
@@ -470,7 +469,7 @@ public class ShowerDetailsActivity extends BaseActivity {
                     shower_details_roundImageView);
             shower_details_nickname_tv.setText(showerInfoMess.getUser_name());
             shower_details_sex_age.setText(showerInfoMess.getUser_age());
-            if(showerInfoMess.getUser_sex()==null&&showerInfoMess.getUser_age()==null){
+            if (showerInfoMess.getUser_sex() == null && showerInfoMess.getUser_age() == null) {
                 shower_details_sex_age.setVisibility(View.INVISIBLE);
             }
             if ("男".equals(showerInfoMess.getUser_sex())) {
@@ -493,6 +492,19 @@ public class ShowerDetailsActivity extends BaseActivity {
             shower_details_interested_sign_gv.setAdapter(new TagsMessAdapter(
                     mTagsMesses, mContext));
             attention = showerInfoMess.getAttention();
+            if (user_id.equals(SPUtils.get(mContext, "uid", ""))) {
+                shower_details_add_friend_btn.setVisibility(View.GONE);
+            } else {
+                switch (showerInfoMess.getIsfriend()) {
+                    case 0:
+                        break;
+                    case 1:
+                        shower_details_add_friend_btn.setVisibility(View.GONE);
+                        break;
+                    default:
+                        break;
+                }
+            }
             if (1 == attention) {
                 shower_details_attention_btn.setText("已关注");
                 shower_details_attention_btn.setSelected(true);
