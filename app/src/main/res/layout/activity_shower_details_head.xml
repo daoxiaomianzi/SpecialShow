@@ -98,9 +98,9 @@ android:gravity="center"
             android:textSize="@dimen/text_size_24px" />
         </LinearLayout>
 
+
+
         <TextView
-             android:onClick="onClick"
-                android:clickable="true"
             android:id="@+id/shower_details_attention_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,13 +109,35 @@ android:gravity="center"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/text_size_24px"
             android:background="@drawable/bg_dynami_attention_selecter"
+            android:clickable="true"
+            android:gravity="center"
+            android:minEms="3"
+            android:onClick="onClick"
+            android:paddingBottom="1dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="1dp"
+            android:text="关注"
+            android:textColor="@drawable/text_attention_color_check_selector"
+            android:textSize="@dimen/text_size_22px" />
+        <TextView
+            android:onClick="onClick"
+            android:clickable="true"
+            android:id="@+id/shower_details_add_friend_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/shower_details_roundImageView"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/text_size_24px"
+            android:background="@drawable/bg_dynami_attention_selecter"
+            android:layout_toLeftOf="@id/shower_details_attention_btn"
             android:gravity="center"
             android:minEms="3"
             android:paddingBottom="1dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="1dp"
-            android:text="关注"
+            android:text="加好友"
             android:textColor="@drawable/text_attention_color_check_selector"
             android:textSize="@dimen/text_size_22px" />
     </RelativeLayout>
@@ -238,6 +260,10 @@ android:gravity="center"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/text_size_26px"
             >
+            <ImageView
+                android:id="@+id/shower_details_crafstman_right"
+                style="@style/list_menu_next"
+                />
             <com.show.specialshow.utils.RoundImageView 
                 android:layout_centerVertical="true"
                 android:id="@+id/shower_details_crafstman_roundImageView"
@@ -247,7 +273,7 @@ android:gravity="center"
             <TextView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/text_size_16px"
+                android:layout_marginLeft="@dimen/text_size_6px"
                 android:layout_marginTop="@dimen/text_size_4px"
                 android:layout_alignTop="@id/shower_details_crafstman_roundImageView"
                 android:id="@+id/shower_detaisls_crafstman_nickname"
@@ -256,32 +282,34 @@ android:gravity="center"
                 android:textSize="@dimen/text_size_24px"
                 android:textColor="@color/color_999999"
                 />
-            <TextView 
+
+            
+            <TextView
+                android:layout_marginLeft="@dimen/text_size_3px"
+                android:id="@+id/shower_detaisls_crafstman_nickname_tv"
+                android:text="js造型"
+                android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname"
+                android:layout_alignTop="@id/shower_detaisls_crafstman_nickname"
+                android:layout_width="wrap_content"
+                android:minEms="3"
+                android:maxEms="7"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_555555"
+                />
+            <TextView
                 android:id="@+id/shower_detaisls_crafstman_moods"
-                android:layout_marginLeft="@dimen/text_size_16px"
-                  android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
+                android:layout_marginLeft="@dimen/text_size_6px"
+                android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2425人气"
                 android:textColor="@color/color_F47183"
                 android:drawableLeft="@drawable/icon_moods"
-        android:drawablePadding="@dimen/text_size_4px"
-        android:textSize="@dimen/text_size_26px" 
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/shower_detaisls_crafstman_nickname"
-                />
-            
-            <TextView 
-                android:id="@+id/shower_detaisls_crafstman_nickname_tv"
-                android:text="js造型"
-                android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname"
-                android:layout_alignBottom="@id/shower_detaisls_crafstman_nickname"
-                android:layout_width="wrap_content"
-                android:minEms="3"
-                android:singleLine="true"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_555555"
-                android:layout_marginLeft="@dimen/text_size_10px"
+                android:drawablePadding="@dimen/text_size_4px"
+                android:textSize="@dimen/text_size_26px"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/shower_detaisls_crafstman_nickname_tv"
                 />
             
             <TextView 
@@ -290,10 +318,10 @@ android:gravity="center"
                 android:id="@+id/shower_details_crafstman_position"
                 android:text="@string/position"
                 android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname_tv"
-                android:layout_alignBottom="@id/shower_detaisls_crafstman_nickname_tv"
+                android:layout_alignTop="@id/shower_detaisls_crafstman_nickname_tv"
              	android:textColor="@color/color_999999"
              	android:textSize="@dimen/text_size_24px"
-             	android:layout_marginLeft="@dimen/text_size_36px"
+             	android:layout_marginLeft="@dimen/text_size_10px"
                 />
             <TextView 
                 android:id="@+id/shower_detaisls_crafstman_thumbup"
@@ -309,21 +337,19 @@ android:gravity="center"
         android:textSize="@dimen/text_size_26px" 
                 />
             
-            <TextView 
+            <TextView
+                android:singleLine="true"
+                android:layout_toLeftOf="@id/shower_details_crafstman_right"
                 android:id="@+id/shower_details_crafstman_position_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/shower_details_crafstman_position"
+                android:layout_alignTop="@id/shower_details_crafstman_position"
                 android:layout_toRightOf="@id/shower_details_crafstman_position"
-                android:layout_marginLeft="@dimen/text_size_16px"
+                android:layout_marginLeft="@dimen/text_size_3px"
                 android:textColor="@color/light_text_color"
                 android:text="中华人民共和国公务员"
-                android:singleLine="true"
                 />
-            <ImageView 
-            style="@style/list_menu_next"
-              android:layout_marginRight="@dimen/text_size_26px"
-                />
+
         </RelativeLayout>
       <View
             android:layout_width="match_parent"
@@ -352,7 +378,6 @@ android:gravity="center"
                /> 
                <ImageView 
                    style="@style/list_menu_next"
-                   android:layout_marginRight="@dimen/text_size_26px"
                    />
         </RelativeLayout>
       </LinearLayout>

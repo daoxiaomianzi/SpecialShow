@@ -1,33 +1,44 @@
 package com.show.specialshow.model;
 
-public class City {
-	public String name;
-	public String pinyi;
+import com.alibaba.fastjson.JSON;
 
-	public City(String name, String pinyi) {
-		super();
-		this.name = name;
-		this.pinyi = pinyi;
-	}
+import java.io.Serializable;
+import java.util.List;
 
-	public City() {
-		super();
-	}
+public class City implements Serializable{
+    public String name;
+    public String pinyi;
 
-	public String getName() {
-		return name;
-	}
+    public City(String name, String pinyi) {
+        super();
+        this.name = name;
+        this.pinyi = pinyi;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public City() {
+        super();
+    }
 
-	public String getPinyi() {
-		return pinyi;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setPinyi(String pinyi) {
-		this.pinyi = pinyi;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getPinyi() {
+        return pinyi;
+    }
+
+    public void setPinyi(String pinyi) {
+        this.pinyi = pinyi;
+    }
+    public static List<City> parse(String result){
+        try {
+            return JSON.parseArray(result, City.class);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

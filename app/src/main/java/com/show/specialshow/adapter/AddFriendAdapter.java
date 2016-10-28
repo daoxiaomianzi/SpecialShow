@@ -84,7 +84,7 @@ public class AddFriendAdapter extends BaseAdapter {
 	/**
 	 * 添加contact
 	 * 
-	 * @param i
+	 * @param ／／i
 	 * 
 	 */
 	public void addContact(final int emid) {

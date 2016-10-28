@@ -10,8 +10,23 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/craftsm_item_moods"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_4px"
+        android:drawableLeft="@drawable/icon_moods"
+        android:drawablePadding="@dimen/text_size_4px"
+        android:text="124人气"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/craftsm_head_item_pro"
+        android:layout_alignRight="@id/craftsm_head_item_pro"
+        android:textColor="#FF69B4"
+        android:textSize="@dimen/text_size_26px" />
 
     <TextView
+        android:layout_marginRight="@dimen/text_size_3px"
+        android:layout_toLeftOf="@id/craftsm_item_moods"
         android:id="@+id/craftsm_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,18 +50,6 @@
         android:textColor="@color/color_999999"
         android:textSize="@dimen/text_size_26px" />
 
-    <TextView
-        android:id="@+id/craftsm_item_moods"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_size_4px"
-        android:drawableLeft="@drawable/icon_moods"
-        android:drawablePadding="@dimen/text_size_4px"
-        android:text="124人气"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/craftsm_head_item_pro"
-        android:layout_alignRight="@id/craftsm_head_item_pro"
-        android:textColor="#FF69B4"
-        android:textSize="@dimen/text_size_26px" />
+
 
 </RelativeLayout>

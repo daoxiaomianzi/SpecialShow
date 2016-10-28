@@ -177,12 +177,12 @@ public class CraftsmandetailsActivity extends BaseActivity {
 			break;
 		case R.id.craftsman_details_working_iv1:
 			bundle.putString(OneImageShowActivity.ONE_IMAGE_URL,
-					craftsmanPicsMesses.get(0).getThumbnail_pic());
+					craftsmanPicsMesses.get(0).getBig_pic());
 			UIHelper.startActivity(mContext, OneImageShowActivity.class, bundle);
 			break;
 		case R.id.craftsman_details_working_iv2:
 			bundle.putString(OneImageShowActivity.ONE_IMAGE_URL,
-					craftsmanPicsMesses.get(1).getThumbnail_pic());
+					craftsmanPicsMesses.get(1).getBig_pic());
 			UIHelper.startActivity(mContext, OneImageShowActivity.class, bundle);
 			break;
 		case R.id.craftsman_details_clickKlike:// 点赞

@@ -258,5 +258,9 @@ public interface URLs {
 	 * 积分商场链接
 	 */
 	String INTEGRAL_MARKET=BASE_IMAGE_URL+"index.php?g=User&m=Market&a=index&from=22&uid=";
+	/**
+	 * 选择城市中城市数据请求
+	 */
+	String CITY_CITYLIST=BASE_URL+"/City/Citylist";
 }
 

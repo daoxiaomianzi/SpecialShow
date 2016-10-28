@@ -29,11 +29,18 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
 import com.show.specialshow.db.DBHelper;
 import com.show.specialshow.db.DatabaseHelper;
 import com.show.specialshow.model.City;
+import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.PingYinUtil;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
@@ -134,8 +141,9 @@ public class SwitchCityActivity extends BaseActivity implements
             }
         });
         initOverlay();
-        cityInit();
-        hotCityInit();
+//        cityInit();
+        getCityList();
+//        hotCityInit();
         hisCityInit();
         setAdapter(allCity_lists, city_hot, city_history);
 
@@ -215,11 +223,12 @@ public class SwitchCityActivity extends BaseActivity implements
         allCity_lists.add(city);
         city = new City("最近", "1"); // 最近访问的城市
         allCity_lists.add(city);
-        city = new City("热门", "2"); // 热门城市
+//        city = new City("热门", "2"); // 热门城市
+//        allCity_lists.add(city);
+//        city = new City("全部", "3"); // 全部城市
+        city = new City("全部", "2"); // 全部城市
         allCity_lists.add(city);
-        city = new City("全部", "3"); // 全部城市
-        allCity_lists.add(city);
-        city_lists = getCityList();
+//        city_lists = getCityList();
         allCity_lists.addAll(city_lists);
     }
 
@@ -253,24 +262,58 @@ public class SwitchCityActivity extends BaseActivity implements
 
     @SuppressWarnings("unchecked")
     private ArrayList<City> getCityList() {
-        DBHelper dbHelper = new DBHelper(this);
-        ArrayList<City> list = new ArrayList<City>();
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city", null);
-            City city;
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
-                list.add(city);
+//        DBHelper dbHelper = new DBHelper(this);
+//        try {
+//            dbHelper.createDataBase();
+//            SQLiteDatabase db = dbHelper.getWritableDatabase();
+//            Cursor cursor = db.rawQuery("select * from city", null);
+//            City city;
+//            while (cursor.moveToNext()) {
+//                city = new City(cursor.getString(1), cursor.getString(2));
+//                list.add(city);
+//            }
+//            cursor.close();
+//            db.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.CITY_CITYLIST;
+        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                loadIng("加载中", true);
             }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Collections.sort(list, comparator);
-        return list;
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                MessageResult result = MessageResult.parse(responseInfo.result);
+                if (null == result) {
+                    return;
+                }
+                if (1 == result.getSuccess()) {
+                    city_lists = (ArrayList<City>) City.parse(result.getData());
+                    if (city_lists != null) {
+                        Collections.sort(city_lists, comparator);
+                        cityInit();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
+            }
+        });
+        return city_lists;
     }
 
     /**
@@ -309,14 +352,14 @@ public class SwitchCityActivity extends BaseActivity implements
                     letterListView.setVisibility(View.GONE);
                     personList.setVisibility(View.GONE);
                     getResultCityList(s.toString());
-                    if (city_result.size() <= 0) {
-                        tv_noresult.setVisibility(View.VISIBLE);
-                        resultList.setVisibility(View.GONE);
-                    } else {
-                        tv_noresult.setVisibility(View.GONE);
-                        resultList.setVisibility(View.VISIBLE);
-                        resultListAdapter.notifyDataSetChanged();
-                    }
+//                    if (city_result.size() <= 0) {
+//                        tv_noresult.setVisibility(View.VISIBLE);
+//                        resultList.setVisibility(View.GONE);
+//                    } else {
+//                        tv_noresult.setVisibility(View.GONE);
+//                        resultList.setVisibility(View.VISIBLE);
+//                        resultListAdapter.notifyDataSetChanged();
+//                    }
                 }
             }
 
@@ -334,25 +377,78 @@ public class SwitchCityActivity extends BaseActivity implements
 
     @SuppressWarnings("unchecked")
     private void getResultCityList(String keyword) {
-        DBHelper dbHelper = new DBHelper(this);
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery(
-                    "select * from city where name like \"%" + keyword
-                            + "%\" or pinyin like \"%" + keyword + "%\"", null);
-            City city;
-//			Log.e("info", "length = " + cursor.getCount());
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
-                city_result.add(city);
+
+//        DBHelper dbHelper = new DBHelper(this);
+//        try {
+//            dbHelper.createDataBase();
+//            SQLiteDatabase db = dbHelper.getWritableDatabase();
+//            Cursor cursor = db.rawQuery(
+//                    "select * from city where name like \"%" + keyword
+//                            + "%\" or pinyin like \"%" + keyword + "%\"", null);
+//            City city;
+////			Log.e("info", "length = " + cursor.getCount());
+//            while (cursor.moveToNext()) {
+//                city = new City(cursor.getString(1), cursor.getString(2));
+//                city_result.add(city);
+//            }
+//            cursor.close();
+//            db.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Collections.sort(city_result, comparator);
+        RequestParams params = TXApplication.getParams();
+        params.addBodyParameter("key", keyword);
+        String url = URLs.CITY_CITYLIST;
+        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                loadIng("加载中", true);
             }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Collections.sort(city_result, comparator);
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                MessageResult result = MessageResult.parse(responseInfo.result);
+                if (null == result) {
+                    return;
+                }
+
+                if (1 == result.getSuccess()) {
+                    if (result.getData() == null) {
+                        tv_noresult.setVisibility(View.VISIBLE);
+                        resultList.setVisibility(View.GONE);
+                    } else {
+                        ArrayList city_result1 = (ArrayList<City>) City.parse(result.getData());
+                        if (city_result1 != null) {
+                            Collections.sort(city_result1, comparator);
+                            if (city_result1.size() <= 0) {
+                                tv_noresult.setVisibility(View.VISIBLE);
+                                resultList.setVisibility(View.GONE);
+                            } else {
+                                tv_noresult.setVisibility(View.GONE);
+                                resultList.setVisibility(View.VISIBLE);
+                                city_result.addAll(city_result1);
+                                resultListAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
+            }
+        });
     }
 
     /**
@@ -534,7 +630,8 @@ public class SwitchCityActivity extends BaseActivity implements
         private List<City> list;
         private List<City> hotList;
         private List<String> hisCity;
-        final int VIEW_TYPE = 5;
+        //        final int VIEW_TYPE = 5;
+        final int VIEW_TYPE = 4;
 
         public ListAdapter(Context context, List<City> list,
                            List<City> hotList, List<String> hisCity) {
@@ -566,7 +663,8 @@ public class SwitchCityActivity extends BaseActivity implements
 
         @Override
         public int getItemViewType(int position) {
-            return position < 4 ? position : 4;
+            return position < 3 ? position : 3;
+//            return position < 4 ? position : 4;
         }
 
         @Override
@@ -655,27 +753,28 @@ public class SwitchCityActivity extends BaseActivity implements
                 TextView recentHint = (TextView) convertView
                         .findViewById(R.id.recentHint);
                 recentHint.setText("最近访问的城市");
+//            } else if (viewType == 2) {
+//                convertView = inflater.inflate(R.layout.recent_city, null);
+//                GridView hotCity = (GridView) convertView
+//                        .findViewById(R.id.recent_city);
+//                hotCity.setOnItemClickListener(new OnItemClickListener() {
+//
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view,
+//                                            int position, long id) {
+//                        Intent data = new Intent();
+//                        data.putExtra("select_city", city_hot.get(position).getName());
+//                        UIHelper.setResult(mContext, RESULT_OK, data);
+//                        InsertCity(city_hot.get(position).getName());
+//                        SPUtils.put(mContext, "city", city_hot.get(position).getName());
+//                    }
+//                });
+//                hotCity.setAdapter(new HotCityAdapter(context, this.hotList));
+//                TextView hotHint = (TextView) convertView
+//                        .findViewById(R.id.recentHint);
+//                hotHint.setText("热门城市");
+//            } else if (viewType == 3) {
             } else if (viewType == 2) {
-                convertView = inflater.inflate(R.layout.recent_city, null);
-                GridView hotCity = (GridView) convertView
-                        .findViewById(R.id.recent_city);
-                hotCity.setOnItemClickListener(new OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        Intent data = new Intent();
-                        data.putExtra("select_city", city_hot.get(position).getName());
-                        UIHelper.setResult(mContext, RESULT_OK, data);
-                        InsertCity(city_hot.get(position).getName());
-                        SPUtils.put(mContext, "city", city_hot.get(position).getName());
-                    }
-                });
-                hotCity.setAdapter(new HotCityAdapter(context, this.hotList));
-                TextView hotHint = (TextView) convertView
-                        .findViewById(R.id.recentHint);
-                hotHint.setText("热门城市");
-            } else if (viewType == 3) {
                 convertView = inflater.inflate(R.layout.total_item, null);
             } else {
                 if (convertView == null) {

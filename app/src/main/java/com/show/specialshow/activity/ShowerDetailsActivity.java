@@ -1,5 +1,7 @@
 package com.show.specialshow.activity;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +22,10 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.applib.controller.HXSDKHelper;
+import com.easemob.chat.EMContactManager;
+import com.easemob.chatuidemo.DemoHXSDKHelper;
+import com.easemob.chatuidemo.activity.AlertDialog;
 import com.easemob.chatuidemo.activity.ChatActivity;
 import com.easemob.chatuidemo.utils.SmileUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -72,6 +78,7 @@ public class ShowerDetailsActivity extends BaseActivity {
     private TextView shower_details_xinzuo;//星座
     private RoundImageView shower_details_roundImageView;// 头像
     private TextView shower_details_attention_btn;// 关注
+    private TextView shower_details_add_friend_btn;//加好友
     private TextView shower_details_nickname_tv;// 昵称
     private TextView shower_details_often_in_tv;// 常居地
     private TextView shower_details_signature_tv;// 个性签名
@@ -116,6 +123,8 @@ public class ShowerDetailsActivity extends BaseActivity {
     private ShowerCommedAdapter adapter;
     private List<ShopComcardStaPicsMess> mComcardStaPicsMess;
     private String user_id;
+    private ProgressDialog progressDialog;
+
 
     @Override
     public void initData() {
@@ -150,6 +159,8 @@ public class ShowerDetailsActivity extends BaseActivity {
         shower_details_xinzuo = (TextView) shower_details_head.findViewById(R.id.shower_details_xinzuo);
         shower_details_attention_btn = (TextView) shower_details_head
                 .findViewById(R.id.shower_details_attention_btn);
+        shower_details_add_friend_btn= (TextView) shower_details_head.
+                findViewById(R.id.shower_details_add_friend_btn);
         shower_details_nickname_tv = (TextView) shower_details_head
                 .findViewById(R.id.shower_details_nickname_tv);
         shower_details_often_in_tv = (TextView) shower_details_head
@@ -321,10 +332,86 @@ public class ShowerDetailsActivity extends BaseActivity {
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
                 break;
+            case R.id.shower_details_add_friend_btn://加好友
+                if (TXApplication.login) {
+                    addContact(Integer.valueOf(user_id));
+                }else{
+                    bundle.putInt(LoginActivity.FROM_LOGIN,
+                            LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
+                break;
 
             default:
                 break;
         }
+    }
+
+    /**
+     * 添加contact
+     *
+     * @param ／／i
+     *
+     */
+    public void addContact(final int emid) {
+        if (TXApplication.getInstance().getUserName().equals(emid + "")) {
+            String str = mContext.getString(R.string.not_add_myself);
+            mContext.startActivity(new Intent(mContext, AlertDialog.class)
+                    .putExtra("msg", str));
+            return;
+        }
+
+        if (((DemoHXSDKHelper) HXSDKHelper.getInstance()).getContactList()
+                .containsKey(emid + "")) {
+            // 提示已在好友列表中，无需添加
+            if (EMContactManager.getInstance().getBlackListUsernames()
+                    .contains(emid + "")) {
+                mContext.startActivity(new Intent(mContext, AlertDialog.class)
+                        .putExtra("msg", "此用户已是你好友(被拉黑状态)，从黑名单列表中移出即可"));
+                return;
+            }
+            String strin = mContext
+                    .getString(R.string.This_user_is_already_your_friend);
+            mContext.startActivity(new Intent(mContext, AlertDialog.class)
+                    .putExtra("msg", strin));
+            return;
+        }
+
+        progressDialog = new ProgressDialog(mContext);
+        String stri = mContext.getResources().getString(
+                R.string.Is_sending_a_request);
+        progressDialog.setMessage(stri);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
+        new Thread(new Runnable() {
+            public void run() {
+
+                try {
+                    // demo写死了个reason，实际应该让用户手动填入
+                    String s = mContext.getResources().getString(
+                            R.string.Add_a_friend);
+                    EMContactManager.getInstance().addContact(emid + "", s);
+                    ((Activity) mContext).runOnUiThread(new Runnable() {
+                        public void run() {
+                            progressDialog.dismiss();
+                            String s1 = mContext.getResources().getString(
+                                    R.string.send_successful);
+                            UIHelper.ToastMessage(mContext, s1);
+                        }
+                    });
+                } catch (final Exception e) {
+                    ((Activity) mContext).runOnUiThread(new Runnable() {
+                        public void run() {
+                            progressDialog.dismiss();
+                            String s2 = mContext.getResources().getString(
+                                    R.string.Request_add_buddy_failure);
+                            UIHelper.ToastMessage(mContext, s2);
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 
     private void attention(String attentid, final TextView btn) {
