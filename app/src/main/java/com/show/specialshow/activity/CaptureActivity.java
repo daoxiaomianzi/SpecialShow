@@ -108,7 +108,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
         switch (v.getId()) {
             case R.id.contest_cancel_tv:
                 affirmDialog.dismiss();
-                mContext.finish();
+                if (handler!=null) {
+                    handler.restartPreviewAndDecode();
+                }
                 break;
             case R.id.contest_confirm_tv:
                 bundle.putString("result", resultString + "&uid=" + SPUtils.get(mContext, "uid", ""));
@@ -181,8 +183,14 @@ public class CaptureActivity extends BaseActivity implements Callback {
         if (resultString.equals("")) {
             Toast.makeText(CaptureActivity.this, "扫描失败!", Toast.LENGTH_SHORT)
                     .show();
+            if(handler!=null){
+                handler.restartPreviewAndDecode();
+            }
         } else if (!resultString.contains("http://m.teshow.com/index.php?g=User&m=Merchant&a=type")) {
             UIHelper.ToastMessage(mContext,"不支持此类二维码");
+            if(handler!=null){
+                handler.restartPreviewAndDecode();
+            }
         } else {
 //			Intent resultIntent = new Intent();
 //			Bundle bundle = new Bundle();
