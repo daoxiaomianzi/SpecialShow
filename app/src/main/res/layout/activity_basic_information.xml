@@ -7,7 +7,7 @@
 	android:orientation="vertical"
 	android:id="@+id/basic_information_all"
     tools:context=".activity.BasicInformationActivity" >
-    <include 
+    <include
         layout="@layout/view_common_head"
         />
 	<RelativeLayout
@@ -19,7 +19,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="60dp"
 	    >
-	    <ImageView 
+	    <ImageView
 	        android:id="@+id/basic_infor_head_right"
 	        style="@style/list_menu_next"
 	        />
@@ -32,12 +32,12 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             imagecontrol:border_thickness="2dp"/>
-            <!-- android:src="@drawable/girl" --> 
+            <!-- android:src="@drawable/girl" -->
 	    <TextView
 	        android:layout_marginLeft="@dimen/text_size_20px"
 	        style="@style/user_info_tv"
 	        android:text="@string/head_portrait"/>
-	    <ImageView 
+	    <ImageView
 	        style="@style/user_info_split"
 	        />
 	</RelativeLayout>
@@ -48,7 +48,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="@dimen/text_size_114px"
 	    >
-	    <TextView 
+	    <TextView
 	        android:id="@+id/basic_infor_nickname"
 	        style="@style/user_info_tv"
 	        android:text="@string/nickname"
@@ -81,12 +81,12 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="@dimen/height_50"
 	    >
-	    <TextView 
+	    <TextView
 	        android:id="@+id/basic_infor_sex"
 	        style="@style/user_info_tv"
 	        android:text="@string/sex"
 	        />
-	    <TextView 
+	    <TextView
 	        android:id="@+id/basic_info_sex_name"
 	        android:layout_marginLeft="@dimen/text_size_16px"
 	        android:layout_toRightOf="@id/basic_infor_sex"
@@ -109,12 +109,12 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="@dimen/height_50"
 	    >
-	    <TextView 
+	    <TextView
 	        android:id="@+id/basic_info_birthday"
 	        style="@style/user_info_tv"
 	        android:text="@string/birthday"
 	        />
-	    	<TextView 
+	    	<TextView
 	    	    android:id="@+id/basic_info_birthday_data"
 	        android:layout_marginLeft="@dimen/text_size_16px"
 	        android:layout_toRightOf="@id/basic_info_birthday"
@@ -136,12 +136,12 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="@dimen/height_50"
 	    >
-	    <TextView 
+	    <TextView
 	        android:id="@+id/basic_info_often_in"
 	        style="@style/user_info_tv"
 	        android:text="@string/often_in"
 	        />
-	    	<TextView 
+	    	<TextView
 	    	    android:id="@+id/basic_info_often_in_address"
 	        android:layout_marginLeft="@dimen/text_size_16px"
 	        android:layout_toRightOf="@id/basic_info_often_in"

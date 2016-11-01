@@ -45,7 +45,8 @@ public class BaseBusCenWebActivity extends BaseActivity {
     private ValueCallback<Uri> mUploadMessage;// 表单的数据信息
     private ValueCallback<Uri[]> mUploadCallbackAboveL;
     protected Handler mHandler = new Handler();
-
+    protected JsResult jsResult;
+    private boolean isDoubleShow=false;
     // private ValueCallback<Uri> mFilePathCallback;
     // private ValueCallback<Uri[]> mFilePathCallbackArray;
     // private ImagePick ip;
@@ -184,6 +185,13 @@ public class BaseBusCenWebActivity extends BaseActivity {
                 result.confirm();
                 return true;
             }
+            @Override
+            public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+                jsResult=result;
+                isDoubleShow=true;
+                createAffirmDialog(message,DIALOG_DOUBLE_STPE,true);
+                return true;
+            }
         });
         content.setWebViewClient(new WebViewClient() {
             @Override
@@ -314,6 +322,15 @@ public class BaseBusCenWebActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.contest_confirm_tv:
+                if (isDoubleShow) {
+                    jsResult.confirm();
+                }
+                affirmDialog.dismiss();
+                break;
+            case R.id.contest_cancel_tv:
+                if(isDoubleShow){
+                    jsResult.cancel();
+                }
                 affirmDialog.dismiss();
                 break;
 

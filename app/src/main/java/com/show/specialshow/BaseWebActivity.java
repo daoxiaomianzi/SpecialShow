@@ -88,6 +88,13 @@ public class BaseWebActivity extends BaseActivity {
 				result.confirm();
 				return true;
 			}
+
+//			@Override
+//			public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+//				createAffirmDialog(message,DIALOG_DOUBLE_STPE,true);
+//				result.confirm();
+//				return true;
+//			}
 		});
 		content.setWebViewClient(new WebViewClient() {
 			@Override
