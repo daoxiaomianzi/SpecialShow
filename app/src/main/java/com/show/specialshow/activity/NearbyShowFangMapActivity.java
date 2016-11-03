@@ -3,8 +3,9 @@ package com.show.specialshow.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -16,12 +17,14 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
+import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
@@ -46,7 +49,7 @@ import java.util.List;
 
 public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocationListener, AMap.OnMarkerClickListener,
         AMap.OnInfoWindowClickListener, AMap.OnMapLoadedListener,
-        View.OnClickListener, AMap.InfoWindowAdapter, LocationSource {
+        View.OnClickListener, AMap.InfoWindowAdapter, LocationSource, AMap.OnCameraChangeListener {
     //数据相关
     private List<NearMapMess> mapMessList = new ArrayList<>();
     //相关控件
@@ -66,16 +69,17 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     private View view;
     // 初始化全局 bitmap 信息，不用时及时 recycle
     private BitmapDescriptor bdA;
+
     private List<Marker> markerList = new ArrayList<>();
     private TextView map_shop;//店铺名字
-//    private TextView map_address;//店铺地址
+    //    private TextView map_address;//店铺地址
     //sqlite数据库
     private DatabaseUtil mDBUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        near_show_et= (EditText) findViewById(R.id.near_show_et);
+        near_show_et = (EditText) findViewById(R.id.near_show_et);
         // 地图初始化
         mMapView = (MapView) findViewById(R.id.bmapView);
         mMapView.onCreate(savedInstanceState);
@@ -96,10 +100,10 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(StringUtils.isEmpty(editable.toString().trim())){
-                    if(null!=aMap){
-                    aMap.clear();
-                        if(mapMessList!=null){
+                if (StringUtils.isEmpty(editable.toString().trim())) {
+                    if (null != aMap) {
+                        aMap.clear();
+                        if (mapMessList != null) {
                             addMarkersToMap(mapMessList);
                         }
                     }
@@ -113,6 +117,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      * 获取数据
      */
     private void getData() {
+        mDBUtil.deleteAll();
         RequestParams params = TXApplication.getParams();
         String url = URLs.SHOP_NEARSHOP;
         if (0.0d == mLat || 0.0d == mLon) {
@@ -124,9 +129,16 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 //            params.addBodyParameter("latitude", "31.234841");//纬度
         }
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                loadIng("加载中...", true);
+            }
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (null != dialog) {
+                    dialog.dismiss();
+                }
                 MessageResult result = MessageResult.parse(responseInfo.result);
                 if (null == result) {
                     return;
@@ -134,7 +146,18 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                 if (1 == result.getSuccess()) {
                     String info = result.getData();
                     if (null != info) {
-                        mapMessList = NearMapMess.parse(info);
+                        List<NearMapMess> mapList = NearMapMess.parse(info);
+                        if (null != mapList && !mapList.isEmpty()) {
+                            mapMessList.addAll(mapList);
+                        }
+                        for (int i = mapMessList.size() - 1; i > 0; i--) {
+                            for (int j = i - 1; j >= 0; j--) {
+                                if (mapMessList.get(j).getShop_id().equals(mapMessList.get(i).getShop_id())) {
+                                    mapMessList.remove(j);
+                                    break;
+                                }
+                            }
+                        }
                         if (mapMessList.isEmpty() || mapMessList == null) {
                             UIHelper.ToastMessage(mContext, "附近没有秀坊");
                             return;
@@ -148,6 +171,9 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 
             @Override
             public void onFailure(HttpException error, String msg) {
+                if (null != dialog) {
+                    dialog.dismiss();
+                }
                 UIHelper.ToastMessage(mContext, R.string.net_work_error);
             }
         });
@@ -157,7 +183,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     /**
      * 插入数据进数据库
      */
-    private void insertData(){
+    private void insertData() {
         for (int i = 0; i < mapMessList.size(); i++) {
             mDBUtil.Insert(mapMessList.get(i));
         }
@@ -166,14 +192,13 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 
     @Override
     public void initData() {
+        mDBUtil = new DatabaseUtil(mContext);
         setContentView(R.layout.activity_nearby_show_fang_map);
 
     }
 
     @Override
     public void initView() {
-        mDBUtil=new DatabaseUtil(mContext);
-        mDBUtil.deleteAll();
     }
 
     @Override
@@ -196,20 +221,20 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                 affirmDialog.dismiss();
                 break;
             case R.id.btn_search://搜索
-                if(StringUtils.isEmpty(near_show_et.getText().toString().trim())){
-                    UIHelper.ToastMessage(mContext,"请输入关键字");
-                }else{
+                if (StringUtils.isEmpty(near_show_et.getText().toString().trim())) {
+                    UIHelper.ToastMessage(mContext, "请输入关键字");
+                } else {
                     searchResult();
                 }
                 break;
             case R.id.near_show_right_tv:
-                UIHelper.startActivity(mContext,NearShowActivity.class);
+                UIHelper.startActivity(mContext, NearShowActivity.class);
                 break;
             case R.id.near_show_back:
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                boolean isOpen=imm.isActive();//isOpen若返回true，则表示输入法打开
-                if(isOpen){
-                   UIHelper.isVisable(mContext,near_show_et);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                boolean isOpen = imm.isActive();//isOpen若返回true，则表示输入法打开
+                if (isOpen) {
+                    UIHelper.isVisable(mContext, near_show_et);
                 }
                 finish();
                 break;
@@ -219,50 +244,52 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     /**
      * 搜索结果
      */
-    private void searchResult(){
+    private void searchResult() {
         List<NearMapMess> searchList = mDBUtil.queryByname(near_show_et.getText().toString().trim());
-        if(searchList.size()!=0){
-            if(null!=aMap){
+        if (searchList.size() != 0) {
+            if (null != aMap) {
                 aMap.clear();
-                if(null!=markerList){
+                if (null != markerList) {
                     markerList.clear();
                 }
                 addMarkersToMap(searchList);
             }
-        }else{
-            UIHelper.ToastMessage(mContext,"没有搜索到秀坊");
+        } else {
+            UIHelper.ToastMessage(mContext, "没有搜索到秀坊");
         }
     }
+
     /**
- * 弹出对话框,选择是去店铺还是导航
- */
-    private void switchDialog(final double mLat2, final double mLon2, final String shop_id,String address){
+     * 弹出对话框,选择是去店铺还是导航
+     */
+    private void switchDialog(final double mLat2, final double mLon2, final String shop_id, String address) {
         new ActionSheetDialog(mContext)
                 .builder()
-                .setTitle("前往\n"+address)
+                .setTitle("前往\n" + address)
                 .setCancelable(true)
                 .setCanceledOnTouchOutside(true)
                 .addSheetItem("店铺详情", ActionSheetDialog.SheetItemColor.Blue,
                         new ActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Bundle bundle =new Bundle();
-                                bundle.putString("shop_id",shop_id);
-                                UIHelper.startActivity(mContext,StoresDetailsActivity.class,bundle);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("shop_id", shop_id);
+                                UIHelper.startActivity(mContext, StoresDetailsActivity.class, bundle);
                             }
                         })
                 .addSheetItem("前往", ActionSheetDialog.SheetItemColor.Blue,
                         new ActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                isShowDialog(mLat2,mLon2);
+                                isShowDialog(mLat2, mLon2);
                             }
                         }).show();
     }
+
     /**
      * 弹出对话框，选择出行导航方式
      */
-    private void isShowDialog(final double mLat2,final double mLon2) {
+    private void isShowDialog(final double mLat2, final double mLon2) {
         new ActionSheetDialog(mContext)
                 .builder()
                 .setTitle("导航\n请选择出行方式")
@@ -272,24 +299,24 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                         new ActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Bundle bundle=new Bundle();
-                                bundle.putDouble("mLat1",mLat);
-                                bundle.putDouble("mLon1",mLon);
-                                bundle.putDouble("mLat2",mLat2);
-                                bundle.putDouble("mLon2",mLon2);
-                                UIHelper.startActivity(mContext,WalkNaviActivity.class,bundle);
+                                Bundle bundle = new Bundle();
+                                bundle.putDouble("mLat1", mLat);
+                                bundle.putDouble("mLon1", mLon);
+                                bundle.putDouble("mLat2", mLat2);
+                                bundle.putDouble("mLon2", mLon2);
+                                UIHelper.startActivity(mContext, WalkNaviActivity.class, bundle);
                             }
                         })
                 .addSheetItem("驾车导航", ActionSheetDialog.SheetItemColor.Blue,
                         new ActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                Bundle bundle=new Bundle();
-                                bundle.putDouble("mLat1",mLat);
-                                bundle.putDouble("mLon1",mLon);
-                                bundle.putDouble("mLat2",mLat2);
-                                bundle.putDouble("mLon2",mLon2);
-                                UIHelper.startActivity(mContext,NavigationActivity.class,bundle);
+                                Bundle bundle = new Bundle();
+                                bundle.putDouble("mLat1", mLat);
+                                bundle.putDouble("mLon1", mLon);
+                                bundle.putDouble("mLat2", mLat2);
+                                bundle.putDouble("mLon2", mLon2);
+                                UIHelper.startActivity(mContext, NavigationActivity.class, bundle);
                             }
                         }).show();
     }
@@ -321,11 +348,42 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     }
 
     /**
+     * 自定义infowinfow窗口
+     */
+    public void render(Marker marker, View view) {
+        String title = marker.getTitle();
+        TextView titleUi = ((TextView) view.findViewById(R.id.title));
+        if (title != null) {
+            SpannableString titleText = new SpannableString(title);
+//            titleText.setSpan(new ForegroundColorSpan(Color.RED), 0,
+//                    titleText.length(), 0);
+//            titleUi.setTextSize(15);
+            titleUi.setText(titleText);
+
+        } else {
+            titleUi.setText("");
+        }
+        String snippet = marker.getSnippet();
+        TextView snippetUi = ((TextView) view.findViewById(R.id.snippet));
+        if (snippet != null) {
+            SpannableString snippetText = new SpannableString(snippet);
+//            snippetText.setSpan(new ForegroundColorSpan(Color.GREEN), 0,
+//                    snippetText.length(), 0);
+//            snippetUi.setTextSize(20);
+            snippetUi.setText(snippetText);
+        } else {
+            snippetUi.setText("");
+        }
+    }
+
+    /**
      * 监听自定义infowindow窗口的infowindow事件回调
      */
     @Override
     public View getInfoWindow(Marker marker) {
-        return null;
+        View view = getLayoutInflater().inflate(R.layout.custom_info_window, null);
+        render(marker, view);
+        return view;
     }
 
     /**
@@ -341,7 +399,12 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      */
     @Override
     public void onInfoWindowClick(Marker marker) {
-
+        for (int i = 0; i < markerList.size(); i++) {
+            if (marker.equals(markerList.get(i))) {
+                LatLng ll = marker.getPosition();
+                switchDialog(ll.latitude, ll.longitude, mapMessList.get(i).getShop_id(), mapMessList.get(i).getAddress());
+            }
+        }
     }
 
     /**
@@ -357,12 +420,12 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      */
     @Override
     public boolean onMarkerClick(Marker marker) {
-        for (int i = 0; i < markerList.size(); i++) {
-            if (marker .equals( markerList.get(i))) {
-                LatLng ll = marker.getPosition();
-                switchDialog(ll.latitude,ll.longitude,mapMessList.get(i).getShop_id(),mapMessList.get(i).getAddress());
-            }
-        }
+//        for (int i = 0; i < markerList.size(); i++) {
+//            if (marker .equals( markerList.get(i))) {
+//                LatLng ll = marker.getPosition();
+//                switchDialog(ll.latitude,ll.longitude,mapMessList.get(i).getShop_id(),mapMessList.get(i).getAddress());
+//            }
+//        }
         return false;
     }
 
@@ -397,6 +460,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     }
 
     private void setUpMap() {
+        aMap.setOnCameraChangeListener(this);//设置获取当前屏幕中心点的经纬度
         aMap.setOnMapLoadedListener(this);// 设置amap加载成功事件监听器
         aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
         aMap.setOnInfoWindowClickListener(this);// 设置点击infoWindow事件监听器
@@ -415,21 +479,21 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      */
     private void addMarkersToMap(List<NearMapMess> mapMessList) {
         for (int i = 0; i < mapMessList.size(); i++) {
-            view = getLayoutInflater().from(mContext).inflate(R.layout.map_button, null);
-            map_shop = (TextView) view.findViewById(R.id.map_shop);
-//            map_address = (TextView) view.findViewById(R.id.map_address);
-            map_shop.setText(mapMessList.get(i).getTitle());
-//            map_address.setText(mapMessList.get(i).getAddress());
-            bdA = BitmapDescriptorFactory
-                    .fromView(view);
+//            view = getLayoutInflater().from(mContext).inflate(R.layout.map_button, null);
+//            map_shop = (TextView) view.findViewById(R.id.map_shop);
+////            map_address = (TextView) view.findViewById(R.id.map_address);
+//            map_shop.setText(mapMessList.get(i).getTitle());
+////            map_address.setText(mapMessList.get(i).getAddress());
+            bdA = BitmapDescriptorFactory.
+                    fromResource(R.drawable.icon_nearby_marke);
+//                    .fromView(view);
             LatLng ll = new LatLng(mapMessList.get(i).getLatitude(), mapMessList.get(i).getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(ll);
-            marker = aMap.addMarker(markerOptions.icon(bdA).draggable(true));
-            marker.showInfoWindow();
+            marker = aMap.addMarker(markerOptions.title(mapMessList.get(i).getTitle()).snippet(mapMessList.get(i).getAddress()).icon(bdA).draggable(true));
             markerList.add(marker);
         }
-
+        marker.showInfoWindow();
     }
 
     @Override
@@ -490,4 +554,24 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
         }
         locationClient = null;
     }
+
+    @Override
+    public void onCameraChange(CameraPosition cameraPosition) {
+    }
+
+    @Override
+    public void onCameraChangeFinish(CameraPosition cameraPosition) {
+        LatLng latLng = cameraPosition.target;
+        LatLng latLngLocation = new LatLng(mLat, mLon);
+        if (mLat != 0.0d && mLon != 0.0d) {
+            float distance = AMapUtils.calculateLineDistance(latLngLocation, latLng);
+            if (distance > 4000) {
+                mLon = latLng.longitude;
+                mLat = latLng.latitude;
+                getData();
+            }
+        }
+    }
+
+
 }
