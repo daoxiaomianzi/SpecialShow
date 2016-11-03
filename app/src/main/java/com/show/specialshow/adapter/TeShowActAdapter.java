@@ -90,10 +90,10 @@ public class TeShowActAdapter extends BaseAdapter {
             viewHolder.tv_item_activities_is_free.setText(mList.get(position).getPost_expense() + "元");
         }
         viewHolder.tv_item_activities_time.setText(MessageFormat.format(
-                "时间:{0}", mList.get(position).getPost_active_time()
+                "时间: {0}", mList.get(position).getPost_active_time()
         ));
         viewHolder.tv_item_activities_address.setText(MessageFormat.format(
-                "地址:{0}", mList.get(position).getPost_place()
+                "地址: {0}", mList.get(position).getPost_place()
         ));
         viewHolder.tv_item_activities_excerpt.setText(mList.get(position).getPost_excerpt());
     }

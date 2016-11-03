@@ -10,14 +10,27 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.utils.ActionSheetDialog;
+import com.show.specialshow.utils.FileUtils;
+import com.show.specialshow.utils.UIHelper;
+import com.show.specialshow.view.CustomProgressDialog;
 import com.show.specialshow.view.PhotoViewAttacher;
 import com.show.specialshow.view.PhotoViewAttacher.OnPhotoTapListener;
 
-public class ImageDetailFragment extends Fragment {
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class ImageDetailFragment extends BaseFragment {
 	private String mImageUrl;
 	private ImageView mImageView;
 	private ProgressBar progressBar;
@@ -53,9 +66,74 @@ public class ImageDetailFragment extends Fragment {
 				getActivity().finish();
 			}
 		});
-		
+		mAttacher.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				showSelectDialog();
+				return true;
+			}
+		});
+
 		progressBar = (ProgressBar) v.findViewById(R.id.loading);
 		return v;
+	}
+
+	/**
+	 * 选择弹框
+	 */
+	private  void showSelectDialog() {
+		new ActionSheetDialog(getActivity())
+				.builder()
+				.setCancelable(true)
+				.setCanceledOnTouchOutside(true)
+				.addSheetItem("保存图片", ActionSheetDialog.SheetItemColor.Black,
+						new ActionSheetDialog.OnSheetItemClickListener() {
+							@Override
+							public void onClick(int which) {
+								savePhoto();
+							}
+						}).show();
+	}
+
+	/**
+	 * 保存图片
+	 * @param
+     */
+	private void savePhoto(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+	 	String savePath="/TX_SAVE_PHOTO/"+sdf.format(date) + ".png";
+		File file=new File(FileUtils.SDPATH,savePath);
+		if(!file.getParentFile().exists()){
+			file.getParentFile().mkdirs();
+		}
+		HttpUtils httpUtils= new HttpUtils();
+		httpUtils.download(mImageUrl, FileUtils.SDPATH+savePath, new RequestCallBack<File>() {
+			@Override
+			public void onStart() {
+				loadIng("正在保存",false);
+			}
+
+			@Override
+			public void onSuccess(ResponseInfo<File> responseInfo) {
+				if(null!=dialog){
+					dialog.dismiss();
+				}
+				if(200==responseInfo.statusCode){
+					UIHelper.ToastMessage(getActivity(),"保存成功，在sd下的TX_SAVE_PHOTO文件夹下查看");
+				}else{
+					UIHelper.ToastMessage(getActivity(),"保存失败");
+				}
+			}
+
+			@Override
+			public void onFailure(HttpException e, String s) {
+				if(null!=dialog){
+					dialog.dismiss();
+				}
+				UIHelper.ToastMessage(getActivity(),"保存失败");
+			}
+		});
 	}
 
 	@Override
@@ -102,6 +180,31 @@ public class ImageDetailFragment extends Fragment {
 		
 		
 		
+	}
+
+	@Override
+	public void initData() {
+
+	}
+
+	@Override
+	public void initView() {
+
+	}
+
+	@Override
+	public void setListener() {
+
+	}
+
+	@Override
+	public void fillView() {
+
+	}
+
+	@Override
+	public void onClick(View v) {
+
 	}
 
 }

@@ -9,8 +9,8 @@
     android:paddingBottom="@dimen/text_size_10px"
     android:paddingLeft="@dimen/text_size_10px"
     android:id="@+id/rl_activities_img"
-    android:layout_width="125dp"
-    android:layout_height="175dp">
+    android:layout_width="95dp"
+    android:layout_height="140dp">
 
     <ImageView
         android:scaleType="fitXY"
@@ -19,13 +19,13 @@
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tv_item_activities_progress"
-        android:textSize="@dimen/text_size_30px"
+        android:textSize="@dimen/text_size_24px"
         android:gravity="center"
         android:textColor="@color/white"
         android:text="正在进行"
         android:background="@color/green"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/text_size_86px"
+        android:layout_height="@dimen/text_size_44px"
         android:layout_alignParentBottom="true"
         />
 
@@ -38,18 +38,20 @@
         android:layout_marginLeft="@dimen/text_size_16px"
         android:layout_toRightOf="@id/rl_activities_img"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="140dp"
         >
 
         <TextView
             android:id="@+id/tv_item_activities_title"
-            android:singleLine="true"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textSize="@dimen/text_size_30px"
            style="@style/user_info_tv"
             android:text="Hanhoo 韩后"
             />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_item_activities_slogan"
 
             android:singleLine="true"
@@ -59,7 +61,7 @@
 
         <TextView
             android:id="@+id/tv_item_activities_is_free"
-            android:layout_marginTop="@dimen/text_size_4px"
+            android:layout_marginTop="@dimen/text_size_6px"
             android:textColor="@color/white"
             android:paddingTop="@dimen/text_size_1px"
             android:paddingBottom="@dimen/text_size_1px"
@@ -71,7 +73,7 @@
             />
         <TextView
             android:id="@+id/tv_item_activities_time"
-            android:layout_marginTop="@dimen/text_size_4px"
+            android:layout_marginTop="@dimen/text_size_6px"
             android:textColor="@color/color_656565"
             android:singleLine="true"
             style="@style/user_info_tv"
@@ -86,6 +88,7 @@
             android:text="地址：赣州市红旗大道29号美丝纺"
             />
         <TextView
+            android:visibility="gone"
             android:id="@+id/tv_item_activities_excerpt"
             android:maxLines="3"
             android:ellipsize="end"

@@ -38,6 +38,8 @@ import com.show.specialshow.view.SignUpDialog;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.MessageFormat;
+
 public class ActivitiesDetailActivity extends BaseActivity {
     //相关控件
     private WebView content;
@@ -113,8 +115,8 @@ public class ActivitiesDetailActivity extends BaseActivity {
             }else{
                 tv_detail_activities_is_free.setText(activitiesMess.getPost_expense()+"元");
             }
-            tv_detail_activities_time.setText(activitiesMess.getPost_active_time());
-            tv_detail_activities_address.setText(activitiesMess.getPost_place());
+            tv_detail_activities_time.setText(MessageFormat.format("时间: {0}",activitiesMess.getPost_active_time()));
+            tv_detail_activities_address.setText(MessageFormat.format("地址: {0}",activitiesMess.getPost_place()));
             tv_detail_activities_excerpt.setText(activitiesMess.getPost_excerpt());
 
         }
