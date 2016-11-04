@@ -16,28 +16,28 @@
         android:background="@color/app_line_bg"
         />
 
-    <RelativeLayout
-        android:layout_height="45dp"
-        android:id="@+id/rl_my_topic"
-        style="@style/user_info_container" >
+    <!--<RelativeLayout-->
+        <!--android:layout_height="45dp"-->
+        <!--android:id="@+id/rl_my_topic"-->
+        <!--style="@style/user_info_container" >-->
 
-        <ImageView
-            android:id="@+id/my_topic_iv"
-            style="@style/user_info_iv"
-            android:src="@drawable/icon_topic" />
+        <!--<ImageView-->
+            <!--android:id="@+id/my_topic_iv"-->
+            <!--style="@style/user_info_iv"-->
+            <!--android:src="@drawable/icon_topic" />-->
 
-        <TextView
-            android:textColor="@color/color_656565"
-            style="@style/user_info_tv"
-            android:layout_toRightOf="@id/my_topic_iv"
-            android:text="@string/my_topic" />
+        <!--<TextView-->
+            <!--android:textColor="@color/color_656565"-->
+            <!--style="@style/user_info_tv"-->
+            <!--android:layout_toRightOf="@id/my_topic_iv"-->
+            <!--android:text="@string/my_topic" />-->
 
-        <ImageView style="@style/user_info_split" />
+        <!--<ImageView style="@style/user_info_split" />-->
 
-        <ImageView
-            android:id="@+id/my_topic_iv_right_iv"
-            style="@style/list_menu_next" />
-    </RelativeLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/my_topic_iv_right_iv"-->
+            <!--style="@style/list_menu_next" />-->
+    <!--</RelativeLayout>-->
 
 
     <RelativeLayout

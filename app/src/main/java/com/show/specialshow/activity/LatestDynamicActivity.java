@@ -47,9 +47,9 @@ public class LatestDynamicActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.rl_my_topic://我的话题
-                myTopic();
-                break;
+//            case R.id.rl_my_topic://我的话题
+//                myTopic();
+//                break;
             case R.id.rl_photo_albums_dynamic://我的动态
                 UIHelper.startActivity(mContext, AlbumsDynamicActivity.class);
                 break;

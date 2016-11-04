@@ -54,39 +54,39 @@ public class FindActivity extends BaseActivity {
             return;
         }
         switch (v.getId()) {
-            case R.id.rll_texiu_community://特秀社区
-                if (TXApplication.login) {
-                    if(CommonUtils.isLogin(mContext)){
-                        UIHelper.startActivity(mContext, MainCommunityActivity.class);
-                    }else{
-                        //创建CommUser前必须先初始化CommunitySDK
-                        CommunitySDK sdk = CommunityFactory.getCommSDK(this);
-                        CommUser user = new CommUser();
-                        UserMessage userMessage = TXApplication.getUserMess();
-                        user.name = userMessage.getNickname().toString();
-                        user.id = userMessage.getUid().toString();
-                        sdk.loginToUmengServerBySelfAccount(this, user, new LoginListener() {
-                            @Override
-                            public void onStart() {
-                            }
-                            @Override
-                            public void onComplete(int stCode, CommUser commUser) {
-                                Log.d("tag", "login result is"+stCode);          //获取登录结果状态码
-                                if (ErrorCode.NO_ERROR == stCode) {
-                                    //登录成功，可以打开社区，也可以进行其他的操作，开发者自己定义
-                                    UIHelper.startActivity(mContext, MainCommunityActivity.class);
-                                }else{
-                                    UIHelper.ToastLogMessage(mContext,"出了点小问题，请稍后再试哦|");
-                                }
-                            }
-                        });
-                    }
-                } else {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
-                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
-                }
-                break;
+//            case R.id.rll_texiu_community://特秀社区
+//                if (TXApplication.login) {
+//                    if(CommonUtils.isLogin(mContext)){
+//                        UIHelper.startActivity(mContext, MainCommunityActivity.class);
+//                    }else{
+//                        //创建CommUser前必须先初始化CommunitySDK
+//                        CommunitySDK sdk = CommunityFactory.getCommSDK(this);
+//                        CommUser user = new CommUser();
+//                        UserMessage userMessage = TXApplication.getUserMess();
+//                        user.name = userMessage.getNickname().toString();
+//                        user.id = userMessage.getUid().toString();
+//                        sdk.loginToUmengServerBySelfAccount(this, user, new LoginListener() {
+//                            @Override
+//                            public void onStart() {
+//                            }
+//                            @Override
+//                            public void onComplete(int stCode, CommUser commUser) {
+//                                Log.d("tag", "login result is"+stCode);          //获取登录结果状态码
+//                                if (ErrorCode.NO_ERROR == stCode) {
+//                                    //登录成功，可以打开社区，也可以进行其他的操作，开发者自己定义
+//                                    UIHelper.startActivity(mContext, MainCommunityActivity.class);
+//                                }else{
+//                                    UIHelper.ToastLogMessage(mContext,"出了点小问题，请稍后再试哦|");
+//                                }
+//                            }
+//                        });
+//                    }
+//                } else {
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+//                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+//                }
+//                break;
             case R.id.rll_texiu_activity://特秀活动
                 UIHelper.startActivity(mContext,TeShowActivitiesActivity.class);
 //                if (TXApplication.login) {
