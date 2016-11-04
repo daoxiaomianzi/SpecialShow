@@ -19,6 +19,7 @@ import com.show.specialshow.URLs;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.MyBookingMess;
 import com.show.specialshow.model.UserMessage;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
 
@@ -181,6 +182,9 @@ public class MyBookingActivity extends BaseSearchActivity {
 				
 				@Override
 				public void onClick(View v) {
+					if(!BtnUtils.getInstance().isFastDoubleClick()){
+						return;
+					}
 					Bundle bundle=new Bundle();
 					bundle.putSerializable(RESER_DETAILS, myBookingList.get(position));
 					UIHelper.startActivity(mContext, ReserDetailsActivity.class, bundle);

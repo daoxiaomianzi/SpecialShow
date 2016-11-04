@@ -78,6 +78,7 @@ public class TeShowActAdapter extends BaseAdapter {
         ImageLoader.getInstance().displayImage(mList.get(position).getPost_smeta(), viewHolder.iv_item_activities_img);
         if (mList.get(position).isPost_isprogress()) {
             viewHolder.tv_item_activities_progress.setText("正在进行");
+            viewHolder.tv_item_activities_progress.setBackgroundResource(R.color.green);
         } else {
             viewHolder.tv_item_activities_progress.setText("已结束");
             viewHolder.tv_item_activities_progress.setBackgroundResource(R.color.gary);
