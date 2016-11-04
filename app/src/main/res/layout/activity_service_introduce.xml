@@ -21,7 +21,8 @@
         android:textColor="@color/color_ffffff"
         android:textSize="@dimen/text_size_32px"
         />
-    <ScrollView 
+    <ScrollView
+		android:layout_marginTop="@dimen/text_size_6px"
         android:layout_above="@id/service_des_appoint_immed"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -36,7 +37,7 @@
         >
             <FrameLayout
             android:layout_width="fill_parent"
-            android:layout_height="158dp"
+            android:layout_height="220dp"
             android:orientation="vertical" >
 				<ImageView
 					android:scaleType="fitXY"
