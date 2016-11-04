@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -245,14 +244,20 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      * 搜索结果
      */
     private void searchResult() {
-        List<NearMapMess> searchList = mDBUtil.queryByname(near_show_et.getText().toString().trim());
+        List<NearMapMess> searchList = mDBUtil.queryByname(
+                near_show_et.getText().toString().trim());
         if (searchList.size() != 0) {
             if (null != aMap) {
                 aMap.clear();
                 if (null != markerList) {
                     markerList.clear();
                 }
+                mapMessList = searchList;
                 addMarkersToMap(searchList);
+                LatLng latLng = new LatLng(mapMessList.get(0).getLatitude(),
+                        mapMessList.get(0).getLongitude());
+                //设置中心点和缩放比例
+                aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
             }
         } else {
             UIHelper.ToastMessage(mContext, "没有搜索到秀坊");
@@ -337,9 +342,9 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
             isFirstLoc = false;
             mLat = aMapLocation.getLatitude();
             mLon = aMapLocation.getLongitude();
-            LatLng marker1 = new LatLng(mLat, mLon);
+            LatLng latLng = new LatLng(mLat, mLon);
             //设置中心点和缩放比例
-            aMap.moveCamera(CameraUpdateFactory.changeLatLng(marker1));
+            aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
             if (null != mListener) {
                 mListener.onLocationChanged(aMapLocation);
             }
@@ -490,8 +495,17 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
             LatLng ll = new LatLng(mapMessList.get(i).getLatitude(), mapMessList.get(i).getLongitude());
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(ll);
-            marker = aMap.addMarker(markerOptions.title(mapMessList.get(i).getTitle()).snippet(mapMessList.get(i).getAddress()).icon(bdA).draggable(true));
+            marker = aMap.addMarker(markerOptions.title(mapMessList.get(i).getTitle())
+                    .snippet(mapMessList.get(i).getAddress()).icon(bdA).draggable(true));
             markerList.add(marker);
+        }
+        for (int i = markerList.size() - 1; i > 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (markerList.get(j).getPosition().equals(markerList.get(i).getPosition())) {
+                    markerList.remove(j);
+                    break;
+                }
+            }
         }
         marker.showInfoWindow();
     }
@@ -568,6 +582,9 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
             if (distance > 4000) {
                 mLon = latLng.longitude;
                 mLat = latLng.latitude;
+                if (aMap != null) {
+                    aMap.clear();
+                }
                 getData();
             }
         }

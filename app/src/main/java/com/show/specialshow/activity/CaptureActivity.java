@@ -108,7 +108,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
         switch (v.getId()) {
             case R.id.contest_cancel_tv:
                 affirmDialog.dismiss();
-                if (handler!=null) {
+                if (handler != null) {
                     handler.restartPreviewAndDecode();
                 }
                 break;
@@ -183,17 +183,17 @@ public class CaptureActivity extends BaseActivity implements Callback {
         if (resultString.equals("")) {
             Toast.makeText(CaptureActivity.this, "扫描失败!", Toast.LENGTH_SHORT)
                     .show();
-            if(handler!=null){
+            if (handler != null) {
                 handler.restartPreviewAndDecode();
             }
-        } else if (!resultString.contains("http://m.teshow.com/index.php?g=User&m=Merchant&a=type")) {
-            UIHelper.ToastMessage(mContext,"不支持此类二维码");
-            if(handler!=null){
+        } else if (!resultString.contains("http://m.teshow.com")) {
+            UIHelper.ToastMessage(mContext, "不支持此类二维码");
+            if (handler != null) {
                 handler.restartPreviewAndDecode();
             }
         } else {
 //			Intent resultIntent = new Intent();
-//			Bundle bundle = new Bundle();
+			Bundle bundle = new Bundle();
             Matrix matrix = new Matrix();
             matrix.postScale(0.5f, 0.5f);
             Bitmap bit = Bitmap.createBitmap(barcode, 0, 0, barcode.getWidth(),
@@ -202,7 +202,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //			Log.i("result",resultString);
 //			bundle.putParcelable("bitmap", bit);
 //			resultIntent.putExtras(bundle);
-            createAffirmDialog("申请成为手艺人界面", DIALOG_DOUBLE_STPE, "即将前往", false);
+            bundle.putString("result", resultString + "&uid=" + SPUtils.get(mContext, "uid", ""));
+            UIHelper.startActivity(mContext, ScanResultActivity.class, bundle);
+//            createAffirmDialog("扫描界面", DIALOG_DOUBLE_STPE, "即将前往", false);
         }
     }
 
