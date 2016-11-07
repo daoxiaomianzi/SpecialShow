@@ -38,6 +38,8 @@ import com.google.zxing.qrcode.QRCodeReader;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
+import com.show.specialshow.contstant.ConstantValue;
+import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.zxing.camera.CameraManager;
@@ -193,7 +195,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
             }
         } else {
 //			Intent resultIntent = new Intent();
-			Bundle bundle = new Bundle();
+            Bundle bundle = new Bundle();
             Matrix matrix = new Matrix();
             matrix.postScale(0.5f, 0.5f);
             Bitmap bit = Bitmap.createBitmap(barcode, 0, 0, barcode.getWidth(),
@@ -202,7 +204,9 @@ public class CaptureActivity extends BaseActivity implements Callback {
 //			Log.i("result",resultString);
 //			bundle.putParcelable("bitmap", bit);
 //			resultIntent.putExtras(bundle);
-            bundle.putString("result", resultString + "&uid=" + SPUtils.get(mContext, "uid", ""));
+            String uid = (String) SPUtils.get(mContext, "uid", "");
+            bundle.putString("result", resultString + "&uid=" + uid + "&" + ConstantValue.sign
+                    + "=" + MD5Utils.getMd5Str(uid + ConstantValue.SIGN));
             UIHelper.startActivity(mContext, ScanResultActivity.class, bundle);
 //            createAffirmDialog("扫描界面", DIALOG_DOUBLE_STPE, "即将前往", false);
         }
