@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="toast_dblclick_back_pressed">再按一下返回到桌面</string>
+    <string name="cancle_app_download">取消下载</string>
 
     <string name="no_net_work">当前网络不可用，请检查网络设置！</string>
     <string name="app_name">特秀美妆</string>

@@ -262,5 +262,14 @@ public interface URLs {
 	 * 选择城市中城市数据请求
 	 */
 	String CITY_CITYLIST=BASE_URL+"/City/Citylist";
+	/**
+	 * apk下载地址
+	 */
+	String DOWN_LOAD = "http://www.xiaodai.com/UF/apk/xdlc.apk";
+	/**
+	 * 获得当前版本
+	 */
+	String GET_CURRENT_VERSION = BASE_URL
+			+ "/Pindex/version_get";
 }
 

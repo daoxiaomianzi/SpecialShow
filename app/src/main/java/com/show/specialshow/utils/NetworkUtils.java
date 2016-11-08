@@ -11,6 +11,15 @@ import android.net.NetworkInfo;
  * 网络使用工具类
  */
 public class NetworkUtils {
+    /**
+     * 检测网络是否可用
+     */
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getActiveNetworkInfo();
+        return ni != null && ni.isConnectedOrConnecting();
+    }
 
     /**
      * 判断是不是wifi网络状态

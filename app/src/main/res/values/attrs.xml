@@ -31,4 +31,13 @@
         <!-- Defines a vertical widget. -->
         <enum name="vertical" value="1" />
     </attr>
+
+    <declare-styleable name="FlikerProgressBar">
+        <attr name="textSize" format="dimension|reference"/>
+
+        <attr name="loadingColor" format="color|reference"/>
+
+        <attr name="stopColor" format="color|reference"/>
+
+    </declare-styleable>
 </resources>
