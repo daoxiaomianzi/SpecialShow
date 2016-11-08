@@ -265,7 +265,7 @@ public interface URLs {
 	/**
 	 * apk下载地址
 	 */
-	String DOWN_LOAD = "http://www.xiaodai.com/UF/apk/xdlc.apk";
+	String DOWN_LOAD = "http://m.teshow.com/UF/apk/teshow.apk";
 	/**
 	 * 获得当前版本
 	 */

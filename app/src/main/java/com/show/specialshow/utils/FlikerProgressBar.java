@@ -17,7 +17,7 @@ import com.show.specialshow.R;
 
 
 /**
- * Created by chenliu on 2016/8/26.<br/
+ * Created by xuyong on 2016/8/26.<br/
  * 描述：
  * </br>
  */
