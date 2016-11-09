@@ -222,18 +222,18 @@ public class OrderActivity extends BaseActivity {
                     UIHelper.showConfirmDialog(mContext, "请选择人数", null, null,
                             true);
                 } else {
-                    if (("选择手艺人".equals(order_craftseman_people.getText()
-                            .toString().trim())
-                            || TextUtils.isEmpty(order_craftseman_people
-                            .getText().toString().trim()))) {
-                        UIHelper.showConfirmDialog(mContext, "请选择手艺人", null, null, true);
+//                    if (("选择手艺人".equals(order_craftseman_people.getText()
+//                            .toString().trim())
+//                            || TextUtils.isEmpty(order_craftseman_people
+//                            .getText().toString().trim()))) {
+//                        UIHelper.showConfirmDialog(mContext, "请选择手艺人", null, null, true);
+//                    } else {
+                    if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
+                        UIHelper.showConfirmDialog(mContext, "请输入您的姓名", null, null, true);
                     } else {
-                        if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
-                            UIHelper.showConfirmDialog(mContext, "请输入您的姓名", null, null, true);
-                        } else {
-                            order();
-                        }
+                        order();
                     }
+//                    }
                 }
             }
         }
@@ -252,7 +252,9 @@ public class OrderActivity extends BaseActivity {
             params.addBodyParameter("staffid", craftsmanIntroduceMess.getCratsman_introduce_id());
             params.addBodyParameter("mid", craftsmanIntroduceMess.getCratsman_introduce_shopId());
         } else {
-            params.addBodyParameter("staffid", shopPeopleMess.getChoice_artisans_id());
+            if(null!=shopPeopleMess){
+                params.addBodyParameter("staffid", shopPeopleMess.getChoice_artisans_id());
+            }
             params.addBodyParameter("mid", shop_id);
         }
         params.addBodyParameter("appointmenttime", order_time.getText().toString().trim());

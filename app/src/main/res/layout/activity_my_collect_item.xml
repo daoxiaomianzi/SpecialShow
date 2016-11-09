@@ -5,6 +5,7 @@
         android:id="@+id/show_lang_item_rll"
         android:clickable="true"
         android:focusable="true"
+    android:paddingTop="@dimen/text_size_6px"
     android:orientation="vertical" >
 
 
@@ -27,7 +28,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_marginTop="@dimen/text_size_4px"
+                    android:layout_marginTop="@dimen/text_size_1px"
                     android:layout_toRightOf="@id/show_lang_item_iv"
                     android:text="嘉里酒店健身中心"
                     android:textSize="@dimen/text_size_24px" />
@@ -35,7 +36,7 @@
                     android:id="@+id/show_lang_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/text_size_8px"
+                    android:layout_marginTop="@dimen/text_size_4px"
                     android:layout_alignParentRight="true"
                     android:text="0.24km"
                     android:textColor="@color/color_999999"
@@ -128,7 +129,7 @@
 
     <View
         android:layout_below="@id/show_lang_item_rl"
-        android:layout_marginTop="@dimen/text_size_10px"
+        android:layout_marginTop="@dimen/text_size_6px"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/color_ededed"

@@ -92,7 +92,8 @@ public class ShowLaneAdapter extends BaseAdapter {
 		vh.show_lang_item_moods_num.setText(mList.get(position).getHot());
 		vh.show_lang_distance.setText(mList.get(position).getDistance());
 		vh.show_lang_item_address.setText(mList.get(position).getAddress());
-		vh.show_lang_item_xf.setText(mList.get(position).getXf());
+//		vh.show_lang_item_xf.setText(mList.get(position).getXf());
+		vh.show_lang_item_xf.setVisibility(View.GONE);
 		mTagsMesses=ShopListTagsMess.parse(mList.get(position).getTags());
 		String label = null;
 		if(mTagsMesses!=null&&!mTagsMesses.isEmpty()){

@@ -146,7 +146,6 @@ public class MyCollectActivity extends BaseSearchActivity implements AMapLocatio
 	public void initView() {
 		my_collect_nodata_tv=(TextView) findViewById(R.id.my_collect_nodata_tv);
 		search_result_lv=(XListView) findViewById(R.id.search_result_lv);
-		search_result_lv.setDividerHeight(DensityUtil.dip2px(mContext, 10));
 		adapter=new MyCollectAdapter(mList, mContext,1);
 	}
 

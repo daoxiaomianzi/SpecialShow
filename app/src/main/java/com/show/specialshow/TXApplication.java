@@ -66,8 +66,8 @@ public class TXApplication extends MultiDexApplication {
 	public static DemoHXSDKHelper hxSDKHelper = new DemoHXSDKHelper();
 	
 	// login user name
-	public final String PREF_USERNAME = "username";
-	
+//	public final String PREF_USERNAME = "username";
+
 	/**
 	 * 当前用户nickname,为了苹果推送不是userid而是昵称
 	 */

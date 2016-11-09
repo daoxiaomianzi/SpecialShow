@@ -314,6 +314,13 @@
                 <ImageView
                     android:id="@+id/my_message_iv_right_iv"
                     style="@style/list_menu_next" />
+                <TextView
+                    android:id="@+id/tv_unReadMess"
+                    android:layout_marginRight="0dp"
+                    style="@style/user_info_iv"
+                    android:layout_toLeftOf="@+id/my_message_iv_right_iv"
+                    android:text=""
+                    android:textColor="@color/color_ee4000" />
             </RelativeLayout>
 
             <RelativeLayout
