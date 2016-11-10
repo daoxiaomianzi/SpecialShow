@@ -114,6 +114,12 @@ public class ServiceIntroduceActivity extends BaseActivity {
                 bundle.putSerializable(CraftsmandetailsActivity.PEOPLE_LIST, (Serializable) shopPeopleMesses);
                 UIHelper.startActivity(mContext, OrderActivity.class, bundle);
                 break;
+            case R.id.service_des_banner_show_iv:
+                bundle.putString(OneImageShowActivity.ONE_IMAGE_URL,
+                        shopServiceMess.getService_list_icon());
+                UIHelper.startActivity(mContext, OneImageShowActivity.class, bundle);
+                break;
+
             default:
                 break;
         }
