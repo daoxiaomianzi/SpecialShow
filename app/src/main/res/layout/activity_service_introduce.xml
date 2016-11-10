@@ -2,90 +2,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:background="@color/app_bg"
-    tools:context=".activity.ServiceIntroduceActivity" >
-    <include 
+    android:background="@color/app_bg"
+    tools:context=".activity.ServiceIntroduceActivity">
+
+    <include
         android:id="@+id/service_des_head"
-        layout="@layout/view_common_head"
-        />
-    <TextView 
-        android:onClick="onClick"
-        android:clickable="true"
+        layout="@layout/view_common_head" />
+
+    <TextView
         android:id="@+id/service_des_appoint_immed"
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_size_114px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_send_selector"
-        android:text="@string/appointment_immediately"
+        android:clickable="true"
         android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/appointment_immediately"
         android:textColor="@color/color_ffffff"
-        android:textSize="@dimen/text_size_32px"
-        />
+        android:textSize="@dimen/text_size_32px" />
+
     <ScrollView
-        android:layout_above="@id/service_des_appoint_immed"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
+        android:layout_above="@id/service_des_appoint_immed"
         android:layout_below="@id/service_des_head"
-        >
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_bg"
-        android:orientation="vertical"
-        >
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_bg"
+            android:orientation="vertical">
+
             <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="220dp"
-            android:orientation="vertical" >
-				<ImageView
-					android:adjustViewBounds="true"
-					android:id="@+id/service_des_banner_show_iv"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent" />
-
-            <android.support.v4.view.ViewPager
-				android:visibility="gone"
-				android:background="#00000000"
-                android:id="@+id/service_des_banner_show_vp"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" />
+                android:layout_height="220dp"
+                android:orientation="vertical">
 
-            <!--<RelativeLayout-->
+                <ImageView
+                    android:id="@+id/service_des_banner_show_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/service_des_banner_show_vp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#00000000"
+                    android:visibility="gone" />
+
+                <!--<RelativeLayout-->
                 <!--android:visibility="gone"-->
                 <!--android:layout_width="fill_parent"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_gravity="bottom" >-->
 
                 <!--<TextView-->
-                    <!--android:id="@+id/service_des_describe_tv"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@color/half_transparency"-->
-                    <!--android:padding="8dp"-->
-                    <!--android:textSize="@dimen/text_size_26px"-->
-                    <!--android:textColor="@color/white"-->
-                    <!--android:text="JS造型 仅售100元，价值160元染发套餐！" />-->
-               <!---->
-            <!--</RelativeLayout>-->
-        </FrameLayout>
-        <RelativeLayout
-    			    android:id="@+id/service_item_rl"
-    android:descendantFocusability="blocksDescendants"
-    			    android:clickable="true"
-    			    android:paddingTop="@dimen/text_size_4px"
-    			    android:paddingBottom="@dimen/text_size_4px"
+                <!--android:id="@+id/service_des_describe_tv"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/half_transparency"-->
+                <!--android:padding="8dp"-->
+                <!--android:textSize="@dimen/text_size_26px"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:text="JS造型 仅售100元，价值160元染发套餐！" />-->
+                <!---->
+                <!--</RelativeLayout>-->
+            </FrameLayout>
+
+            <RelativeLayout
+                android:id="@+id/service_item_rl"
                 style="@style/stores_rll"
-                android:background="@color/color_ffffff"
                 android:layout_height="70dp"
-               >
+                android:background="@color/color_ffffff"
+                android:clickable="true"
+                android:descendantFocusability="blocksDescendants"
+                android:paddingBottom="@dimen/text_size_4px"
+                android:paddingTop="@dimen/text_size_4px">
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/service_des_iv"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_launcher"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/servicde_des_name"
@@ -108,87 +110,88 @@
                     android:text="￥1088.00"
                     android:textColor="@color/color_F47183"
                     android:textSize="@dimen/text_size_30px" />
-				<RelativeLayout 
-				    android:id="@+id/rll_service_des_price"
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toRightOf="@id/service_des_cheap_price"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginBottom="@dimen/text_size_10px"
-				    >
-                <TextView
-                    android:id="@+id/service_des_price"
+
+                <RelativeLayout
+                    android:id="@+id/rll_service_des_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥4600.00"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_28px" />
-                <View 
-                    android:id="@+id/service_des_price_vi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1.0dp"
-                    android:layout_alignLeft="@id/service_des_price"
-                    android:layout_alignRight="@id/service_des_price"
-                    android:background="@color/color_656565"
-                    android:layout_centerInParent="true"
-                    />
-			</RelativeLayout>
-			<Button 
-			    android:onClick="onClick"
-			    android:focusable="false"
-			    android:clickable="true"
-			    android:id="@+id/service_des_reservation"
-			    android:layout_width="70dp"
-			    android:layout_height="30dp"
-			    android:layout_alignBottom="@id/rll_service_des_price"
-			    android:layout_alignParentRight="true"
-			    android:background="@color/color_F47183"
-			    android:text="@string/reservation"
-			    android:textColor="@color/color_ffffff"
-			    android:textSize="@dimen/text_size_24px"
-			    />
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/text_size_10px"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/service_des_cheap_price">
+
+                    <TextView
+                        android:id="@+id/service_des_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥4600.00"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_size_28px" />
+
+                    <View
+                        android:id="@+id/service_des_price_vi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="1.0dp"
+                        android:layout_alignLeft="@id/service_des_price"
+                        android:layout_alignRight="@id/service_des_price"
+                        android:layout_centerInParent="true"
+                        android:background="@color/color_656565" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/service_des_reservation"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@id/rll_service_des_price"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/color_F47183"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:onClick="onClick"
+                    android:text="@string/reservation"
+                    android:textColor="@color/color_ffffff"
+                    android:textSize="@dimen/text_size_24px" />
 
             </RelativeLayout>
-            <TextView
-				android:paddingTop="@dimen/text_size_16px"
-				android:layout_marginTop="@dimen/text_size_16px"
-                android:paddingLeft="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-				android:background="@color/white"
-                android:text="@string/des_show"
-                        android:textColor="@color/color_656565"
-                    android:textSize="@dimen/text_size_30px"
-                />
-		<LinearLayout
-			android:background="@color/white"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-            <View 
-                android:layout_marginRight="@dimen/text_size_16px"
-                android:layout_marginLeft="@dimen/text_size_28px"
-                android:layout_marginTop="@dimen/text_size_16px"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_aaaaaa"
-                />
-		</LinearLayout>
 
             <TextView
-				android:background="@color/white"
-                android:id="@+id/service_des_tv"
-                android:paddingTop="@dimen/text_size_20px"
-                android:paddingRight="@dimen/text_size_16px"
-                android:paddingLeft="16dp"
-				android:paddingBottom="@dimen/text_size_16px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="asaddddddds"
-                 android:textColor="@color/color_333333"
-                    android:textSize="@dimen/text_size_30px" 
-                />
+                android:layout_marginTop="@dimen/text_size_16px"
+                android:background="@color/white"
+                android:paddingLeft="16dp"
+                android:paddingTop="@dimen/text_size_16px"
+                android:text="@string/des_show"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/text_size_28px"
+                    android:layout_marginRight="@dimen/text_size_16px"
+                    android:layout_marginTop="@dimen/text_size_16px"
+                    android:background="@color/color_aaaaaa" />
             </LinearLayout>
-            </ScrollView>
+
+            <TextView
+                android:id="@+id/service_des_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/text_size_16px"
+                android:paddingLeft="16dp"
+                android:paddingRight="@dimen/text_size_16px"
+                android:paddingTop="@dimen/text_size_20px"
+                android:text="asaddddddds"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_size_30px" />
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
