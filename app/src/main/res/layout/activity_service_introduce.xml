@@ -40,7 +40,7 @@
             android:layout_height="220dp"
             android:orientation="vertical" >
 				<ImageView
-					android:scaleType="fitXY"
+					android:adjustViewBounds="true"
 					android:id="@+id/service_des_banner_show_iv"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent" />
