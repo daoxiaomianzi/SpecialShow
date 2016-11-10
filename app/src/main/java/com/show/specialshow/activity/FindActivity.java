@@ -26,7 +26,7 @@ public class FindActivity extends BaseActivity {
     @Override
     public void initData() {
         setContentView(R.layout.activity_find);
-         View head = findViewById(R.id.head_rl);
+        View head = findViewById(R.id.head_rl);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ImmersedStatusbarUtils.initAfterSetContentView(mContext, head);
         }
@@ -50,7 +50,7 @@ public class FindActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if(!BtnUtils.getInstance().isFastDoubleClick()){
+        if (!BtnUtils.getInstance().isFastDoubleClick()) {
             return;
         }
         switch (v.getId()) {
@@ -88,7 +88,7 @@ public class FindActivity extends BaseActivity {
 //                }
 //                break;
             case R.id.rll_texiu_activity://特秀活动
-                UIHelper.startActivity(mContext,TeShowActivitiesActivity.class);
+                UIHelper.startActivity(mContext, TeShowActivitiesActivity.class);
 //                if (TXApplication.login) {
 //                    if(CommonUtils.isLogin(mContext)){
 //                        UIHelper.startActivity(mContext,TexiuActivitiesActivity.class);
@@ -122,10 +122,16 @@ public class FindActivity extends BaseActivity {
 //                }
                 break;
             case R.id.rll_scan://扫一扫
-                UIHelper.startActivity(mContext,CaptureActivity.class);
+                if (TXApplication.login) {
+                    UIHelper.startActivity(mContext, CaptureActivity.class);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
                 break;
             case R.id.rll_nearly_show_fang://附近秀坊地图
-                UIHelper.startActivity(mContext,NearbyShowFangMapActivity.class);
+                UIHelper.startActivity(mContext, NearbyShowFangMapActivity.class);
                 break;
 
             default:

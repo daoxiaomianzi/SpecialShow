@@ -46,7 +46,7 @@ public class BaseBusCenWebActivity extends BaseActivity {
     private ValueCallback<Uri[]> mUploadCallbackAboveL;
     protected Handler mHandler = new Handler();
     protected JsResult jsResult;
-    private boolean isDoubleShow=false;
+    private boolean isDoubleShow = false;
     // private ValueCallback<Uri> mFilePathCallback;
     // private ValueCallback<Uri[]> mFilePathCallbackArray;
     // private ImagePick ip;
@@ -185,11 +185,12 @@ public class BaseBusCenWebActivity extends BaseActivity {
                 result.confirm();
                 return true;
             }
+
             @Override
             public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-                jsResult=result;
-                isDoubleShow=true;
-                createAffirmDialog(message,DIALOG_DOUBLE_STPE,true);
+                jsResult = result;
+                isDoubleShow = true;
+                createAffirmDialog(message, DIALOG_DOUBLE_STPE, true);
                 return true;
             }
         });
@@ -328,7 +329,7 @@ public class BaseBusCenWebActivity extends BaseActivity {
                 affirmDialog.dismiss();
                 break;
             case R.id.contest_cancel_tv:
-                if(isDoubleShow){
+                if (isDoubleShow) {
                     jsResult.cancel();
                 }
                 affirmDialog.dismiss();

@@ -62,6 +62,8 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     boolean isFirstLoc = true; // 是否首次定位
     private double mLat = 0.0d;//纬度
     private double mLon = 0.0d;//经度
+    private double locationLat = 0.0d;//定位的纬度
+    private double locationLot = 0.0d;//定位的经度
     //覆盖物相关
     private Marker marker;
     //加载的布局
@@ -305,8 +307,8 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                             @Override
                             public void onClick(int which) {
                                 Bundle bundle = new Bundle();
-                                bundle.putDouble("mLat1", mLat);
-                                bundle.putDouble("mLon1", mLon);
+                                bundle.putDouble("mLat1", locationLat);
+                                bundle.putDouble("mLon1", locationLot);
                                 bundle.putDouble("mLat2", mLat2);
                                 bundle.putDouble("mLon2", mLon2);
                                 UIHelper.startActivity(mContext, WalkNaviActivity.class, bundle);
@@ -317,8 +319,8 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                             @Override
                             public void onClick(int which) {
                                 Bundle bundle = new Bundle();
-                                bundle.putDouble("mLat1", mLat);
-                                bundle.putDouble("mLon1", mLon);
+                                bundle.putDouble("mLat1", locationLat);
+                                bundle.putDouble("mLon1", locationLot);
                                 bundle.putDouble("mLat2", mLat2);
                                 bundle.putDouble("mLon2", mLon2);
                                 UIHelper.startActivity(mContext, NavigationActivity.class, bundle);
@@ -342,6 +344,8 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
             isFirstLoc = false;
             mLat = aMapLocation.getLatitude();
             mLon = aMapLocation.getLongitude();
+            locationLat = aMapLocation.getLatitude();
+            locationLot = aMapLocation.getLongitude();
             LatLng latLng = new LatLng(mLat, mLon);
             //设置中心点和缩放比例
             aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
