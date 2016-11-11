@@ -1,9 +1,11 @@
 package com.show.specialshow.fragment;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -458,6 +460,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 		search_result_key.setAdapter(keyAdapter);
 	}
 
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	private void changeKeyListView(int size) {
 		stopLoad();
 		if (size < ConstantValue.PAGE_SIZE || localKeyRecord == totalKeyRecord) {

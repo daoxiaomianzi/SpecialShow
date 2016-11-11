@@ -3,18 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.NearShowActivity" >
-    <include
-        layout="@layout/view_common_head"
-        />
+    android:background="@color/white"
+    tools:context=".activity.NearShowActivity">
+
+    <include layout="@layout/view_common_head" />
 
     <LinearLayout
-        android:background="@color/white"
         android:id="@+id/nearby_switch_tab_ll"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/nearby_tab_show_lane_ll"
@@ -23,15 +23,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dip" >
+            android:padding="10dip">
 
             <TextView
-                android:onClick="onClick"
                 android:id="@+id/nearby_tab_show_lane_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:gravity="center"
+                android:onClick="onClick"
                 android:padding="2dp"
                 android:text="@string/circle_nearby_show_lane"
                 android:textColor="@drawable/text_grey_color_check_selector"
@@ -47,7 +47,7 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="10dip"
-            android:saveEnabled="false" >
+            android:saveEnabled="false">
 
             <TextView
                 android:id="@+id/nearby_tab_show_visitor_tv"
@@ -55,8 +55,8 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:gravity="center"
-                android:padding="2dp"
                 android:onClick="onClick"
+                android:padding="2dp"
                 android:text="@string/circle_nearby_show_visitor"
                 android:textColor="@drawable/text_grey_color_check_selector"
                 android:textSize="@dimen/text_size_26px" />
@@ -65,30 +65,28 @@
 
     <LinearLayout
         android:id="@+id/nearby_tab_line_llt"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center" >
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/nearby_tab_line_iv"
-            android:layout_width="50dp"
-            android:layout_height="3dp"
-            android:background="@drawable/tab_selected_pressed_holo"
-            android:contentDescription="tab" >
-        </ImageView>
+            android:layout_width="70dp"
+            android:layout_height="1.5dp"
+            android:background="@color/color_F47183"
+            android:contentDescription="tab"></ImageView>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_999999" />
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/nearby_page_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/app_bg"
-        android:layout_weight="1" >
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"
+        android:background="@color/app_bg"></android.support.v4.view.ViewPager>
 
 </LinearLayout>

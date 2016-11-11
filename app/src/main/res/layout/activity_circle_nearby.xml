@@ -95,7 +95,7 @@
         <ImageView
             android:id="@+id/nearby_tab_line_iv"
             android:layout_width="70dp"
-            android:layout_height="2dp"
+            android:layout_height="1.5dp"
             android:background="@color/color_F47183"
             android:contentDescription="tab" >
         </ImageView>
