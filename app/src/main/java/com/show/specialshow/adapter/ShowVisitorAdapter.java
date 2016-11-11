@@ -34,13 +34,13 @@ public class ShowVisitorAdapter extends BaseAdapter {
     private List<ShopVisitorListMess> mList;
     private Context mContext;
     OnItemViewClickListener listener;
-    private String[]  solars={"白羊","金牛","双子","巨蟹","狮子","处女","天秤","天蝎","射手",
-    "摩羯","水瓶","双鱼"};
-    private int[] solarImgs={R.drawable.icon_baiyang,R.drawable.icon_jinniu
-    ,R.drawable.icon_shuangzi,R.drawable.icon_juxie,R.drawable.icon_shizi
-    ,R.drawable.icon_chunv,R.drawable.icon_tianping,R.drawable.icon_tianxie
-    ,R.drawable.icon_sheshou,R.drawable.icon_mojie,R.drawable.icon_shuiping
-    ,R.drawable.icon_shuangyu};
+    private String[] solars = {"白羊", "金牛", "双子", "巨蟹", "狮子", "处女", "天秤", "天蝎", "射手",
+            "摩羯", "水瓶", "双鱼"};
+    private int[] solarImgs = {R.drawable.icon_baiyang, R.drawable.icon_jinniu
+            , R.drawable.icon_shuangzi, R.drawable.icon_juxie, R.drawable.icon_shizi
+            , R.drawable.icon_chunv, R.drawable.icon_tianping, R.drawable.icon_tianxie
+            , R.drawable.icon_sheshou, R.drawable.icon_mojie, R.drawable.icon_shuiping
+            , R.drawable.icon_shuangyu};
 
 
     public ShowVisitorAdapter(List<ShopVisitorListMess> mList, Context mContext) {
@@ -123,19 +123,22 @@ public class ShowVisitorAdapter extends BaseAdapter {
                     R.drawable.icon_sex_girl, mContext,
                     vh.show_visitor_item_age);
             vh.show_visitor_item_age.setBackgroundResource(R.drawable.bg_sex_womam);
-        }else{
-            if(mList.get(position).getUser_age()==null){
+        } else {
+            if (mList.get(position).getUser_age() == null) {
                 vh.show_visitor_item_age.setVisibility(View.GONE);
-            }else{
+            } else {
                 vh.show_visitor_item_age.setVisibility(View.VISIBLE);
+                UIHelper.leftDrawable(
+                        R.color.transparent, mContext,
+                        vh.show_visitor_item_age);
                 vh.show_visitor_item_age.setBackgroundResource(R.drawable.bg_sex_man);
             }
         }
-        if(0==mList.get(position).getUser_xz()){
+        if (0 == mList.get(position).getUser_xz()) {
             vh.show_visitor_item_constellation.setVisibility(View.GONE);
-        }else{
-            bindXzData(vh.show_visitor_item_constellation,solarImgs[mList.get(position).getUser_xz()-1],
-                    solars[mList.get(position).getUser_xz()-1]);
+        } else {
+            bindXzData(vh.show_visitor_item_constellation, solarImgs[mList.get(position).getUser_xz() - 1],
+                    solars[mList.get(position).getUser_xz() - 1]);
         }
         vh.show_visitor_item_introduction.setText(mList.get(position)
                 .getUser_introduce());
@@ -164,11 +167,11 @@ public class ShowVisitorAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void bindXzData(TextView textView,int res,String string){
+    private void bindXzData(TextView textView, int res, String string) {
         textView.setVisibility(View.VISIBLE);
         textView.setText(string);
         UIHelper.leftDrawable(
-               res, mContext,
+                res, mContext,
                 textView);
     }
 
@@ -197,9 +200,9 @@ public class ShowVisitorAdapter extends BaseAdapter {
                     if (TXApplication.login) {
                         attention(mList.get(holder.getPostion()).getUser_id(),
                                 holder.show_visitor_item_attention_btn);
-                    }else{
-                        bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
-                        UIHelper.startActivity((Activity) mContext,LoginActivity.class,bundle);
+                    } else {
+                        bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                        UIHelper.startActivity((Activity) mContext, LoginActivity.class, bundle);
                     }
                     break;
             }

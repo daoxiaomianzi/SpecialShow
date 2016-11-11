@@ -126,7 +126,9 @@ public class CraftsmanAdapter extends BaseAdapter {
 
             } else {
                 vh.craftsman_item_age.setVisibility(View.VISIBLE);
-
+                UIHelper.leftDrawable(
+                        R.color.transparent, mContext,
+                        vh.craftsman_item_age);
                 vh.craftsman_item_age.setBackgroundResource(R.drawable.bg_sex_man);
             }
         }
@@ -195,9 +197,9 @@ public class CraftsmanAdapter extends BaseAdapter {
                     if (TXApplication.login) {
                         attention(mList.get(holder.getPostion()).getUser_id(),
                                 holder.craftsman_item_attention_btn);
-                    }else{
-                        bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
-                        UIHelper.startActivity((Activity) mContext,LoginActivity.class,bundle);
+                    } else {
+                        bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                        UIHelper.startActivity((Activity) mContext, LoginActivity.class, bundle);
                     }
                     break;
             }
