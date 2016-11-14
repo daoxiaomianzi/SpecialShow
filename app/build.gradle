@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion '24.0.0'
     dexOptions {
         javaMaxHeapSize "4g"
@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.show.specialshow"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
         multiDexEnabled true
     }
     //签名
