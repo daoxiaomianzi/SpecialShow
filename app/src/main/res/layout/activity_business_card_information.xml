@@ -1,20 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/all_business_card"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_f5f5f6"
     android:orientation="vertical"
-    android:id="@+id/all_business_card"
-    tools:context=".BusinessCardInformationActivity" >
+    tools:context=".activity.BusinessCardInformationActivity">
 
     <include layout="@layout/view_common_head" />
 
     <RelativeLayout
         android:id="@+id/rll_business_card_head"
         style="@style/user_info_container"
-        android:clickable="true"
-        android:layout_height="60dp" >
+        android:layout_height="60dp"
+        android:clickable="true">
 
         <ImageView
             android:id="@+id/business_card_head_right"
@@ -43,195 +43,196 @@
             android:textColor="@color/color_aaaaaa"
             android:textSize="@dimen/text_size_28px" />
     </RelativeLayout>
-    
-    <RelativeLayout 
+
+    <RelativeLayout
         android:id="@+id/rll_show_fang"
-        android:layout_marginTop="@dimen/text_size_16px"
-        android:clickable="true"
         style="@style/user_info_container"
-        >
-        <ImageView 
+        android:layout_marginTop="@dimen/text_size_16px"
+        android:clickable="true">
+
+        <ImageView
             android:id="@+id/show_fang_right"
-			style="@style/list_menu_next"    
-			android:visibility="gone"        
-            />
-        <TextView 
+            style="@style/list_menu_next"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/show_fang_tv"
             style="@style/user_info_tv"
-            android:text="@string/show_fang"
-            />
-        <TextView 
+            android:text="@string/show_fang" />
+
+        <TextView
             android:id="@+id/show_fang_name"
-            android:singleLine="true"
-            android:layout_toRightOf="@id/show_fang_tv"
-            android:layout_toLeftOf="@id/show_fang_right"
             style="@style/user_info_tv"
-            android:text=""
-            android:textColorHint="@color/color_aaaaaa"
             android:layout_marginLeft="@dimen/text_size_4px"
             android:layout_marginRight="@dimen/text_size_8px"
-            />
+            android:layout_toLeftOf="@id/show_fang_right"
+            android:layout_toRightOf="@id/show_fang_tv"
+            android:singleLine="true"
+            android:text=""
+            android:textColorHint="@color/color_aaaaaa" />
+
+        <ImageView style="@style/list_menu_next" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rll_business_card_design"
-        android:background="@color/color_ffffff"
-        android:onClick="onClick"
-        android:clickable="true"
-        android:paddingLeft="@dimen/text_size_28px"
-        android:layout_marginTop="@dimen/text_size_16px"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/text_size_90px"
-        >
-        <TextView 
+        android:layout_marginTop="@dimen/text_size_16px"
+        android:background="@color/color_ffffff"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/text_size_28px">
+
+        <TextView
             android:id="@+id/business_card_design_tv"
             style="@style/user_info_tv"
-			android:text="@string/designation"            
-            />
+            android:text="@string/designation" />
+
         <EditText
             android:id="@+id/business_card_design_et"
-            android:singleLine="true"
-            android:paddingLeft="@dimen/text_size_8px"
-            android:layout_toRightOf="@id/business_card_design_tv"
-           	android:background="@color/color_ffffff"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/business_card_design_tv"
+            android:background="@color/color_ffffff"
             android:hint="@string/designation_hint"
+            android:paddingLeft="@dimen/text_size_8px"
+            android:singleLine="true"
             android:textColorHint="@color/color_aaaaaa"
-            android:textSize="@dimen/text_size_28px"
-            />
+            android:textSize="@dimen/text_size_28px" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rll_business_card_title"
-        android:background="@color/color_ffffff"
-        android:onClick="onClick"
-        android:clickable="true"
-        android:paddingLeft="@dimen/text_size_28px"
-        android:layout_marginTop="@dimen/text_size_16px"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/text_size_90px"
-        >
-        <TextView 
+        android:layout_marginTop="@dimen/text_size_16px"
+        android:background="@color/color_ffffff"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/text_size_28px">
+
+        <TextView
             android:id="@+id/business_card_title_tv"
             style="@style/user_info_tv"
-			android:text="@string/title"            
-            />
+            android:text="@string/title" />
+
         <EditText
             android:id="@+id/business_card_title_et"
-            android:singleLine="true"
-            android:paddingLeft="@dimen/text_size_8px"
-            android:layout_toRightOf="@id/business_card_title_tv"
-           	android:background="@color/color_ffffff"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/business_card_title_tv"
+            android:background="@color/color_ffffff"
             android:hint="@string/title_hint"
+            android:paddingLeft="@dimen/text_size_8px"
+            android:singleLine="true"
             android:textColorHint="@color/color_aaaaaa"
-            android:textSize="@dimen/text_size_28px"
-            />
+            android:textSize="@dimen/text_size_28px" />
     </RelativeLayout>
-        <RelativeLayout 
+
+    <RelativeLayout
         android:id="@+id/rll_working_time"
-        android:layout_marginTop="@dimen/text_size_16px"
-        android:clickable="true"
         style="@style/user_info_container"
-        >
-        <ImageView 
+        android:layout_marginTop="@dimen/text_size_16px"
+        android:clickable="true">
+
+        <ImageView
             android:id="@+id/business_working_time_right"
-			style="@style/list_menu_next"            
-            />
-        <TextView 
+            style="@style/list_menu_next" />
+
+        <TextView
             android:id="@+id/business_working_time_tv"
             style="@style/user_info_tv"
-            android:text="@string/working_time"
-            />
-        <TextView 
+            android:text="@string/working_time" />
+
+        <TextView
             android:id="@+id/business_card_working_number"
-            android:singleLine="true"
-            android:layout_toRightOf="@id/business_working_time_tv"
             style="@style/user_info_tv"
-            android:text=""
-            android:textColorHint="@color/color_aaaaaa"
             android:layout_marginLeft="@dimen/text_size_4px"
-            />
-        <TextView 
-            android:id="@+id/business_card_working_year"
+            android:layout_toRightOf="@id/business_working_time_tv"
             android:singleLine="true"
-            android:layout_toRightOf="@id/business_card_working_number"
+            android:text=""
+            android:textColorHint="@color/color_aaaaaa" />
+
+        <TextView
+            android:id="@+id/business_card_working_year"
             style="@style/user_info_tv"
-            android:text="年"
-            android:textColorHint="@color/color_aaaaaa"
             android:layout_marginRight="@dimen/text_size_8px"
-            />
+            android:layout_toRightOf="@id/business_card_working_number"
+            android:singleLine="true"
+            android:text="年"
+            android:textColorHint="@color/color_aaaaaa" />
     </RelativeLayout>
-    
-        <RelativeLayout
-        android:background="@color/color_ffffff"
-        android:onClick="onClick"
-        android:clickable="true"
-        android:paddingLeft="@dimen/text_size_28px"
-        android:layout_marginTop="@dimen/text_size_16px"
+
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/text_size_90px"
-        >
-        <TextView 
+        android:layout_marginTop="@dimen/text_size_16px"
+        android:background="@color/color_ffffff"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/text_size_28px">
+
+        <TextView
             android:id="@+id/business_card_good_at_tv"
             style="@style/user_info_tv"
-			android:text="@string/good_at"            
-            />
+            android:text="@string/good_at" />
+
         <EditText
             android:id="@+id/business_card_good_at_et"
-            android:singleLine="true"
-            android:paddingLeft="@dimen/text_size_8px"
-            android:layout_toRightOf="@id/business_card_good_at_tv"
-           	android:background="@color/color_ffffff"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/business_card_good_at_tv"
+            android:background="@color/color_ffffff"
+            android:paddingLeft="@dimen/text_size_8px"
+            android:singleLine="true"
             android:text=""
             android:textColorHint="@color/color_aaaaaa"
-            android:textSize="@dimen/text_size_28px"
-            />
+            android:textSize="@dimen/text_size_28px" />
     </RelativeLayout>
-    <LinearLayout 
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/text_size_26px"
         android:background="@color/color_ffffff"
-	    android:layout_marginTop="@dimen/text_size_26px"
-	    android:paddingLeft="@dimen/text_size_28px"
-	    android:layout_width="fill_parent"
-	    android:layout_height="100dp"
-	    android:orientation="horizontal"
-	    android:paddingTop="@dimen/text_size_10px"
-	    >
-	    <TextView 
-	        android:id="@+id/basic_info_signature"
-	        style="@style/user_info_tv"
-	        android:text="@string/brief_introduction"
-	        />
-	    	<EditText
-	    	android:id="@+id/basic_info_introduce_hint"
-	    	    android:gravity="top"
-	    	android:paddingLeft="@dimen/text_size_16px"
-	        android:textSize="@dimen/text_size_28px"
-	        android:textColorHint="@color/color_aaaaaa"
-	        android:hint="@string/brief_introduction_hint"
-	        android:layout_marginLeft="@dimen/text_size_4px"
-	        android:background="@color/color_ffffff"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        />
-	</LinearLayout>
-	<TextView
-	    android:layout_marginTop="45dp"
-	    android:layout_marginLeft="@dimen/text_size_86px"
-	    android:layout_marginRight="@dimen/text_size_86px"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/text_size_28px"
+        android:paddingTop="@dimen/text_size_10px">
+
+        <TextView
+            android:id="@+id/basic_info_signature"
+            style="@style/user_info_tv"
+            android:text="@string/brief_introduction" />
+
+        <EditText
+            android:id="@+id/basic_info_introduce_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_size_4px"
+            android:background="@color/color_ffffff"
+            android:gravity="top"
+            android:hint="@string/brief_introduction_hint"
+            android:paddingLeft="@dimen/text_size_16px"
+            android:textColorHint="@color/color_aaaaaa"
+            android:textSize="@dimen/text_size_28px" />
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/business_modify_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_size_86px"
+        android:layout_marginRight="@dimen/text_size_86px"
+        android:layout_marginTop="45dp"
         android:background="@drawable/bg_send_selector"
+        android:clickable="true"
         android:gravity="center"
+        android:onClick="onClick"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:text="修改"
-        android:onClick="onClick"
-        android:clickable="true"
-        android:textSize="@dimen/text_size_32px"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_32px" />
 
 </LinearLayout>
