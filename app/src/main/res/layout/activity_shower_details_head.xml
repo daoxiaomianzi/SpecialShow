@@ -3,101 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
 
     <RelativeLayout
-        android:background="@color/color_ffffff"
         android:layout_width="fill_parent"
-        android:paddingBottom="@dimen/text_size_16px"
-        android:layout_height="215dp" >
+        android:layout_height="215dp"
+        android:background="@color/color_ffffff"
+        android:paddingBottom="@dimen/text_size_16px">
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="170dp"
-            android:background="@drawable/bg_shower" >
+            android:background="@drawable/bg_shower">
 
             <TextView
                 android:id="@+id/shower_details_often_in_tv"
                 style="@style/user_info_tv"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginRight="@dimen/text_size_26px"
+                android:layout_alignParentRight="true"
                 android:layout_marginBottom="@dimen/text_size_8px"
-                android:textSize="@dimen/text_size_24px"
-                android:textColor="@color/color_ffffff"
-                android:singleLine="true"
+                android:layout_marginRight="@dimen/text_size_26px"
                 android:maxEms="6"
+                android:singleLine="true"
                 android:text="上海"
-                />
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/text_size_24px" />
+
             <TextView
                 android:id="@+id/shower_details_often_in"
-                android:layout_marginRight="@dimen/text_size_10px"
-                android:textSize="@dimen/text_size_24px"
-                android:textColor="@color/color_ffffff"
-                android:layout_alignBottom="@id/shower_details_often_in_tv"
-                android:layout_toLeftOf="@id/shower_details_often_in_tv"
                 style="@style/user_info_tv"
+                android:layout_alignBottom="@id/shower_details_often_in_tv"
+                android:layout_marginRight="@dimen/text_size_10px"
+                android:layout_toLeftOf="@id/shower_details_often_in_tv"
                 android:text="@string/often_in"
-                />
+                android:textColor="@color/color_ffffff"
+                android:textSize="@dimen/text_size_24px" />
+
             <TextView
                 android:id="@+id/shower_details_nickname_tv"
-                android:textColor="@color/color_ffffff"
-                android:layout_alignBottom="@id/shower_details_often_in_tv"
                 style="@style/user_info_tv"
-                android:text="js造型"
+                android:layout_alignBottom="@id/shower_details_often_in_tv"
                 android:layout_marginLeft="85dp"
-                />
+                android:text="js造型"
+                android:textColor="@color/color_ffffff" />
 
             <include
                 android:id="@+id/shower_details_head_2"
-                layout="@layout/view_common_head"
-                />
+                layout="@layout/view_common_head" />
 
-	</RelativeLayout>
+        </RelativeLayout>
+
         <com.show.specialshow.utils.RoundImageView
             android:id="@+id/shower_details_roundImageView"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="@dimen/text_size_26px"
-             />
+            android:layout_marginLeft="@dimen/text_size_26px" />
+
         <LinearLayout
-            android:layout_alignBottom="@id/shower_details_roundImageView"
-android:orientation="horizontal"
-            android:layout_toRightOf="@id/shower_details_roundImageView"
-android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/shower_details_sex_age"
-            style="@style/user_info_tv"
-        android:gravity="center"
-            android:text="dd"
-            android:layout_marginLeft="15dp"
-            android:background="@drawable/bg_dynami_attention_selecter"
-            android:paddingLeft="@dimen/text_size_10px"
-            android:paddingRight="@dimen/text_size_10px"
-            android:textSize="@dimen/text_size_20px"
-            android:textColor="@color/white"
-            android:minEms="3"
-            />
-
-        <TextView
-            android:layout_marginLeft="5dp"
-            android:id="@+id/shower_details_xinzuo"
-            style="@style/user_info_tv"
-            android:layout_alignTop="@id/shower_details_sex_age"
-            android:layout_alignBottom="@id/shower_details_sex_age"
-            android:layout_toRightOf="@id/shower_details_sex_age"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/shower_details_roundImageView"
+            android:layout_toRightOf="@id/shower_details_roundImageView"
             android:gravity="center"
-            android:minEms="3"
-            android:text="dd"
-            android:textColor="@color/color_555555"
-            android:textSize="@dimen/text_size_24px" />
-        </LinearLayout>
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/shower_details_sex_age"
+                style="@style/user_info_tv"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/bg_dynami_attention_selecter"
+                android:gravity="center"
+                android:minEms="3"
+                android:paddingLeft="@dimen/text_size_10px"
+                android:paddingRight="@dimen/text_size_10px"
+                android:text="dd"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20px" />
+
+            <TextView
+                android:id="@+id/shower_details_xinzuo"
+                style="@style/user_info_tv"
+                android:layout_alignBottom="@id/shower_details_sex_age"
+                android:layout_alignTop="@id/shower_details_sex_age"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/shower_details_sex_age"
+                android:gravity="center"
+                android:minEms="3"
+                android:text="dd"
+                android:textColor="@color/color_555555"
+                android:textSize="@dimen/text_size_24px" />
+        </LinearLayout>
 
 
         <TextView
@@ -120,19 +118,20 @@ android:gravity="center"
             android:text="关注"
             android:textColor="@drawable/text_attention_color_check_selector"
             android:textSize="@dimen/text_size_22px" />
+
         <TextView
-            android:onClick="onClick"
-            android:clickable="true"
             android:id="@+id/shower_details_add_friend_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/shower_details_roundImageView"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/text_size_24px"
-            android:background="@drawable/bg_dynami_attention_selecter"
             android:layout_toLeftOf="@id/shower_details_attention_btn"
+            android:background="@drawable/bg_dynami_attention_selecter"
+            android:clickable="true"
             android:gravity="center"
             android:minEms="3"
+            android:onClick="onClick"
             android:paddingBottom="1dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -141,384 +140,379 @@ android:gravity="center"
             android:textColor="@drawable/text_attention_color_check_selector"
             android:textSize="@dimen/text_size_22px" />
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/shower_details_content"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
-    <LinearLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <View
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/imaginary_line_shape"
-            android:layerType="software" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:background="@color/color_ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/text_size_26px"
-        android:paddingRight="@dimen/text_size_26px"
-        android:paddingTop="@dimen/text_size_16px" >
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/personalized_signature"
-            android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_size_26px" />
+            android:background="@color/white">
 
-        <TextView
-            android:textColor="@color/color_555555"
-            android:id="@+id/shower_details_signature_tv"
-            style="@style/user_info_tv"
-            android:textSize="@dimen/text_size_26px"
-            android:layout_marginLeft="@dimen/text_size_8px"
-            android:text="鱼柳包里面的鱼柳变咗就唔系" />
-    </LinearLayout>
-  <!--       <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/text_size_26px"
-        android:layout_marginRight="@dimen/text_size_26px"
-         android:layout_marginTop="@dimen/text_size_20px"
-        android:background="@color/color_ededed" /> -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/imaginary_line_shape"
+                android:layerType="software" />
 
-    <LinearLayout
-        android:background="@color/color_ffffff"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/text_size_26px"
-        android:paddingRight="@dimen/text_size_26px"
-        android:paddingTop="@dimen/text_size_16px"
-        android:paddingBottom="@dimen/text_size_16px"
-        >
+        </LinearLayout>
 
-        <TextView
-            style="@style/user_info_tv"
-            android:text="@string/interested_signing"
-            android:textColor="@color/color_999999" />
 
-        <GridView
-            android:paddingTop="@dimen/text_size_4px"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/shower_details_interested_sign_gv"
-            android:layout_width="200dp"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/text_size_8px"
-            android:descendantFocusability="blocksDescendants"
-            android:horizontalSpacing="@dimen/text_size_16px"
-            android:listSelector="#00000000"
-            android:cacheColorHint="#00000000"
-            android:numColumns="3" >
-        </GridView>
-    </LinearLayout>
-  <!--     <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/ling_0.8"
-        android:background="@color/color_ededed" />
-      <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/ling_0.8"
-         android:layout_marginTop="@dimen/text_size_20px"
-        android:background="@color/color_ededed" /> -->
-      <LinearLayout 
-          android:layout_marginTop="@dimen/text_size_20px"
-          android:background="@color/color_ffffff"
-          android:id="@+id/shower_details_crafstman_ll"
-          android:layout_width="fill_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical"
-          android:paddingTop="@dimen/text_size_20px"
-          >
-      
-      <TextView
-          android:drawablePadding="@dimen/text_size_8px"
-          android:drawableLeft="@drawable/icon_user_card"
-          android:layout_marginLeft="@dimen/text_size_26px"
-          android:layout_marginRight="@dimen/text_size_26px"
-          style="@style/user_info_tv"
-          android:text="@string/card_information"
-          android:textColor="@color/light_text_color"
-          />
-   
-        <RelativeLayout 
-            android:id="@+id/shower_details_crafstman_rll"
-            android:paddingTop="@dimen/text_size_26px"
-           style="@style/user_info_container"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/text_size_26px"
-            >
-            <ImageView
-                android:id="@+id/shower_details_crafstman_right"
-                style="@style/list_menu_next"
-                />
-            <com.show.specialshow.utils.RoundImageView 
-                android:layout_centerVertical="true"
-                android:id="@+id/shower_details_crafstman_roundImageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                />
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/text_size_6px"
-                android:layout_marginTop="@dimen/text_size_4px"
-                android:layout_alignTop="@id/shower_details_crafstman_roundImageView"
-                android:id="@+id/shower_detaisls_crafstman_nickname"
-                android:text="@string/nickname"
-                android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
-                android:textSize="@dimen/text_size_24px"
-                android:textColor="@color/color_999999"
-                />
-
-            
-            <TextView
-                android:layout_marginLeft="@dimen/text_size_3px"
-                android:id="@+id/shower_detaisls_crafstman_nickname_tv"
-                android:text="js造型"
-                android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname"
-                android:layout_alignTop="@id/shower_detaisls_crafstman_nickname"
-                android:layout_width="wrap_content"
-                android:minEms="3"
-                android:maxEms="7"
-                android:singleLine="true"
-                android:layout_height="wrap_content"
-                android:textColor="@color/color_555555"
-                />
-            <TextView
-                android:id="@+id/shower_detaisls_crafstman_moods"
-                android:layout_marginLeft="@dimen/text_size_6px"
-                android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2425人气"
-                android:textColor="@color/color_F47183"
-                android:drawableLeft="@drawable/icon_moods"
-                android:drawablePadding="@dimen/text_size_4px"
-                android:textSize="@dimen/text_size_26px"
-                android:layout_marginTop="8dp"
-                android:layout_below="@id/shower_detaisls_crafstman_nickname_tv"
-                />
-            
-            <TextView 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/shower_details_crafstman_position"
-                android:text="@string/position"
-                android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname_tv"
-                android:layout_alignTop="@id/shower_detaisls_crafstman_nickname_tv"
-             	android:textColor="@color/color_999999"
-             	android:textSize="@dimen/text_size_24px"
-             	android:layout_marginLeft="@dimen/text_size_10px"
-                />
-            <TextView 
-                android:id="@+id/shower_detaisls_crafstman_thumbup"
-                  android:layout_toRightOf="@id/shower_detaisls_crafstman_moods"
-                  android:layout_alignBottom="@id/shower_detaisls_crafstman_moods"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2425人点赞"
-                android:textColor="@color/color_F47183"
-                android:drawableLeft="@drawable/icon_dot"
-                android:layout_alignLeft="@id/shower_details_crafstman_position"
-        android:drawablePadding="@dimen/text_size_4px"
-        android:textSize="@dimen/text_size_26px" 
-                />
-            
-            <TextView
-                android:singleLine="true"
-                android:layout_toLeftOf="@id/shower_details_crafstman_right"
-                android:id="@+id/shower_details_crafstman_position_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@id/shower_details_crafstman_position"
-                android:layout_toRightOf="@id/shower_details_crafstman_position"
-                android:layout_marginLeft="@dimen/text_size_3px"
-                android:textColor="@color/light_text_color"
-                android:text="中华人民共和国公务员"
-                />
-
-        </RelativeLayout>
-      <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/imaginary_line_shape"
-            android:layerType="software" />
-        <RelativeLayout 
-            android:id="@+id/rll_shower_details_shop"
-            style="@style/user_info_container"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/text_size_26px"
-            >
-           <TextView 
-               android:id="@+id/shower_details_shops_located"
-               style="@style/user_info_tv"
-               android:text="@string/shops_located"
-               android:textColor="@color/color_999999"
-               /> 
-           <TextView 
-               android:id="@+id/shower_details_shops_located_tv"
-               android:layout_toRightOf="@id/shower_details_shops_located"
-               style="@style/user_info_tv"
-               android:text="js造型"
-               android:layout_marginLeft="@dimen/text_size_16px"
-               /> 
-               <ImageView 
-                   style="@style/list_menu_next"
-                   />
+            android:paddingRight="@dimen/text_size_26px"
+            android:paddingTop="@dimen/text_size_16px">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personalized_signature"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_26px" />
+
+            <TextView
+                android:id="@+id/shower_details_signature_tv"
+                style="@style/user_info_tv"
+                android:layout_marginLeft="@dimen/text_size_8px"
+                android:text="鱼柳包里面的鱼柳变咗就唔系"
+                android:textColor="@color/color_555555"
+                android:textSize="@dimen/text_size_26px" />
+        </LinearLayout>
+        <!--       <View
+              android:layout_width="fill_parent"
+              android:layout_height="1dp"
+              android:layout_marginLeft="@dimen/text_size_26px"
+              android:layout_marginRight="@dimen/text_size_26px"
+               android:layout_marginTop="@dimen/text_size_20px"
+              android:background="@color/color_ededed" /> -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/text_size_16px"
+            android:paddingLeft="@dimen/text_size_26px"
+            android:paddingRight="@dimen/text_size_26px"
+            android:paddingTop="@dimen/text_size_16px">
+
+            <TextView
+                style="@style/user_info_tv"
+                android:text="@string/interested_signing"
+                android:textColor="@color/color_999999" />
+
+            <GridView
+                android:id="@+id/shower_details_interested_sign_gv"
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/text_size_8px"
+                android:cacheColorHint="#00000000"
+                android:descendantFocusability="blocksDescendants"
+                android:horizontalSpacing="@dimen/text_size_16px"
+                android:listSelector="#00000000"
+                android:numColumns="3"
+                android:paddingTop="@dimen/text_size_4px"></GridView>
+        </LinearLayout>
+        <!--     <View
+              android:layout_width="fill_parent"
+              android:layout_height="@dimen/ling_0.8"
+              android:background="@color/color_ededed" />
+            <View
+              android:layout_width="fill_parent"
+              android:layout_height="@dimen/ling_0.8"
+               android:layout_marginTop="@dimen/text_size_20px"
+              android:background="@color/color_ededed" /> -->
+        <LinearLayout
+            android:id="@+id/shower_details_crafstman_ll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_size_20px"
+            android:background="@color/color_ffffff"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/text_size_20px">
+
+            <TextView
+                style="@style/user_info_tv"
+                android:layout_marginLeft="@dimen/text_size_26px"
+                android:layout_marginRight="@dimen/text_size_26px"
+                android:drawableLeft="@drawable/icon_user_card"
+                android:drawablePadding="@dimen/text_size_8px"
+                android:text="@string/card_information"
+                android:textColor="@color/light_text_color" />
+
+            <RelativeLayout
+                android:id="@+id/shower_details_crafstman_rll"
+                style="@style/user_info_container"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/text_size_26px"
+                android:paddingTop="@dimen/text_size_26px">
+
+                <ImageView
+                    android:id="@+id/shower_details_crafstman_right"
+                    style="@style/list_menu_next" />
+
+                <com.show.specialshow.utils.RoundImageView
+                    android:id="@+id/shower_details_crafstman_roundImageView"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/shower_detaisls_crafstman_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/shower_details_crafstman_roundImageView"
+                    android:layout_marginLeft="@dimen/text_size_6px"
+                    android:layout_marginTop="@dimen/text_size_4px"
+                    android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
+                    android:text="@string/nickname"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_24px" />
+
+
+                <TextView
+                    android:id="@+id/shower_detaisls_crafstman_nickname_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/shower_detaisls_crafstman_nickname"
+                    android:layout_marginLeft="@dimen/text_size_3px"
+                    android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname"
+                    android:maxEms="7"
+                    android:minEms="3"
+                    android:singleLine="true"
+                    android:text="js造型"
+                    android:textColor="@color/color_555555" />
+
+                <TextView
+                    android:id="@+id/shower_detaisls_crafstman_moods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/shower_detaisls_crafstman_nickname_tv"
+                    android:layout_marginLeft="@dimen/text_size_6px"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@id/shower_details_crafstman_roundImageView"
+                    android:drawableLeft="@drawable/icon_moods"
+                    android:drawablePadding="@dimen/text_size_4px"
+                    android:text="2425人气"
+                    android:textColor="@color/color_F47183"
+                    android:textSize="@dimen/text_size_26px" />
+
+                <TextView
+                    android:id="@+id/shower_details_crafstman_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/shower_detaisls_crafstman_nickname_tv"
+                    android:layout_marginLeft="@dimen/text_size_10px"
+                    android:layout_toRightOf="@id/shower_detaisls_crafstman_nickname_tv"
+                    android:text="@string/position"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_size_24px" />
+
+                <TextView
+                    android:id="@+id/shower_detaisls_crafstman_thumbup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/shower_detaisls_crafstman_moods"
+                    android:layout_alignLeft="@id/shower_details_crafstman_position"
+                    android:layout_toRightOf="@id/shower_detaisls_crafstman_moods"
+                    android:drawableLeft="@drawable/icon_dot"
+                    android:drawablePadding="@dimen/text_size_4px"
+                    android:text="2425人点赞"
+                    android:textColor="@color/color_F47183"
+                    android:textSize="@dimen/text_size_26px" />
+
+                <TextView
+                    android:id="@+id/shower_details_crafstman_position_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/shower_details_crafstman_position"
+                    android:layout_marginLeft="@dimen/text_size_3px"
+                    android:layout_toLeftOf="@id/shower_details_crafstman_right"
+                    android:layout_toRightOf="@id/shower_details_crafstman_position"
+                    android:singleLine="true"
+                    android:text="中华人民共和国公务员"
+                    android:textColor="@color/light_text_color" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/imaginary_line_shape"
+                android:layerType="software" />
+
+            <RelativeLayout
+                android:id="@+id/rll_shower_details_shop"
+                style="@style/user_info_container"
+                android:paddingLeft="@dimen/text_size_26px">
+
+                <TextView
+                    android:id="@+id/shower_details_shops_located"
+                    style="@style/user_info_tv"
+                    android:text="@string/shops_located"
+                    android:textColor="@color/color_999999" />
+
+                <TextView
+                    android:id="@+id/shower_details_shops_located_tv"
+                    style="@style/user_info_tv"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_toRightOf="@id/shower_details_shops_located"
+                    android:text="js造型" />
+
+                <ImageView style="@style/list_menu_next" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/shower_details_attention_tv"
+
+            style="@style/user_info_tv"
+
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/text_size_20px"
+            android:background="@color/color_ffffff"
+            android:drawableLeft="@drawable/icon_user_atten"
+            android:drawablePadding="@dimen/text_size_8px"
+            android:paddingBottom="@dimen/text_size_16px"
+            android:paddingLeft="@dimen/text_size_26px"
+            android:paddingRight="@dimen/text_size_26px"
+            android:paddingTop="@dimen/text_size_16px"
+            android:text="关注的人(0)"
+            android:textColor="@color/light_text_color" />
+
+        <RelativeLayout
+            android:id="@+id/shower_details_attention_rll"
+            style="@style/user_info_container"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"
+            android:paddingBottom="@dimen/text_size_16px">
+
+            <ImageView
+                android:id="@+id/shower_details_attention_arrow"
+                style="@style/list_menu_next" />
+
+            <GridView
+                android:id="@+id/shower_details_attention_gv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:layout_toLeftOf="@id/shower_details_attention_arrow"
+                android:cacheColorHint="#00000000"
+                android:horizontalSpacing="5dp"
+                android:listSelector="#00000000"
+                android:numColumns="5"
+                android:scrollbars="none"></GridView>
         </RelativeLayout>
-      </LinearLayout>
-      <TextView
-          android:drawablePadding="@dimen/text_size_8px"
 
-          android:paddingBottom="@dimen/text_size_16px"
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_ededed" />
 
-          android:drawableLeft="@drawable/icon_user_atten"
-          android:paddingTop="@dimen/text_size_16px"
-          android:id="@+id/shower_details_attention_tv"
-          android:layout_marginTop="@dimen/text_size_20px"
-          android:paddingLeft="@dimen/text_size_26px"
-          android:paddingRight="@dimen/text_size_26px"
-      style="@style/user_info_tv"
-      android:layout_width="match_parent"
-      android:background="@color/color_ffffff"
-      android:textColor="@color/light_text_color"
-          android:text="关注的人(0)"
-          />
-      <RelativeLayout 
-          android:paddingBottom="@dimen/text_size_16px"
-          android:id="@+id/shower_details_attention_rll"
-          style="@style/user_info_container"
-          android:layout_height="wrap_content"
-          android:background="@color/color_ffffff"
-          >
-        <ImageView
-            android:id="@+id/shower_details_attention_arrow"
-            style="@style/list_menu_next"
-            />
-      <GridView
-          android:id="@+id/shower_details_attention_gv"
-          android:layout_toLeftOf="@id/shower_details_attention_arrow"
-          android:layout_marginRight="60dp"
-          android:scrollbars="none"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:numColumns="5"
-          android:listSelector="#00000000"
-            android:cacheColorHint="#00000000"
-            android:horizontalSpacing="5dp"
-          ></GridView>
-      </RelativeLayout>
-      <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_ededed" />
-      <TextView
-          android:paddingBottom="@dimen/text_size_16px"
-          android:drawablePadding="@dimen/text_size_8px"
-          android:drawableLeft="@drawable/icon_user_fans"
-          android:paddingTop="@dimen/text_size_16px"
-          android:background="@color/color_ffffff"
-          android:id="@+id/shower_details_fans_tv" 
-          android:paddingLeft="@dimen/text_size_26px"
-          android:paddingRight="@dimen/text_size_26px"
-      style="@style/user_info_tv"
-      android:layout_width="match_parent"
-      android:textColor="@color/light_text_color"
-          android:text="TA的粉丝(0)"
-          />
-      <RelativeLayout 
-          android:paddingBottom="@dimen/text_size_16px"
-          android:id="@+id/shower_details_fans_rll"
-          style="@style/user_info_container"
-          android:layout_height="wrap_content"
-          android:background="@color/color_ffffff"
-          >
-      <ImageView 
-          android:id="@+id/shower_details_fans_arrow"
-          style="@style/list_menu_next"
-          
-          />
-      <GridView 
-          android:layout_marginRight="60dp"
-          android:layout_toLeftOf="@id/shower_details_fans_arrow"
-          android:id="@+id/shower_details_fans_gv"
-          android:scrollbars="none"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:numColumns="5"
-          android:listSelector="#00000000"
-            android:cacheColorHint="#00000000"
-            android:horizontalSpacing="5dp"
-          ></GridView>
-      </RelativeLayout>
- <!--      		<RadioGroup
-		    android:layout_marginTop="@dimen/text_size_4px"
-		    android:layout_width="fill_parent"
-		    android:layout_height="@dimen/text_size_114px"
-		    android:orientation="horizontal"
-		    >
-		    <RadioButton 
-		        android:onClick="onClick"
-		        android:id="@+id/shower_details_showcard"
-		        android:checked="true"
-		        android:gravity="center"
-		        android:button="@null"
-		        android:layout_width="0dp"
-		        android:layout_height="fill_parent"
-		        android:layout_weight="1"
-		        android:text="秀卡(0)"
-		        android:textColor="@drawable/main_table_text_selector"
-		        />
-		    <RadioButton 
-		        android:onClick="onClick"
-		        android:id="@+id/shower_details_cengcard"
-		        android:gravity="center"
-		        android:textColor="@drawable/main_table_text_selector"
-		        android:button="@null"
-		        android:layout_width="0dp"
-		        android:layout_height="fill_parent"
-		        android:layout_weight="1"
-		        android:text="蹭卡(0)"
-		        />
-		    <RadioButton 
-		        android:onClick="onClick"
-		        android:id="@+id/shower_details_dynamic"
-		        android:textColor="@drawable/main_table_text_selector"
-		        android:gravity="center"
-		        android:button="@null"
-		        android:layout_width="0dp"
-		        android:layout_height="fill_parent"
-		        android:layout_weight="1"
-		        android:text="动态(0)"
-		        />
-		</RadioGroup>
-		   <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/text_size_26px"
-        android:layout_marginRight="@dimen/text_size_26px"
-        android:background="@color/color_ededed" /> -->
-         <View
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/text_size_26px"
-        android:layout_marginRight="@dimen/text_size_26px"
-         android:layout_marginBottom="@dimen/text_size_20px"
-        />
-      </LinearLayout>
+        <TextView
+            android:id="@+id/shower_details_fans_tv"
+            style="@style/user_info_tv"
+            android:layout_width="match_parent"
+            android:background="@color/color_ffffff"
+            android:drawableLeft="@drawable/icon_user_fans"
+            android:drawablePadding="@dimen/text_size_8px"
+            android:paddingBottom="@dimen/text_size_16px"
+            android:paddingLeft="@dimen/text_size_26px"
+            android:paddingRight="@dimen/text_size_26px"
+            android:paddingTop="@dimen/text_size_16px"
+            android:text="TA的粉丝(0)"
+            android:textColor="@color/light_text_color" />
+
+        <RelativeLayout
+            android:id="@+id/shower_details_fans_rll"
+            style="@style/user_info_container"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"
+            android:paddingBottom="@dimen/text_size_16px">
+
+            <ImageView
+                android:id="@+id/shower_details_fans_arrow"
+                style="@style/list_menu_next"
+
+                />
+
+            <GridView
+                android:id="@+id/shower_details_fans_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:layout_toLeftOf="@id/shower_details_fans_arrow"
+                android:cacheColorHint="#00000000"
+                android:horizontalSpacing="5dp"
+                android:listSelector="#00000000"
+                android:numColumns="5"
+                android:scrollbars="none"></GridView>
+        </RelativeLayout>
+        <!--      		<RadioGroup
+                   android:layout_marginTop="@dimen/text_size_4px"
+                   android:layout_width="fill_parent"
+                   android:layout_height="@dimen/text_size_114px"
+                   android:orientation="horizontal"
+                   >
+                   <RadioButton
+                       android:onClick="onClick"
+                       android:id="@+id/shower_details_showcard"
+                       android:checked="true"
+                       android:gravity="center"
+                       android:button="@null"
+                       android:layout_width="0dp"
+                       android:layout_height="fill_parent"
+                       android:layout_weight="1"
+                       android:text="秀卡(0)"
+                       android:textColor="@drawable/main_table_text_selector"
+                       />
+                   <RadioButton
+                       android:onClick="onClick"
+                       android:id="@+id/shower_details_cengcard"
+                       android:gravity="center"
+                       android:textColor="@drawable/main_table_text_selector"
+                       android:button="@null"
+                       android:layout_width="0dp"
+                       android:layout_height="fill_parent"
+                       android:layout_weight="1"
+                       android:text="蹭卡(0)"
+                       />
+                   <RadioButton
+                       android:onClick="onClick"
+                       android:id="@+id/shower_details_dynamic"
+                       android:textColor="@drawable/main_table_text_selector"
+                       android:gravity="center"
+                       android:button="@null"
+                       android:layout_width="0dp"
+                       android:layout_height="fill_parent"
+                       android:layout_weight="1"
+                       android:text="动态(0)"
+                       />
+               </RadioGroup>
+                  <View
+               android:layout_width="fill_parent"
+               android:layout_height="1dp"
+               android:layout_marginLeft="@dimen/text_size_26px"
+               android:layout_marginRight="@dimen/text_size_26px"
+               android:background="@color/color_ededed" /> -->
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/text_size_20px"
+            android:layout_marginLeft="@dimen/text_size_26px"
+            android:layout_marginRight="@dimen/text_size_26px" />
+    </LinearLayout>
 
 </LinearLayout>
