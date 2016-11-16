@@ -69,7 +69,7 @@ public class UIHelper {
 	public static void ToastMessage(Context cont, String msg, int time) {
 		Toast.makeText(cont, msg, time).show();
 	}
-	
+
 	public static void ToastLogMessage(Context cont,String msg){
 		if(TXApplication.isShowToast){
 			Toast.makeText(cont, msg, Toast.LENGTH_SHORT).show();
@@ -89,7 +89,7 @@ public class UIHelper {
 	}
 	/**
 	 * 获得系统的最新时间
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getLastUpdateTime() {
@@ -140,7 +140,7 @@ public class UIHelper {
 
 	/**
 	 * 调用系统电话功能
-	 * 
+	 *
 	 * @param context
 	 * @param //phonenumber
 	 */
@@ -264,7 +264,7 @@ public class UIHelper {
 	/**
 	 * popwindow框
 	 */
-	public static PopupWindow showPopwindow(View popView,Context context,View parentView){
+	public static PopupWindow showPopwindow(View popView, Context context,View parentView){
 		 PopupWindow pw = new PopupWindow(popView,
 				WindowManager.LayoutParams.MATCH_PARENT,
 				WindowManager.LayoutParams.WRAP_CONTENT);

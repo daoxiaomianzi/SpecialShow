@@ -82,11 +82,11 @@ public class BasicInformationActivity extends BaseActivity {
     private Dialog dialog;//
     private BasicHandler basicHandler = new BasicHandler(this);
     private List<ShopListTagsMess> mTagsMesses = new ArrayList<>();// 标签数据
-    private List<String> mLabels=new ArrayList<>();
+    private List<String> mLabels = new ArrayList<>();
     private int basic_mode = 0;
     public static final String MY_BASIC = "我的资料";
 
-     class BasicHandler extends Handler {
+    class BasicHandler extends Handler {
         WeakReference<BasicInformationActivity> mActivity;
 
         BasicHandler(BasicInformationActivity activity) {
@@ -104,7 +104,7 @@ public class BasicInformationActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        basic_mode=getIntent().getIntExtra("basic_mode",0);
+        basic_mode = getIntent().getIntExtra("basic_mode", 0);
         setContentView(R.layout.activity_basic_information);
     }
 
@@ -135,9 +135,9 @@ public class BasicInformationActivity extends BaseActivity {
         basic_info_interested_sign_gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Bundle bundle =new Bundle();
+                Bundle bundle = new Bundle();
                 UIHelper.startActivityForResult(mContext,
-                        SelectLabelActivity.class,SendCardActivity.TAKE_LABEL, bundle);
+                        SelectLabelActivity.class, SendCardActivity.TAKE_LABEL, bundle);
             }
         });
     }
@@ -228,9 +228,9 @@ public class BasicInformationActivity extends BaseActivity {
                 saveInfo();
                 break;
             case R.id.basic_info_interested_sign_ll://标签
-                Bundle bundle =new Bundle();
+                Bundle bundle = new Bundle();
                 UIHelper.startActivityForResult(mContext,
-                        SelectLabelActivity.class,SendCardActivity.TAKE_LABEL, bundle);
+                        SelectLabelActivity.class, SendCardActivity.TAKE_LABEL, bundle);
                 break;
             default:
                 break;
@@ -259,10 +259,10 @@ public class BasicInformationActivity extends BaseActivity {
             params.addBodyParameter("type", "1");
             params.addBodyParameter("icon", tempFile);
         }
-        if(mTagsMesses!=null){
-        for (int i = 0; i < mTagsMesses.size(); i++) {
-            params.addBodyParameter("tag[]", mTagsMesses.get(i).getTag_name());
-        }
+        if (mTagsMesses != null) {
+            for (int i = 0; i < mTagsMesses.size(); i++) {
+                params.addBodyParameter("tag[]", mTagsMesses.get(i).getTag_name());
+            }
         }
 
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
@@ -298,12 +298,12 @@ public class BasicInformationActivity extends BaseActivity {
         userMessage.setLogin(true);
         userMessage.setUser_biaoshi(user.getUser_biaoshi());
         TXApplication.loginSuccess(userMessage);
-        if(0==basic_mode){
+        if (0 == basic_mode) {
             Intent data = new Intent();
 //		data.putExtra(MyActivity.BAS_INFOR, );
             UIHelper.setResult(mContext, RESULT_OK, data);
             UIHelper.ToastMessage(mContext, "修改成功");
-        }else if(1==basic_mode){
+        } else if (1 == basic_mode) {
             AppManager.getAppManager().finishActivity(2);
             Intent mIntent = new Intent(MY_BASIC);
             mIntent.putExtra("yaner", "发送广播，相当于在这里传送数据");
@@ -619,30 +619,30 @@ public class BasicInformationActivity extends BaseActivity {
                     }
                     break;
                 case SendCardActivity.TAKE_LABEL:
-                    mLabels=data.getStringArrayListExtra("labels");
-                    if(null==mLabels||mLabels.isEmpty()||mLabels.size()==0){
-                        if(null!=mTagsMesses){
+                    mLabels = data.getStringArrayListExtra("labels");
+                    if (null == mLabels || mLabels.isEmpty() || mLabels.size() == 0) {
+                        if (null != mTagsMesses) {
                             mTagsMesses.clear();
-                        }else{
-                            mTagsMesses=new ArrayList<>();
+                        } else {
+                            mTagsMesses = new ArrayList<>();
                         }
                         basic_info_interested_sign_tv.setVisibility(View.VISIBLE);
                         basic_info_interested_sign_gv.setVisibility(View.GONE);
                         return;
-                    }else{
-                        if(null!=mTagsMesses){
+                    } else {
+                        if (null != mTagsMesses) {
                             mTagsMesses.clear();
-                        }else{
-                            mTagsMesses=new ArrayList<>();
+                        } else {
+                            mTagsMesses = new ArrayList<>();
                         }
-                        for (int i = 0; i <mLabels.size() ; i++) {
-                         ShopListTagsMess shopListTagsMess=new ShopListTagsMess();
+                        for (int i = 0; i < mLabels.size(); i++) {
+                            ShopListTagsMess shopListTagsMess = new ShopListTagsMess();
                             shopListTagsMess.setTag_name(mLabels.get(i));
                             mTagsMesses.add(shopListTagsMess);
                         }
                         basic_info_interested_sign_tv.setVisibility(View.GONE);
                         basic_info_interested_sign_gv.setVisibility(View.VISIBLE);
-                        basic_info_interested_sign_gv.setAdapter(new TagsMessAdapter(mTagsMesses,mContext));
+                        basic_info_interested_sign_gv.setAdapter(new TagsMessAdapter(mTagsMesses, mContext));
                     }
                     break;
                 default:

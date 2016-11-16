@@ -252,7 +252,7 @@ public class OrderActivity extends BaseActivity {
             params.addBodyParameter("staffid", craftsmanIntroduceMess.getCratsman_introduce_id());
             params.addBodyParameter("mid", craftsmanIntroduceMess.getCratsman_introduce_shopId());
         } else {
-            if(null!=shopPeopleMess){
+            if (null != shopPeopleMess) {
                 params.addBodyParameter("staffid", shopPeopleMess.getChoice_artisans_id());
             }
             params.addBodyParameter("mid", shop_id);
@@ -375,6 +375,19 @@ public class OrderActivity extends BaseActivity {
         pw.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         pw.showAtLocation(ll_all, Gravity.BOTTOM, 0, 0);
+        // 设置背景颜色变暗
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().setAttributes(lp);
+        pw.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
 
         tv_ok.setOnClickListener(new OnClickListener() {
 
@@ -431,6 +444,19 @@ public class OrderActivity extends BaseActivity {
         mPopupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
         // 在底部显示
         mPopupWindow.showAtLocation(ll_all, Gravity.BOTTOM, 0, 0);
+        // 设置背景颜色变暗
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.7f;
+        getWindow().setAttributes(lp);
+        mPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1f;
+                getWindow().setAttributes(lp);
+            }
+        });
 
         tv_ok.setOnClickListener(new OnClickListener() {
 
