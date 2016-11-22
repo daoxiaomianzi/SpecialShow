@@ -30,7 +30,7 @@ public class SetActivity extends BaseActivity {
     public void initView() {
         set_mb_num = (TextView) findViewById(R.id.set_mb_num);
         finish_login_tv = (TextView) findViewById(R.id.finish_login_tv);
-        tv_payment_code_modify= (TextView) findViewById(R.id.tv_payment_code_modify);
+        tv_payment_code_modify = (TextView) findViewById(R.id.tv_payment_code_modify);
     }
 
     @Override
@@ -53,9 +53,9 @@ public class SetActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(TXApplication.setTradingpassword){
+        if (TXApplication.setTradingpassword) {
             tv_payment_code_modify.setText("修改");
-        }else{
+        } else {
             tv_payment_code_modify.setText("设置");
         }
     }
@@ -86,7 +86,7 @@ public class SetActivity extends BaseActivity {
             case R.id.rl_login_password://登录密码
                 break;
             case R.id.rl_payment_code://支付密码
-                    UIHelper.startActivity(mContext,SetTradingPasswordActivity.class);
+                UIHelper.startActivity(mContext, SetTradingPasswordActivity.class);
                 break;
 
 
