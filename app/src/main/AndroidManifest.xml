@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.show.specialshow"
-    android:versionCode="2"
-    android:versionName="1.0.1">
+    android:versionCode="3"
+    android:versionName="1.0.2">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -846,9 +846,7 @@
         <!-- 自己的页面等其他相关 -->
 
         <activity android:name=".activity.BannerWebActivity" />
-        <activity
-            android:name=".activity.NearbyShowFangMapActivity"
-           />
+        <activity android:name=".activity.NearbyShowFangMapActivity" />
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".activity.WalkNaviActivity" />
         <activity android:name=".activity.LatestDynamicActivity" />
@@ -871,9 +869,7 @@
         <activity android:name=".activity.ArticleWebActivity" />
         <activity android:name=".activity.SetTradingPasswordActivity" />
         <activity android:name=".activity.IntegralmMarketActivity" />
-        <activity
-            android:name=".activity.MerchantActivity"
-/>
+        <activity android:name=".activity.MerchantActivity" />
         <activity android:name=".activity.ShowLaneActivity"></activity>
     </application>
 
