@@ -26,7 +26,7 @@ public class CircleNearbyActivity extends BaseActivity {
     /**
      * tab显示文本框
      */
-    private TextView nearby_tab_show_lane_tv;
+//    private TextView nearby_tab_show_lane_tv;
     private TextView nearby_tab_show_visitor_tv;
     private TextView nearby_tab_craftsman_tv;
 
@@ -41,8 +41,8 @@ public class CircleNearbyActivity extends BaseActivity {
     /**
      * fragment
      */
-    private ShowLaneFragment mShowLaneFg;
-    private ShowVisitorFragment mShowVisitorFg;
+//    private ShowLaneFragment mShowLaneFg;
+    private ShowVisitorFragment mShowVisitorFg;//秀客
     private CraftsmanFragment mCraftsmanFg;//手艺人
 
     @Override
@@ -54,15 +54,15 @@ public class CircleNearbyActivity extends BaseActivity {
     public void initView() {
         setContentView(R.layout.activity_circle_nearby);
         nearby_page_vp = (ViewPager) findViewById(R.id.nearby_page_vp);
-        nearby_tab_show_lane_tv = (TextView) findViewById(R.id.nearby_tab_show_lane_tv);
+//        nearby_tab_show_lane_tv = (TextView) findViewById(R.id.nearby_tab_show_lane_tv);
         nearby_tab_show_visitor_tv = (TextView) findViewById(R.id.nearby_tab_show_visitor_tv);
         nearby_tab_craftsman_tv = (TextView) findViewById(R.id.nearby_tab_craftsman_tv);
         nearby_tab_line_llt = (LinearLayout) findViewById(R.id.nearby_tab_line_llt);
         initTabLineWidth();
-        mShowLaneFg = new ShowLaneFragment();
+//        mShowLaneFg = new ShowLaneFragment();
         mShowVisitorFg = new ShowVisitorFragment();
         mCraftsmanFg = new CraftsmanFragment();
-        mFragmentList.add(mShowLaneFg);
+//        mFragmentList.add(mShowLaneFg);
         mFragmentList.add(mShowVisitorFg);
         mFragmentList.add(mCraftsmanFg);
     }
@@ -71,7 +71,7 @@ public class CircleNearbyActivity extends BaseActivity {
     public void fillView() {
         nearby_page_vp.setAdapter(mAdapter);
         nearby_page_vp.setCurrentItem(0);
-        nearby_page_vp.setOffscreenPageLimit(2);
+        nearby_page_vp.setOffscreenPageLimit(1);
         resetTextView(0);
     }
 
@@ -96,28 +96,28 @@ public class CircleNearbyActivity extends BaseActivity {
                 if (currentIndex == 0 && position == 0)// 0->1
                 {
                     lp.leftMargin = (int) (offset
-                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
-                            * (TXApplication.WINDOW_WIDTH / 3));
+                            * (TXApplication.WINDOW_WIDTH * 1.0 / 2) + currentIndex
+                            * (TXApplication.WINDOW_WIDTH / 2));
 
                 } else if (currentIndex == 1 && position == 0) // 1->0
                 {
                     lp.leftMargin = (int) (-(1 - offset)
-                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
-                            * (TXApplication.WINDOW_WIDTH / 3));
+                            * (TXApplication.WINDOW_WIDTH * 1.0 / 2) + currentIndex
+                            * (TXApplication.WINDOW_WIDTH / 2));
 
                 } else if (currentIndex == 1 && position == 1) // 1->2
                 {
                     lp.leftMargin = (int) (offset
-                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
-                            * (TXApplication.WINDOW_WIDTH / 3));
-                } else if (currentIndex == 2 && position == 2) {
-                    lp.leftMargin = (int) (offset
-                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
-                            * (TXApplication.WINDOW_WIDTH / 3));
-                } else if (currentIndex == 2 && position == 1) {
-                    lp.leftMargin = (int) (-(1 - offset)
-                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
-                            * (TXApplication.WINDOW_WIDTH / 3));
+                            * (TXApplication.WINDOW_WIDTH * 1.0 / 2) + currentIndex
+                            * (TXApplication.WINDOW_WIDTH / 2));
+//                } else if (currentIndex == 2 && position == 2) {
+//                    lp.leftMargin = (int) (offset
+//                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
+//                            * (TXApplication.WINDOW_WIDTH / 3));
+//                } else if (currentIndex == 2 && position == 1) {
+//                    lp.leftMargin = (int) (-(1 - offset)
+//                            * (TXApplication.WINDOW_WIDTH * 1.0 / 3) + currentIndex
+//                            * (TXApplication.WINDOW_WIDTH / 3));
                 }
                 nearby_tab_line_llt.setLayoutParams(lp);
             }
@@ -133,18 +133,18 @@ public class CircleNearbyActivity extends BaseActivity {
 
     protected void resetTextView(int position) {
         switch (position) {
+////                nearby_tab_show_lane_tv.setSelected(true);
+//                nearby_tab_show_visitor_tv.setSelected(false);
+//                nearby_tab_craftsman_tv.setSelected(false);
+//                break;
+//            case 0:
             case 0:
-                nearby_tab_show_lane_tv.setSelected(true);
-                nearby_tab_show_visitor_tv.setSelected(false);
-                nearby_tab_craftsman_tv.setSelected(false);
-                break;
-            case 1:
-                nearby_tab_show_lane_tv.setSelected(false);
+//                nearby_tab_show_lane_tv.setSelected(false);
                 nearby_tab_show_visitor_tv.setSelected(true);
                 nearby_tab_craftsman_tv.setSelected(false);
                 break;
-            case 2:
-                nearby_tab_show_lane_tv.setSelected(false);
+            case 1:
+//                nearby_tab_show_lane_tv.setSelected(false);
                 nearby_tab_show_visitor_tv.setSelected(false);
                 nearby_tab_craftsman_tv.setSelected(true);
                 break;
@@ -157,14 +157,14 @@ public class CircleNearbyActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.nearby_tab_show_lane_tv:
+//            case R.id.nearby_tab_show_lane_tv:
+//                nearby_page_vp.setCurrentItem(0);
+//                break;
+            case R.id.nearby_tab_show_visitor_tv:
                 nearby_page_vp.setCurrentItem(0);
                 break;
-            case R.id.nearby_tab_show_visitor_tv:
-                nearby_page_vp.setCurrentItem(1);
-                break;
             case R.id.nearby_tab_craftsman_tv:
-                nearby_page_vp.setCurrentItem(2);
+                nearby_page_vp.setCurrentItem(1);
                 break;
             default:
                 break;
@@ -174,7 +174,7 @@ public class CircleNearbyActivity extends BaseActivity {
     private void initTabLineWidth() {
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) nearby_tab_line_llt
                 .getLayoutParams();
-        lp.width = TXApplication.WINDOW_WIDTH / 3;
+        lp.width = TXApplication.WINDOW_WIDTH / 2;
         nearby_tab_line_llt.setLayoutParams(lp);
     }
 

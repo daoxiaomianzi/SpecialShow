@@ -61,7 +61,7 @@ public class SendCardActivity extends BaseActivity {
     private static final String SEND_REVIEW = "点评";
     private static final int TAKE_PICTURE = 0x000001;
     private static final int TAKE_STORE = 0x000010;
-     static final int TAKE_LABEL = 0X000011;
+    static final int TAKE_LABEL = 0X000011;
     private TextView send_card_addtion_slogan_tv;
     private TextView send_card_select_label_tv;
     private EditText send_card_describe_et;
@@ -80,27 +80,31 @@ public class SendCardActivity extends BaseActivity {
 
     private ShopItem mShop;
     private String mLabel = "";
-    private List<String> mLabels=new ArrayList<>();
-    private SendHandle sendHandle =new SendHandle(this);
-    class SendHandle extends  Handler{
+    private List<String> mLabels = new ArrayList<>();
+    private SendHandle sendHandle = new SendHandle(this);
+    public static final String SEND_ACTION_NAME = "发送动态页发送广播到动态页";
+
+
+    class SendHandle extends Handler {
         WeakReference<SendCardActivity> mActivity;
 
         SendHandle(SendCardActivity activity) {
             mActivity = new WeakReference<SendCardActivity>(activity);
         }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if(1==msg.what){
+            if (1 == msg.what) {
                 Intent data = (Intent) msg.getData().getSerializable("data");
                 int resultCode = msg.getData().getInt("resultCode");
                 if (Bimp.tempSelectBitmap.size() < 9 && resultCode == RESULT_OK) {
                     Bitmap bm = null;
-                    if(data!=null){
-                        bm= (Bitmap) data.getExtras().get("data");
-                    }else{
+                    if (data != null) {
+                        bm = (Bitmap) data.getExtras().get("data");
+                    } else {
                         ImageFactory imageFactory = new ImageFactory();
-                       bm= imageFactory.ratio(out.getAbsolutePath(),480f,800f);
+                        bm = imageFactory.ratio(out.getAbsolutePath(), 480f, 800f);
                     }
                     String newFilePath = "";
                     newFilePath = FileUtils.saveBitmap(bm, fileName, mContext);
@@ -116,6 +120,7 @@ public class SendCardActivity extends BaseActivity {
             }
         }
     }
+
     @SuppressLint("NewApi")
     @Override
     public void initData() {
@@ -172,12 +177,12 @@ public class SendCardActivity extends BaseActivity {
                 break;
             case SelectSendTypeActivity.SEND_STATE_CODE:
                 title_show = "发状态";
-                if (mLabels==null||mLabels.isEmpty()||mLabels.size()==0) {
+                if (mLabels == null || mLabels.isEmpty() || mLabels.size() == 0) {
                     append_choose_show = "选择内容标签(最多三项)";
                 } else {
-                    for (int i = 0; i <mLabels.size() ; i++) {
-                       String str=mLabels.get(i);
-                        append_choose_show=append_choose_show+str;
+                    for (int i = 0; i < mLabels.size(); i++) {
+                        String str = mLabels.get(i);
+                        append_choose_show = append_choose_show + str;
                     }
                 }
                 break;
@@ -346,7 +351,7 @@ public class SendCardActivity extends BaseActivity {
         switch (sendType) {
             case CraftsmandetailsActivity.STAFF_REVIEW:
                 Intent data = new Intent();
-                UIHelper.setResult(mContext,RESULT_OK,data);
+                UIHelper.setResult(mContext, RESULT_OK, data);
                 break;
             case SelectSendTypeActivity.SHOW_CARD_CODE:
 //			UIHelper.startActivity(mContext, MainActivity.class,bundle);
@@ -362,7 +367,11 @@ public class SendCardActivity extends BaseActivity {
 //			AppManager.getAppManager().finishActivity(4);
 //			AppManager.getAppManager().finishActivity(MainActivity.class);
 //			UIHelper.startActivity(mContext, MainActivity.class,bundle);
-                startActivity();
+//                startActivity();
+                Intent mIntent = new Intent(SendCardActivity.SEND_ACTION_NAME);
+//                 发送广播
+                sendBroadcast(mIntent);
+                finish();
                 break;
             case StoresDetailsActivity.SHOP_SHOW_CARD:
                 finish();
@@ -491,14 +500,14 @@ public class SendCardActivity extends BaseActivity {
                     UIHelper.showConfirmDialog(mContext, "文字和图片不可同时为空", null, null, true);
                     return;
                 } else {
-                    if((Boolean)SPUtils.get(mContext,"ichange",true)){
+                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
                         sendState();
 
-                    }else{
-                        UIHelper.ToastMessage(mContext,"请先完善资料");
-                        Bundle bundle =new Bundle();
-                        bundle.putInt("from_mode",1);
-                        UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                    } else {
+                        UIHelper.ToastMessage(mContext, "请先完善资料");
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("from_mode", 1);
+                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
                     }
                 }
             }
@@ -513,13 +522,13 @@ public class SendCardActivity extends BaseActivity {
     private void addImageToParams(RequestParams params) {
         Iterator<ImageItem> iterator = Bimp.tempSelectBitmap.iterator();
         int i = Bimp.tempSelectBitmap.size();
-        ImageFactory imageFactory =new ImageFactory();
+        ImageFactory imageFactory = new ImageFactory();
         while (iterator.hasNext()) {
             i--;
             ImageItem imageItem = iterator.next();
-            Bitmap bm=imageFactory.ratio(imageItem.getImagePath(),480f,800f);
-            String newFilePath = FileUtils.saveBitmap(bm,"/TX_PHOTO/"+String.valueOf(System.currentTimeMillis())
-                   ,
+            Bitmap bm = imageFactory.ratio(imageItem.getImagePath(), 480f, 800f);
+            String newFilePath = FileUtils.saveBitmap(bm, "/TX_PHOTO/" + String.valueOf(System.currentTimeMillis())
+                    ,
                     mContext);
             File tempFile = new File(newFilePath);
             params.addBodyParameter("pic" + i, tempFile);
@@ -554,18 +563,20 @@ public class SendCardActivity extends BaseActivity {
         overridePendingTransition(R.anim.activity_translate_in,
                 R.anim.activity_translate_out);
     }
+
     String fileName;
     File out;
+
     private void startPhoto() {
         Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileName = "/TX_PHOTO/"+String.valueOf(System.currentTimeMillis());
-        out= new File(FileUtils.SDPATH,fileName+ ".JPEG");
-        if(!out.getParentFile().exists()){
+        fileName = "/TX_PHOTO/" + String.valueOf(System.currentTimeMillis());
+        out = new File(FileUtils.SDPATH, fileName + ".JPEG");
+        if (!out.getParentFile().exists()) {
             out.getParentFile().mkdirs();
         }
         Uri uri = Uri.fromFile(out);
         openCameraIntent.
-               putExtra(MediaStore.EXTRA_OUTPUT, uri);// 获取拍照后未压缩的原图片，并保存在uri路径中
+                putExtra(MediaStore.EXTRA_OUTPUT, uri);// 获取拍照后未压缩的原图片，并保存在uri路径中
         startActivityForResult(openCameraIntent, TAKE_PICTURE);
     }
 
@@ -576,12 +587,12 @@ public class SendCardActivity extends BaseActivity {
         }
         switch (requestCode) {
             case TAKE_PICTURE:
-                Message message=new Message();
-                Bundle bundle=new Bundle();
+                Message message = new Message();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("data", (Serializable) data);
-                bundle.putInt("resultCode",resultCode);
+                bundle.putInt("resultCode", resultCode);
                 message.setData(bundle);//bundle传值，耗时，效率低
-                message.what=1;//标志是哪个线程传数据
+                message.what = 1;//标志是哪个线程传数据
                 sendHandle.sendMessage(message);//发送message信息
 
                 break;
@@ -590,7 +601,7 @@ public class SendCardActivity extends BaseActivity {
                 updataView();
                 break;
             case TAKE_LABEL:
-                mLabels=data.getStringArrayListExtra("labels");
+                mLabels = data.getStringArrayListExtra("labels");
                 updataView();
 //                mLabel = "美发";
                 break;

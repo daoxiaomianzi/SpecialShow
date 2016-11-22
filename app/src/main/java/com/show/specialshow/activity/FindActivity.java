@@ -130,8 +130,17 @@ public class FindActivity extends BaseActivity {
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
                 break;
-            case R.id.rll_nearly_show_fang://附近秀坊地图
-                UIHelper.startActivity(mContext, NearbyShowFangMapActivity.class);
+//            case R.id.rll_nearly_show_fang://附近秀坊地图
+//                UIHelper.startActivity(mContext, NearbyShowFangMapActivity.class);
+//                break;
+            case R.id.rll_integral:
+                if (TXApplication.login) {
+                    UIHelper.startActivity(mContext, IntegralmMarketActivity.class);
+                } else {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
                 break;
 
             default:

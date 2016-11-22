@@ -51,8 +51,7 @@
                         android:layout_height="65dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        imagecontrol:border_thickness="2dp"
-                        />
+                        imagecontrol:border_thickness="2dp" />
 
                     <TextView
                         android:id="@+id/my_name"
@@ -237,8 +236,8 @@
 
                 <TextView
                     android:id="@+id/tv_apply_merchant"
-                    android:layout_marginRight="0dp"
                     style="@style/user_info_iv"
+                    android:layout_marginRight="0dp"
                     android:layout_toLeftOf="@+id/shop_center_iv_right_iv"
                     android:text="@string/apply_merchant"
                     android:textColor="@color/color_999999" />
@@ -268,29 +267,29 @@
                     style="@style/list_menu_next" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_my_integral"
-                style="@style/user_info_container"
-                android:layout_height="45dp">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_my_integral"-->
+                <!--style="@style/user_info_container"-->
+                <!--android:layout_height="45dp">-->
 
-                <ImageView
-                    android:id="@+id/my_integral_iv"
-                    style="@style/user_info_iv"
-                    android:src="@drawable/icon_my_invite" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/my_integral_iv"-->
+                    <!--style="@style/user_info_iv"-->
+                    <!--android:src="@drawable/icon_inergral" />-->
 
-                <TextView
-                    style="@style/user_info_tv"
-                    android:layout_toRightOf="@id/my_integral_iv"
-                    android:text="@string/my_integral"
-                    android:textColor="@color/color_656565" />
+                <!--<TextView-->
+                    <!--style="@style/user_info_tv"-->
+                    <!--android:layout_toRightOf="@id/my_integral_iv"-->
+                    <!--android:text="@string/my_integral"-->
+                    <!--android:textColor="@color/color_656565" />-->
 
-                <ImageView style="@style/user_info_split" />
+                <!--<ImageView style="@style/user_info_split" />-->
 
 
-                <ImageView
-                    android:id="@+id/my_integral_iv_right_iv"
-                    style="@style/list_menu_next" />
-            </RelativeLayout>
+                <!--<ImageView-->
+                    <!--android:id="@+id/my_integral_iv_right_iv"-->
+                    <!--style="@style/list_menu_next" />-->
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/rl_my_message"
@@ -300,7 +299,7 @@
                 <ImageView
                     android:id="@+id/my_message_iv"
                     style="@style/user_info_iv"
-                    android:src="@drawable/icon_my_invite" />
+                    android:src="@drawable/icon_my_message" />
 
                 <TextView
                     style="@style/user_info_tv"
@@ -314,28 +313,31 @@
                 <ImageView
                     android:id="@+id/my_message_iv_right_iv"
                     style="@style/list_menu_next" />
+
                 <TextView
                     android:id="@+id/tv_unReadMess"
-                    android:layout_marginRight="0dp"
                     style="@style/user_info_iv"
+                    android:layout_marginRight="0dp"
                     android:layout_toLeftOf="@+id/my_message_iv_right_iv"
                     android:text=""
                     android:textColor="@color/color_ee4000" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_height="45dp"
                 android:id="@+id/rl_my_two_code"
-                style="@style/user_info_container" >
+                style="@style/user_info_container"
+                android:layout_height="45dp">
+
                 <ImageView
                     android:id="@+id/my_two_code_iv"
                     style="@style/user_info_iv"
-                    android:src="@drawable/icon_my_invite" />
+                    android:src="@drawable/icon_two_code" />
+
                 <TextView
-                    android:layout_toRightOf="@+id/my_two_code_iv"
-                    android:textColor="@color/color_656565"
                     style="@style/user_info_tv"
-                    android:text="@string/my_two_code" />
+                    android:layout_toRightOf="@+id/my_two_code_iv"
+                    android:text="@string/my_two_code"
+                    android:textColor="@color/color_656565" />
 
                 <ImageView
                     android:id="@+id/my_two_code_iv_right_iv"

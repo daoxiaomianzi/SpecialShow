@@ -90,7 +90,7 @@ public class BasicInformationActivity extends BaseActivity {
         WeakReference<BasicInformationActivity> mActivity;
 
         BasicHandler(BasicInformationActivity activity) {
-            mActivity = new WeakReference<BasicInformationActivity>(activity);
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override

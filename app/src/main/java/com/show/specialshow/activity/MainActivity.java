@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private int index = 0;//
     private long exitTime;
     private View[] views;
+    private View menu_merchant_rll;//商家
     private View menu_special_show_circle_rll;// 特秀圈
     private View menu_find_rll;// 发现
     private View menu_chat_rll;// 聊天
@@ -108,32 +109,19 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     public void onClick(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
-            case R.id.menu_special_show_circle_rll:
+            case R.id.menu_merchant_rll:
                 index = 0;
                 changeTab();
                 break;
-            case R.id.menu_find_rll:
+            case R.id.menu_special_show_circle_rll:
                 index = 1;
                 changeTab();
                 break;
-            case R.id.menu_chat_rll:
-                if (TXApplication.login) {
-                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
-                        index = 2;
-                        changeTab();
-                    } else {
-                        UIHelper.ToastMessage(mContext, "请先完善资料");
-                        bundle.putInt("from_mode", 1);
-                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
-                    }
-
-                } else {
-                    bundle.putInt(LoginActivity.FROM_LOGIN,
-                            LoginActivity.FROM_OTHER);
-                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
-                }
+            case R.id.menu_find_rll:
+                index = 2;
+                changeTab();
                 break;
-            case R.id.menu_my_rll:
+            case R.id.menu_chat_rll:
                 if (TXApplication.login) {
                     if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
                         index = 3;
@@ -150,15 +138,32 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
                 break;
-            case R.id.menu_add_rll:
-//			if (TXApplication.login) {
-                startActivity(new Intent(this, SelectSendTypeActivity.class));
-//			} else {
-//				bundle.putInt(LoginActivity.FROM_LOGIN,
-//						LoginActivity.FROM_OTHER);
-//				UIHelper.startActivity(mContext, LoginActivity.class, bundle);
-//			}
+            case R.id.menu_my_rll:
+                if (TXApplication.login) {
+                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
+                        index = 4;
+                        changeTab();
+                    } else {
+                        UIHelper.ToastMessage(mContext, "请先完善资料");
+                        bundle.putInt("from_mode", 1);
+                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
+                    }
+
+                } else {
+                    bundle.putInt(LoginActivity.FROM_LOGIN,
+                            LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
                 break;
+//            case R.id.menu_add_rll:
+////			if (TXApplication.login) {
+//                startActivity(new Intent(this, SelectSendTypeActivity.class));
+////			} else {
+////				bundle.putInt(LoginActivity.FROM_LOGIN,
+////						LoginActivity.FROM_OTHER);
+////				UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+////			}
+//                break;
             case R.id.contest_confirm_tv:
 
                 break;
@@ -282,24 +287,26 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     @Override
     public void initView() {
         setContentView(R.layout.activity_main);
+        menu_merchant_rll = findViewById(R.id.menu_merchant_rll);
         menu_special_show_circle_rll = findViewById(R.id.menu_special_show_circle_rll);
         menu_find_rll = findViewById(R.id.menu_find_rll);
         menu_chat_rll = findViewById(R.id.menu_chat_rll);
         menu_my_rll = findViewById(R.id.menu_my_rll);
         unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         my_circle_red_small = (ImageView) findViewById(R.id.my_circle_red_small);
-        views = new View[]{menu_special_show_circle_rll, menu_find_rll,
+        views = new View[]{menu_merchant_rll, menu_special_show_circle_rll, menu_find_rll,
                 menu_chat_rll, menu_my_rll};
         tabHost = (TabHost) findViewById(android.R.id.tabhost);
         localActivityManager = new LocalActivityManager(this, true);
         localActivityManager.dispatchResume();
         tabHost.setup(localActivityManager);
+        Intent merchantIntent = new Intent(MainActivity.this, MerchantActivity.class);
         Intent specialShowIntent = new Intent(MainActivity.this,
                 SpecialShowCircleActivity.class);
         Intent findIntent = new Intent(MainActivity.this, FindActivity.class);
         Intent chatIntent = new Intent(MainActivity.this, MainHxActivity.class);
         Intent myIntent = new Intent(MainActivity.this, MyActivity.class);
-        Intent[] intents = new Intent[]{specialShowIntent, findIntent,
+        Intent[] intents = new Intent[]{merchantIntent, specialShowIntent, findIntent,
                 chatIntent, myIntent};
         for (int i = 0; i < intents.length; i++) {
             tabHost.addTab(tabHost.newTabSpec(i + "").setIndicator("")

@@ -194,41 +194,42 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
     public void setListener() {
 
     }
+
     /**
      * 判断是否有未读消息
      */
-    private void isMessage(){
-        RequestParams params=TXApplication.getParams();
-        String url= URLs.USER_ISMESSAGE;
-        params.addBodyParameter("uid",TXApplication.getUserMess().getUid());
+    private void isMessage() {
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.USER_ISMESSAGE;
+        params.addBodyParameter("uid", TXApplication.getUserMess().getUid());
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 MessageResult result = MessageResult.parse(responseInfo.result);
-                if(null==result){
+                if (null == result) {
                     return;
                 }
-                if(1==result.getSuccess()){
+                if (1 == result.getSuccess()) {
                     try {
                         JSONObject obj = new JSONObject(result.getData());
                         int count = obj.getInt("count");
-                        if(count>0){
-                            tv_unReadMess.setText(count+"");
-                        }else{
+                        if (count > 0) {
+                            tv_unReadMess.setText(count + "");
+                        } else {
                             tv_unReadMess.setVisibility(View.GONE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
-                    UIHelper.ToastMessage(mContext,R.string.net_work_error);
+                } else {
+                    UIHelper.ToastMessage(mContext, R.string.net_work_error);
                 }
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                UIHelper.ToastMessage(mContext,R.string.net_work_error);
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
             }
         });
     }
@@ -295,9 +296,9 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
             case R.id.rl_my_invite://我的邀请
                 UIHelper.startActivity(mContext, MyInviteActivity.class);
                 break;
-            case R.id.rl_my_integral://我的积分
-                UIHelper.startActivity(mContext, IntegralmMarketActivity.class);
-                break;
+//            case R.id.rl_my_integral://积分商城
+//                UIHelper.startActivity(mContext, IntegralmMarketActivity.class);
+//                break;
             case R.id.rl_my_message://我的消息
                 getParent().startActivityForResult(new Intent(mContext,
                         MessageNoticeActivity.class), UNREADMESS);

@@ -653,8 +653,10 @@
         <!-- 自己的页面等其他相关 -->
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
-            android:launchMode="standard" />
+            android:launchMode="standard"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.SpecialShowCircleActivity"
             android:label="@string/title_activity_special_show_circle" />
@@ -846,8 +848,7 @@
         <activity android:name=".activity.BannerWebActivity" />
         <activity
             android:name=".activity.NearbyShowFangMapActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+           />
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".activity.WalkNaviActivity" />
         <activity android:name=".activity.LatestDynamicActivity" />
@@ -869,7 +870,11 @@
         <activity android:name=".activity.OfficialEventAndDynamicActivity" />
         <activity android:name=".activity.ArticleWebActivity" />
         <activity android:name=".activity.SetTradingPasswordActivity" />
-        <activity android:name=".activity.IntegralmMarketActivity"></activity>
+        <activity android:name=".activity.IntegralmMarketActivity" />
+        <activity
+            android:name=".activity.MerchantActivity"
+/>
+        <activity android:name=".activity.ShowLaneActivity"></activity>
     </application>
 
 </manifest>
