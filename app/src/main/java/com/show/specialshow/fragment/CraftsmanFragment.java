@@ -74,6 +74,8 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         mLon=aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
+        registerBoradcastReceiver();
+        registerShowerBoradcastReceiver();
         search_result_lv.setPullLoadEnable(true);
     }
 
@@ -190,8 +192,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void fillView() {
-        registerBoradcastReceiver();
-        registerShowerBoradcastReceiver();
+
     }
     public void registerShowerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
