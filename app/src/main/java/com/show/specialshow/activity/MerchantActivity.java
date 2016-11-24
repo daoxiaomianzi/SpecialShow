@@ -124,7 +124,7 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
         localActivityManager.dispatchResume();
         tabHost.setup(localActivityManager);
         Intent showLaneIntent = new Intent(mContext,
-                ShowLaneActivity.class);
+                CircleNearbyActivity.class);
         Intent NearbyShowFangMapIntent = new Intent(mContext,
                 NearbyShowFangMapActivity.class);
         tabHost.addTab(buildTabSpec("list", R.string.merchant_list,
@@ -212,11 +212,11 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
                 }
                 break;
             case R.id.contest_confirm_tv://确定
-				merchant_address.setText(currentCity);
-				SPUtils.put(mContext,"city",currentCity);
-				Intent mIntent = new Intent(CircleDynamicDetailActivity.ACTION_NAME);
+                merchant_address.setText(currentCity);
+                SPUtils.put(mContext, "city", currentCity);
+                Intent mIntent = new Intent(CircleDynamicDetailActivity.ACTION_NAME);
 //                 发送广播
-				sendBroadcast(mIntent);
+                sendBroadcast(mIntent);
                 affirmDialog.dismiss();
                 break;
             case R.id.contest_cancel_tv://取消

@@ -12,53 +12,53 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <!--<LinearLayout-->
-        <!--android:onClick="onClick"-->
-        <!--android:id="@+id/nearby_tab_show_lane_ll"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:padding="10dip" >-->
-
-        <!--<TextView-->
-        <!--android:onClick="onClick"-->
-        <!--android:id="@+id/nearby_tab_show_lane_tv"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:clickable="true"-->
-        <!--android:gravity="center"-->
-        <!--android:padding="2dp"-->
-        <!--android:text="@string/circle_nearby_show_lane"-->
-        <!--android:textColor="@drawable/text_grey_color_check_selector"-->
-        <!--android:textSize="@dimen/text_size_26px" />-->
-        <!--</LinearLayout>-->
-
         <LinearLayout
-            android:id="@+id/nearby_tab_show_visitor_ll"
+            android:id="@+id/nearby_tab_show_lane_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:clickable="true"
             android:gravity="center"
             android:onClick="onClick"
             android:orientation="horizontal"
-            android:padding="10dip"
-            android:saveEnabled="false">
+            android:padding="10dip">
 
             <TextView
-                android:id="@+id/nearby_tab_show_visitor_tv"
+                android:id="@+id/nearby_tab_show_lane_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:gravity="center"
                 android:onClick="onClick"
                 android:padding="2dp"
-                android:text="@string/circle_nearby_show_visitor"
+                android:text="@string/circle_nearby_show_lane"
                 android:textColor="@drawable/text_grey_color_check_selector"
                 android:textSize="@dimen/text_size_26px" />
         </LinearLayout>
+
+        <!--<LinearLayout-->
+        <!--android:id="@+id/nearby_tab_show_visitor_ll"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center"-->
+        <!--android:onClick="onClick"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="10dip"-->
+        <!--android:saveEnabled="false">-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/nearby_tab_show_visitor_tv"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center"-->
+        <!--android:onClick="onClick"-->
+        <!--android:padding="2dp"-->
+        <!--android:text="@string/circle_nearby_show_visitor"-->
+        <!--android:textColor="@drawable/text_grey_color_check_selector"-->
+        <!--android:textSize="@dimen/text_size_26px" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/nearby_tab_show_craftsman_ll"

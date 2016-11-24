@@ -80,7 +80,7 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
         Intent circleDynamicIntent = new Intent(mContext,
                 CircleDynamicActivity.class);
         Intent circleNearbyIntent = new Intent(mContext,
-                CircleNearbyActivity.class);
+                ShowLaneActivity.class);
         tabHost.addTab(buildTabSpec("dynamic", R.string.circle_dynamic,
                 R.drawable.bg_main_redio_button_left_selecter,
                 circleDynamicIntent));

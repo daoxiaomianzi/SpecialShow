@@ -1,5 +1,6 @@
 package com.show.specialshow.activity;
 
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -18,6 +19,7 @@ import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
@@ -50,7 +52,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
     //数据相关
     private List<NearMapMess> mapMessList = new ArrayList<>();
     //相关控件
-    private MapView mMapView;//高德地图页
+    private TextureMapView mMapView;//高德地图页
     private EditText near_show_et;//输入框
     // 定位相关
     private AMapLocationClient locationClient = null;
@@ -77,11 +79,14 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//                getWindow().setFormat(PixelFormat.TRANSLUCENT);
+
         super.onCreate(savedInstanceState);
         near_show_et = (EditText) findViewById(R.id.near_show_et);
         // 地图初始化
-        mMapView = (MapView) findViewById(R.id.bmapView);
+        mMapView = (TextureMapView) findViewById(R.id.bmapView);
         mMapView.onCreate(savedInstanceState);
+
         if (aMap == null) {
             aMap = mMapView.getMap();
             setUpMap();
@@ -445,7 +450,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 
     private void InitLocation() {
 
-        locationClient = new AMapLocationClient(this.getApplicationContext());
+        locationClient = new AMapLocationClient(mContext.getApplicationContext());
         locationOption = new AMapLocationClientOption();
         // 设置定位模式为低功耗模式
         locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
