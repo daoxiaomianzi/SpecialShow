@@ -267,29 +267,29 @@
                     style="@style/list_menu_next" />
             </RelativeLayout>
 
-            <!--<RelativeLayout-->
-                <!--android:id="@+id/rl_my_integral"-->
-                <!--style="@style/user_info_container"-->
-                <!--android:layout_height="45dp">-->
+            <RelativeLayout
+                android:id="@+id/rl_my_integral"
+                style="@style/user_info_container"
+                android:layout_height="45dp">
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/my_integral_iv"-->
-                    <!--style="@style/user_info_iv"-->
-                    <!--android:src="@drawable/icon_inergral" />-->
+                <ImageView
+                    android:id="@+id/my_integral_iv"
+                    style="@style/user_info_iv"
+                    android:src="@drawable/icon_inergral" />
 
-                <!--<TextView-->
-                    <!--style="@style/user_info_tv"-->
-                    <!--android:layout_toRightOf="@id/my_integral_iv"-->
-                    <!--android:text="@string/my_integral"-->
-                    <!--android:textColor="@color/color_656565" />-->
+                <TextView
+                    style="@style/user_info_tv"
+                    android:layout_toRightOf="@id/my_integral_iv"
+                    android:text="@string/my_integral"
+                    android:textColor="@color/color_656565" />
 
-                <!--<ImageView style="@style/user_info_split" />-->
+                <ImageView style="@style/user_info_split" />
 
 
-                <!--<ImageView-->
-                    <!--android:id="@+id/my_integral_iv_right_iv"-->
-                    <!--style="@style/list_menu_next" />-->
-            <!--</RelativeLayout>-->
+                <ImageView
+                    android:id="@+id/my_integral_iv_right_iv"
+                    style="@style/list_menu_next" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_my_message"

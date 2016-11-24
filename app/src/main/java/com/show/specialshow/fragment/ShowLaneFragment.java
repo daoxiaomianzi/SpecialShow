@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -133,10 +134,10 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                 clickMapBtn();
             }
         });
-        show_lang_search_et.setOnKeyListener(new View.OnKeyListener() {
+        show_lang_search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+            public boolean onEditorAction(TextView textView, int keyCode, KeyEvent keyEvent) {
+                if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
                     // 先隐藏键盘
                     UIHelper.isVisable(mContext, show_lang_search_et);
                     //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
