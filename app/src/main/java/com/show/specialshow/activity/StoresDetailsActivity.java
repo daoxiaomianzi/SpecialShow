@@ -200,7 +200,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
         stores_details_moods_num = (TextView) stores_details
                 .findViewById(R.id.stores_details_moods_num);
         stores_iv = (ImageView) stores_details.findViewById(R.id.stores_iv);
-        stores_counts= (TextView) stores_details.findViewById(R.id.stores_counts);
+        stores_counts = (TextView) stores_details.findViewById(R.id.stores_counts);
         stores_details_name = (TextView) stores_details
                 .findViewById(R.id.stores_details_name);
         stores_details_vi = stores_details.findViewById(R.id.stores_details_vi);
@@ -332,8 +332,8 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 createAffirmDialog("拔打电话？", 2, true);
                 break;
             case R.id.rl_stores_details_branch_stores://分店
-                bundle.putString("shop_id",mShopListMess.getShop_id());
-                UIHelper.startActivity(mContext,ShopBranchActivity.class,bundle);
+                bundle.putString("shop_id", mShopListMess.getShop_id());
+                UIHelper.startActivity(mContext, ShopBranchActivity.class, bundle);
                 break;
             case R.id.contest_confirm_tv:
                 affirmDialog.dismiss();
@@ -405,23 +405,25 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
             case R.id.tv_stores_details_cou://优惠买单
                 if (TXApplication.login) {
                     bundle.putString("shop_title", mShopListMess.getTitle());
-                    UIHelper.startActivity(mContext,OfferPayActivity.class,bundle);
-                }else{
-                    bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
-                    UIHelper.startActivity(mContext,LoginActivity.class,bundle);
+                    UIHelper.startActivity(mContext, OfferPayActivity.class, bundle);
+                } else {
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
                 break;
             case R.id.rl_stores_details_introduction://秀坊简介
                 if (shopShopMess != null) {
-                    bundle.putString("introduce",shopShopMess.getShow_shop_introduce());
+                    bundle.putString("introduce", shopShopMess.getShow_shop_introduce());
                 }
-                UIHelper.startActivity(mContext,ShowIntroductActivity.class,bundle);
+                UIHelper.startActivity(mContext, ShowIntroductActivity.class, bundle);
                 break;
             case R.id.stores_iv://秀坊图片
-                if (mIntroducePicMess != null&&!mIntroducePicMess.isEmpty()) {
+                if (mIntroducePicMess != null && !mIntroducePicMess.isEmpty()) {
                     bundle.putSerializable("work_pics", (Serializable) mIntroducePicMess);
-                    UIHelper.startActivity(mContext,WorkActivity.class,bundle);
+                    UIHelper.startActivity(mContext, WorkActivity.class, bundle);
                 }
+                break;
+            case R.id.stores_message_rll://商家名片
                 break;
 
             default:
@@ -772,19 +774,19 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
      */
     private void updataview() {
         tv_stores_details_branch_stores_num.setText(MessageFormat
-        .format("共有{0}家分店",shopDetailsMess.getStore_count()));
+                .format("共有{0}家分店", shopDetailsMess.getStore_count()));
         if (mShopListMess != null) {
             head_title_tv.setVisibility(View.VISIBLE);
             head_title_tv.setText(mShopListMess.getTitle());
-            mIntroducePicMess=ShopComcardStaPicsMess.parse(mShopListMess.getPic_urls());
-            if(mIntroducePicMess==null||mIntroducePicMess.isEmpty()
-                    ){
+            mIntroducePicMess = ShopComcardStaPicsMess.parse(mShopListMess.getPic_urls());
+            if (mIntroducePicMess == null || mIntroducePicMess.isEmpty()
+                    ) {
                 stores_iv.setImageResource(R.drawable.ic_launcher);
                 stores_counts.setText("0张图片");
-            }else{
+            } else {
                 ImageLoader.getInstance().displayImage(mIntroducePicMess.get(0).getThumbnail_pic(),
                         stores_iv);
-                stores_counts.setText(mIntroducePicMess.size()+"张图片");
+                stores_counts.setText(mIntroducePicMess.size() + "张图片");
             }
             stores_details_name.setText(mShopListMess.getTitle());
             stores_details_show_card_num.setText(mShopListMess.getShowCard());
@@ -985,7 +987,7 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                     vh.shop_commend_createtime.setText(mReviewMesses.get(position)
                             .getComment_time());
                     vh.shop_commend_content.setText(SmileUtils.getSmiledText(mContext
-                    ,mReviewMesses.get(position)
+                            , mReviewMesses.get(position)
                                     .getComment_total()));
                     mComcardStaPicsMess = ShopComcardStaPicsMess
                             .parse(mReviewMesses.get(position).getStatus_pics());
@@ -1034,9 +1036,9 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                     vh.roundImage_commend.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bundle bundle =new Bundle();
-                            bundle.putString("user_id",mReviewMesses.get(position).getComment_uid());
-                            UIHelper.startActivity(mContext,ShowerDetailsActivity.class,bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user_id", mReviewMesses.get(position).getComment_uid());
+                            UIHelper.startActivity(mContext, ShowerDetailsActivity.class, bundle);
                         }
                     });
 
@@ -1117,28 +1119,28 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                         @Override
                         public void onClick(View view) {
                             Bundle bundle = new Bundle();
-                            if(TXApplication.login){
-                                if(ShopComcardStaUserMess
+                            if (TXApplication.login) {
+                                if (ShopComcardStaUserMess
                                         .parse(mCommendcardStatusMesses.get(position)
                                                 .getStatus_user()).getUser_id().equals(SPUtils.get(mContext
-                                                ,"uid",""))){
-                                    UIHelper.ToastMessage(mContext,"不能和自己聊天");
+                                                , "uid", ""))) {
+                                    UIHelper.ToastMessage(mContext, "不能和自己聊天");
 
-                                }else{
-                                    if((Boolean)SPUtils.get(mContext,"ichange",true)){
-                                        bundle.putString("userId",ShopComcardStaUserMess
+                                } else {
+                                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
+                                        bundle.putString("userId", ShopComcardStaUserMess
                                                 .parse(mCommendcardStatusMesses.get(position)
                                                         .getStatus_user()).getUser_id());
-                                        UIHelper.startActivity(mContext, ChatActivity.class,bundle);
-                                    }else{
-                                        UIHelper.ToastMessage(mContext,"请先完善资料");
-                                        bundle.putInt("from_mode",1);
-                                        UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+                                        UIHelper.startActivity(mContext, ChatActivity.class, bundle);
+                                    } else {
+                                        UIHelper.ToastMessage(mContext, "请先完善资料");
+                                        bundle.putInt("from_mode", 1);
+                                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
                                     }
 
 
                                 }
-                            }else{
+                            } else {
                                 bundle.putInt(LoginActivity.FROM_LOGIN,
                                         LoginActivity.FROM_OTHER);
                                 UIHelper.startActivity(mContext, LoginActivity.class, bundle);
@@ -1149,9 +1151,9 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                     vh.roundImage_commend.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Bundle bundle =new Bundle();
-                            bundle.putString("user_id",mComcardStaUserMess.getUser_id());
-                            UIHelper.startActivity(mContext,ShowerDetailsActivity.class,bundle);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("user_id", mComcardStaUserMess.getUser_id());
+                            UIHelper.startActivity(mContext, ShowerDetailsActivity.class, bundle);
                         }
                     });
                     break;
