@@ -16,12 +16,21 @@ public class ShopListMess implements Serializable {
     private String showCard;//秀卡
     private String hot;//人气
     private String shop_id;//商户id
+    private String shop_uid;//商户店家用户id
     private String title;//商户名
     private String distance;//距离
     private String pic_urls;//图片地址
     private int notice;//是否收藏
     private String address;//店铺地址
     private String xf;//人均消费
+
+    public String getShop_uid() {
+        return shop_uid;
+    }
+
+    public void setShop_uid(String shop_uid) {
+        this.shop_uid = shop_uid;
+    }
 
     public String getXf() {
         return xf;

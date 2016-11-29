@@ -67,6 +67,8 @@ import com.show.specialshow.utils.RoundImageView;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -424,6 +426,16 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                 }
                 break;
             case R.id.stores_message_rll://商家名片
+                if (TXApplication.login) {
+                    if (mShopListMess != null && !StringUtils.isEmpty(mShopListMess.getShop_uid())
+                            ) {
+                        bundle.putString("user_id", mShopListMess.getShop_uid());
+                        UIHelper.startActivity(mContext, ShowerDetailsActivity.class, bundle);
+                    }
+                } else {
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
                 break;
 
             default:
