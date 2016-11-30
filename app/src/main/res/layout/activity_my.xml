@@ -24,7 +24,7 @@
             <RelativeLayout
                 android:id="@+id/my_head_rll"
                 android:layout_width="fill_parent"
-                android:layout_height="130dp"
+                android:layout_height="110dp"
                 android:background="@color/color_F47183">
 
                 <TextView
@@ -39,40 +39,132 @@
 
                 <RelativeLayout
                     android:id="@+id/rll_roundImage_one_border"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
                     android:clickable="true"
-                    android:onClick="onClick">
+                    android:onClick="onClick"
+                    android:paddingLeft="60dp">
 
                     <com.show.specialshow.utils.RoundImageView
                         android:id="@+id/roundImage_one_border"
                         android:layout_width="65dp"
                         android:layout_height="65dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
+                        android:layout_centerVertical="true"
                         imagecontrol:border_thickness="2dp" />
 
                     <TextView
                         android:id="@+id/my_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/roundImage_one_border"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/text_size_26px"
+                        android:layout_alignTop="@id/roundImage_one_border"
+                        android:layout_marginLeft="@dimen/text_size_26px"
+                        android:layout_marginTop="@dimen/text_size_6px"
+                        android:layout_toRightOf="@id/roundImage_one_border"
                         android:text="点击登录"
                         android:textColor="@color/color_ffffff"
-                        android:textSize="@dimen/text_size_26px" />
+                        android:textSize="@dimen/text_size_30px" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/roundImage_one_border"
+                        android:layout_marginBottom="@dimen/text_size_4px"
+                        android:layout_marginLeft="@dimen/text_size_20px"
+                        android:layout_toRightOf="@id/roundImage_one_border"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/ll_focus_on"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onClick"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/focus_on"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+
+                            <TextView
+                                android:id="@+id/focus_on_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_fans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/text_size_20px"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onClick"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/fans"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+
+                            <TextView
+                                android:id="@+id/fans_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_friends"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/text_size_20px"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:onClick="onClick"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/friends"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+
+                            <TextView
+                                android:id="@+id/friends_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_24px" />
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </RelativeLayout>
+
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_alignLeft="@id/my_name"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ll_focus_on"
+                    android:id="@+id/ll_coupons"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -83,25 +175,30 @@
                     android:orientation="vertical"
                     android:paddingTop="@dimen/text_size_4px">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/focus_on"
-                        android:textColor="@color/color_999999"
-                        android:textSize="@dimen/text_size_24px" />
+                        android:src="@drawable/icon_coupon" />
 
                     <TextView
-                        android:id="@+id/focus_on_num"
+                        android:id="@+id/coupons_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_size_4px"
-                        android:text="0"
-                        android:textColor="@color/color_656565"
-                        android:textSize="@dimen/text_size_28px" />
+                        android:text="@string/coupon"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_size_20px" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="@dimen/ling_0.8"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_ededed">
+
+                </View>
+
                 <LinearLayout
-                    android:id="@+id/ll_fans"
+                    android:id="@+id/ll_my_reservation"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -112,25 +209,30 @@
                     android:orientation="vertical"
                     android:paddingTop="@dimen/text_size_4px">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/fans"
-                        android:textColor="@color/color_999999"
-                        android:textSize="@dimen/text_size_24px" />
+                        android:src="@drawable/icon_make" />
 
                     <TextView
-                        android:id="@+id/fans_num"
+                        android:id="@+id/my_reservation_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_size_4px"
-                        android:text="0"
-                        android:textColor="@color/color_656565"
-                        android:textSize="@dimen/text_size_28px" />
+                        android:text="@string/my_reservation"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_size_20px" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="@dimen/ling_0.8"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_ededed">
+
+                </View>
+
                 <LinearLayout
-                    android:id="@+id/ll_friends"
+                    android:id="@+id/ll_invite_awards"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -141,21 +243,19 @@
                     android:orientation="vertical"
                     android:paddingTop="@dimen/text_size_4px">
 
-                    <TextView
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/friends"
-                        android:textColor="@color/color_999999"
-                        android:textSize="@dimen/text_size_24px" />
+                        android:src="@drawable/icon_invite_awards" />
 
                     <TextView
-                        android:id="@+id/friends_num"
+                        android:id="@+id/invite_awards_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/text_size_4px"
-                        android:text="0"
-                        android:textColor="@color/color_656565"
-                        android:textSize="@dimen/text_size_28px" />
+                        android:text="@string/invite_awards"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_size_20px" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -189,28 +289,28 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/rl_my_reservation"
-                style="@style/user_info_container"
-                android:layout_height="45dp">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rl_my_reservation"-->
+            <!--style="@style/user_info_container"-->
+            <!--android:layout_height="45dp">-->
 
-                <ImageView
-                    android:id="@+id/my_reservation_iv"
-                    style="@style/user_info_iv"
-                    android:src="@drawable/icon_my_reservation" />
+            <!--<ImageView-->
+            <!--android:id="@+id/my_reservation_iv"-->
+            <!--style="@style/user_info_iv"-->
+            <!--android:src="@drawable/icon_my_reservation" />-->
 
-                <TextView
-                    style="@style/user_info_tv"
-                    android:layout_toRightOf="@id/my_reservation_iv"
-                    android:text="@string/my_reservation"
-                    android:textColor="@color/color_656565" />
+            <!--<TextView-->
+            <!--style="@style/user_info_tv"-->
+            <!--android:layout_toRightOf="@id/my_reservation_iv"-->
+            <!--android:text="@string/my_reservation"-->
+            <!--android:textColor="@color/color_656565" />-->
 
-                <ImageView style="@style/user_info_split" />
+            <!--<ImageView style="@style/user_info_split" />-->
 
-                <ImageView
-                    android:id="@+id/my_reservation_iv_right_iv"
-                    style="@style/list_menu_next" />
-            </RelativeLayout>
+            <!--<ImageView-->
+            <!--android:id="@+id/my_reservation_iv_right_iv"-->
+            <!--style="@style/list_menu_next" />-->
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/rl_shop_center"
@@ -243,29 +343,29 @@
                     android:textColor="@color/color_999999" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_my_invite"
-                style="@style/user_info_container"
-                android:layout_height="45dp">
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/rl_my_invite"-->
+            <!--style="@style/user_info_container"-->
+            <!--android:layout_height="45dp">-->
 
-                <ImageView
-                    android:id="@+id/my_invite_iv"
-                    style="@style/user_info_iv"
-                    android:src="@drawable/icon_my_invite" />
+            <!--<ImageView-->
+            <!--android:id="@+id/my_invite_iv"-->
+            <!--style="@style/user_info_iv"-->
+            <!--android:src="@drawable/icon_my_invite" />-->
 
-                <TextView
-                    style="@style/user_info_tv"
-                    android:layout_toRightOf="@id/my_invite_iv"
-                    android:text="@string/my_invite"
-                    android:textColor="@color/color_656565" />
+            <!--<TextView-->
+            <!--style="@style/user_info_tv"-->
+            <!--android:layout_toRightOf="@id/my_invite_iv"-->
+            <!--android:text="@string/my_invite"-->
+            <!--android:textColor="@color/color_656565" />-->
 
-                <ImageView style="@style/user_info_split" />
+            <!--<ImageView style="@style/user_info_split" />-->
 
 
-                <ImageView
-                    android:id="@+id/my_invite_iv_right_iv"
-                    style="@style/list_menu_next" />
-            </RelativeLayout>
+            <!--<ImageView-->
+            <!--android:id="@+id/my_invite_iv_right_iv"-->
+            <!--style="@style/list_menu_next" />-->
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:id="@+id/rl_my_integral"

@@ -846,7 +846,10 @@
         <!-- 自己的页面等其他相关 -->
 
         <activity android:name=".activity.BannerWebActivity" />
-        <activity android:name=".activity.NearbyShowFangMapActivity" />
+        <activity
+            android:name=".activity.NearbyShowFangMapActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".activity.NavigationActivity" />
         <activity android:name=".activity.WalkNaviActivity" />
         <activity android:name=".activity.LatestDynamicActivity" />
@@ -870,7 +873,8 @@
         <activity android:name=".activity.SetTradingPasswordActivity" />
         <activity android:name=".activity.IntegralmMarketActivity" />
         <activity android:name=".activity.MerchantActivity" />
-        <activity android:name=".activity.ShowLaneActivity"></activity>
+        <activity android:name=".activity.ShowLaneActivity" />
+        <activity android:name=".activity.SearchLaneActivity"></activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TabHost;
@@ -36,12 +37,13 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
     private TabHost tabHost;
     private LocalActivityManager localActivityManager;
 
-    private RadioGroup merchant_head_menu_rg;
+    //    private RadioGroup merchant_head_menu_rg;
     private static final int SELECT_ADDRESS = 0x000002;//选择城市
     private static final int MESSAGE_NOTICE = 0x000003;//消息
 
     private TextView merchant_address;//城市
-    private ImageView circle_red_small;//消息通知小红点
+    //    private ImageView circle_red_small;//消息通知小红点
+    private EditText show_lang_search_et;//搜索框
 
     // 定位相关
     private AMapLocationClient locationClient = null;
@@ -58,26 +60,26 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
                         getResources().getDrawable(resIcon))
                 .setContent(content);
     }
-
-    private void onListener() {
-        merchant_head_menu_rg
-                .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        switch (checkedId) {
-                            case R.id.merchant_head_list_rb:
-                                tabHost.setCurrentTabByTag("list");
-                                break;
-                            case R.id.merchant_head_map_rb:
-                                tabHost.setCurrentTabByTag("map");
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-    }
+//
+//    private void onListener() {
+//        merchant_head_menu_rg
+//                .setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//
+//                    @Override
+//                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                        switch (checkedId) {
+//                            case R.id.merchant_head_list_rb:
+//                                tabHost.setCurrentTabByTag("list");
+//                                break;
+//                            case R.id.merchant_head_map_rb:
+//                                tabHost.setCurrentTabByTag("map");
+//                                break;
+//                            default:
+//                                break;
+//                        }
+//                    }
+//                });
+//    }
 
     private void InitLocation() {
         locationClient = new AMapLocationClient(this.getApplicationContext());
@@ -115,27 +117,27 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
 
     @Override
     public void initView() {
-        circle_red_small = (ImageView) findViewById(R.id.circle_red_small);
-
+//        circle_red_small = (ImageView) findViewById(R.id.circle_red_small);
+        show_lang_search_et = (EditText) findViewById(R.id.show_lang_search_et);
         merchant_address = (TextView) findViewById(R.id.merchant_address);
-        merchant_head_menu_rg = (RadioGroup) findViewById(R.id.merchant_head_menu_rg);
+//        merchant_head_menu_rg = (RadioGroup) findViewById(R.id.merchant_head_menu_rg);
         tabHost = (TabHost) findViewById(R.id.merchantTabHost);
         localActivityManager = new LocalActivityManager(this, true);
         localActivityManager.dispatchResume();
         tabHost.setup(localActivityManager);
         Intent showLaneIntent = new Intent(mContext,
-                CircleNearbyActivity.class);
-        Intent NearbyShowFangMapIntent = new Intent(mContext,
-                NearbyShowFangMapActivity.class);
+                ShowLaneActivity.class);
+//        Intent NearbyShowFangMapIntent = new Intent(mContext,
+//                NearbyShowFangMapActivity.class);
         tabHost.addTab(buildTabSpec("list", R.string.merchant_list,
                 R.drawable.bg_main_redio_button_left_selecter,
                 showLaneIntent));
-        tabHost.addTab(buildTabSpec("map", R.string.merchant_map,
-                R.drawable.bg_main_redio_button_right_selecter,
-                NearbyShowFangMapIntent));
+//        tabHost.addTab(buildTabSpec("map", R.string.merchant_map,
+//                R.drawable.bg_main_redio_button_right_selecter,
+//                NearbyShowFangMapIntent));
         merchant_address.setText(SPUtils.get(mContext, "city", "上海").toString());
         SPUtils.put(mContext, "oldCity", merchant_address.getText().toString().trim());
-        onListener();
+//        onListener();
         InitLocation();
     }
 
@@ -146,55 +148,60 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
 
     @Override
     public void setListener() {
-
+        show_lang_search_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UIHelper.startActivity(mContext, SearchLaneActivity.class);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (TXApplication.login) {
-            isMessage();
-        }
+//        if (TXApplication.login) {
+//            isMessage();
+//        }
     }
 
-    /**
-     * 判断是否有未读消息
-     */
-    private void isMessage() {
-        RequestParams params = TXApplication.getParams();
-        String url = URLs.USER_ISMESSAGE;
-        params.addBodyParameter("uid", TXApplication.getUserMess().getUid());
-        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
-
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                MessageResult result = MessageResult.parse(responseInfo.result);
-                if (null == result) {
-                    return;
-                }
-                if (1 == result.getSuccess()) {
-                    try {
-                        JSONObject obj = new JSONObject(result.getData());
-                        int count = obj.getInt("count");
-                        if (count > 0) {
-                            circle_red_small.setVisibility(View.VISIBLE);
-                        } else {
-                            circle_red_small.setVisibility(View.GONE);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    UIHelper.ToastMessage(mContext, R.string.net_work_error);
-                }
-            }
-
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                UIHelper.ToastMessage(mContext, R.string.net_work_error);
-            }
-        });
-    }
+//    /**
+//     * 判断是否有未读消息
+//     */
+//    private void isMessage() {
+//        RequestParams params = TXApplication.getParams();
+//        String url = URLs.USER_ISMESSAGE;
+//        params.addBodyParameter("uid", TXApplication.getUserMess().getUid());
+//        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+//
+//            @Override
+//            public void onSuccess(ResponseInfo<String> responseInfo) {
+//                MessageResult result = MessageResult.parse(responseInfo.result);
+//                if (null == result) {
+//                    return;
+//                }
+//                if (1 == result.getSuccess()) {
+//                    try {
+//                        JSONObject obj = new JSONObject(result.getData());
+//                        int count = obj.getInt("count");
+//                        if (count > 0) {
+//                            circle_red_small.setVisibility(View.VISIBLE);
+//                        } else {
+//                            circle_red_small.setVisibility(View.GONE);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    UIHelper.ToastMessage(mContext, R.string.net_work_error);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(HttpException error, String msg) {
+//                UIHelper.ToastMessage(mContext, R.string.net_work_error);
+//            }
+//        });
+//    }
 
     @Override
     public void onClick(View v) {
@@ -202,14 +209,8 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
             case R.id.merchant_address://选择城市
                 getParent().startActivityForResult(new Intent(mContext, SwitchCityActivity.class), SELECT_ADDRESS);
                 break;
-            case R.id.message_notice://消息通知
-                if (TXApplication.login) {
-                    getParent().startActivityForResult(new Intent(mContext, MessageNoticeActivity.class), MESSAGE_NOTICE);
-                } else {
-                    Intent intent = new Intent(mContext, LoginActivity.class);
-                    intent.putExtra(LoginActivity.FROM_LOGIN, LoginActivity.FROM_MAIN);
-                    getParent().startActivityForResult(intent, MESSAGE_NOTICE);
-                }
+            case R.id.merchant_map://地图
+                UIHelper.startActivity(mContext, NearbyShowFangMapActivity.class);
                 break;
             case R.id.contest_confirm_tv://确定
                 merchant_address.setText(currentCity);

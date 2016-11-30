@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_search_lane"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical"
+    tools:context=".activity.SearchLaneActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/text_size_10px"
+        android:paddingLeft="@dimen/text_size_20px"
+        android:paddingRight="@dimen/text_size_20px"
+        android:paddingTop="@dimen/text_size_16px">
+
+        <Button
+            android:id="@+id/search_lane_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:onClick="onClick"
+            android:paddingLeft="@dimen/text_size_20px"
+            android:text="@string/cancel"
+            android:textColor="@color/color_F47183"
+            android:textSize="@dimen/text_size_30px"
+
+            />
+
+        <EditText
+            android:id="@+id/search_lane_et"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/search_lane_cancel"
+            android:background="@drawable/bg_near_show_circle_search"
+            android:drawableLeft="@drawable/icon_search_lane"
+            android:drawablePadding="@dimen/text_size_6px"
+            android:hint="@string/input_show_fang_hint"
+            android:imeOptions="actionSearch"
+            android:paddingLeft="@dimen/text_size_16px"
+            android:paddingRight="@dimen/text_size_10px"
+            android:singleLine="true"
+            android:textColor="@color/color_999999"
+
+            android:textColorHint="@color/umeng_comm_color_c7"
+            android:textSize="@dimen/text_size_26px" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/text_size_26px"
+                android:layout_marginTop="@dimen/text_size_36px"
+                android:text="搜索历史"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_size_26px" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ling_0.8"
+                android:layout_marginLeft="@dimen/text_size_26px"
+                android:layout_marginRight="@dimen/text_size_26px"
+                android:layout_marginTop="@dimen/text_size_16px"
+                android:background="@color/color_ededed">
+
+            </View>
+
+            <com.show.specialshow.view.MyListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/text_size_26px"
+                android:layout_marginRight="@dimen/text_size_26px"
+                android:divider="@color/color_ededed"
+                android:dividerHeight="@dimen/ling_0.8"
+                android:listSelector="#00000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/text_size_16px"
+                android:text="清除搜索历史"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_size_26px" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

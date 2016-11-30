@@ -18,10 +18,10 @@ public class ShowLaneActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ShowVisitorFragment showVisitorFragment = new ShowVisitorFragment();
+        ShowLaneFragment showLaneFragment = new ShowLaneFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.activity_show_lane, showVisitorFragment).
-                show(showVisitorFragment).commit();
+                .add(R.id.activity_show_lane, showLaneFragment).
+                show(showLaneFragment).commit();
     }
 
     @Override

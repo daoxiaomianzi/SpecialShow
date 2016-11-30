@@ -3,60 +3,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#faF35B81"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".activity.NearbyShowFangMapActivity">
 
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/switch_city_title"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="45dip"-->
-    <!--android:background="@drawable/bg_title_shape"-->
-    <!--&gt;-->
+    <RelativeLayout
+        android:id="@+id/switch_city_title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dip"
+        android:background="@drawable/bg_title_shape">
 
-    <!--<TextView-->
-    <!--android:id="@+id/near_show_back"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="45dp"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:background="@null"-->
-    <!--android:clickable="true"-->
-    <!--android:drawableLeft="@drawable/icon_arrow_left_white"-->
-    <!--android:drawablePadding="3dp"-->
-    <!--android:gravity="center"-->
-    <!--android:onClick="onClick"-->
-    <!--android:paddingLeft="15dp"-->
-    <!--android:paddingRight="15dp"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_32px" />-->
+        <TextView
+            android:id="@+id/near_show_back"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawableLeft="@drawable/icon_arrow_left_white"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_32px" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/head_title_tv"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="45dp"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:ellipsize="end"-->
-    <!--android:gravity="center"-->
-    <!--android:maxWidth="250dp"-->
-    <!--android:singleLine="true"-->
-    <!--android:text="附近秀坊"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_40px" />-->
+        <TextView
+            android:id="@+id/head_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxWidth="250dp"
+            android:singleLine="true"
+            android:text="附近秀坊"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_40px" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/near_show_right_tv"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="45dp"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:clickable="true"-->
-    <!--android:gravity="center"-->
-    <!--android:onClick="onClick"-->
-    <!--android:paddingLeft="20dp"-->
-    <!--android:paddingRight="10dp"-->
-    <!--android:drawableLeft="@drawable/icon_list"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/text_size_32px"-->
-    <!--android:visibility="visible" />-->
-    <!--</RelativeLayout>-->
+        <!--<TextView-->
+            <!--android:id="@+id/near_show_right_tv"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:clickable="true"-->
+            <!--android:drawableLeft="@drawable/icon_list"-->
+            <!--android:gravity="center"-->
+            <!--android:onClick="onClick"-->
+            <!--android:paddingLeft="20dp"-->
+            <!--android:paddingRight="10dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/text_size_32px"-->
+            <!--android:visibility="visible" />-->
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,11 +74,10 @@
             android:id="@+id/search_bar_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/text_size_10px"
             android:layout_marginLeft="@dimen/text_size_10px"
-            android:layout_marginRight="55dp"
-            android:layout_marginTop="@dimen/text_size_16px"
+            android:layout_marginRight="10dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 

@@ -56,9 +56,9 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     private List<ShopListTagsMess> mTagsMesses = new ArrayList<ShopListTagsMess>();
     //相关控件
     private TextView show_lang_nodata_tv;
-    private EditText show_lang_search_et;//搜索框
-    private Button map_btn;//地图按钮
-    private XListView search_result_key;//key关键字搜索结果
+    //    private EditText show_lang_search_et;//搜索框
+//    private Button map_btn;//地图按钮
+//    private XListView search_result_key;//key关键字搜索结果
     // 定位相关
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
@@ -85,9 +85,9 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     public void initData() {
         InitLocation();
         show_lang_nodata_tv = (TextView) findViewById(R.id.show_lang_nodata_tv);
-        show_lang_search_et = (EditText) findViewById(R.id.show_lang_search_et);
-        map_btn = (Button) findViewById(R.id.map_btn);
-        search_result_key = (XListView) findViewById(R.id.search_result_key);
+//        show_lang_search_et = (EditText) findViewById(R.id.show_lang_search_et);
+//        map_btn = (Button) findViewById(R.id.map_btn);
+//        search_result_key = (XListView) findViewById(R.id.search_result_key);
         adapter = new ShowLaneAdapter(mList, mContext);
     }
 
@@ -98,144 +98,144 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     public void setListener() {
-        show_lang_search_et.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int start, int count,
-                                          int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (StringUtils.isEmpty(editable.toString().trim())) {
-//                    map_btn.setBackgroundResource(R.drawable.icon_map);
-//                    map_btn.setText("");
-                    map_btn.setVisibility(View.GONE);
-                    if (null != keyList) {
-                        keyList.clear();
-                    }
-                    search_result_key.setVisibility(View.GONE);
-                    search_result_lv.setVisibility(View.VISIBLE);
-                } else {
-                    map_btn.setVisibility(View.VISIBLE);
-                    map_btn.setBackgroundColor(Color.WHITE);
-                    map_btn.setText(R.string.cancel);
-                }
-            }
-        });
-        map_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickMapBtn();
-            }
-        });
-        show_lang_search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
-                    // 先隐藏键盘
-                    UIHelper.isVisable(mContext, show_lang_search_et);
-                    //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
-                    search();
-                }
-                return false;
-            }
-        });
+//        show_lang_search_et.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int start, int count,
+//                                          int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                if (StringUtils.isEmpty(editable.toString().trim())) {
+////                    map_btn.setBackgroundResource(R.drawable.icon_map);
+////                    map_btn.setText("");
+//                    map_btn.setVisibility(View.GONE);
+//                    if (null != keyList) {
+//                        keyList.clear();
+//                    }
+//                    search_result_key.setVisibility(View.GONE);
+//                    search_result_lv.setVisibility(View.VISIBLE);
+//                } else {
+//                    map_btn.setVisibility(View.VISIBLE);
+//                    map_btn.setBackgroundColor(Color.WHITE);
+//                    map_btn.setText(R.string.cancel);
+//                }
+//            }
+//        });
+//        map_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                clickMapBtn();
+//            }
+//        });
+//        show_lang_search_et.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int keyCode, KeyEvent keyEvent) {
+//                if (keyCode == EditorInfo.IME_ACTION_SEARCH) {
+//                    // 先隐藏键盘
+//                    UIHelper.isVisable(mContext, show_lang_search_et);
+//                    //进行搜索操作的方法，在该方法中可以加入mEditSearchUser的非空判断
+//                    search();
+//                }
+//                return false;
+//            }
+//        });
     }
 
-    /**
-     * 搜索结果
-     */
-    private void search() {
-        if (StringUtils.isEmpty(show_lang_search_et.getText().toString().trim())) {
-            UIHelper.ToastMessage(mContext, "请输入关键字");
-        } else {
-            keyAdapter = new ShowLaneAdapter(keyList, mContext);
-            initKeyListView();
-        }
-    }
+//    /**
+//     * 搜索结果
+//     */
+//    private void search() {
+//        if (StringUtils.isEmpty(show_lang_search_et.getText().toString().trim())) {
+//            UIHelper.ToastMessage(mContext, "请输入关键字");
+//        } else {
+//            keyAdapter = new ShowLaneAdapter(keyList, mContext);
+//            initKeyListView();
+//        }
+//    }
 
-    /**
-     * 通过关键字key搜索的秀坊列表
-     */
-    private void getKeyData() {
-        String key = show_lang_search_et.getText().toString().trim();//秀坊关键字
-        RequestParams params = TXApplication.getParams();
-        String url = URLs.SHOP_SHOPLIST;
-        UserMessage user = TXApplication.getUserMess();
-        params.addBodyParameter("uid", user.getUid());
-        params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
-        params.addBodyParameter("key", key);
-        params.addBodyParameter("index", pageIndex + "");
-        if (0.0d == mLat || 0.0d == mLon) {
-            UIHelper.ToastMessage(mContext, "获取位置失败,请重试!");
-        } else {
-            params.addBodyParameter("longitude", mLon + "");//经度
-            params.addBodyParameter("latitude", mLat + "");//纬度
-        }
-        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
-
-            @Override
-            public void onFailure(HttpException error, String msg) {
-                onKeyError(getResources().getString(R.string.net_server_error));
-            }
-
-            @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                MessageResult result = MessageResult.parse(responseInfo.result);
-                if (null == result) {
-                    onKeyError(getResources().getString(R.string.no_data_search));
-                    return;
-                }
-                if (1 == result.getSuccess()) {
-                    ShopLaneList shopLaneList = ShopLaneList.parse(result.getData());
-                    List<ShopListMess> List = shopLaneList.getList();
-                    if (null == List) {
-                        UIHelper.ToastMessage(mContext, "无搜索结果");
-                        changeKeyListView(0);
-                        return;
-                    }
-                    int size = List.size();
-                    totalKeyRecord = shopLaneList.getTotal();
-                    if (totalKeyRecord <= ConstantValue.PAGE_SIZE) {
-                        search_result_key.setPullLoadEnable(false);
-                    }
-                    if (search_result_key.getState() == XListView.LOAD_REFRESH) {
-                        keyList.clear();
-                    }
-                    keyList.addAll(List);
-                    for (int i = 0; i < keyList.size(); i++) {
-                        for (int j = keyList.size() - 1; j > i; j--) {
-                            if (keyList.get(j).getShop_id()
-                                    .equals(keyList.get(i).getShop_id())) {
-                                keyList.remove(j);
-                            }
-                        }
-                    }
-                    if (keyList == null || keyList.isEmpty()) {
-                        search_result_key.setVisibility(View.VISIBLE);
-                        search_result_lv.setVisibility(View.GONE);
-                        show_lang_nodata_tv.setVisibility(View.VISIBLE);
-                    } else {
-                        search_result_key.setVisibility(View.VISIBLE);
-                        search_result_lv.setVisibility(View.GONE);
-                        show_lang_nodata_tv.setVisibility(View.GONE);
-                    }
-                    localKeyRecord = keyList.size();
-//					totalRecord = -1;
-                    changeKeyListView(size);
-                } else {
-                    changeKeyListView(0);
-                    UIHelper.ToastMessage(mContext, result.getMessage());
-                }
-            }
-        });
-    }
+//    /**
+//     * 通过关键字key搜索的秀坊列表
+//     */
+//    private void getKeyData() {
+//        String key = show_lang_search_et.getText().toString().trim();//秀坊关键字
+//        RequestParams params = TXApplication.getParams();
+//        String url = URLs.SHOP_SHOPLIST;
+//        UserMessage user = TXApplication.getUserMess();
+//        params.addBodyParameter("uid", user.getUid());
+//        params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
+//        params.addBodyParameter("key", key);
+//        params.addBodyParameter("index", pageIndex + "");
+//        if (0.0d == mLat || 0.0d == mLon) {
+//            UIHelper.ToastMessage(mContext, "获取位置失败,请重试!");
+//        } else {
+//            params.addBodyParameter("longitude", mLon + "");//经度
+//            params.addBodyParameter("latitude", mLat + "");//纬度
+//        }
+//        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+//
+//            @Override
+//            public void onFailure(HttpException error, String msg) {
+//                onKeyError(getResources().getString(R.string.net_server_error));
+//            }
+//
+//            @Override
+//            public void onSuccess(ResponseInfo<String> responseInfo) {
+//                MessageResult result = MessageResult.parse(responseInfo.result);
+//                if (null == result) {
+//                    onKeyError(getResources().getString(R.string.no_data_search));
+//                    return;
+//                }
+//                if (1 == result.getSuccess()) {
+//                    ShopLaneList shopLaneList = ShopLaneList.parse(result.getData());
+//                    List<ShopListMess> List = shopLaneList.getList();
+//                    if (null == List) {
+//                        UIHelper.ToastMessage(mContext, "无搜索结果");
+//                        changeKeyListView(0);
+//                        return;
+//                    }
+//                    int size = List.size();
+//                    totalKeyRecord = shopLaneList.getTotal();
+//                    if (totalKeyRecord <= ConstantValue.PAGE_SIZE) {
+//                        search_result_key.setPullLoadEnable(false);
+//                    }
+//                    if (search_result_key.getState() == XListView.LOAD_REFRESH) {
+//                        keyList.clear();
+//                    }
+//                    keyList.addAll(List);
+//                    for (int i = 0; i < keyList.size(); i++) {
+//                        for (int j = keyList.size() - 1; j > i; j--) {
+//                            if (keyList.get(j).getShop_id()
+//                                    .equals(keyList.get(i).getShop_id())) {
+//                                keyList.remove(j);
+//                            }
+//                        }
+//                    }
+//                    if (keyList == null || keyList.isEmpty()) {
+//                        search_result_key.setVisibility(View.VISIBLE);
+//                        search_result_lv.setVisibility(View.GONE);
+//                        show_lang_nodata_tv.setVisibility(View.VISIBLE);
+//                    } else {
+//                        search_result_key.setVisibility(View.VISIBLE);
+//                        search_result_lv.setVisibility(View.GONE);
+//                        show_lang_nodata_tv.setVisibility(View.GONE);
+//                    }
+//                    localKeyRecord = keyList.size();
+////					totalRecord = -1;
+//                    changeKeyListView(size);
+//                } else {
+//                    changeKeyListView(0);
+//                    UIHelper.ToastMessage(mContext, result.getMessage());
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public void fillView() {
@@ -270,22 +270,22 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     }
 
-    /**
-     * 地图和取消的时候做不同的操作
-     */
-    private void clickMapBtn() {
-        if (StringUtils.isEmpty(map_btn.getText().toString().trim())) {//当为地图按钮时
-            UIHelper.startActivity(getActivity(), NearbyShowFangMapActivity.class);
-        } else {//当为取消按钮时
-            show_lang_search_et.setText("");
-            UIHelper.isVisable(mContext, show_lang_search_et);
-            if (null != keyList) {
-                keyList.clear();
-            }
-            search_result_key.setVisibility(View.GONE);
-            search_result_lv.setVisibility(View.VISIBLE);
-        }
-    }
+//    /**
+//     * 地图和取消的时候做不同的操作
+//     */
+//    private void clickMapBtn() {
+//        if (StringUtils.isEmpty(map_btn.getText().toString().trim())) {//当为地图按钮时
+//            UIHelper.startActivity(getActivity(), NearbyShowFangMapActivity.class);
+//        } else {//当为取消按钮时
+//            show_lang_search_et.setText("");
+//            UIHelper.isVisable(mContext, show_lang_search_et);
+//            if (null != keyList) {
+//                keyList.clear();
+//            }
+//            search_result_key.setVisibility(View.GONE);
+//            search_result_lv.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     @Override
     protected void getData() {
@@ -331,7 +331,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                     List<ShopListMess> List = shopLaneList.getList();
                     if (null == List) {
                         changeListView(0);
-                        search_result_key.setVisibility(View.GONE);
+//                        search_result_key.setVisibility(View.GONE);
                         search_result_lv.setVisibility(View.VISIBLE);
                         show_lang_nodata_tv.setVisibility(View.VISIBLE);
                         search_result_lv.setPullLoadEnable(false);
@@ -357,12 +357,12 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                         }
                     }
                     if (mList == null || mList.isEmpty()) {
-                        search_result_key.setVisibility(View.GONE);
+//                        search_result_key.setVisibility(View.GONE);
                         search_result_lv.setVisibility(View.VISIBLE);
                         show_lang_nodata_tv.setVisibility(View.VISIBLE);
                         search_result_lv.setPullLoadEnable(false);
                     } else {
-                        search_result_key.setVisibility(View.GONE);
+//                        search_result_key.setVisibility(View.GONE);
                         search_result_lv.setVisibility(View.VISIBLE);
                         show_lang_nodata_tv.setVisibility(View.GONE);
                     }
@@ -442,64 +442,64 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
         }
     }
 
-    private void initKeyListView() {
-        search_result_key.setDividerHeight(15);
-        search_result_key.setPullLoadEnable(true);
-        search_result_key.setPullRefreshEnable(false);
-        search_result_key.setXListViewListener(new XListView.IXListViewListener() {
-
-            @Override
-            public void onRefresh() {
-                pageKeyIndex = 1;
-                getKeyData();
-            }
-
-            @Override
-            public void onLoadMore() {
-                pageKeyIndex++;
-                getKeyData();
-            }
-
-            @Override
-            public void onInit() {
-                getKeyData();
-
-            }
-        });
-        search_result_key.setAdapter(keyAdapter);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void changeKeyListView(int size) {
-        stopLoad();
-        if (size < ConstantValue.PAGE_SIZE || localKeyRecord == totalKeyRecord) {
-            search_result_key.loadFull();
-        }
-        if (size == 0 && localKeyRecord == 0) {
-            search_result_key.loadEmpty();
-        }
-        if (search_result_key.getState() == XListView.LOAD_INIT)
-            search_result_key.setSelectionFromTop(0, 0);
-        keyAdapter.notifyDataSetChanged();
-    }
-
-    private void onKeyError(String prompt) {
-        UIHelper.ToastMessage(mContext, prompt);
-        stopKeyLoad();
-        search_result_key.onError();
-    }
-
-    private void stopKeyLoad() {
-        switch (search_result_key.getState()) {
-            case XListView.LOAD_INIT:
-                search_result_key.stopInit();
-                break;
-            case XListView.LOAD_REFRESH:
-                search_result_key.stopRefresh();
-                break;
-            case XListView.LOAD_MORE:
-                search_result_key.stopLoadMore();
-                break;
-        }
-    }
+//    private void initKeyListView() {
+//        search_result_key.setDividerHeight(15);
+//        search_result_key.setPullLoadEnable(true);
+//        search_result_key.setPullRefreshEnable(false);
+//        search_result_key.setXListViewListener(new XListView.IXListViewListener() {
+//
+//            @Override
+//            public void onRefresh() {
+//                pageKeyIndex = 1;
+//                getKeyData();
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//                pageKeyIndex++;
+//                getKeyData();
+//            }
+//
+//            @Override
+//            public void onInit() {
+//                getKeyData();
+//
+//            }
+//        });
+//        search_result_key.setAdapter(keyAdapter);
+//    }
+//
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    private void changeKeyListView(int size) {
+//        stopLoad();
+//        if (size < ConstantValue.PAGE_SIZE || localKeyRecord == totalKeyRecord) {
+//            search_result_key.loadFull();
+//        }
+//        if (size == 0 && localKeyRecord == 0) {
+//            search_result_key.loadEmpty();
+//        }
+//        if (search_result_key.getState() == XListView.LOAD_INIT)
+//            search_result_key.setSelectionFromTop(0, 0);
+//        keyAdapter.notifyDataSetChanged();
+//    }
+//
+//    private void onKeyError(String prompt) {
+//        UIHelper.ToastMessage(mContext, prompt);
+//        stopKeyLoad();
+//        search_result_key.onError();
+//    }
+//
+//    private void stopKeyLoad() {
+//        switch (search_result_key.getState()) {
+//            case XListView.LOAD_INIT:
+//                search_result_key.stopInit();
+//                break;
+//            case XListView.LOAD_REFRESH:
+//                search_result_key.stopRefresh();
+//                break;
+//            case XListView.LOAD_MORE:
+//                search_result_key.stopLoadMore();
+//                break;
+//        }
+//    }
 }

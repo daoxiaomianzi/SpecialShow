@@ -34,60 +34,61 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_24px" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="45dp"
-                android:layout_centerHorizontal="true">
 
-                <RadioGroup
-                    android:id="@+id/merchant_head_menu_rg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/bg_main_redio_group_shape"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingLeft="1dp"
-                    android:paddingRight="1dp">
+            <!--<RelativeLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_centerHorizontal="true">-->
 
-                    <RadioButton
-                        android:id="@+id/merchant_head_list_rb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_main_redio_button_left_selecter"
-                        android:button="@null"
-                        android:checked="true"
-                        android:gravity="center"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="3dp"
-                        android:text="@string/merchant_list"
-                        android:textColor="@drawable/text_color_check_selector" />
+            <!--<RadioGroup-->
+            <!--android:id="@+id/merchant_head_menu_rg"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="@drawable/bg_main_redio_group_shape"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:paddingLeft="1dp"-->
+            <!--android:paddingRight="1dp">-->
 
-                    <RadioButton
-                        android:id="@+id/merchant_head_map_rb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_main_redio_button_right_selecter"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:paddingBottom="3dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:paddingTop="3dp"
-                        android:text="@string/merchant_map"
-                        android:textColor="@drawable/text_color_check_selector" />
-                </RadioGroup>
-            </RelativeLayout>
+            <!--<RadioButton-->
+            <!--android:id="@+id/merchant_head_list_rb"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/bg_main_redio_button_left_selecter"-->
+            <!--android:button="@null"-->
+            <!--android:checked="true"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingBottom="3dp"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:paddingRight="15dp"-->
+            <!--android:paddingTop="3dp"-->
+            <!--android:text="@string/merchant_list"-->
+            <!--android:textColor="@drawable/text_color_check_selector" />-->
+
+            <!--<RadioButton-->
+            <!--android:id="@+id/merchant_head_map_rb"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/bg_main_redio_button_right_selecter"-->
+            <!--android:button="@null"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingBottom="3dp"-->
+            <!--android:paddingLeft="15dp"-->
+            <!--android:paddingRight="15dp"-->
+            <!--android:paddingTop="3dp"-->
+            <!--android:text="@string/merchant_map"-->
+            <!--android:textColor="@drawable/text_color_check_selector" />-->
+            <!--</RadioGroup>-->
+            <!--</RelativeLayout>-->
 
             <TextView
-                android:id="@+id/message_notice"
+                android:id="@+id/merchant_map"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_alignParentRight="true"
                 android:clickable="true"
-                android:drawableLeft="@drawable/icon_special_show_message"
+                android:drawableLeft="@drawable/icon_map"
                 android:gravity="center"
                 android:onClick="onClick"
                 android:paddingLeft="20dp"
@@ -95,15 +96,34 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_32px" />
 
-            <ImageView
-                android:id="@+id/circle_red_small"
-                android:layout_width="@dimen/text_size_16px"
-                android:layout_height="@dimen/text_size_16px"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/text_size_18px"
+            <EditText
+                android:id="@+id/show_lang_search_et"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
                 android:layout_marginTop="@dimen/text_size_16px"
-                android:background="@drawable/circle_red_small"
-                android:visibility="gone" />
+                android:layout_toLeftOf="@+id/merchant_map"
+                android:layout_toRightOf="@id/merchant_address"
+                android:background="@drawable/bg_near_show_circle"
+                android:drawableLeft="@drawable/search_input"
+                android:drawablePadding="@dimen/text_size_6px"
+                android:hint="@string/input_show_fang_hint"
+                android:paddingLeft="@dimen/text_size_16px"
+                android:paddingRight="@dimen/text_size_10px"
+                android:singleLine="true"
+                android:textColor="@color/color_999999"
+
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_size_26px" />
+            <!--<ImageView-->
+            <!--android:id="@+id/circle_red_small"-->
+            <!--android:layout_width="@dimen/text_size_16px"-->
+            <!--android:layout_height="@dimen/text_size_16px"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="@dimen/text_size_18px"-->
+            <!--android:layout_marginTop="@dimen/text_size_16px"-->
+            <!--android:background="@drawable/circle_red_small"-->
+            <!--android:visibility="gone" />
+-->
         </RelativeLayout>
 
         <RelativeLayout

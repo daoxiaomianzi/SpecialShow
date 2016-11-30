@@ -1,11 +1,13 @@
 package com.show.specialshow.activity;
 
+import android.content.Context;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -234,14 +236,14 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
 //            case R.id.near_show_right_tv:
 //                UIHelper.startActivity(mContext, NearShowActivity.class);
 //                break;
-//            case R.id.near_show_back:
-//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//                boolean isOpen = imm.isActive();//isOpen若返回true，则表示输入法打开
-//                if (isOpen) {
-//                    UIHelper.isVisable(mContext, near_show_et);
-//                }
-//                finish();
-//                break;
+            case R.id.near_show_back:
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                boolean isOpen = imm.isActive();//isOpen若返回true，则表示输入法打开
+                if (isOpen) {
+                    UIHelper.isVisable(mContext, near_show_et);
+                }
+                finish();
+                break;
         }
     }
 
@@ -482,8 +484,8 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // 设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种
         aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
-//        UiSettings uiSettings = aMap.getUiSettings();
-//        uiSettings.setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setZoomPosition(AMapOptions.ZOOM_POSITION_RIGHT_CENTER);
     }
 
     /**

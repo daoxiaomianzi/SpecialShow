@@ -290,10 +290,10 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                 UIHelper.startActivity(mContext, BusinessCenterActivity.class);
                 break;
 
-            case R.id.rl_my_reservation://我的预约
+            case R.id.ll_my_reservation://我的预约
                 UIHelper.startActivity(mContext, MyBookingActivity.class);
                 break;
-            case R.id.rl_my_invite://我的邀请
+            case R.id.ll_invite_awards://我的邀请
                 UIHelper.startActivity(mContext, MyInviteActivity.class);
                 break;
             case R.id.rl_my_integral://积分商城
