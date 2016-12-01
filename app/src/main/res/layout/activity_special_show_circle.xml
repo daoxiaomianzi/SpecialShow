@@ -69,7 +69,7 @@
                         android:id="@+id/show_circle_head_nearby_rb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_main_redio_button_right_selecter"
+                        android:background="@drawable/bg_main_redio_button_center_selecter"
                         android:button="@null"
                         android:gravity="center"
                         android:paddingBottom="3dp"
@@ -77,6 +77,20 @@
                         android:paddingRight="15dp"
                         android:paddingTop="3dp"
                         android:text="附近"
+                        android:textColor="@drawable/text_color_check_selector" />
+
+                    <RadioButton
+                        android:id="@+id/show_circle_head_chat_rb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_main_redio_button_right_selecter"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="3dp"
+                        android:text="聊天"
                         android:textColor="@drawable/text_color_check_selector" />
                 </RadioGroup>
             </RelativeLayout>

@@ -875,7 +875,9 @@
         <activity android:name=".activity.MerchantActivity" />
         <activity android:name=".activity.ShowLaneActivity" />
         <activity android:name=".activity.SearchLaneActivity" />
-        <activity android:name=".activity.SearchResultActivity"></activity>
+        <activity android:name=".activity.SearchResultActivity" />
+        <activity android:name=".activity.ShowVisitorActivity" />
+        <activity android:name=".activity.ShowCraftsmanActivity"></activity>
     </application>
 
 </manifest>

@@ -15,17 +15,20 @@
             android:layout_above="@+id/main_bottom_rll"
             android:padding="0dip">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"></FrameLayout>
-
             <TabWidget
                 android:id="@android:id/tabs"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@android:id/tabcontent"
                 android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/tabWidget"
+                android:layout_toRightOf="@+id/tabWidget"></FrameLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -53,6 +56,22 @@
                         style="@style/main_menu_btn"
                         android:drawableTop="@drawable/main_table_icon_merchant_selector"
                         android:text="@string/merchant" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menu_craftsman_rll"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:padding="3dp">
+
+                    <TextView
+                        android:id="@+id/menu_craftsman_tv"
+                        style="@style/main_menu_btn"
+                        android:drawableTop="@drawable/main_table_icon_craftsman_selector"
+                        android:text="@string/circle_nearby_craftsman" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -93,35 +112,35 @@
                 <!--android:layout_weight="1"-->
                 <!--android:padding="3dp"></RelativeLayout>-->
 
-                <RelativeLayout
-                    android:id="@+id/menu_chat_rll"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:onClick="onClick"
-                    android:padding="3dp">
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/menu_chat_rll"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:clickable="true"-->
+                <!--android:onClick="onClick"-->
+                <!--android:padding="3dp">-->
 
-                    <TextView
-                        android:id="@+id/menu_chat_tv"
-                        style="@style/main_menu_btn"
-                        android:drawableTop="@drawable/main_table_icon_chat_selector"
-                        android:text="@string/chat" />
+                <!--<TextView-->
+                <!--android:id="@+id/menu_chat_tv"-->
+                <!--style="@style/main_menu_btn"-->
+                <!--android:drawableTop="@drawable/main_table_icon_chat_selector"-->
+                <!--android:text="@string/chat" />-->
 
-                    <TextView
-                        android:id="@+id/unread_msg_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="3dp"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/unread_count_bg"
-                        android:gravity="center"
-                        android:text="7"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        android:visibility="invisible" />
-                </RelativeLayout>
+                <!--<TextView-->
+                <!--android:id="@+id/unread_msg_number"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="3dp"-->
+                <!--android:layout_marginTop="0dp"-->
+                <!--android:background="@drawable/unread_count_bg"-->
+                <!--android:gravity="center"-->
+                <!--android:text="7"-->
+                <!--android:textColor="@android:color/white"-->
+                <!--android:textSize="12sp"-->
+                <!--android:visibility="invisible" />-->
+                <!--</RelativeLayout>-->
 
                 <RelativeLayout
                     android:id="@+id/menu_my_rll"

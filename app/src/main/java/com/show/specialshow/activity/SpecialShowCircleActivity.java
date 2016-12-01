@@ -7,33 +7,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
-import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.easemob.chatuidemo.activity.MainHxActivity;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
-import com.show.specialshow.URLs;
-import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
-import com.show.specialshow.utils.OnTabActivityResultListener;
 import com.show.specialshow.utils.SPUtils;
+import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.show.specialshow.view.ActionItem;
+import com.show.specialshow.view.TitlePopup;
+import com.umeng.comm.core.beans.ShareContent;
 
 public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabActivityResultListener,AMapLocationListener*/ {
 
@@ -50,6 +42,10 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
     // 定位相关
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
+    private int index = 0;
+
+    // 添加pop相关
+    private TitlePopup titlePopup;
 
     @Override
     public void initData() {
@@ -73,6 +69,8 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
 //		special_show_address=(TextView) findViewById(R.id.special_show_address);
 //        circle_red_small = (ImageView) findViewById(R.id.circle_red_small);
         show_circle_head_menu_rg = (RadioGroup) findViewById(R.id.show_circle_head_menu_rg);
+        show_circle_head_dynamic_rb = (RadioButton) findViewById(R.id.show_circle_head_dynamic_rb);
+        show_circle_head_nearby_rb = (RadioButton) findViewById(R.id.show_circle_head_nearby_rb);
         tabHost = (TabHost) findViewById(R.id.myTabHost);
         localActivityManager = new LocalActivityManager(this, true);
         localActivityManager.dispatchResume();
@@ -80,13 +78,17 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
         Intent circleDynamicIntent = new Intent(mContext,
                 CircleDynamicActivity.class);
         Intent circleNearbyIntent = new Intent(mContext,
-                ShowLaneActivity.class);
+                ShowVisitorActivity.class);
+        Intent chatIntent = new Intent(mContext, MainHxActivity.class);
         tabHost.addTab(buildTabSpec("dynamic", R.string.circle_dynamic,
                 R.drawable.bg_main_redio_button_left_selecter,
                 circleDynamicIntent));
         tabHost.addTab(buildTabSpec("nearby", R.string.circle_nearby,
-                R.drawable.bg_main_redio_button_right_selecter,
+                R.drawable.bg_main_redio_button_center_selecter,
                 circleNearbyIntent));
+        tabHost.addTab(buildTabSpec("chat", R.string.chat,
+                R.drawable.bg_main_redio_button_right_selecter,
+                chatIntent));
 //		special_show_address.setText(SPUtils.get(mContext,"city","上海").toString());
 //		SPUtils.put(mContext,"oldCity",special_show_address.getText().toString().trim());
         onListener();
@@ -94,12 +96,63 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
 
     @Override
     public void fillView() {
-
+        inint();
     }
 
     @Override
     public void setListener() {
 
+    }
+
+    private void inint() {
+        // 实例化标题栏弹窗
+        titlePopup = new TitlePopup(this, RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        titlePopup.setItemOnClickListener(onitemClick);
+        // 给标题栏弹窗添加子类
+        titlePopup.addAction(new ActionItem(this, R.string.addfriend,
+                R.drawable.icon_menu_addfriend));
+        titlePopup.addAction(new ActionItem(this, R.string.myfriend,
+                R.drawable.icon_menu_myfriend));
+        titlePopup.addAction(new ActionItem(this, R.string.invite_friend,
+                R.drawable.icon_invite_friends));
+    }
+
+    private TitlePopup.OnItemOnClickListener onitemClick = new TitlePopup.OnItemOnClickListener() {
+
+        @Override
+        public void onItemClick(ActionItem item, int position) {
+            Bundle bundle = new Bundle();
+            // mLoadingDialog.show();
+            switch (position) {
+                case 0:// 添加好友
+                    UIHelper.startActivity(mContext,
+                            AddFriendActivity.class);
+                    break;
+                case 1:// 我的好友
+                    bundle.putInt(MainHxActivity.INDEX, 1);
+                    UIHelper.startActivity(mContext,
+                            com.easemob.chatuidemo.activity.LoginActivity.class, bundle);
+                    break;
+                case 2://邀请好友
+                    inviteFriends();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 邀请好友
+     */
+    private void inviteFriends() {
+        ShareContent shareItem = new ShareContent();
+        shareItem.mText = "特秀美妆:美不曾离开，让你的美由此开始";
+        shareItem.mTargetUrl = "http://m.teshow.com/index.php?g=User&m=Merchant&a=zhuce&uid=" + TXApplication.getUserMess().getUid();
+        shareItem.mTitle = "特秀美妆:美不曾离开，让你的美由此开始";
+//                ShareSDKManager.getInstance().getCurrentSDK().share((Activity) mContext, shareItem);
+        ShareServiceFactory.getShareService().share(this, shareItem);
     }
 
 //    /**
@@ -149,10 +202,48 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
                         switch (checkedId) {
                             case R.id.show_circle_head_dynamic_rb:
+                                index = 0;
                                 tabHost.setCurrentTabByTag("dynamic");
                                 break;
                             case R.id.show_circle_head_nearby_rb:
+                                index = 1;
                                 tabHost.setCurrentTabByTag("nearby");
+                                break;
+                            case R.id.show_circle_head_chat_rb:
+                                Bundle bundle = new Bundle();
+                                if (TXApplication.login) {
+                                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
+                                        tabHost.setCurrentTabByTag("chat");
+                                    } else {
+                                        UIHelper.ToastMessage(mContext, "请先完善资料");
+                                        bundle.putInt("from_mode", 1);
+                                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
+                                        switch (index) {
+                                            case 0:
+                                                show_circle_head_dynamic_rb.setChecked(true);
+                                                break;
+                                            case 1:
+                                                show_circle_head_nearby_rb.setChecked(true);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                } else {
+                                    bundle.putInt(LoginActivity.FROM_LOGIN,
+                                            LoginActivity.FROM_OTHER);
+                                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                                    switch (index) {
+                                        case 0:
+                                            show_circle_head_dynamic_rb.setChecked(true);
+                                            break;
+                                        case 1:
+                                            show_circle_head_nearby_rb.setChecked(true);
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
                                 break;
                             default:
                                 break;
@@ -177,9 +268,19 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
 //                getParent().startActivityForResult(new Intent(mContext, SwitchCityActivity.class), SELECT_ADDRESS);
 //                break;
             case R.id.send_dynamic://发布动态
-                Bundle bundle = new Bundle();
-                bundle.putInt("send_type", SelectSendTypeActivity.SEND_STATE_CODE);
-                UIHelper.startActivity(mContext, SendCardActivity.class, bundle);
+                switch (tabHost.getCurrentTab()) {
+                    case 2:
+                        titlePopup.show(findViewById(R.id.send_dynamic));
+                        break;
+                    case 0:
+                    case 1:
+                    default:
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("send_type", SelectSendTypeActivity.SEND_STATE_CODE);
+                        UIHelper.startActivity(mContext, SendCardActivity.class, bundle);
+                        break;
+                }
+
                 break;
             case R.id.contest_confirm_tv://确定
 //				special_show_address.setText(currentCity);

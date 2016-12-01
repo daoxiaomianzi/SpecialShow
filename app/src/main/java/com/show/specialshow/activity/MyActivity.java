@@ -176,9 +176,9 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                 rightDrawable.getMinimumHeight());
         head_right_tv.setCompoundDrawables(null, null, rightDrawable, null);
         head_right_tv.setPadding(DensityUtil.dip2px(mContext, 20), 0, DensityUtil.dip2px(mContext, 17), 0);
-        height = TXApplication.WINDOW_HEIGHT - DensityUtil.dip2px(mContext, 130);
-        my_scroll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                height));
+//        height = TXApplication.WINDOW_HEIGHT - DensityUtil.dip2px(mContext, 130);
+//        my_scroll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+//                height));
         updataview();
     }
 

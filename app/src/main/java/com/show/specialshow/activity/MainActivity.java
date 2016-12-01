@@ -77,13 +77,14 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private long exitTime;
     private View[] views;
     private View menu_merchant_rll;//商家
+    private View menu_craftsman_rll;//手艺人
     private View menu_special_show_circle_rll;// 特秀圈
     private View menu_find_rll;// 发现
-    private View menu_chat_rll;// 聊天
+    //    private View menu_chat_rll;// 聊天
     private View menu_my_rll;// 我的
     private ImageView my_circle_red_small;//小红点
     // 未读消息textview
-    private TextView unreadLabel;
+//    private TextView unreadLabel;
 
     private MyConnectionListener connectionListener = null;
     private InviteMessgeDao inviteMessgeDao;
@@ -113,31 +114,35 @@ public class MainActivity extends BaseActivity implements EMEventListener {
                 index = 0;
                 changeTab();
                 break;
-            case R.id.menu_special_show_circle_rll:
+            case R.id.menu_craftsman_rll:
                 index = 1;
                 changeTab();
                 break;
-            case R.id.menu_find_rll:
+            case R.id.menu_special_show_circle_rll:
                 index = 2;
                 changeTab();
                 break;
-            case R.id.menu_chat_rll:
-                if (TXApplication.login) {
-                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
-                        index = 3;
-                        changeTab();
-                    } else {
-                        UIHelper.ToastMessage(mContext, "请先完善资料");
-                        bundle.putInt("from_mode", 1);
-                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
-                    }
-
-                } else {
-                    bundle.putInt(LoginActivity.FROM_LOGIN,
-                            LoginActivity.FROM_OTHER);
-                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
-                }
+            case R.id.menu_find_rll:
+                index = 3;
+                changeTab();
                 break;
+//            case R.id.menu_chat_rll:
+//                if (TXApplication.login) {
+//                    if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
+//                        index = 3;
+//                        changeTab();
+//                    } else {
+//                        UIHelper.ToastMessage(mContext, "请先完善资料");
+//                        bundle.putInt("from_mode", 1);
+//                        UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
+//                    }
+//
+//                } else {
+//                    bundle.putInt(LoginActivity.FROM_LOGIN,
+//                            LoginActivity.FROM_OTHER);
+//                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+//                }
+//                break;
             case R.id.menu_my_rll:
                 if (TXApplication.login) {
                     if ((Boolean) SPUtils.get(mContext, "ichange", true)) {
@@ -288,26 +293,28 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     public void initView() {
         setContentView(R.layout.activity_main);
         menu_merchant_rll = findViewById(R.id.menu_merchant_rll);
+        menu_craftsman_rll = findViewById(R.id.menu_craftsman_rll);
         menu_special_show_circle_rll = findViewById(R.id.menu_special_show_circle_rll);
         menu_find_rll = findViewById(R.id.menu_find_rll);
-        menu_chat_rll = findViewById(R.id.menu_chat_rll);
+//        menu_chat_rll = findViewById(R.id.menu_chat_rll);
         menu_my_rll = findViewById(R.id.menu_my_rll);
-        unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
+//        unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
         my_circle_red_small = (ImageView) findViewById(R.id.my_circle_red_small);
-        views = new View[]{menu_merchant_rll, menu_special_show_circle_rll, menu_find_rll,
-                menu_chat_rll, menu_my_rll};
+        views = new View[]{menu_merchant_rll, menu_craftsman_rll, menu_special_show_circle_rll, menu_find_rll,
+                menu_my_rll};
         tabHost = (TabHost) findViewById(android.R.id.tabhost);
         localActivityManager = new LocalActivityManager(this, true);
         localActivityManager.dispatchResume();
         tabHost.setup(localActivityManager);
         Intent merchantIntent = new Intent(MainActivity.this, MerchantActivity.class);
+        Intent craftsmanIntent = new Intent(MainActivity.this, ShowCraftsmanActivity.class);
         Intent specialShowIntent = new Intent(MainActivity.this,
                 SpecialShowCircleActivity.class);
         Intent findIntent = new Intent(MainActivity.this, FindActivity.class);
-        Intent chatIntent = new Intent(MainActivity.this, MainHxActivity.class);
+//        Intent chatIntent = new Intent(MainActivity.this, MainHxActivity.class);
         Intent myIntent = new Intent(MainActivity.this, MyActivity.class);
-        Intent[] intents = new Intent[]{merchantIntent, specialShowIntent, findIntent,
-                chatIntent, myIntent};
+        Intent[] intents = new Intent[]{merchantIntent, craftsmanIntent, specialShowIntent, findIntent,
+                myIntent};
         for (int i = 0; i < intents.length; i++) {
             tabHost.addTab(tabHost.newTabSpec(i + "").setIndicator("")
                     .setContent(intents[i]));
@@ -378,10 +385,10 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     public void updateUnreadLabel() {
         int count = getUnreadMsgCountTotal();
         if (count > 0) {
-            unreadLabel.setText(String.valueOf(count));
-            unreadLabel.setVisibility(View.VISIBLE);
+//            unreadLabel.setText(String.valueOf(count));
+//            unreadLabel.setVisibility(View.VISIBLE);
         } else {
-            unreadLabel.setVisibility(View.INVISIBLE);
+//            unreadLabel.setVisibility(View.INVISIBLE);
         }
     }
 

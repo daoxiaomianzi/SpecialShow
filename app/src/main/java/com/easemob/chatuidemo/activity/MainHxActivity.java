@@ -13,11 +13,6 @@
  */
 package com.easemob.chatuidemo.activity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -77,17 +72,15 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
-import com.show.specialshow.activity.AddFriendActivity;
-import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
 import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
-import com.show.specialshow.view.ActionItem;
-import com.show.specialshow.view.TitlePopup;
-import com.show.specialshow.view.TitlePopup.OnItemOnClickListener;
-import com.umeng.comm.core.beans.ImageItem;
-import com.umeng.comm.core.beans.ShareContent;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainHxActivity extends BaseActivity implements EMEventListener {
 
@@ -115,8 +108,8 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
     protected TextView head_left_tv;
     protected TextView head_title_tv;
     protected TextView head_right_tv;
-    // 添加pop相关
-    private TitlePopup titlePopup;
+    //    // 添加pop相关
+//    private TitlePopup titlePopup;
     public static final String INDEX = "currentTabIndex";
 
     /**
@@ -149,7 +142,7 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
 //			return;
 //		}
         setContentView(R.layout.activity_hx_main);
-        inint();
+//        inint();
         initView();
         // MobclickAgent.setDebugMode( true );
         // --?--
@@ -352,11 +345,12 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
         }
         switch (currentTabIndex) {
             case 0:
-                head_left_tv.setVisibility(View.GONE);
-                head_right_tv.setVisibility(View.VISIBLE);
-                head_title_tv.setText("聊天");
-                UIHelper.leftDrawable(R.drawable.icon_add_craftsman
-                        , MainHxActivity.this, head_right_tv);
+                head.setVisibility(View.GONE);
+//                head_left_tv.setVisibility(View.GONE);
+//                head_right_tv.setVisibility(View.VISIBLE);
+//                head_title_tv.setText("聊天");
+//                UIHelper.leftDrawable(R.drawable.icon_add_craftsman
+//                        , MainHxActivity.this, head_right_tv);
                 break;
             case 1:
                 head_title_tv.setText("我的好友");
@@ -370,53 +364,53 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.head_right_tv:
-                titlePopup.show(findViewById(R.id.head_right_tv));
-                break;
+//            case R.id.head_right_tv:
+//                titlePopup.show(findViewById(R.id.head_right_tv));
+//                break;
 
             default:
                 break;
         }
     }
 
-    private void inint() {
-        // 实例化标题栏弹窗
-        titlePopup = new TitlePopup(this, LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
-        titlePopup.setItemOnClickListener(onitemClick);
-        // 给标题栏弹窗添加子类
-        titlePopup.addAction(new ActionItem(this, R.string.addfriend,
-                R.drawable.icon_menu_addfriend));
-        titlePopup.addAction(new ActionItem(this, R.string.myfriend,
-                R.drawable.icon_menu_myfriend));
-        titlePopup.addAction(new ActionItem(this, R.string.invite_friend,
-                R.drawable.icon_invite_friends));
-    }
+//    private void inint() {
+//        // 实例化标题栏弹窗
+//        titlePopup = new TitlePopup(this, LayoutParams.WRAP_CONTENT,
+//                LayoutParams.WRAP_CONTENT);
+//        titlePopup.setItemOnClickListener(onitemClick);
+//        // 给标题栏弹窗添加子类
+//        titlePopup.addAction(new ActionItem(this, R.string.addfriend,
+//                R.drawable.icon_menu_addfriend));
+//        titlePopup.addAction(new ActionItem(this, R.string.myfriend,
+//                R.drawable.icon_menu_myfriend));
+//        titlePopup.addAction(new ActionItem(this, R.string.invite_friend,
+//                R.drawable.icon_invite_friends));
+//    }
 
-    private OnItemOnClickListener onitemClick = new OnItemOnClickListener() {
-
-        @Override
-        public void onItemClick(ActionItem item, int position) {
-            Bundle bundle = new Bundle();
-            // mLoadingDialog.show();
-            switch (position) {
-                case 0:// 添加好友
-                    UIHelper.startActivity(MainHxActivity.this,
-                            AddFriendActivity.class);
-                    break;
-                case 1:// 我的好友
-                    bundle.putInt(INDEX, 1);
-                    UIHelper.startActivity(MainHxActivity.this,
-                            LoginActivity.class, bundle);
-                    break;
-                case 2://邀请好友
-                    inviteFriends();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+//    private OnItemOnClickListener onitemClick = new OnItemOnClickListener() {
+//
+//        @Override
+//        public void onItemClick(ActionItem item, int position) {
+//            Bundle bundle = new Bundle();
+//            // mLoadingDialog.show();
+//            switch (position) {
+//                case 0:// 添加好友
+//                    UIHelper.startActivity(MainHxActivity.this,
+//                            AddFriendActivity.class);
+//                    break;
+//                case 1:// 我的好友
+//                    bundle.putInt(INDEX, 1);
+//                    UIHelper.startActivity(MainHxActivity.this,
+//                            LoginActivity.class, bundle);
+//                    break;
+//                case 2://邀请好友
+//                    inviteFriends();
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    };
 
     /**
      * 邀请回调
@@ -427,17 +421,17 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
         ShareServiceFactory.getShareService().onActivityResult(MainHxActivity.this, requestCode, resultCode, data);
     }
 
-    /**
-     * 邀请好友
-     */
-    private void inviteFriends() {
-        ShareContent shareItem = new ShareContent();
-        shareItem.mText = "特秀美妆:美不曾离开，让你的美由此开始";
-        shareItem.mTargetUrl = "http://m.teshow.com/index.php?g=User&m=Merchant&a=zhuce&uid=" + TXApplication.getUserMess().getUid();
-        shareItem.mTitle = "特秀美妆:美不曾离开，让你的美由此开始";
-//                ShareSDKManager.getInstance().getCurrentSDK().share((Activity) mContext, shareItem);
-        ShareServiceFactory.getShareService().share(this, shareItem);
-    }
+//    /**
+//     * 邀请好友
+//     */
+//    private void inviteFriends() {
+//        ShareContent shareItem = new ShareContent();
+//        shareItem.mText = "特秀美妆:美不曾离开，让你的美由此开始";
+//        shareItem.mTargetUrl = "http://m.teshow.com/index.php?g=User&m=Merchant&a=zhuce&uid=" + TXApplication.getUserMess().getUid();
+//        shareItem.mTitle = "特秀美妆:美不曾离开，让你的美由此开始";
+////                ShareSDKManager.getInstance().getCurrentSDK().share((Activity) mContext, shareItem);
+//        ShareServiceFactory.getShareService().share(this, shareItem);
+//    }
 
     /**
      * 监听事件
