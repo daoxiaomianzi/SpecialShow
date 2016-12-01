@@ -18,7 +18,6 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.fragment.CraftsmanFragment;
 import com.show.specialshow.fragment.ShowLaneFragment;
-import com.show.specialshow.fragment.ShowVisitorFragment;
 
 public class CircleNearbyActivity extends BaseActivity {
 

@@ -1,31 +1,31 @@
 package com.show.specialshow.activity;
 
-
 import android.view.View;
 
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.fragment.ShowLaneFragment;
 
-public class ShowLaneActivity extends BaseActivity {
-
+public class SearchResultActivity extends BaseActivity {
+    private String key;
 
     @Override
     public void initData() {
-        setContentView(R.layout.activity_show_lane);
+        key = getIntent().getExtras().getString("key", "");
+        setContentView(R.layout.activity_search_result);
     }
 
     @Override
     public void initView() {
-        ShowLaneFragment showLaneFragment = new ShowLaneFragment();
+        ShowLaneFragment showLaneFragment = ShowLaneFragment.newInstance(key);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.activity_show_lane, showLaneFragment).
+                .add(R.id.ll_search_result_content, showLaneFragment).
                 show(showLaneFragment).commit();
     }
 
     @Override
     public void fillView() {
-
+        head_title_tv.setText("搜索结果");
     }
 
     @Override

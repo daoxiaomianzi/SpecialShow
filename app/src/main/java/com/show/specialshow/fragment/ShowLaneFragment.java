@@ -65,12 +65,32 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     // 当前定位坐标(起点)
     private double mLat = 0.0d;//纬度
     private double mLon = 0.0d;//经度
-    //通过关键字搜出来的数据
-    private List<ShopListMess> keyList = new ArrayList<>();
-    private int pageKeyIndex = 1;
-    private int totalKeyRecord;
-    private int localKeyRecord = 0;
-    private BaseAdapter keyAdapter;
+    //    通过关键字搜出来的数据
+//    private List<ShopListMess> keyList = new ArrayList<>();
+//    private int pageKeyIndex = 1;
+//    private int totalKeyRecord;
+//    private int localKeyRecord = 0;
+//    private BaseAdapter keyAdapter;
+    private String key;
+
+
+
+    public static ShowLaneFragment newInstance(String key) {
+        final ShowLaneFragment f = new ShowLaneFragment();
+
+        final Bundle args = new Bundle();
+        args.putString("key", key);
+        f.setArguments(args);
+
+        return f;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        key = getArguments() != null ? getArguments().getString("key") : null;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -294,7 +314,11 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
         UserMessage user = TXApplication.getUserMess();
         params.addBodyParameter("uid", user.getUid());
         params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
-        params.addBodyParameter("city", SPUtils.get(mContext, "city", "上海").toString());
+        if (StringUtils.isEmpty(key)) {
+            params.addBodyParameter("city", SPUtils.get(mContext, "city", "上海").toString());
+        } else {
+            params.addBodyParameter("key", key);
+        }
         params.addBodyParameter("index", pageIndex + "");
         if (0.0d == mLat || 0.0d == mLon) {
             InitLocation();

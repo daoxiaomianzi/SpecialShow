@@ -275,7 +275,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      * 弹出对话框,选择是去店铺还是导航
      */
     private void switchDialog(final double mLat2, final double mLon2, final String shop_id, String address) {
-        new ActionSheetDialog(getParent())
+        new ActionSheetDialog(mContext)
                 .builder()
                 .setTitle("前往\n" + address)
                 .setCancelable(true)
@@ -302,7 +302,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      * 弹出对话框，选择出行导航方式
      */
     private void isShowDialog(final double mLat2, final double mLon2) {
-        new ActionSheetDialog(getParent())
+        new ActionSheetDialog(mContext)
                 .builder()
                 .setTitle("导航\n请选择出行方式")
                 .setCancelable(true)

@@ -75,7 +75,7 @@ public class SearchDatabaseUtil {
 
     public void Delete(String search_history) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete(SearchHistoryHelper.TABLE_NAME, "user_id=?", new String[]{search_history + ""});
+        db.delete(SearchHistoryHelper.TABLE_NAME, "search_history=?", new String[]{search_history + ""});
         db.close();
     }
 
