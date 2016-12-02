@@ -1,184 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/show_lang_item_rll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        android:id="@+id/show_lang_item_rll"
-        android:clickable="true"
-        android:focusable="true"
-    android:orientation="vertical" >
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
     <RelativeLayout
-        android:paddingBottom="@dimen/text_size_6px"
-        android:paddingTop="@dimen/text_size_3px"
         android:id="@+id/show_lang_item_rl"
-                style="@style/shopList_rll"
-                android:layout_height="80dp"
-                >
+        style="@style/shopList_rll"
+        android:layout_height="80dp"
+        android:paddingBottom="@dimen/text_size_6px"
+        android:paddingTop="@dimen/text_size_6px">
 
-                <com.show.specialshow.utils.RoundImageView
-                    android:id="@+id/show_lang_item_iv"
-                    android:layout_centerVertical="true"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
- />
+        <com.show.specialshow.utils.RoundImageView
+            android:id="@+id/show_lang_item_iv"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerVertical="true" />
 
-                <TextView
-                    android:textColor="@color/color_555555"
-                    android:id="@+id/show_lang_item_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_toRightOf="@id/show_lang_item_iv"
-                    android:text="嘉里酒店健身中心"
-                    android:textSize="@dimen/text_size_26px" />
-                <TextView
-                    android:id="@+id/show_lang_distance"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:text="0.24km"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_24px" />
+        <TextView
+            android:id="@+id/show_lang_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/text_size_16px"
+            android:layout_toRightOf="@id/show_lang_item_iv"
+            android:text="嘉里酒店健身中心"
+            android:textColor="@color/color_555555"
+            android:textSize="@dimen/text_size_26px" />
+
+        <TextView
+            android:id="@+id/show_lang_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="0.24km"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px" />
+
         <TextView
             android:id="@+id/show_lang_item_xf"
-            android:textColor="@color/color_999999"
             style="@style/user_info_tv"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="80"
-            android:textSize="@dimen/text_size_26px"
-            />
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_26px" />
+
         <TextView
-            android:gravity="center"
             android:id="@+id/show_lang_item_label_tv"
-            android:textSize="@dimen/text_size_20px"
-            android:paddingTop="@dimen/text_size_3px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/text_size_16px"
+            android:layout_toRightOf="@id/show_lang_item_iv"
+            android:background="@drawable/bg_tags"
+            android:gravity="center"
+            android:minEms="3"
             android:paddingBottom="@dimen/text_size_3px"
             android:paddingLeft="@dimen/text_size_10px"
             android:paddingRight="@dimen/text_size_10px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_tags"
-            android:layout_toRightOf="@id/show_lang_item_iv"
-            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/text_size_3px"
             android:text="美妆"
-            android:minEms="3"
             android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_20px" />
+
+        <GridView
+            android:id="@+id/show_lang_item_label_gv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/text_size_16px"
-            />
+            android:layout_toRightOf="@id/show_lang_item_iv"
+            android:horizontalSpacing="@dimen/text_size_16px"
+            android:listSelector="#00000000"
+            android:numColumns="3"
+            android:visibility="gone"></GridView>
 
-                <GridView
-                    android:visibility="gone"
-                    android:numColumns="3"
-                    android:id="@+id/show_lang_item_label_gv"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"  
-                  android:listSelector="#00000000"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_toRightOf="@id/show_lang_item_iv"
-                    android:horizontalSpacing="@dimen/text_size_16px"
-                    ></GridView>
+        <!--                 <TextView
+                            android:id="@+id/show_lang_item_label_tv1"
+                            android:layout_width="70dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/text_size_8px"
+                            android:layout_toRightOf="@id/show_lang_item_iv"
+                            android:background="@drawable/bg_label"
+                            android:gravity="center"
+                            android:text="美甲"
+                            android:textColor="#7588EF" />
 
-<!--                 <TextView
-                    android:id="@+id/show_lang_item_label_tv1"
-                    android:layout_width="70dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/text_size_8px"
-                    android:layout_toRightOf="@id/show_lang_item_iv"
-                    android:background="@drawable/bg_label"
-                    android:gravity="center"
-                    android:text="美甲"
-                    android:textColor="#7588EF" />
+                        <TextView
+                            android:id="@+id/show_lang_item_label_tv2"
+                            android:layout_width="70dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/text_size_16px"
+                            android:layout_toRightOf="@id/show_lang_item_label_tv1"
+                            android:background="@drawable/bg_label"
+                            android:gravity="center"
+                            android:text="美妆"
+                            android:textColor="#7588EF" />
 
-                <TextView
-                    android:id="@+id/show_lang_item_label_tv2"
-                    android:layout_width="70dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_toRightOf="@id/show_lang_item_label_tv1"
-                    android:background="@drawable/bg_label"
-                    android:gravity="center"
-                    android:text="美妆"
-                    android:textColor="#7588EF" />
-
-                <TextView
-                    android:id="@+id/show_lang_item_label_tv3"
-                    android:layout_width="70dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_toRightOf="@id/show_lang_item_label_tv2"
-                    android:background="@drawable/bg_label"
-                    android:gravity="center"
-                    android:text="美发"
-                    android:textColor="#7588EF" /> -->
+                        <TextView
+                            android:id="@+id/show_lang_item_label_tv3"
+                            android:layout_width="70dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/text_size_16px"
+                            android:layout_toRightOf="@id/show_lang_item_label_tv2"
+                            android:background="@drawable/bg_label"
+                            android:gravity="center"
+                            android:text="美发"
+                            android:textColor="#7588EF" /> -->
         <TextView
-            android:singleLine="true"
-            android:layout_marginRight="@dimen/text_size_8px"
-            android:layout_toLeftOf="@id/show_lang_distance"
             android:id="@+id/show_lang_item_address"
             style="@style/user_info_tv"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/text_size_16px"
+            android:layout_marginRight="@dimen/text_size_8px"
+            android:layout_toLeftOf="@id/show_lang_distance"
+            android:layout_toRightOf="@id/show_lang_item_iv"
+            android:drawableLeft="@drawable/icon_address"
+            android:drawablePadding="@dimen/text_size_1px"
+            android:singleLine="true"
             android:text="上海市"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px" />
+
+        <TextView
+            android:id="@+id/show_lang_item_card_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/text_size_16px"
             android:layout_toRightOf="@id/show_lang_item_iv"
+            android:text="秀卡(8)"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/text_size_24px"
-            android:drawablePadding="@dimen/text_size_1px"
-            android:drawableLeft="@drawable/icon_address"
-            />
+            android:visibility="gone" />
 
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/show_lang_item_card_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/text_size_16px"
-                    android:layout_toRightOf="@id/show_lang_item_iv"
-                    android:text="秀卡(8)"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_24px" />
+        <TextView
+            android:id="@+id/show_lang_item_ceng_card_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/text_size_4px"
+            android:layout_marginLeft="@dimen/text_size_36px"
+            android:layout_toRightOf="@id/show_lang_item_card_num"
+            android:text="蹭卡(8)"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px"
+            android:visibility="gone" />
 
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/show_lang_item_ceng_card_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/text_size_4px"
-                    android:layout_marginLeft="@dimen/text_size_36px"
-                    android:layout_toRightOf="@id/show_lang_item_card_num"
-                    android:text="蹭卡(8)"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_24px" />
+        <TextView
+            android:id="@+id/show_lang_item_moods_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/text_size_4px"
+            android:layout_marginLeft="@dimen/text_size_40px"
+            android:layout_toRightOf="@id/show_lang_item_ceng_card_num"
+            android:drawableLeft="@drawable/icon_moods"
+            android:drawablePadding="3dp"
+            android:text="1458人气"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_size_24px"
+            android:visibility="gone" />
+    </RelativeLayout>
 
-                <TextView
-                    android:visibility="gone"
-                    android:id="@+id/show_lang_item_moods_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/text_size_4px"
-                    android:layout_marginLeft="@dimen/text_size_40px"
-                    android:layout_toRightOf="@id/show_lang_item_ceng_card_num"
-                    android:drawableLeft="@drawable/icon_moods"
-                    android:text="1458人气"
-                    android:drawablePadding="3dp"
-                    android:textColor="@color/color_999999"
-                    android:textSize="@dimen/text_size_24px" />
-            </RelativeLayout>
-            <View 
-                android:layout_below="@id/show_lang_item_rl"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_ededed"
-                android:layout_marginLeft="@dimen/text_size_16px"
-                android:layout_marginRight="@dimen/text_size_16px"
-                />
-    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/show_lang_item_rl"
+        android:layout_marginLeft="@dimen/text_size_16px"
+        android:layout_marginRight="@dimen/text_size_16px"
+        android:background="@color/color_ededed" />
+
 
 </RelativeLayout>

@@ -8,6 +8,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.FrameLayout;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -23,7 +28,10 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
+import com.show.specialshow.adapter.ConstellationAdapter;
 import com.show.specialshow.adapter.CraftsmanAdapter;
+import com.show.specialshow.adapter.GirdDropDownAdapter;
+import com.show.specialshow.adapter.ListDropDownAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopVisitorListMess;
@@ -33,8 +41,10 @@ import com.show.specialshow.receiver.MyReceiver;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
+import com.yyydjk.library.DropDownMenu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,13 +53,28 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     //相关控件
     private TextView craftsman_nodata_tv;
     private UserMessage user;
+    private FrameLayout fl_craftsman_content;
+    private LinearLayout ll_craftsman_content;
     // 定位相关
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
     // 当前定位坐标(起点)
-    private double mLat=0.0d;//纬度
-    private double mLon=0.0d;//经度
+    private double mLat = 0.0d;//纬度
+    private double mLon = 0.0d;//经度
     private List<ShopVisitorListMess> mList = new ArrayList<>();
+    private DropDownMenu mDropDownMenu;
+    private String headers[] = {"全部类型", "综合排序", "筛选"};
+    private List<View> popupViews = new ArrayList<>();
+
+    private GirdDropDownAdapter cityAdapter;
+    private ListDropDownAdapter ageAdapter;
+    private ConstellationAdapter constellationAdapter;
+
+    private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
+    private String ages[] = {"不限", "18岁以下", "18-22岁", "23-26岁", "27-35岁", "35岁以上"};
+    private String constellations[] = {"不限", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "摩羯座", "水瓶座", "双鱼座"};
+
+    private int constellationPosition = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,16 +87,17 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     /**
      * 高德地图定位成功回调
+     *
      * @param aMapLocation
      */
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        if(null==aMapLocation){
-            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+        if (null == aMapLocation) {
+            UIHelper.ToastMessage(mContext, "获取当前位置失败");
             return;
         }
-        mLat=aMapLocation.getLatitude();
-        mLon=aMapLocation.getLongitude();
+        mLat = aMapLocation.getLatitude();
+        mLon = aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
         registerBoradcastReceiver();
@@ -82,26 +108,26 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     @Override
     protected void getData() {
         RequestParams params = TXApplication.getParams();
-        String url= URLs.SPACE_STAFFLIST;
+        String url = URLs.SPACE_STAFFLIST;
         user = TXApplication.getUserMess();
         params.addBodyParameter("uid", user.getUid());
         params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
         params.addBodyParameter("index", pageIndex + "");
-        params.addBodyParameter("current_city", SPUtils.get(mContext,"city","上海").toString());
-        if(0.0d==mLat||0.0d==mLon){
+        params.addBodyParameter("current_city", SPUtils.get(mContext, "city", "上海").toString());
+        if (0.0d == mLat || 0.0d == mLon) {
             InitLocation();
             return;
-        }else{
-            params.addBodyParameter("longitude",mLon+"");//经度
-            params.addBodyParameter("latitude",mLat+"");//纬度
+        } else {
+            params.addBodyParameter("longitude", mLon + "");//经度
+            params.addBodyParameter("latitude", mLat + "");//纬度
         }
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
-                MessageResult result =MessageResult.parse(responseInfo.result);
+                MessageResult result = MessageResult.parse(responseInfo.result);
                 if (null == result) {
                     onError(getResources().getString(
                             R.string.net_work_error));
@@ -115,7 +141,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                             .parse(result.getData());
                     List<ShopVisitorListMess> list = showVisitorList
                             .getList();
-                    if (null==showVisitorList||null == list) {
+                    if (null == showVisitorList || null == list) {
                         changeListView(0);
                         search_result_lv.setVisibility(View.VISIBLE);
                         craftsman_nodata_tv
@@ -137,9 +163,9 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 //                            }
 //                        }
 //                    }
-                    for(int i = mList.size() - 1; i > 0; i--) {
-                        for(int j = i - 1; j >= 0; j--) {
-                            if(mList.get(j).getUser_id().equals(mList.get(i).getUser_id())) {
+                    for (int i = mList.size() - 1; i > 0; i--) {
+                        for (int j = i - 1; j >= 0; j--) {
+                            if (mList.get(j).getUser_id().equals(mList.get(i).getUser_id())) {
                                 mList.remove(j);
                                 break;
                             }
@@ -165,7 +191,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
             @Override
             public void onFailure(HttpException e, String s) {
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
                 onError(getResources().getString(R.string.net_work_error));
@@ -175,14 +201,77 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void initData() {
+        mDropDownMenu = (DropDownMenu) findViewById(R.id.dropDownMenu);
+        craftsman_nodata_tv = (TextView) findViewById(R.id.craftsman_nodata_tv);
+        fl_craftsman_content = (FrameLayout) findViewById(R.id.fl_craftsman_content);
+        ll_craftsman_content = (LinearLayout) findViewById(R.id.ll_craftsman_content);
+        ll_craftsman_content.removeView(fl_craftsman_content);
+        adapter = new CraftsmanAdapter(mList, mContext);
         InitLocation();
-        craftsman_nodata_tv= (TextView) findViewById(R.id.craftsman_nodata_tv);
-        adapter=new CraftsmanAdapter(mList,mContext);
     }
 
     @Override
     public void initView() {
+        //init city menu
+        final ListView cityView = new ListView(mContext);
+        cityAdapter = new GirdDropDownAdapter(mContext, Arrays.asList(citys));
+        cityView.setDividerHeight(0);
+        cityView.setAdapter(cityAdapter);
 
+        //init age menu
+        final ListView ageView = new ListView(mContext);
+        ageView.setDividerHeight(0);
+        ageAdapter = new ListDropDownAdapter(mContext, Arrays.asList(ages));
+        ageView.setAdapter(ageAdapter);
+
+
+        //init constellation
+        final View constellationView = getActivity().getLayoutInflater().inflate(R.layout.custom_layout, null);
+        GridView constellation = (GridView) constellationView.findViewById(R.id.constellation);
+        constellationAdapter = new ConstellationAdapter(getActivity(), Arrays.asList(constellations));
+        constellation.setAdapter(constellationAdapter);
+        TextView ok = (TextView) constellationView.findViewById(R.id.ok);
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDropDownMenu.setTabText(constellationPosition == 0 ? headers[2] : constellations[constellationPosition]);
+                mDropDownMenu.closeMenu();
+            }
+        });
+
+        //init popupViews
+        popupViews.add(cityView);
+        popupViews.add(ageView);
+        popupViews.add(constellationView);
+
+        //add item click event
+        cityView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cityAdapter.setCheckItem(position);
+                mDropDownMenu.setTabText(position == 0 ? headers[0] : citys[position]);
+                mDropDownMenu.closeMenu();
+            }
+        });
+
+        ageView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ageAdapter.setCheckItem(position);
+                mDropDownMenu.setTabText(position == 0 ? headers[1] : ages[position]);
+                mDropDownMenu.closeMenu();
+            }
+        });
+
+        constellation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                constellationAdapter.setCheckItem(position);
+                constellationPosition = position;
+            }
+        });
+        //init dropdownview
+        mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fl_craftsman_content);
     }
 
     @Override
@@ -192,8 +281,8 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void fillView() {
-
     }
+
     public void registerShowerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(ShowerDetailsActivity.ACTION_NAME);
@@ -211,6 +300,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         }
 
     };
+
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(CircleDynamicDetailActivity.ACTION_NAME);
@@ -223,10 +313,10 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(CircleDynamicDetailActivity.ACTION_NAME)) {
-                if(null!=mList){
+                if (null != mList) {
                     mList.clear();
                 }
-                pageIndex=1;
+                pageIndex = 1;
                 search_result_lv.setState(XListView.LOAD_REFRESH);
                 getData();
             }
@@ -238,10 +328,11 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     public void onClick(View v) {
 
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-      getActivity().unregisterReceiver(mShowerBroadcastReceiver);
+        getActivity().unregisterReceiver(mShowerBroadcastReceiver);
         getActivity().unregisterReceiver(mBroadcastReceiver);
         if (null != locationClient) {
             /**
@@ -253,8 +344,10 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
             locationOption = null;
         }
     }
+
     /**
      * 初始化地图定位
+     *
      * @param
      */
     private void InitLocation() {
@@ -277,7 +370,9 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         locationOption.setOnceLocationLatest(true);
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
-        loadIng("加载中",true);
+        loadIng("加载中", true);
 
     }
+
+
 }

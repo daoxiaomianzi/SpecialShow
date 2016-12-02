@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_craftsman_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <FrameLayout
+    <com.yyydjk.library.DropDownMenu
+        android:id="@+id/dropDownMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_ffffff" >
+        app:dddividerColor="@color/cc_gray"
+        app:ddmaskColor="@color/mask_color"
+        app:ddmenuBackgroundColor="@color/white"
+        app:ddmenuSelectedIcon="@drawable/drop_down_selected_icon"
+        app:ddmenuTextSize="15sp"
+        app:ddmenuUnselectedIcon="@drawable/drop_down_unselected_icon"
+        app:ddtextSelectedColor="@color/drop_down_selected"
+        app:ddtextUnselectedColor="@color/drop_down_unselected"
+        app:ddunderlineColor="@color/cc_gray"></com.yyydjk.library.DropDownMenu>
+
+
+    <FrameLayout
+        android:id="@+id/fl_craftsman_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_ffffff">
 
         <include
             layout="@layout/view_commom_listview"
@@ -15,17 +34,17 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/craftsman_nodata_tv"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:text="暂无数据"
-                android:textColor="@color/color_656565" />
+                android:textColor="@color/color_656565"
+                android:visibility="gone" />
         </RelativeLayout>
     </FrameLayout>
 

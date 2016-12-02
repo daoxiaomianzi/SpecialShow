@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="error_item_color">#F6EBE6</color>
+    <color name="error_item_color">#F6EBE6</color>
     <color name="app_bg">#f6f6f6</color>
     <color name="color_f4f4f4">#f4f4f4</color>
     <color name="app_line_bg">#e5e5e5</color>
@@ -27,7 +27,7 @@
     <color name="color_ee4000">#ee4000</color>
     <!-- 半透明 -->
     <color name="half_transparency">#66FFFFFF</color>
-	 <color name="province_line_border">#000000</color>
+    <color name="province_line_border">#000000</color>
     <!-- 按钮相关颜色 -->
     <color name="btn_border_unpress">#ea5639</color>
     <color name="btn_border_press">#757575</color>
@@ -55,8 +55,8 @@
     <color name="half_transparent">#70000000</color>
     <color name="color_f9469b">#f9469b</color>
     <color name="color_b699ab">#b699ab</color>
-    
-        <color name="common_top_bar_blue">#4ebcd3</color>
+
+    <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#00acff</color>
     <color name="btn_login_pressed">#46678d</color>
     <color name="btn_logout_normal">#d33f3f</color>
@@ -126,10 +126,12 @@
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
     <color name="gary">#898989</color>
-    <color name="darkgrey"> #C0C0C0</color>
+    <color name="darkgrey">#C0C0C0</color>
     <color name="color_00">#8A000000</color>
     <color name="green">#10a209</color>
     <color name="sign_up_red">#e32020</color>
+
+
 
 
 </resources>
