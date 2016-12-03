@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
@@ -41,6 +43,7 @@ import com.show.specialshow.model.CircleDynamicList;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.receiver.MyReceiver;
 import com.show.specialshow.utils.BannerPointUtils;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
@@ -352,6 +355,19 @@ public class CircleDynamicActivity extends BaseSearchActivity {
 
     @Override
     public void setListener() {
+        search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                CircleDynamicItem item = mList.get(position - 1);
+                bundle.putString("idStr", item.getIdStr());
+                UIHelper.startActivity(mContext,
+                        CircleDynamicDetailActivity.class, bundle);
+            }
+        });
 //        dynamic_banner.setOnPageChangeListener(new OnPageChangeListener() {
 //
 //            @Override

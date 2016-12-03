@@ -1,5 +1,6 @@
 package com.show.specialshow.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -29,6 +31,7 @@ import com.show.specialshow.model.ShopVisitorListMess;
 import com.show.specialshow.model.ShowVisitorList;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.receiver.MyReceiver;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
@@ -73,6 +76,20 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
 
     @Override
     public void setListener() {
+        search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("user_id", mList.get(position - 1)
+                        .getUser_id());
+                UIHelper.startActivity(getActivity(),
+                        ShowerDetailsActivity.class, bundle);
+
+            }
+        });
     }
 
     @Override

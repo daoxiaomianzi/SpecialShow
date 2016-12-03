@@ -3,8 +3,6 @@
     android:id="@+id/craftsman_item_rll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:focusable="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -97,25 +95,24 @@
             android:layout_toRightOf="@id/craftsman_item_iv"
             android:background="@drawable/bg_tags"
             android:gravity="center"
+            android:minEms="3"
             android:paddingBottom="@dimen/text_size_3px"
             android:paddingLeft="@dimen/text_size_10px"
             android:paddingRight="@dimen/text_size_10px"
             android:paddingTop="@dimen/text_size_3px"
             android:text="美妆"
-            android:minEms="3"
             android:textColor="@color/color_999999"
             android:textSize="@dimen/text_size_20px" />
 
         <TextView
             android:id="@+id/craftsman_item_store"
             style="@style/user_info_tv"
-            android:text="门店:"
-            android:layout_toRightOf="@id/craftsman_item_iv"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/text_size_16px"
+            android:layout_toRightOf="@id/craftsman_item_iv"
+            android:text="门店:"
             android:textColor="@color/color_999999"
-            android:textSize="@dimen/text_size_24px"
-            />
+            android:textSize="@dimen/text_size_24px" />
 
         <TextView
             android:id="@+id/craftsman_item_address"

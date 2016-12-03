@@ -1,6 +1,7 @@
 package com.show.specialshow.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,6 +28,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
+import com.show.specialshow.activity.CraftsmandetailsActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
 import com.show.specialshow.adapter.ConstellationAdapter;
 import com.show.specialshow.adapter.CraftsmanAdapter;
@@ -38,6 +40,7 @@ import com.show.specialshow.model.ShopVisitorListMess;
 import com.show.specialshow.model.ShowVisitorList;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.receiver.MyReceiver;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
@@ -276,7 +279,19 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void setListener() {
-
+        search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("user_id", mList.get(position - 1)
+                        .getUser_id());
+                UIHelper.startActivity((Activity) mContext,
+                        CraftsmandetailsActivity.class, bundle);
+            }
+        });
     }
 
     @Override

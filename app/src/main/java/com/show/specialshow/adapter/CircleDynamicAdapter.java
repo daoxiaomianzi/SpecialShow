@@ -225,7 +225,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 .getUser_icon(), holders[type].portrait);
         listener = new OnItemViewClickListener(holders[type]);
         holders[type].attention.setOnClickListener(listener);
-        holders[type].item.setOnClickListener(listener);
+//        holders[type].item.setOnClickListener(listener);
         holders[type].url_title.setOnClickListener(listener);
         holders[type].thumbs_count_ll.setOnClickListener(listener);
         holders[type].comment_count_ll.setOnClickListener(listener);
@@ -518,7 +518,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                     UIHelper.startActivity((Activity) mContext,
                             DynamicImagePagerActivity.class, bundle);
                     break;
-                case R.id.dynamic_item:
+//                case R.id.dynamic_item:
                 case R.id.dynamic_type_just_text_thumbs_count_ll:
                 case R.id.dynamic_type_just_text_comment_count_ll:
                 case R.id.dynamic_type_one_picture_thumbs_count_ll:

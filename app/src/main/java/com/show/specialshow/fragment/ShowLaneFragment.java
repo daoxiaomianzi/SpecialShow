@@ -1,25 +1,18 @@
 package com.show.specialshow.fragment;
 
-import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,10 +30,8 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.BannerWebActivity;
-import com.show.specialshow.activity.CircleDynamicActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
-import com.show.specialshow.activity.NearbyShowFangMapActivity;
-import com.show.specialshow.adapter.CircleDynamicAdapter;
+import com.show.specialshow.activity.StoresDetailsActivity;
 import com.show.specialshow.adapter.ShowLaneAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.BannerMess;
@@ -51,6 +42,7 @@ import com.show.specialshow.model.ShopListTagsMess;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.receiver.MyReceiver;
 import com.show.specialshow.utils.BannerPointUtils;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.xlistview.XListView;
@@ -66,7 +58,7 @@ import java.util.concurrent.TimeUnit;
 public class ShowLaneFragment extends BaseSearch implements AMapLocationListener {
 
     private List<ShopListMess> mList = new ArrayList<ShopListMess>();
-    private List<ShopListTagsMess> mTagsMesses = new ArrayList<ShopListTagsMess>();
+    private List<ShopListTagsMess> mTagsMesses = new ArrayList<>();
     //相关控件
     private TextView show_lang_nodata_tv;
     //    private EditText show_lang_search_et;//搜索框
@@ -215,6 +207,21 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                 }
             });
         }
+        search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                if (StringUtils.isEmpty(key)) {
+                    bundle.putString("shop_id", mList.get(position - 2).getShop_id());
+                } else {
+                    bundle.putString("shop_id", mList.get(position - 1).getShop_id());
+                }
+                UIHelper.startActivity((Activity) mContext, StoresDetailsActivity.class, bundle);
+            }
+        });
 
 
 //        show_lang_search_et.addTextChangedListener(new TextWatcher() {

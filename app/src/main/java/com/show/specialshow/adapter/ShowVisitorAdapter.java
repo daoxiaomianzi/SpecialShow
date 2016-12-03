@@ -162,7 +162,7 @@ public class ShowVisitorAdapter extends BaseAdapter {
                 break;
         }
         listener = new OnItemViewClickListener(vh);
-        vh.show_visitor_item_rll.setOnClickListener(listener);
+//        vh.show_visitor_item_rll.setOnClickListener(listener);
         vh.show_visitor_item_attention_btn.setOnClickListener(listener);
         return convertView;
     }
@@ -190,12 +190,12 @@ public class ShowVisitorAdapter extends BaseAdapter {
             }
             Bundle bundle = new Bundle();
             switch (v.getId()) {
-                case R.id.show_visitor_item_rll:
-                    bundle.putString("user_id", mList.get(holder.getPostion())
-                            .getUser_id());
-                    UIHelper.startActivity((Activity) mContext,
-                            ShowerDetailsActivity.class, bundle);
-                    break;
+//                case R.id.show_visitor_item_rll:
+//                    bundle.putString("user_id", mList.get(holder.getPostion())
+//                            .getUser_id());
+//                    UIHelper.startActivity((Activity) mContext,
+//                            ShowerDetailsActivity.class, bundle);
+//                    break;
                 case R.id.show_visitor_item_attention_btn:// 关注
                     if (TXApplication.login) {
                         attention(mList.get(holder.getPostion()).getUser_id(),

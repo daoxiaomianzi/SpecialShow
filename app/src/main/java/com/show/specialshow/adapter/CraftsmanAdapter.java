@@ -158,7 +158,7 @@ public class CraftsmanAdapter extends BaseAdapter {
                 break;
         }
         listener = new OnItemViewClickListener(vh);
-        vh.craftsman_item_rll.setOnClickListener(listener);
+//        vh.craftsman_item_rll.setOnClickListener(listener);
         vh.craftsman_item_attention_btn.setOnClickListener(listener);
         return convertView;
     }
@@ -186,12 +186,12 @@ public class CraftsmanAdapter extends BaseAdapter {
             }
             Bundle bundle = new Bundle();
             switch (v.getId()) {
-                case R.id.craftsman_item_rll:
-                    bundle.putString("user_id", mList.get(holder.getPostion())
-                            .getUser_id());
-                    UIHelper.startActivity((Activity) mContext,
-                            CraftsmandetailsActivity.class, bundle);
-                    break;
+//                case R.id.craftsman_item_rll:
+//                    bundle.putString("user_id", mList.get(holder.getPostion())
+//                            .getUser_id());
+//                    UIHelper.startActivity((Activity) mContext,
+//                            CraftsmandetailsActivity.class, bundle);
+//                    break;
                 case R.id.craftsman_item_attention_btn:// 关注
 
                     if (TXApplication.login) {
