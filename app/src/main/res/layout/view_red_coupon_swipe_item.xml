@@ -33,7 +33,7 @@
             <RelativeLayout
                 android:id="@+id/red_coupon_type_bg_item"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/icon_red_coupon_available_title"
                 android:padding="5dp">
 
@@ -50,10 +50,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/bg_red_coupon"
                 android:orientation="horizontal"
-                android:paddingRight="6dp">
+                android:paddingBottom="3dp"
+                android:paddingRight="4dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -81,16 +82,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/red_coupon_usefull_life_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:text="全场通用"
+                            android:text="全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用"
                             android:textColor="@color/color_656565"
                             android:textSize="@dimen/text_size_24px" />
                     </LinearLayout>
