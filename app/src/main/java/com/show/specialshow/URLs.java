@@ -271,5 +271,13 @@ public interface URLs {
      */
     String GET_CURRENT_VERSION = BASE_URL
             + "/Pindex/version_get";
+    /**
+     * 优惠劵
+     */
+    String COUPON = BASE_URL + "/user/my_coupon";
+    /**
+     * 删除过期和已使用的优惠劵
+     */
+    String DELETE_INVALID_COUPON = BASE_URL + "";
 }
 

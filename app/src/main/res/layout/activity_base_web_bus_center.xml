@@ -2,70 +2,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:clipToPadding="true"
+    android:background="#faF35B81"
+    android:clipToPadding="true"
     android:fitsSystemWindows="true"
-    android:background="#faF35B81" 
-    tools:context=".activity.BaseBusCenWebActivity" >
-  
-      <RelativeLayout
+    tools:context=".activity.BaseBusCenWebActivity">
+
+    <RelativeLayout
         android:id="@+id/web_head"
-        android:background="@drawable/bg_title_shape"
         android:layout_width="fill_parent"
         android:layout_height="45dip"
-       >
+        android:background="@drawable/bg_title_shape">
 
         <TextView
             android:id="@+id/head_left_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="45dp"
             android:layout_alignParentLeft="true"
             android:background="@null"
             android:clickable="true"
-            android:text="后退"
             android:drawableLeft="@drawable/icon_arrow_left_white"
             android:drawablePadding="3dp"
             android:gravity="center"
             android:onClick="goBack"
             android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_32px" />
+
         <TextView
-            android:layout_toRightOf="@+id/head_left_tv"
             android:id="@+id/head_close_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="45dp"
+            android:layout_toRightOf="@+id/head_left_tv"
             android:background="@null"
             android:clickable="true"
+            android:drawableLeft="@drawable/icon_close"
             android:drawablePadding="3dp"
             android:gravity="center"
             android:onClick="goBack"
-            android:paddingLeft="5dp"
-            android:text="关闭"
+            android:paddingLeft="10dp"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_32px" />
 
         <TextView
             android:id="@+id/head_title_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="80dp"
+            android:layout_toRightOf="@id/head_close_tv"
             android:ellipsize="end"
             android:gravity="center"
-            android:maxWidth="250dp"
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_36px" />
     </RelativeLayout>
-  
-  <ImageView
+
+    <ImageView
         style="@style/split_iv_horizontal"
         android:layout_below="@+id/web_head" />
 
     <include
+        layout="@layout/view_source_detail_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/web_head"
-        layout="@layout/view_source_detail_content" />
+        android:layout_below="@id/web_head" />
 
     <ProgressBar
         android:id="@+id/detail_load_progress_sb"

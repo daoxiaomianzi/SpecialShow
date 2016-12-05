@@ -289,7 +289,10 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
             case R.id.rl_shop_center://商户中心
                 UIHelper.startActivity(mContext, BusinessCenterActivity.class);
                 break;
-
+            case R.id.ll_coupons://优惠劵
+                bundle.putInt("isSelect", 0);
+                UIHelper.startActivity(mContext, MyDiscountCouponActivity.class, bundle);
+                break;
             case R.id.ll_my_reservation://我的预约
                 UIHelper.startActivity(mContext, MyBookingActivity.class);
                 break;

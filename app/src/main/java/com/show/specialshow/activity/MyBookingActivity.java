@@ -150,7 +150,7 @@ public class MyBookingActivity extends BaseSearchActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder vh = null;
+            ViewHolder vh;
             if (null == convertView) {
                 vh = new ViewHolder();
                 convertView = View.inflate(mContext, R.layout.activity_my_booking_item, null);

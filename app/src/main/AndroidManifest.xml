@@ -878,6 +878,7 @@
         <activity android:name=".activity.SearchResultActivity" />
         <activity android:name=".activity.ShowVisitorActivity" />
         <activity android:name=".activity.ShowCraftsmanActivity"></activity>
+        <activity android:name=".activity.MyDiscountCouponActivity"></activity>
     </application>
 
 </manifest>

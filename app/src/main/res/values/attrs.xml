@@ -21,7 +21,7 @@
         <attr name="logo_pay" format="reference|color" />
         <attr name="desc" format="reference|string" />
         <attr name="checked" format="boolean" />
-        <attr name="radio" format="reference"/>
+        <attr name="radio" format="reference" />
     </declare-styleable>
 
     <!-- Standard orientation constant. -->
@@ -33,11 +33,25 @@
     </attr>
 
     <declare-styleable name="FlikerProgressBar">
-        <attr name="textSize" format="dimension|reference"/>
+        <attr name="textSize" format="dimension|reference" />
 
-        <attr name="loadingColor" format="color|reference"/>
+        <attr name="loadingColor" format="color|reference" />
 
-        <attr name="stopColor" format="color|reference"/>
+        <attr name="stopColor" format="color|reference" />
 
+    </declare-styleable>
+
+    <!-- 侧滑 -->
+    <declare-styleable name="SwipeLayout">
+        <attr name="drag_edge" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="top" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="show_mode" format="enum">
+            <enum name="lay_down" value="0" />
+            <enum name="pull_out" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

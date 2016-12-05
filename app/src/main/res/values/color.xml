@@ -131,7 +131,8 @@
     <color name="green">#10a209</color>
     <color name="sign_up_red">#e32020</color>
 
-
+    <color name="novice_label_text">#e20013</color>
+    <color name="color_cccccc">#cccccc</color>
 
 
 </resources>
