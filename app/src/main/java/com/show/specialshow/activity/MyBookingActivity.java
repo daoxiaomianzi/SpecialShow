@@ -2,7 +2,6 @@ package com.show.specialshow.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -27,7 +26,7 @@ import com.show.specialshow.xlistview.XListView;
 import java.util.List;
 
 /**
- * 手艺人作品页
+ * 我的预约页
  *
  * @author admin
  */

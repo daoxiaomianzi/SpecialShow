@@ -1,40 +1,66 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/app_bg"
+    android:orientation="vertical"
     tools:context=".activity.MyDiscountCouponActivity">
 
-    <include layout="@layout/view_common_head" />
+    <TextView
+        android:id="@+id/no_use_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="不使用优惠劵"
+        android:textColor="@color/color_565656"
+        android:textSize="@dimen/text_size_30px" />
 
-    <FrameLayout
+    <View
+        android:id="@+id/no_use_coupon_vi"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.5"
+        android:layout_above="@id/no_use_coupon"
+        android:background="@color/umeng_comm_color_c7" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_bg">
+        android:layout_above="@id/no_use_coupon_vi"
+        android:orientation="vertical">
 
-        <include
-            layout="@layout/view_commom_listview"
-            android:visibility="gone" />
+        <include layout="@layout/view_common_head" />
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/app_bg">
 
-            <TextView
-                android:id="@+id/red_coupon_no_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="暂无信息"
-                android:textSize="@dimen/text_size_30px"
+            <include
+                layout="@layout/view_commom_listview"
                 android:visibility="gone" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/red_coupon_no_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="暂无信息"
+                    android:textSize="@dimen/text_size_30px"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
 
 
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

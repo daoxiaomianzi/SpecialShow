@@ -134,7 +134,7 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
                 .findViewById(R.id.red_coupon_buy_btn);
         holder.red_coupon_all = (LinearLayout) convertView.findViewById(R.id.red_coupon_all);
         listener = new OnItemViewClickListener(holder);
-        holder.red_coupon_all.setOnClickListener(listener);
+//        holder.red_coupon_all.setOnClickListener(listener);
         convertView.findViewById(R.id.trash).setOnClickListener(
                 new OnClickListener() {
 

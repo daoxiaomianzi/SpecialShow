@@ -12,6 +12,7 @@ public class MyBookingMess implements Serializable {
     private static final long serialVersionUID = 6261553867803288799L;
     private String shop_name;//预约门店名称
     private String service_name;//服务名称
+    private String service_id;//服务id
     private String staff_name;//手艺人名称
     private String appointment_time;//预约时间
     private String add_time;//提交时间
@@ -23,6 +24,14 @@ public class MyBookingMess implements Serializable {
     private String shop_id;//商户id
     private String appointment_id;//预约id
     private String service_price;//预约总费用
+
+    public String getService_id() {
+        return service_id;
+    }
+
+    public void setService_id(String service_id) {
+        this.service_id = service_id;
+    }
 
     public String getService_price() {
         return service_price;

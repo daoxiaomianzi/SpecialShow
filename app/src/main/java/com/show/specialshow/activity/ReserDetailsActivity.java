@@ -83,6 +83,8 @@ public class ReserDetailsActivity extends BaseActivity {
                     bundle.putInt("isToShop", 0);
                     bundle.putString("shop_title", myBooking.getShop_name());
                     bundle.putString("pay_amount", myBooking.getService_price());
+                    bundle.putString("shop_id", myBooking.getShop_id());
+                    bundle.putString("service_id", myBooking.getService_id());
                     UIHelper.startActivity(mContext, PayActivity.class, bundle);
                     return;
                 }

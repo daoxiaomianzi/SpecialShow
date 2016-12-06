@@ -1,119 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:my="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/app_bg"
+    android:orientation="vertical"
     tools:context="com.show.specialshow.activity.PayActivity">
-    <include
-        layout="@layout/view_common_head"
-        />
+
+    <include layout="@layout/view_common_head" />
+
     <LinearLayout
-        android:background="@color/white"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
         <RelativeLayout
-            android:paddingLeft="@dimen/text_size_26px"
-            android:paddingRight="@dimen/text_size_36px"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/pay_shop_title"
-        android:paddingTop="@dimen/text_size_36px"
-        android:paddingBottom="@dimen/text_size_36px"
-        style="@style/user_info_tv"
-        android:text="测试商家到店付款"
-        android:textSize="@dimen/text_size_30px"
-        />
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/text_size_26px"
+            android:paddingRight="@dimen/text_size_36px">
 
             <TextView
-                android:id="@+id/tv_pay_amount"
-                android:textColor="@color/color_656565"
-                android:textSize="@dimen/text_size_30px"
+                android:id="@+id/pay_shop_title"
                 style="@style/user_info_tv"
                 android:paddingBottom="@dimen/text_size_36px"
                 android:paddingTop="@dimen/text_size_36px"
-                android:text="¥ 1000"
+                android:text="测试商家到店付款"
+                android:textSize="@dimen/text_size_30px" />
+
+            <TextView
+                android:id="@+id/tv_pay_amount"
+                style="@style/user_info_tv"
                 android:layout_alignParentRight="true"
-                />
+                android:paddingBottom="@dimen/text_size_36px"
+                android:paddingTop="@dimen/text_size_36px"
+                android:text="¥ 1000"
+                android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px" />
 
         </RelativeLayout>
+
         <View
-            android:background="@color/color_ededed"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ling_0.8"/>
-        <TextView
-            android:paddingBottom="@dimen/text_size_6px"
-            android:textColor="@color/color_999999"
-            android:paddingTop="@dimen/text_size_16px"
-            android:paddingLeft="@dimen/text_size_26px"
-            style="@style/user_info_tv"
-            android:text="@string/pay_way"
-            />
+            android:layout_height="@dimen/ling_0.5"
+            android:background="@color/umeng_comm_color_c7" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_bg"
+            android:paddingTop="@dimen/text_size_26px">
+
+            <TextView
+                style="@style/user_info_tv"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/text_size_6px"
+                android:paddingLeft="@dimen/text_size_26px"
+                android:paddingTop="@dimen/text_size_16px"
+                android:text="@string/pay_way"
+                android:textColor="@color/color_999999" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ling_0.5"
+            android:background="@color/umeng_comm_color_c7" />
+
 
         <com.show.specialshow.view.PayRadioGroup
             android:id="@+id/genderGroup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            my:orientation="vertical"
-            >
+            my:orientation="vertical">
+
             <com.show.specialshow.view.PayRadioPurified
-                android:visibility="gone"
                 android:id="@+id/p1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_border_selector"
-                my:radio="@drawable/radio"
-                my:logo_pay="@drawable/icon_pay_integral"
-                my:title_pay="@string/pay_integral"
-                my:desc="支付银行卡支付，支付更安全"
+                android:visibility="gone"
                 my:checked="false"
+                my:desc="支付银行卡支付，支付更安全"
+                my:logo_pay="@drawable/icon_pay_integral"
+                my:radio="@drawable/radio"
+                my:title_pay="@string/pay_integral"
 
                 />
+
             <com.show.specialshow.view.PayRadioPurified
                 android:id="@+id/p2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_border_selector"
-                my:radio="@drawable/radio"
-                my:logo_pay="@drawable/icon_pay_wx"
-                my:title_pay="@string/pay_wx"
-                my:checked="true"
                 my:desc="本次消费可获得1000积分"
-                />
+                my:logo_pay="@drawable/icon_pay_wx"
+                my:radio="@drawable/radio"
+                my:title_pay="@string/pay_wx" />
+
+
             <com.show.specialshow.view.PayRadioPurified
                 android:id="@+id/p3"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_border_selector"
-                my:radio="@drawable/radio"
-                my:logo_pay="@drawable/icon_alipay_plugin"
-                my:title_pay="@string/pay_alipay"
                 my:desc="本次消费可获得1000积分"
-                />
+                my:logo_pay="@drawable/icon_alipay_plugin"
+                my:radio="@drawable/radio"
+                my:title_pay="@string/pay_alipay" />
 
         </com.show.specialshow.view.PayRadioGroup>
 
-        <TextView
-            android:id="@+id/pay_confirm"
-            android:onClick="onClick"
-            android:gravity="center"
-            android:layout_marginBottom="@dimen/text_size_30px"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/text_size_26px"
-            android:layout_marginRight="@dimen/text_size_26px"
-            android:layout_marginTop="60dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/text_size_114px"
-            android:background="@drawable/bg_send_selector"
-            android:textSize="@dimen/text_size_26px"
-            android:text="确认支付1000元"
-            />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_pay_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+
+            android:layout_height="@dimen/ling_0.5"
+            android:layout_marginTop="@dimen/text_size_26px"
+            android:background="@color/umeng_comm_color_c7" />
+
+        <RelativeLayout
+            android:id="@+id/pay_red_packet_all"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@color/color_ffffff"
+            android:paddingLeft="@dimen/text_size_30px"
+            android:paddingRight="@dimen/text_size_28px">
+
+            <ImageView
+                android:id="@+id/mortgage_treasure_buy_red_packet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_user_red_packet" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/text_size_10px"
+                android:layout_toRightOf="@id/mortgage_treasure_buy_red_packet"
+                android:text="@string/small_red_packet"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_size_26px" />
+
+            <ImageView
+                android:id="@+id/mortgage_treasure_buy_arrow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_arrow_right" />
+
+            <TextView
+                android:id="@+id/pay_red_coupon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/mortgage_treasure_buy_arrow_right"
+                android:text="@string/available_red_packet"
+                android:textColor="@color/color_565656"
+                android:textSize="@dimen/text_size_26px" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ling_0.5"
+            android:background="@color/umeng_comm_color_c7" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pay_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_114px"
+        android:layout_marginBottom="@dimen/text_size_30px"
+        android:layout_marginLeft="@dimen/text_size_26px"
+        android:layout_marginRight="@dimen/text_size_26px"
+        android:layout_marginTop="@dimen/text_size_114px"
+        android:background="@drawable/bg_send_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="确认支付1000元"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_26px" />
 
 </LinearLayout>

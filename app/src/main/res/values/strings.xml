@@ -549,6 +549,9 @@
     <string name="input_set_login_password">请输入登录密码</string>
     <string name="input_again_set_trading_password">请确认支付密码</string>
     <string name="confirm">确认</string>
+    <!--优惠劵相关-->
+    <string name="small_red_packet">优惠券</string>
+    <string name="available_red_packet">选择优惠券</string>
 
 
 </resources>
