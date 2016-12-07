@@ -26,6 +26,7 @@ import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.MyBookingMess;
 import com.show.specialshow.model.RedCoupon;
 import com.show.specialshow.model.RedCouponList;
+import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.SPUtils;
@@ -35,6 +36,7 @@ import com.show.specialshow.view.PayRadioPurified;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Type;
 import java.text.MessageFormat;
 
 //相关控件
@@ -61,6 +63,7 @@ public class PayActivity extends BaseActivity {
 
     private RedCoupon redCoupon;
     private int totalCoupon;
+    private int type = 0;
 
     @Override
     public void initData() {
@@ -119,9 +122,9 @@ public class PayActivity extends BaseActivity {
             public void onCheckedChanged(PayRadioGroup group, int checkedId) {
 //                payRadioPurified = (PayRadioPurified) findViewById(checkedId);
 //                for (int i = 0; i < group.getChildCount(); i++) {
+                UIHelper.ToastMessage(mContext, "暂未开通");
 //                    ((PayRadioPurified) group.getChildAt(i)).setChangeImg(checkedId);
 //                }
-                UIHelper.ToastMessage(mContext, "暂未开通");
             }
         });
     }
@@ -137,7 +140,9 @@ public class PayActivity extends BaseActivity {
                 if (null != payRadioPurified) {
                     UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
                 } else {
-                    payPassWordDialog();
+                    if (0 == isToShop) {
+                        payPassWordDialog();
+                    }
                 }
                 break;
             case R.id.ll_pay_coupon://选择优惠劵
@@ -153,9 +158,7 @@ public class PayActivity extends BaseActivity {
                         UIHelper.ToastMessage(mContext, "请输入支付密码");
                     } else {
                         payPasswordDialog.dismiss();
-//                        Double buy_money = Double.valueOf(novice_area_buy_input_amount
-//                                .getText().toString().trim());
-//                        canPay(buy_money);
+                        canPay();
                     }
                 }
                 break;
@@ -167,9 +170,73 @@ public class PayActivity extends BaseActivity {
             case R.id.forget_pay_password://忘记支付密码
                 UIHelper.startActivity(mContext, SetTradingPasswordActivity.class);
                 break;
+            case R.id.contest_confirm_tv:
+                if (null != dialog) {
+                    dialog.dismiss();
+                }
+                AppManager.getAppManager().finishActivity(3);
+                break;
             default:
                 break;
         }
+
+    }
+
+    private void canPay() {
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.SERVICE_SERVICEMONEY;
+        final String user_id = (String) SPUtils.get(mContext, "uid", "");
+        params.addBodyParameter("user_id", user_id);
+        params.addBodyParameter("T_pin", MD5Utils.getMd5Str(payPassword_et.getText().toString().trim()));
+        params.addBodyParameter("service_id", service_id);
+        params.addBodyParameter("purchase_id", user_id);
+        params.addBodyParameter("merchant_id", shop_id);
+        params.addBodyParameter("service_price", pay_amount);
+        if (null != redCoupon) {
+            params.addBodyParameter("pay_money", String.valueOf(coupon_amount));
+            params.addBodyParameter("coupon_id", redCoupon.getRed_id());
+            params.addBodyParameter("use_coupon", redCoupon.getNum() + "");
+        } else {
+            params.addBodyParameter("pay_money", pay_amount);
+            params.addBodyParameter("coupon_id", "");
+            params.addBodyParameter("use_coupon", "0");
+        }
+        params.addBodyParameter("re_number", myBookingMess.getPeople_num());
+        params.addBodyParameter("pay_mode", type + "");
+        params.addBodyParameter("appointment_id", myBookingMess.getAppointment_id());
+        params.addBodyParameter(ConstantValue.sign, MD5Utils.getMd5Str(
+                user_id + ConstantValue.SIGN));
+        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                loadIng("支付中...", false);
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                MessageResult result = MessageResult.parse(responseInfo.result);
+                if (null == result) {
+                    return;
+                }
+                if (1 == result.getSuccess()) {
+                    createAffirmDialog(result.getMessage(), DIALOG_SINGLE_STPE, false);
+                } else {
+                    UIHelper.ToastMessage(mContext, result.getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
+            }
+        });
 
     }
 

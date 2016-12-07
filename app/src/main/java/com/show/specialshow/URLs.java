@@ -279,5 +279,9 @@ public interface URLs {
      * 删除过期和已使用的优惠劵
      */
     String DELETE_INVALID_COUPON = BASE_URL + "";
+    /**
+     * 支付预约服务
+     */
+    String SERVICE_SERVICEMONEY = BASE_URL + "/service/servicemoney";
 }
 

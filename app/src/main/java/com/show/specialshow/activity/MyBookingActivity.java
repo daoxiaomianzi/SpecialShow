@@ -176,6 +176,9 @@ public class MyBookingActivity extends BaseSearchActivity {
                 case 1:
                     vh.mybooking_status.setBackgroundResource(R.drawable.icon_confirmed);
                     break;
+                case 3:
+                    vh.mybooking_status.setBackgroundResource(R.drawable.icon_confirmed);
+                    break;
                 case 2:
                     vh.mybooking_status.setBackgroundResource(R.drawable.icon_cancelled);
                     break;

@@ -194,6 +194,14 @@ public class ReserDetailsActivity extends BaseActivity {
                 reser_details_delete.setText("支付");
                 reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_confirmed);
                 break;
+            case 3:
+                reser_details_cancel.setSelected(false);
+                reser_details_cancel.setEnabled(false);
+                reser_details_delete.setSelected(false);
+                reser_details_delete.setEnabled(false);
+                reser_details_delete.setText("已支付");
+                reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_confirmed);
+                break;
             case 2:
                 reser_details_cancel.setSelected(false);
                 reser_details_cancel.setEnabled(false);
