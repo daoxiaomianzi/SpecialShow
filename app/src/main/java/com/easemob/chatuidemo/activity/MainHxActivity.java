@@ -682,9 +682,9 @@ public class MainHxActivity extends BaseActivity implements EMEventListener {
 
     private void chatDialog(String content, int dialogStyle, boolean isCancel,
                             final InviteMessage msg, final String username) {
-        final Dialog chatDialog = new Dialog(MainHxActivity.this,
+        final Dialog chatDialog = new Dialog(MainHxActivity.this.getParent(),
                 R.style.Theme_dialog);
-        LayoutInflater inflater = LayoutInflater.from(MainHxActivity.this);
+        LayoutInflater inflater = LayoutInflater.from(MainHxActivity.this.getParent());
         View view = inflater.inflate(R.layout.view_contest_dialog, null);
         View content_ll = view.findViewById(R.id.content_ll);
         TextView contest_cancel_tv = (TextView) view
