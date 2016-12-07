@@ -41,12 +41,14 @@ public class MyDiscountCouponActivity extends BaseSearchActivity {
     private int isSelect = 0;//0：全部优惠劵，1：查找符合条件的优惠劵
     private String shop_id;//商户id
     private String service_id;//服务id
+    private String service_price;//服务总费用
 
     @Override
     public void initData() {
         isSelect = getIntent().getIntExtra("isSelect", 0);
         shop_id = getIntent().getStringExtra("shop_id");
         service_id = getIntent().getStringExtra("service_id");
+        service_price = getIntent().getStringExtra("service_price");
         adapter = new RedCouponSwipeAdapter(mlist_coupon, mContext);
     }
 
@@ -108,6 +110,7 @@ public class MyDiscountCouponActivity extends BaseSearchActivity {
             case 1:
                 params.addBodyParameter("match_merchant_id", shop_id);
                 params.addBodyParameter("match_service_id", service_id);
+                params.addBodyParameter("match_service_price", service_price);
                 break;
             default:
                 break;

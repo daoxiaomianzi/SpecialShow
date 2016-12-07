@@ -1,8 +1,15 @@
 package com.show.specialshow.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +23,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.MessageResult;
+import com.show.specialshow.model.MyBookingMess;
 import com.show.specialshow.model.RedCoupon;
 import com.show.specialshow.model.RedCouponList;
 import com.show.specialshow.utils.BtnUtils;
@@ -24,6 +32,8 @@ import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.PayRadioGroup;
 import com.show.specialshow.view.PayRadioPurified;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.MessageFormat;
 
@@ -35,11 +45,16 @@ public class PayActivity extends BaseActivity {
     private PayRadioPurified payRadioPurified;
     private TextView tv_pay_amount;
     private TextView pay_red_coupon_tv;
+    //支付密码弹框视图
+    private EditText payPassword_et;
+    private Dialog payPasswordDialog;
     //数据
     private String shop_title;
     private String pay_amount;//支付金额
     private String shop_id;//商户id
     private String service_id;//服务id
+    private MyBookingMess myBookingMess;
+    //
     private int isToShop;
     private LinearLayout ll_pay_coupon;
     public static final int REQUEST_CODE_SELECT_RED_COUPON_PAY = 0X3EC;
@@ -52,8 +67,13 @@ public class PayActivity extends BaseActivity {
         isToShop = getIntent().getIntExtra("isToShop", 0);
         shop_title = getIntent().getStringExtra("shop_title");
         pay_amount = getIntent().getStringExtra("pay_amount");
-        shop_id = getIntent().getStringExtra("shop_id");
-        service_id = getIntent().getStringExtra("service_id");
+        myBookingMess = (MyBookingMess) getIntent().getSerializableExtra("payMess");
+        if (null != myBookingMess) {
+            shop_title = myBookingMess.getShop_name();
+            shop_id = myBookingMess.getShop_id();
+            service_id = myBookingMess.getService_id();
+            pay_amount = myBookingMess.getService_price();
+        }
         setContentView(R.layout.activity_pay);
 
     }
@@ -116,18 +136,69 @@ public class PayActivity extends BaseActivity {
             case R.id.pay_confirm:
                 if (null != payRadioPurified) {
                     UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
+                } else {
+                    payPassWordDialog();
                 }
                 break;
             case R.id.ll_pay_coupon://选择优惠劵
                 bundle.putInt("isSelect", 1);
                 bundle.putString("shop_id", shop_id);
                 bundle.putString("service_id", service_id);
+                bundle.putSerializable("service_price", pay_amount);
                 UIHelper.startActivityForResult(mContext, MyDiscountCouponActivity.class, REQUEST_CODE_SELECT_RED_COUPON_PAY, bundle);
+                break;
+            case R.id.pay_password_confirm_tv://支付密码弹框确定
+                if (null != payPasswordDialog) {
+                    if (StringUtils.isEmpty(payPassword_et.getText().toString().trim())) {
+                        UIHelper.ToastMessage(mContext, "请输入支付密码");
+                    } else {
+                        payPasswordDialog.dismiss();
+//                        Double buy_money = Double.valueOf(novice_area_buy_input_amount
+//                                .getText().toString().trim());
+//                        canPay(buy_money);
+                    }
+                }
+                break;
+            case R.id.pay_password_cancel_tv://支付密码弹框取消
+                if (null != payPasswordDialog) {
+                    payPasswordDialog.dismiss();
+                }
+                break;
+            case R.id.forget_pay_password://忘记支付密码
+                UIHelper.startActivity(mContext, SetTradingPasswordActivity.class);
                 break;
             default:
                 break;
         }
 
+    }
+
+    private void payPassWordDialog() {
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View payPasswordView = inflater.inflate(R.layout.view_pay_password_dialog, null);
+        payPassword_et = (EditText) payPasswordView.findViewById(R.id.pay_password);
+        TextView payPassword_tv = (TextView) payPasswordView.findViewById(R.id.pay_password_dialog_content_tv);
+        String coupon;
+        String str;
+        SpannableString style;
+        String payNum = String.valueOf(coupon_amount);
+        if (redCoupon != null) {
+            coupon = String.valueOf(redCoupon.getNum());
+            str = "您本次支付金额是" + payNum + "元，使用了一张" + coupon +
+                    "元的优惠劵";
+            style = new SpannableString(str);
+            style.setSpan(new ForegroundColorSpan(Color.RED), 8,
+                    8 + payNum.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            style.setSpan(new ForegroundColorSpan(Color.RED), 15 + payNum.length(),
+                    15 + payNum.length() + coupon.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        } else {
+            str = "您本次支付金额是" + pay_amount + "元";
+            style = new SpannableString(str);
+            style.setSpan(new ForegroundColorSpan(Color.RED), 8,
+                    8 + pay_amount.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        payPassword_tv.setText(style);
+        payPasswordDialog = UIHelper.showPayPasswordDialog(mContext, payPasswordView);
     }
 
     @Override
@@ -148,9 +219,11 @@ public class PayActivity extends BaseActivity {
         }
     }
 
+    double coupon_amount;
+
     private void addRedCouponShow() {
         if (null != redCoupon) {
-            double coupon_amount = Double.valueOf(pay_amount) - Double.valueOf(redCoupon.getNum());
+            coupon_amount = Double.valueOf(pay_amount) - Double.valueOf(redCoupon.getNum());
             pay_confirm.setText("确认支付" + coupon_amount + "元");
             pay_red_coupon_tv.setText(MessageFormat.format("{0}元优惠劵", redCoupon.getNum()));
         } else {
@@ -170,6 +243,7 @@ public class PayActivity extends BaseActivity {
                 MD5Utils.getMd5Str(uid + ConstantValue.SIGN));
         params.addBodyParameter("match_merchant_id", shop_id);
         params.addBodyParameter("match_service_id", service_id);
+        params.addBodyParameter("match_service_price", pay_amount);
         TXApplication.post(null, mContext, url, params,
                 new RequestCallBack<String>() {
 

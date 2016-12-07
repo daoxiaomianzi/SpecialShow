@@ -81,10 +81,7 @@ public class ReserDetailsActivity extends BaseActivity {
             case R.id.reser_details_delete://删除
                 if (1 == myBooking.getStatus()) {
                     bundle.putInt("isToShop", 0);
-                    bundle.putString("shop_title", myBooking.getShop_name());
-                    bundle.putString("pay_amount", myBooking.getService_price());
-                    bundle.putString("shop_id", myBooking.getShop_id());
-                    bundle.putString("service_id", myBooking.getService_id());
+                    bundle.putSerializable("payMess", myBooking);
                     UIHelper.startActivity(mContext, PayActivity.class, bundle);
                     return;
                 }
