@@ -3,9 +3,13 @@ package com.show.specialshow.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -40,6 +44,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.MessageFormat;
+
 public class MyActivity extends BaseActivity implements OnTabActivityResultListener {
     // 相关控件
     private ScrollView my_scroll;
@@ -54,6 +60,8 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
     private TextView fans_num;//粉丝数
     private TextView friends_num;//好友数
     private TextView tv_unReadMess;//未读消息数
+    private TextView coupons_num;//优惠劵数量
+    private TextView my_reservation_num;//我的预约数量
     //
     private static final int BAS_INFORMATION = 0x000001;
     private static final int UNREADMESS = 0x000002;
@@ -77,6 +85,18 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                 if (1 == result.getSuccess()) {
                     UserNumMess userNumMess = UserNumMess.parse(result.getData());
                     if (null != userNumMess) {
+                        String couponNum = userNumMess.getCouponNum() + "";
+                        String str = MessageFormat.format("优惠劵（{0}）", couponNum);
+                        SpannableString style = new SpannableString(str);
+                        style.setSpan(new ForegroundColorSpan(Color.RED), 3,
+                                5 + couponNum.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        coupons_num.setText(style);
+                        String appointmentNum = userNumMess.getAppointmentNum() + "";
+                        String str1 = MessageFormat.format("我的预约（{0}）", appointmentNum);
+                        SpannableString style1 = new SpannableString(str1);
+                        style1.setSpan(new ForegroundColorSpan(Color.RED), 4,
+                                6 + appointmentNum.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        my_reservation_num.setText(style1);
                         focus_on_num.setText(userNumMess.getAttentionNum() + "");
                         fans_num.setText(userNumMess.getFansNum() + "");
                         friends_num.setText(userNumMess.getFriendNum() + "");
@@ -161,6 +181,8 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
         vi_craftsman = findViewById(R.id.vi_craftsman);
         tv_apply_merchant = (TextView) findViewById(R.id.tv_apply_merchant);
         tv_unReadMess = (TextView) findViewById(R.id.tv_unReadMess);
+        my_reservation_num = (TextView) findViewById(R.id.my_reservation_num);
+        coupons_num = (TextView) findViewById(R.id.coupons_num);
     }
 
     @Override
@@ -215,6 +237,7 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                         JSONObject obj = new JSONObject(result.getData());
                         int count = obj.getInt("count");
                         if (count > 0) {
+                            tv_unReadMess.setVisibility(View.VISIBLE);
                             tv_unReadMess.setText(count + "");
                         } else {
                             tv_unReadMess.setVisibility(View.GONE);

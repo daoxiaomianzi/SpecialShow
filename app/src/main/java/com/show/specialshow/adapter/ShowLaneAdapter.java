@@ -77,6 +77,7 @@ public class ShowLaneAdapter extends BaseAdapter {
             vh.show_lang_item_label_tv = (TextView) convertView.findViewById(R.id.show_lang_item_label_tv);
             vh.show_lang_item_address = (TextView) convertView.findViewById(R.id.show_lang_item_address);
             vh.show_lang_item_xf = (TextView) convertView.findViewById(R.id.show_lang_item_xf);
+            vh.show_lang_item_vip = (ImageView) convertView.findViewById(R.id.show_lang_item_vip);
             vh.setPosition(position);
             convertView.setTag(vh);
         } else {
@@ -115,7 +116,14 @@ public class ShowLaneAdapter extends BaseAdapter {
         } else {
             vh.show_lang_item_label_tv.setVisibility(View.GONE);
         }
-
+        switch (mList.get(position).getRank()) {
+            case 0:
+                vh.show_lang_item_vip.setVisibility(View.GONE);
+                break;
+            case 1:
+                vh.show_lang_item_vip.setVisibility(View.VISIBLE);
+                break;
+        }
 //		vh.show_lang_item_label_gv.setAdapter(new TagsMessAdapter(mTagsMesses,mContext));
 /*			vh.show_lang_item_rll.setOnClickListener(new OnClickListener() {
             @Override
@@ -165,6 +173,7 @@ public class ShowLaneAdapter extends BaseAdapter {
         private TextView show_lang_item_xf;//人均消费
         private TextView show_lang_distance;
         private RelativeLayout show_lang_item_rll;
+        private ImageView show_lang_item_vip;
 
         public int getPosition() {
             return position;

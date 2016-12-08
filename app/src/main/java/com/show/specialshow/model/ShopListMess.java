@@ -23,6 +23,15 @@ public class ShopListMess implements Serializable {
     private int notice;//是否收藏
     private String address;//店铺地址
     private String xf;//人均消费
+    private int rank;//0:普通商家，1：vip商家
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
     public String getShop_uid() {
         return shop_uid;

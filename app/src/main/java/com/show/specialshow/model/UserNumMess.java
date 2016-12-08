@@ -11,8 +11,26 @@ public class UserNumMess implements Serializable {
     private String attentionNum;//关注数
     private String fansNum;//粉丝数
     private String friendNum;//好友数
-    private int  isMerchant;//返回2说明此用户同时是商户，1为普通用户
+    private int couponNum;//优惠劵数量
+    private int appointmentNum;//预约数量
+    private int isMerchant;//返回2说明此用户同时是商户，1为普通用户
     private int userBiaoshi;//返回2说明此用户同时为手艺人，1为普通用户
+
+    public int getCouponNum() {
+        return couponNum;
+    }
+
+    public void setCouponNum(int couponNum) {
+        this.couponNum = couponNum;
+    }
+
+    public int getAppointmentNum() {
+        return appointmentNum;
+    }
+
+    public void setAppointmentNum(int appointmentNum) {
+        this.appointmentNum = appointmentNum;
+    }
 
     public int getUserBiaoshi() {
         return userBiaoshi;
@@ -53,7 +71,8 @@ public class UserNumMess implements Serializable {
     public void setFansNum(String fansNum) {
         this.fansNum = fansNum;
     }
-    public static UserNumMess parse(String result){
+
+    public static UserNumMess parse(String result) {
         try {
             return JSON.parseObject(result, UserNumMess.class);
         } catch (Exception e) {

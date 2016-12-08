@@ -152,7 +152,7 @@
     <string name="related_services">相关服务(0)</string>
     <string name="reservation">预约</string>
     <string name="craftsman_people">手艺人(0)</string>
-    <string name="input_show_fang_hint">请输入商家名称</string>
+    <string name="input_show_fang_hint">请输入商家名称或地址</string>
     <string name="title_activity_switch_city">SwitchCityActivity</string>
     <!-- 切换城市相关 -->
     <string name="input_city_or_pinyin">请输入城市或拼音</string>

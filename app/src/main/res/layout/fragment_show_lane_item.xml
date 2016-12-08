@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:id="@+id/show_lang_item_rl"
         style="@style/shopList_rll"
@@ -18,11 +19,20 @@
             android:layout_height="65dp"
             android:layout_centerVertical="true" />
 
+        <ImageView
+            android:id="@+id/show_lang_item_vip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/icon_shop_vip" />
+
         <TextView
             android:id="@+id/show_lang_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/text_size_16px"
+            android:layout_toLeftOf="@id/show_lang_item_vip"
             android:layout_toRightOf="@id/show_lang_item_iv"
             android:singleLine="true"
             android:text="嘉里酒店健身中心"
@@ -168,6 +178,7 @@
             android:textSize="@dimen/text_size_24px"
             android:visibility="gone" />
     </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"
