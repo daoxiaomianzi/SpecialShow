@@ -1,7 +1,7 @@
 package com.show.specialshow.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -18,6 +18,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
+import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.RedCoupon;
 import com.show.specialshow.utils.DateUtil;
@@ -149,6 +150,8 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
     private void bindData(ViewHolder holder) {
         RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
         holder.red_coupon_buy_btn.setText("立即\n使用");
+        listener = new OnItemViewClickListener(holder);
+        holder.red_coupon_buy_btn.setOnClickListener(listener);
         holder.red_coupon_type_item.setText("优惠劵");
         holder.red_coupon_value_tv.setText("" + coupon_item.getNum()
                 + "元");
@@ -194,6 +197,8 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
             }
             holder.red_coupon_value_tv.setTextColor(mContext.getResources()
                     .getColor(R.color.color_cccccc));
+            holder.red_coupon_usefull_life_tv.setTextColor(mContext.getResources()
+                    .getColor(R.color.color_cccccc));
             holder.red_coupon_use_sill_tv.setTextColor(mContext.getResources()
                     .getColor(R.color.color_cccccc));
             holder.red_coupon_validity_date_tv
@@ -216,16 +221,16 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
 
         @Override
         public void onClick(View v) {
-            Bundle bundle = new Bundle();
             switch (v.getId()) {
                 case R.id.red_coupon_buy_btn:
-//				RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
-//				if(coupon_item.getIs_use() == 0
-//						&& coupon_item.getEnddate() * 1000 > System
-//						.currentTimeMillis()){
-//					bundle.putInt("registerBack", 1);
-//					UIHelper.startActivity((Activity) mContext, MainActivity.class, bundle);
-//				}
+                    RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
+                    if (coupon_item.getIs_use() == 0
+                            && coupon_item.getEnddate() * 1000 > System
+                            .currentTimeMillis()) {
+                        Intent intent = new Intent(mContext, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        mContext.startActivity(intent);
+                    }
                     break;
                 case R.id.red_coupon_all:
 //                    RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());

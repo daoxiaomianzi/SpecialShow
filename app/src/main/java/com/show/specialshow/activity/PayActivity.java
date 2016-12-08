@@ -174,7 +174,8 @@ public class PayActivity extends BaseActivity {
                 if (null != dialog) {
                     dialog.dismiss();
                 }
-                AppManager.getAppManager().finishActivity(3);
+                Intent intent = new Intent();
+                UIHelper.setResult(mContext, RESULT_OK, intent);
                 break;
             default:
                 break;

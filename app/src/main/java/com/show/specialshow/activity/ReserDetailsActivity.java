@@ -1,5 +1,6 @@
 package com.show.specialshow.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,9 @@ public class ReserDetailsActivity extends BaseActivity {
     private Button reser_details_delete;//删除
     private MyBookingMess myBooking;
     private int action = 0;
+
+    private static final int PAY = 0x000003;//支付
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -82,7 +86,7 @@ public class ReserDetailsActivity extends BaseActivity {
                 if (1 == myBooking.getStatus()) {
                     bundle.putInt("isToShop", 0);
                     bundle.putSerializable("payMess", myBooking);
-                    UIHelper.startActivity(mContext, PayActivity.class, bundle);
+                    UIHelper.startActivityForResult(mContext, PayActivity.class, PAY, bundle);
                     return;
                 }
                 createAffirmDialog("您确定要删除该服务吗", 2, true);
@@ -200,7 +204,7 @@ public class ReserDetailsActivity extends BaseActivity {
                 reser_details_delete.setSelected(false);
                 reser_details_delete.setEnabled(false);
                 reser_details_delete.setText("已支付");
-                reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_confirmed);
+                reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_service_pay);
                 break;
             case 2:
                 reser_details_cancel.setSelected(false);
@@ -215,4 +219,20 @@ public class ReserDetailsActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (RESULT_OK == resultCode) {
+            switch (requestCode) {
+                case PAY:
+                    reser_details_cancel.setSelected(false);
+                    reser_details_cancel.setEnabled(false);
+                    reser_details_delete.setSelected(false);
+                    reser_details_delete.setEnabled(false);
+                    reser_details_delete.setText("已支付");
+                    reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_service_pay);
+                    break;
+            }
+        }
+    }
 }

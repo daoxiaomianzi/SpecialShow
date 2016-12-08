@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/text_size_16px"
             android:layout_toRightOf="@id/show_lang_item_iv"
+            android:singleLine="true"
             android:text="嘉里酒店健身中心"
             android:textColor="@color/color_555555"
             android:textSize="@dimen/text_size_26px" />
