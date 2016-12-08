@@ -92,6 +92,8 @@ public class CraftsmanAdapter extends BaseAdapter {
                     .findViewById(R.id.craftsman_item_age);
             vh.craftsman_item_constellation = (TextView) convertView
                     .findViewById(R.id.craftsman_item_constellation);
+            vh.craftsman_item_label_tv = (TextView)
+                    convertView.findViewById(R.id.craftsman_item_label_tv);
             vh.craftsman_item_attention_btn = (TextView) convertView
                     .findViewById(R.id.craftsman_item_attention_btn);
             vh.craftsman_item_rll = (RelativeLayout) convertView
@@ -107,6 +109,7 @@ public class CraftsmanAdapter extends BaseAdapter {
         vh.craftsman_item_name.setText(mList.get(position)
                 .getUser_name());
         vh.craftsman_item_address.setText(mList.get(position).getShop_name());
+        vh.craftsman_item_label_tv.setText(mList.get(position).getTags());
         vh.craftsman_item_age.setText(mList.get(position).getUser_age());
         if ("男".equals(mList.get(position).getUser_sex())) {
             vh.craftsman_item_age.setVisibility(View.VISIBLE);
@@ -251,14 +254,15 @@ public class CraftsmanAdapter extends BaseAdapter {
 
     static class ViewHolder {
         private int postion;
-        private ImageView craftsman_item_iv;// 秀客头像
-        private TextView craftsman_item_name;// 秀客昵称
-        private TextView craftsman_item_age;// 秀客年龄
-        private TextView craftsman_item_constellation;// 秀客星座
+        private ImageView craftsman_item_iv;// 手艺人头像
+        private TextView craftsman_item_name;// 手艺人昵称
+        private TextView craftsman_item_age;// 手艺人年龄
+        private TextView craftsman_item_constellation;// 手艺人星座
         private TextView craftsman_item_distance;// 距离
         private TextView craftsman_item_address;// 门店地址
         private RelativeLayout craftsman_item_rll;// 整个item
         private TextView craftsman_item_attention_btn;// 关注按钮
+        private TextView craftsman_item_label_tv;//手艺人职业
 
         public int getPostion() {
             return postion;
