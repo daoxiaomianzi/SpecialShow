@@ -38,6 +38,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.model.CraftsmanIntroduceMess;
 import com.show.specialshow.model.MessageResult;
+import com.show.specialshow.model.MyBookingMess;
 import com.show.specialshow.model.ShopPeopleMess;
 import com.show.specialshow.model.ShopServiceMess;
 import com.show.specialshow.model.UserMessage;
@@ -102,6 +103,7 @@ public class OrderActivity extends BaseActivity {
     private int whree_from;
     private UserMessage user;
     private MessageResult result;
+    private MyBookingMess bookingMess;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -111,6 +113,8 @@ public class OrderActivity extends BaseActivity {
         if (2 == whree_from) {
             craftsmanIntroduceMess = (CraftsmanIntroduceMess) getIntent()
                     .getSerializableExtra(CraftsmandetailsActivity.PEOPLE_DES);
+        } else if (3 == whree_from) {
+            bookingMess = (MyBookingMess) getIntent().getSerializableExtra("orderMess");
         } else {
             shopPeopleMess = (ShopPeopleMess) getIntent().getSerializableExtra(
                     CraftsmandetailsActivity.PEOPLE_DES);
@@ -212,29 +216,42 @@ public class OrderActivity extends BaseActivity {
      * 是否可以进行预约服务
      */
     private void isOrder() {
-        if (shopServiceMess == null) {
-            UIHelper.showConfirmDialog(mContext, "请选择服务", null, null, true);
-        } else {
-            if ("选择时间".equals(order_time.getText().toString().trim())) {
-                UIHelper.showConfirmDialog(mContext, "请选择时间", null, null, true);
+        if (3 == whree_from) {
+            if (null == bookingMess) {
+                UIHelper.showConfirmDialog(mContext, "请选择服务", null, null, true);
             } else {
-                if ("选择人数".equals(order_people_num.getText().toString().trim())) {
-                    UIHelper.showConfirmDialog(mContext, "请选择人数", null, null,
-                            true);
-                } else {
+                commonJudge();
+            }
+        } else {
+            if (shopServiceMess == null) {
+                UIHelper.showConfirmDialog(mContext, "请选择服务", null, null, true);
+            } else {
+                commonJudge();
+            }
+        }
+
+    }
+
+    private void commonJudge() {
+        if ("选择时间".equals(order_time.getText().toString().trim())) {
+            UIHelper.showConfirmDialog(mContext, "请选择时间", null, null, true);
+        } else {
+            if ("选择人数".equals(order_people_num.getText().toString().trim())) {
+                UIHelper.showConfirmDialog(mContext, "请选择人数", null, null,
+                        true);
+            } else {
 //                    if (("选择手艺人".equals(order_craftseman_people.getText()
 //                            .toString().trim())
 //                            || TextUtils.isEmpty(order_craftseman_people
 //                            .getText().toString().trim()))) {
 //                        UIHelper.showConfirmDialog(mContext, "请选择手艺人", null, null, true);
 //                    } else {
-                    if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
-                        UIHelper.showConfirmDialog(mContext, "请输入您的姓名", null, null, true);
-                    } else {
-                        order();
-                    }
-//                    }
+                if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
+                    UIHelper.showConfirmDialog(mContext, "请输入您的姓名", null, null, true);
+                } else {
+                    order();
                 }
+//                    }
             }
         }
     }
@@ -533,26 +550,48 @@ public class OrderActivity extends BaseActivity {
                             .getCratsman_introduce_name()));
             rl_order_craftsman_people.setClickable(false);
         }
+        if (3 == whree_from && null != bookingMess) {
+            order_craftseman_people
+                    .setText((bookingMess
+                            .getStaff_name() == null ? ""
+                            : bookingMess
+                            .getStaff_name()));
+            rl_order_craftsman_people.setClickable(false);
+        }
+
     }
 
     /**
      * 加载服务数据
      */
     private void updataService() {
-        if (shopServiceMess == null) {
-            rl_order_service.setVisibility(View.GONE);
-            order_service_vi.setVisibility(View.GONE);
-        } else {
+        if (3 == whree_from && null != bookingMess) {
             rl_order_service.setVisibility(View.VISIBLE);
             order_service_vi.setVisibility(View.VISIBLE);
-            order_service_name.setText(shopServiceMess.getService_list_title());
-            order_service_cheap_price.setText(shopServiceMess
-                    .getService_list_price_now());
-            order_service_price.setText(shopServiceMess
-                    .getService_list_price_old());
-            order_service_price_num.setText(shopServiceMess
-                    .getService_list_discount());
+            order_service_name.setText(bookingMess.getService_name());
+            order_service_cheap_price.setText(bookingMess
+                    .getService_price());
+            order_service_price.setVisibility(View.GONE);
+            findViewById(R.id.rll_order_service_price).setVisibility(View.GONE);
+            order_service_price_num.setVisibility(View.GONE);
+            findViewById(R.id.rl_order_switch_service).setClickable(false);
+        } else {
+            if (shopServiceMess == null) {
+                rl_order_service.setVisibility(View.GONE);
+                order_service_vi.setVisibility(View.GONE);
+            } else {
+                rl_order_service.setVisibility(View.VISIBLE);
+                order_service_vi.setVisibility(View.VISIBLE);
+                order_service_name.setText(shopServiceMess.getService_list_title());
+                order_service_cheap_price.setText(shopServiceMess
+                        .getService_list_price_now());
+                order_service_price.setText(shopServiceMess
+                        .getService_list_price_old());
+                order_service_price_num.setText(shopServiceMess
+                        .getService_list_discount());
+            }
         }
+
     }
 
     @Override

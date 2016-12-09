@@ -1,6 +1,7 @@
 package com.show.specialshow.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,11 @@ public class ReserDetailsActivity extends BaseActivity {
                     bundle.putInt("isToShop", 0);
                     bundle.putSerializable("payMess", myBooking);
                     UIHelper.startActivityForResult(mContext, PayActivity.class, PAY, bundle);
+                    return;
+                } else if (3 == myBooking.getStatus()) {
+                    bundle.putInt(CraftsmandetailsActivity.WHERR_FROM, CraftsmandetailsActivity.ORDER_DETAIL_FROM);
+                    bundle.putSerializable("orderMess", myBooking);
+                    UIHelper.startActivity(mContext, OrderActivity.class, bundle);
                     return;
                 }
                 createAffirmDialog("您确定要删除该服务吗", 2, true);
@@ -201,9 +207,10 @@ public class ReserDetailsActivity extends BaseActivity {
             case 3:
                 reser_details_cancel.setSelected(false);
                 reser_details_cancel.setEnabled(false);
-                reser_details_delete.setSelected(false);
-                reser_details_delete.setEnabled(false);
-                reser_details_delete.setText("已支付");
+                reser_details_cancel.setVisibility(View.GONE);
+                reser_details_delete.setText("再来一单");
+                reser_details_delete.setTextColor(Color.WHITE);
+                reser_details_delete.setBackgroundResource(R.drawable.bg_send_selector);
                 reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_service_pay);
                 break;
             case 2:
@@ -225,11 +232,11 @@ public class ReserDetailsActivity extends BaseActivity {
         if (RESULT_OK == resultCode) {
             switch (requestCode) {
                 case PAY:
-                    reser_details_cancel.setSelected(false);
-                    reser_details_cancel.setEnabled(false);
-                    reser_details_delete.setSelected(false);
-                    reser_details_delete.setEnabled(false);
-                    reser_details_delete.setText("已支付");
+                    myBooking.setStatus(3);
+                    reser_details_cancel.setVisibility(View.GONE);
+                    reser_details_delete.setText("再来一单");
+                    reser_details_delete.setTextColor(Color.WHITE);
+                    reser_details_delete.setBackgroundResource(R.drawable.bg_send_selector);
                     reser_details_marking_rtv.setBackgroundResource(R.drawable.icon_service_pay);
                     break;
             }

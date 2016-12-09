@@ -163,7 +163,6 @@
                 <TextView
                     android:id="@+id/order_time"
                     style="@style/user_info_tv"
-                    android:layout_marginRight="@dimen/text_size_10px"
                     android:layout_toLeftOf="@id/iv_order_time_right"
                     android:text="选择时间"
                     android:textColor="@color/color_555555" />
@@ -199,7 +198,6 @@
                 <TextView
                     android:id="@+id/order_people_num_tv"
                     style="@style/user_info_tv"
-                    android:layout_marginRight="@dimen/text_size_10px"
                     android:layout_toLeftOf="@id/iv_order_people_num_right"
                     android:text="" />
 
@@ -241,7 +239,6 @@
                 <TextView
                     android:id="@+id/order_craftseman_people"
                     style="@style/user_info_tv"
-                    android:layout_marginRight="@dimen/text_size_10px"
                     android:layout_toLeftOf="@id/iv_order_craftsman_people_right"
                     android:text="选择手艺人"
                     android:textColor="@color/color_555555" />
@@ -258,10 +255,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="@dimen/text_size_36px"
-
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_size_36px"
                 android:background="@color/white">
 
                 <ImageView
@@ -283,14 +280,14 @@
                     android:textColor="@color/color_999999" />
 
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
                     android:id="@+id/order_contact"
                     style="@style/user_info_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/text_size_10px"
                     android:layout_marginRight="@dimen/text_size_10px"
                     android:layout_toRightOf="@id/tv_order_contact"
+                    android:background="@color/white"
                     android:text="18516031684"
                     android:textColor="@color/color_555555" />
 
@@ -298,16 +295,18 @@
                     style="@style/list_menu_next"
                     android:visibility="gone" />
             </RelativeLayout>
-<LinearLayout
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-            <ImageView
-                android:layout_height="@dimen/ling_0.8"
-                style="@style/user_info_split"
-                android:layout_marginLeft="@dimen/text_size_16px"
-                android:layout_marginRight="@dimen/text_size_16px" />
-</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_marginRight="@dimen/text_size_16px" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_order_name"
@@ -331,21 +330,23 @@
                     android:textColorHint="@color/umeng_comm_color_c5"
                     android:textSize="@dimen/text_size_26px" />
             </RelativeLayout>
-<LinearLayout
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-            <ImageView
-                android:layout_height="@dimen/ling_0.8"
-                style="@style/user_info_split"
-                android:layout_marginLeft="@dimen/text_size_16px"
-                android:layout_marginRight="@dimen/text_size_16px" />
-</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <ImageView
+                    style="@style/user_info_split"
+                    android:layout_height="@dimen/ling_0.8"
+                    android:layout_marginLeft="@dimen/text_size_16px"
+                    android:layout_marginRight="@dimen/text_size_16px" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_order_remark"
                 style="@style/user_info_container"
-                android:layout_height="@dimen/text_size_114px"
-                >
+                android:layout_height="@dimen/text_size_114px">
 
                 <TextView
                     android:id="@+id/tv_order_remark"
@@ -355,28 +356,29 @@
                     android:textColor="@color/color_999999" />
 
                 <EditText
-                    android:textColor="@color/color_555555"
-                    android:singleLine="true"
-                    android:layout_centerVertical="true"
                     android:id="@+id/order_remark"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/text_size_16px"
                     android:layout_toRightOf="@id/tv_order_remark"
                     android:background="@color/color_ffffff"
                     android:hint="@string/other_requre_service"
                     android:paddingLeft="@dimen/text_size_16px"
+                    android:singleLine="true"
+                    android:textColor="@color/color_555555"
                     android:textColorHint="@color/umeng_comm_color_c5"
                     android:textSize="@dimen/text_size_26px" />
             </RelativeLayout>
+
             <LinearLayout
-                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
                 <ImageView
-                    android:layout_height="@dimen/ling_0.8"
                     style="@style/user_info_split"
-                    />
+                    android:layout_height="@dimen/ling_0.8" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
