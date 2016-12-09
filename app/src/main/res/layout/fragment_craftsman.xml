@@ -44,6 +44,7 @@
                 android:layout_centerVertical="true"
                 android:text="暂无数据"
                 android:textColor="@color/color_656565"
+                android:textSize="@dimen/text_size_30px"
                 android:visibility="gone" />
         </RelativeLayout>
     </FrameLayout>

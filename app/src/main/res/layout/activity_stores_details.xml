@@ -231,7 +231,9 @@
 
         <RelativeLayout
             android:id="@+id/rl_stores_details_opening_time"
-            style="@style/user_info_container">
+            style="@style/user_info_container"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
 
             <TextView
                 android:id="@+id/tv_stores_details_opening_time"
@@ -239,19 +241,6 @@
                 android:text="@string/opening_time"
                 android:textColor="@color/color_999999" />
 
-            <TextView
-                android:id="@+id/tv_stores_details_opening_time_name"
-                style="@style/user_info_tv"
-                android:layout_marginLeft="@dimen/text_size_10px"
-                android:layout_toRightOf="@id/tv_stores_details_opening_time"
-                android:singleLine="true"
-                android:text="08:30-21:30" />
-
-            <ImageView
-                style="@style/user_info_split"
-                android:layout_marginRight="@dimen/text_size_28px" />
-            <!--<ImageView-->
-            <!--style="@style/list_menu_next" />-->
             <TextView
                 android:id="@+id/tv_stores_details_cou"
                 style="@style/user_info_tv"
@@ -267,11 +256,28 @@
                 android:text="优惠买单"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_24px" />
+
+            <TextView
+                android:id="@+id/tv_stores_details_opening_time_name"
+                style="@style/user_info_tv"
+                android:layout_marginLeft="@dimen/text_size_10px"
+                android:layout_toLeftOf="@id/tv_stores_details_cou"
+                android:layout_toRightOf="@id/tv_stores_details_opening_time"
+                android:text="08:30-21:30" />
+
+            <ImageView
+                style="@style/user_info_split"
+                android:layout_marginRight="@dimen/text_size_28px" />
+            <!--<ImageView-->
+            <!--style="@style/list_menu_next" />-->
+
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/rl_stores_details_address"
-            style="@style/user_info_container">
+            style="@style/user_info_container"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
 
             <TextView
                 android:id="@+id/tv_stores_details_address"
@@ -279,19 +285,23 @@
                 android:text="@string/address"
                 android:textColor="@color/color_999999" />
 
+            <ImageView
+                android:id="@+id/iv_stores_details_address_right"
+                style="@style/list_menu_next" />
+
+
             <TextView
                 android:id="@+id/tv_stores_details_address_name"
                 style="@style/user_info_tv"
                 android:layout_marginLeft="@dimen/text_size_10px"
+                android:layout_toLeftOf="@id/iv_stores_details_address_right"
                 android:layout_toRightOf="@id/tv_stores_details_address"
-                android:singleLine="true"
                 android:text="浦东新区张杨路628号东明广场6号" />
 
             <ImageView
                 style="@style/user_info_split"
                 android:layout_marginRight="@dimen/text_size_28px" />
 
-            <ImageView style="@style/list_menu_next" />
         </RelativeLayout>
 
         <RelativeLayout

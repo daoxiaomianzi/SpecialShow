@@ -35,6 +35,7 @@ import com.show.specialshow.adapter.CraftsmanAdapter;
 import com.show.specialshow.adapter.GirdDropDownAdapter;
 import com.show.specialshow.adapter.ListDropDownAdapter;
 import com.show.specialshow.contstant.ConstantValue;
+import com.show.specialshow.model.ConditionMess;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopVisitorListMess;
 import com.show.specialshow.model.ShowVisitorList;
@@ -66,18 +67,23 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     private double mLon = 0.0d;//经度
     private List<ShopVisitorListMess> mList = new ArrayList<>();
     private DropDownMenu mDropDownMenu;
-    private String headers[] = {"全部类型", "综合排序", "筛选"};
+    private String headers[] = {"全部类型", "综合排序", "从业时间"};
     private List<View> popupViews = new ArrayList<>();
 
     private GirdDropDownAdapter cityAdapter;
     private ListDropDownAdapter ageAdapter;
-    private ConstellationAdapter constellationAdapter;
+    private ListDropDownAdapter constellationAdapter;
 
-    private String citys[] = {"不限", "武汉", "北京", "上海", "成都", "广州", "深圳", "重庆", "天津", "西安", "南京", "杭州"};
-    private String ages[] = {"不限", "18岁以下", "18-22岁", "23-26岁", "27-35岁", "35岁以上"};
-    private String constellations[] = {"不限", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", "天秤座", "天蝎座", "射手座", "摩羯座", "水瓶座", "双鱼座"};
 
-    private int constellationPosition = 0;
+    private List<ConditionMess> filterList;
+    private List<ConditionMess> stafftypeList;
+    private List<ConditionMess> orderingList;
+    private int filter = 0;
+    private int staffType = 0;
+    private int ordering = 0;
+    //第一次加载
+    private boolean isFirst = true;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,6 +119,9 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         RequestParams params = TXApplication.getParams();
         String url = URLs.SPACE_STAFFLIST;
         user = TXApplication.getUserMess();
+        params.addBodyParameter("filter", filter + "");
+        params.addBodyParameter("stafftype", staffType + "");
+        params.addBodyParameter("ordering", ordering + "");
         params.addBodyParameter("uid", user.getUid());
         params.addBodyParameter("num", "" + ConstantValue.PAGE_SIZE);
         params.addBodyParameter("index", pageIndex + "");
@@ -144,6 +153,14 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                             .parse(result.getData());
                     List<ShopVisitorListMess> list = showVisitorList
                             .getList();
+                    filterList = showVisitorList.getFilter();
+                    stafftypeList = showVisitorList.getStafftype();
+                    orderingList = showVisitorList.getOrdering();
+                    if (null != filterList && null != stafftypeList
+                            && orderingList != null && isFirst) {
+                        dropDownView();
+                        isFirst = false;
+                    }
                     if (null == showVisitorList || null == list) {
                         changeListView(0);
                         search_result_lv.setVisibility(View.VISIBLE);
@@ -215,32 +232,27 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     @Override
     public void initView() {
+    }
+
+    private void dropDownView() {
         //init city menu
         final ListView cityView = new ListView(mContext);
-        cityAdapter = new GirdDropDownAdapter(mContext, Arrays.asList(citys));
+        cityAdapter = new GirdDropDownAdapter(mContext, stafftypeList);
         cityView.setDividerHeight(0);
         cityView.setAdapter(cityAdapter);
 
         //init age menu
         final ListView ageView = new ListView(mContext);
         ageView.setDividerHeight(0);
-        ageAdapter = new ListDropDownAdapter(mContext, Arrays.asList(ages));
+        ageAdapter = new ListDropDownAdapter(mContext, orderingList);
         ageView.setAdapter(ageAdapter);
 
 
         //init constellation
-        final View constellationView = getActivity().getLayoutInflater().inflate(R.layout.custom_layout, null);
-        GridView constellation = (GridView) constellationView.findViewById(R.id.constellation);
-        constellationAdapter = new ConstellationAdapter(getActivity(), Arrays.asList(constellations));
-        constellation.setAdapter(constellationAdapter);
-        TextView ok = (TextView) constellationView.findViewById(R.id.ok);
-        ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDropDownMenu.setTabText(constellationPosition == 0 ? headers[2] : constellations[constellationPosition]);
-                mDropDownMenu.closeMenu();
-            }
-        });
+        final ListView constellationView = new ListView(mContext);
+        constellationView.setDividerHeight(0);
+        constellationAdapter = new ListDropDownAdapter(mContext, filterList);
+        constellationView.setAdapter(constellationAdapter);
 
         //init popupViews
         popupViews.add(cityView);
@@ -252,8 +264,10 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 cityAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[0] : citys[position]);
+                mDropDownMenu.setTabText(position == 0 ? headers[0] : stafftypeList.get(position).getName());
                 mDropDownMenu.closeMenu();
+                staffType = stafftypeList.get(position).getKey();
+                notifyView();
             }
         });
 
@@ -261,20 +275,32 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ageAdapter.setCheckItem(position);
-                mDropDownMenu.setTabText(position == 0 ? headers[1] : ages[position]);
+                mDropDownMenu.setTabText(position == 0 ? headers[1] : orderingList.get(position).getName());
                 mDropDownMenu.closeMenu();
+                ordering = orderingList.get(position).getKey();
+                notifyView();
             }
         });
 
-        constellation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        constellationView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 constellationAdapter.setCheckItem(position);
-                constellationPosition = position;
+                mDropDownMenu.setTabText(position == 0 ? headers[2] : filterList.get(position).getName());
+                mDropDownMenu.closeMenu();
+                filter = filterList.get(position).getKey();
+                notifyView();
             }
         });
         //init dropdownview
         mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, fl_craftsman_content);
+    }
+
+    private void notifyView() {
+        search_result_lv.setState(XListView.LOAD_REFRESH);
+        mList.clear();
+        adapter.notifyDataSetChanged();
+        getData();
     }
 
     @Override
