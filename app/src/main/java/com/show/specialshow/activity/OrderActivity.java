@@ -1,11 +1,5 @@
 package com.show.specialshow.activity;
 
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -55,6 +49,12 @@ import com.show.specialshow.wheelnum.adapter.NumericWheelAdapter;
 import com.show.specialshow.widget.DatePicker;
 import com.show.specialshow.widget.TimePicker;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 public class OrderActivity extends BaseActivity {
     private LayoutInflater inflater = null;
     private static final int SELECT_SERVICE = 0x000001;
@@ -65,6 +65,9 @@ public class OrderActivity extends BaseActivity {
     private List<ShopPeopleMess> shopPeopleMesses = new ArrayList<ShopPeopleMess>();
     private List<ShopServiceMess> shopServiceMesses = new ArrayList<ShopServiceMess>();
     private String shop_id;
+    private String staff_id;//手艺人id
+    private String service_name;//服务名字
+    private String service_id;//服务id
     // 相关控件
     private RelativeLayout rl_order_service;
     private TextView order_service_name;// 服务名
@@ -110,22 +113,42 @@ public class OrderActivity extends BaseActivity {
     public void initData() {
         whree_from = getIntent().getExtras().getInt(
                 CraftsmandetailsActivity.WHERR_FROM);
-        if (2 == whree_from) {
-            craftsmanIntroduceMess = (CraftsmanIntroduceMess) getIntent()
-                    .getSerializableExtra(CraftsmandetailsActivity.PEOPLE_DES);
-        } else if (3 == whree_from) {
+        if (3 == whree_from) {
             bookingMess = (MyBookingMess) getIntent().getSerializableExtra("orderMess");
+            if (null != bookingMess) {
+                shop_id = bookingMess.getShop_id();
+                staff_id = bookingMess.getStaff_id();
+                service_id = bookingMess.getService_id();
+                service_name = bookingMess.getService_name();
+            }
         } else {
-            shopPeopleMess = (ShopPeopleMess) getIntent().getSerializableExtra(
-                    CraftsmandetailsActivity.PEOPLE_DES);
-            shop_id = getIntent().getStringExtra("shop_id");
+            if (2 == whree_from) {
+                craftsmanIntroduceMess = (CraftsmanIntroduceMess) getIntent()
+                        .getSerializableExtra(CraftsmandetailsActivity.PEOPLE_DES);
+                if (null != craftsmanIntroduceMess) {
+                    shop_id = craftsmanIntroduceMess.getCratsman_introduce_shopId();
+                    staff_id = craftsmanIntroduceMess.getCratsman_introduce_id();
+                }
+            } else {
+                shopPeopleMess = (ShopPeopleMess) getIntent().getSerializableExtra(
+                        CraftsmandetailsActivity.PEOPLE_DES);
+                shop_id = getIntent().getStringExtra("shop_id");
+                if (null != shopPeopleMess) {
+                    staff_id = shopPeopleMess.getChoice_artisans_id();
+                }
+            }
+            shopServiceMesses = (List<ShopServiceMess>) getIntent()
+                    .getSerializableExtra(CraftsmandetailsActivity.SERVICE_LIST);
+            shopServiceMess = (ShopServiceMess) getIntent().getSerializableExtra(
+                    "serviceDes");
+            if (null != shopServiceMess) {
+                service_name = shopServiceMess.getService_list_title();
+                service_id = shopServiceMess.getService_list_id();
+            }
+            shopPeopleMesses = (List<ShopPeopleMess>) getIntent()
+                    .getSerializableExtra(CraftsmandetailsActivity.PEOPLE_LIST);
         }
-        shopServiceMesses = (List<ShopServiceMess>) getIntent()
-                .getSerializableExtra(CraftsmandetailsActivity.SERVICE_LIST);
-        shopServiceMess = (ShopServiceMess) getIntent().getSerializableExtra(
-                "serviceDes");
-        shopPeopleMesses = (List<ShopPeopleMess>) getIntent()
-                .getSerializableExtra(CraftsmandetailsActivity.PEOPLE_LIST);
+
         setContentView(R.layout.activity_order);
         View head = findViewById(R.id.order_head);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -246,11 +269,16 @@ public class OrderActivity extends BaseActivity {
 //                            .getText().toString().trim()))) {
 //                        UIHelper.showConfirmDialog(mContext, "请选择手艺人", null, null, true);
 //                    } else {
-                if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
-                    UIHelper.showConfirmDialog(mContext, "请输入您的姓名", null, null, true);
+                if (TextUtils.isEmpty(order_contact.getText().toString().trim())) {
+                    UIHelper.showConfirmDialog(mContext, "请填写您的手机号", null, null, true);
                 } else {
-                    order();
+                    if (TextUtils.isEmpty(order_name.getText().toString().trim())) {
+                        UIHelper.showConfirmDialog(mContext, "请填写您的姓名", null, null, true);
+                    } else {
+                        order();
+                    }
                 }
+
 //                    }
             }
         }
@@ -265,21 +293,14 @@ public class OrderActivity extends BaseActivity {
         RequestParams params = TXApplication.getParams();
         String url = URLs.APPOINMENT_ADD;
         params.addBodyParameter("number", order_people_num.getText().toString().trim());
-        if (2 == whree_from) {
-            params.addBodyParameter("staffid", craftsmanIntroduceMess.getCratsman_introduce_id());
-            params.addBodyParameter("mid", craftsmanIntroduceMess.getCratsman_introduce_shopId());
-        } else {
-            if (null != shopPeopleMess) {
-                params.addBodyParameter("staffid", shopPeopleMess.getChoice_artisans_id());
-            }
-            params.addBodyParameter("mid", shop_id);
-        }
+        params.addBodyParameter("staffid", staff_id);
+        params.addBodyParameter("mid", shop_id);
         params.addBodyParameter("appointmenttime", order_time.getText().toString().trim());
         params.addBodyParameter("phone", order_contact.getText().toString().trim());
         params.addBodyParameter("name", order_name.getText().toString().trim());
         params.addBodyParameter("remark", order_remark.getText().toString().trim());
-        params.addBodyParameter("servicename", shopServiceMess.getService_list_title());
-        params.addBodyParameter("serviceid", shopServiceMess.getService_list_id());
+        params.addBodyParameter("servicename", service_name);
+        params.addBodyParameter("serviceid", service_id);
         params.addBodyParameter("uid", user.getUid());
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
@@ -557,6 +578,11 @@ public class OrderActivity extends BaseActivity {
                             : bookingMess
                             .getStaff_name()));
             rl_order_craftsman_people.setClickable(false);
+            order_people_num.setText(bookingMess.getPeople_num());
+            order_people_num_tv.setText("人");
+            order_contact.setText(bookingMess.getPeople_mobile());
+            order_name.setText(bookingMess.getPeople_name());
+            order_remark.setText(bookingMess.getPeople_remark());
         }
 
     }
@@ -569,7 +595,7 @@ public class OrderActivity extends BaseActivity {
             rl_order_service.setVisibility(View.VISIBLE);
             order_service_vi.setVisibility(View.VISIBLE);
             order_service_name.setText(bookingMess.getService_name());
-            order_service_cheap_price.setText(bookingMess
+            order_service_cheap_price.setText("¥ " + bookingMess
                     .getService_price());
             order_service_price.setVisibility(View.GONE);
             findViewById(R.id.rll_order_service_price).setVisibility(View.GONE);
@@ -602,11 +628,14 @@ public class OrderActivity extends BaseActivity {
                 case SELECT_SERVICE:
                     shopServiceMess = (ShopServiceMess) data
                             .getSerializableExtra("select_service");
+                    service_name = shopServiceMess.getService_list_title();
+                    service_id = shopServiceMess.getService_list_id();
                     updataService();
                     break;
                 case SELECT_CRAFTSMAN:
                     shopPeopleMess = (ShopPeopleMess) data
                             .getSerializableExtra("select_craftsman");
+                    staff_id = shopPeopleMess.getChoice_artisans_id();
                     updataCraftsman();
                     break;
 

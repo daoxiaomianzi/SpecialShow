@@ -14,6 +14,7 @@ public class MyBookingMess implements Serializable {
     private String service_name;//服务名称
     private String service_id;//服务id
     private String staff_name;//手艺人名称
+    private String staff_id;//手艺人id
     private String appointment_time;//预约时间
     private String add_time;//提交时间
     private int status;//预约状态
@@ -24,6 +25,14 @@ public class MyBookingMess implements Serializable {
     private String shop_id;//商户id
     private String appointment_id;//预约id
     private String service_price;//预约总费用
+
+    public String getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(String staff_id) {
+        this.staff_id = staff_id;
+    }
 
     public String getService_id() {
         return service_id;

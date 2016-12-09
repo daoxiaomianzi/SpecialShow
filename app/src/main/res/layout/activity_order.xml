@@ -288,8 +288,11 @@
                     android:layout_marginRight="@dimen/text_size_10px"
                     android:layout_toRightOf="@id/tv_order_contact"
                     android:background="@color/white"
+                    android:hint="请输入您的手机号"
+                    android:inputType="number"
                     android:text="18516031684"
-                    android:textColor="@color/color_555555" />
+                    android:textColor="@color/color_555555"
+                    android:textColorHint="@color/umeng_comm_color_c5" />
 
                 <ImageView
                     style="@style/list_menu_next"
