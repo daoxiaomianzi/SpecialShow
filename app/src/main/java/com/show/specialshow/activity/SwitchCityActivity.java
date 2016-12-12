@@ -37,7 +37,6 @@ import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
-import com.show.specialshow.db.DBHelper;
 import com.show.specialshow.db.DatabaseHelper;
 import com.show.specialshow.model.City;
 import com.show.specialshow.model.MessageResult;
@@ -47,7 +46,6 @@ import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.MyLetterListView;
 import com.show.specialshow.view.MyLetterListView.OnTouchingLetterChangedListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -283,7 +281,7 @@ public class SwitchCityActivity extends BaseActivity implements
             @Override
             public void onStart() {
                 super.onStart();
-                loadIng("加载中", true);
+                loadIng("加载中...", true);
             }
 
             @Override

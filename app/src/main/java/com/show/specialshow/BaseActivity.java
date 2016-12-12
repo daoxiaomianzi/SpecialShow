@@ -241,6 +241,7 @@ public abstract class BaseActivity extends FragmentActivity {
         }
 
         dialog.setCancelable(canBack);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
     }
 

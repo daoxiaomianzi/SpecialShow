@@ -538,7 +538,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
         locationOption.setOnceLocationLatest(true);
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
-        loadIng("加载中", true);
+        loadIng("加载中...", true);
     }
 
     /**

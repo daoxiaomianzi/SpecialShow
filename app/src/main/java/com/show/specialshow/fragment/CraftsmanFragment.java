@@ -298,6 +298,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
 
     private void notifyView() {
         search_result_lv.setState(XListView.LOAD_REFRESH);
+        pageIndex = 1;
         mList.clear();
         adapter.notifyDataSetChanged();
         getData();
@@ -411,7 +412,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         locationOption.setOnceLocationLatest(true);
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
-        loadIng("加载中", true);
+        loadIng("加载中...", true);
 
     }
 

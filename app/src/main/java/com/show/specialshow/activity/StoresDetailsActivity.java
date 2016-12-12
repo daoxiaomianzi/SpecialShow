@@ -547,13 +547,15 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                     @Override
                     public void onStart() {
                         super.onStart();
-                        loadIng("加载中", true);
+                        loadIng("加载中...", true);
                     }
 
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         UIHelper.ToastMessage(mContext, R.string.net_work_error);
-                        dialog.dismiss();
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                     }
 
                     @Override
@@ -613,12 +615,16 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         UIHelper.ToastMessage(mContext, R.string.net_work_error);
-                        dialog.dismiss();
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                     }
 
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
-                        dialog.dismiss();
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                         MessageResult result = MessageResult
                                 .parse(responseInfo.result);
                         if (null == result) {

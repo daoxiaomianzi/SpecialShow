@@ -1,8 +1,5 @@
 package com.show.specialshow.activity;
 
-import java.io.Serializable;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,12 +36,14 @@ import com.show.specialshow.model.ShopServiceMess;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DensityUtil;
-import com.show.specialshow.utils.ImageLoderutils;
 import com.show.specialshow.utils.RoundImageView;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.MyListView;
 import com.show.specialshow.view.NotifyingScrollView;
 import com.show.specialshow.view.NotifyingScrollView.OnScrollChangedListener;
+
+import java.io.Serializable;
+import java.util.List;
 
 @SuppressLint("UseValueOf")
 public class CraftsmandetailsActivity extends BaseActivity {
@@ -279,10 +278,18 @@ public class CraftsmandetailsActivity extends BaseActivity {
         params.addBodyParameter("uid", user.getUid());
         TXApplication.post(null, mContext, url, params,
                 new RequestCallBack<String>() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        loadIng("加载中...", true);
+                    }
 
                     @Override
                     public void onFailure(HttpException error, String msg) {
                         UIHelper.ToastMessage(mContext, R.string.net_work_error);
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                     }
 
                     @Override
@@ -329,10 +336,16 @@ public class CraftsmandetailsActivity extends BaseActivity {
                     @Override
                     public void onFailure(HttpException error, String mag) {
                         UIHelper.ToastMessage(mContext, R.string.net_work_error);
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                     }
 
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
+                        if (null != dialog) {
+                            dialog.dismiss();
+                        }
                         MessageResult result = MessageResult
                                 .parse(responseInfo.result);
                         if (null == result) {

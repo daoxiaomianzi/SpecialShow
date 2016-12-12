@@ -570,6 +570,10 @@ public class OrderActivity extends BaseActivity {
                             : craftsmanIntroduceMess
                             .getCratsman_introduce_name()));
             rl_order_craftsman_people.setClickable(false);
+            iv_order_craftsman_people_right.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) order_craftseman_people.getLayoutParams();
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            order_craftseman_people.setPadding(0, 0, UIHelper.Dp2Px(mContext, 16), 0);
         }
         if (3 == whree_from && null != bookingMess) {
             order_craftseman_people
@@ -578,6 +582,10 @@ public class OrderActivity extends BaseActivity {
                             : bookingMess
                             .getStaff_name()));
             rl_order_craftsman_people.setClickable(false);
+            iv_order_craftsman_people_right.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) order_craftseman_people.getLayoutParams();
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            order_craftseman_people.setPadding(0, 0, UIHelper.Dp2Px(mContext, 16), 0);
             order_people_num.setText(bookingMess.getPeople_num());
             order_people_num_tv.setText("人");
             order_contact.setText(bookingMess.getPeople_mobile());
@@ -600,7 +608,8 @@ public class OrderActivity extends BaseActivity {
             order_service_price.setVisibility(View.GONE);
             findViewById(R.id.rll_order_service_price).setVisibility(View.GONE);
             order_service_price_num.setVisibility(View.GONE);
-            findViewById(R.id.rl_order_switch_service).setClickable(false);
+            findViewById(R.id.rl_order_switch_service).setVisibility(View.GONE);
+            iv_order_craftsman_people_right.setVisibility(View.INVISIBLE);
         } else {
             if (shopServiceMess == null) {
                 rl_order_service.setVisibility(View.GONE);
