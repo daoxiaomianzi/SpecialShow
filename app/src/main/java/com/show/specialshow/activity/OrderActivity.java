@@ -134,7 +134,7 @@ public class OrderActivity extends BaseActivity {
                         CraftsmandetailsActivity.PEOPLE_DES);
                 shop_id = getIntent().getStringExtra("shop_id");
                 if (null != shopPeopleMess) {
-                    staff_id = shopPeopleMess.getChoice_artisans_id();
+                    staff_id = shopPeopleMess.getChoice_artisans_staffid();
                 }
             }
             shopServiceMesses = (List<ShopServiceMess>) getIntent()
@@ -635,7 +635,7 @@ public class OrderActivity extends BaseActivity {
                 case SELECT_CRAFTSMAN:
                     shopPeopleMess = (ShopPeopleMess) data
                             .getSerializableExtra("select_craftsman");
-                    staff_id = shopPeopleMess.getChoice_artisans_id();
+                    staff_id = shopPeopleMess.getChoice_artisans_staffid();
                     updataCraftsman();
                     break;
 
