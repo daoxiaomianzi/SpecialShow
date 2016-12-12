@@ -17,6 +17,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.MyBookingMess;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.UIHelper;
 
 public class ReserDetailsActivity extends BaseActivity {
@@ -77,6 +78,9 @@ public class ReserDetailsActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        if (!BtnUtils.getInstance().isFastDoubleClick()) {
+            return;
+        }
         Bundle bundle = new Bundle();
         switch (v.getId()) {
             case R.id.reser_details_cancel://取消

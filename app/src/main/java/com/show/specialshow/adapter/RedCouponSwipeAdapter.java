@@ -21,6 +21,7 @@ import com.show.specialshow.URLs;
 import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.RedCoupon;
+import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DateUtil;
 import com.show.specialshow.utils.UIHelper;
 
@@ -221,6 +222,9 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
 
         @Override
         public void onClick(View v) {
+            if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                return;
+            }
             switch (v.getId()) {
                 case R.id.red_coupon_buy_btn:
                     RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
