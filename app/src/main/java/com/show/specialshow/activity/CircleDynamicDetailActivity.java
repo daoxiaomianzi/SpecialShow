@@ -67,7 +67,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class  CircleDynamicDetailActivity extends BaseActivity {
+public class CircleDynamicDetailActivity extends BaseActivity {
     private MyListView detail_lv;
     private List<ShopReviewMess> mlist_test;// 评论数据
     private BaseAdapter mAdapter;
@@ -133,10 +133,10 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
     @Override
     public void initView() {
         setContentView(R.layout.activity_circle_dynamic_detail);
-        iv_emoticons_normal= (ImageView) findViewById(R.id.iv_emoticons_normal);
-        iv_emoticons_checked= (ImageView) findViewById(R.id.iv_emoticons_checked);
-        ll_face_container= (LinearLayout) findViewById(R.id.ll_face_container);
-        vPager= (ViewPager) findViewById(R.id.vPager);
+        iv_emoticons_normal = (ImageView) findViewById(R.id.iv_emoticons_normal);
+        iv_emoticons_checked = (ImageView) findViewById(R.id.iv_emoticons_checked);
+        ll_face_container = (LinearLayout) findViewById(R.id.ll_face_container);
+        vPager = (ViewPager) findViewById(R.id.vPager);
         detail_lv = (MyListView) findViewById(R.id.detail_lv);
         detail_sv = (ScrollView) findViewById(R.id.detail_sv);
         commentLinear = (LinearLayout) findViewById(R.id.commentLinear);
@@ -184,6 +184,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         return reslist;
 
     }
+
     /**
      * 获取表情的gridview的子view
      *
@@ -199,14 +200,14 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
             list.addAll(list1);
         } else if (i == 2) {
             list.addAll(reslist.subList(20, 40));
-        }else if(i==3){
+        } else if (i == 3) {
 
             list.addAll(reslist.subList(40, 60));
-        }else if(i==4){
+        } else if (i == 4) {
             list.addAll(reslist.subList(60, 80));
 
-        }else if(i==5){
-            list.addAll(reslist.subList(80,reslist.size()));
+        } else if (i == 5) {
+            list.addAll(reslist.subList(80, reslist.size()));
 
         }
         list.add("delete_expression");
@@ -223,44 +224,44 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
                     // 文字输入框可见时，才可输入表情
                     // 按住说话可见，不让输入表情
 
-                        if (filename != "delete_expression") { // 不是删除键，显示表情
-                            // 这里用的反射，所以混淆的时候不要混淆SmileUtils这个类
-                            Class clz = Class
-                                    .forName("com.easemob.chatuidemo.utils.SmileUtils");
-                            Field field = clz.getField(filename);
-                            commentEdit.append(SmileUtils.getSmiledText(
-                                    mContext, (String) field.get(null)));
-                        } else { // 删除文字或者表情
-                            if (!TextUtils.isEmpty(commentEdit.getText())) {
+                    if (filename != "delete_expression") { // 不是删除键，显示表情
+                        // 这里用的反射，所以混淆的时候不要混淆SmileUtils这个类
+                        Class clz = Class
+                                .forName("com.easemob.chatuidemo.utils.SmileUtils");
+                        Field field = clz.getField(filename);
+                        commentEdit.append(SmileUtils.getSmiledText(
+                                mContext, (String) field.get(null)));
+                    } else { // 删除文字或者表情
+                        if (!TextUtils.isEmpty(commentEdit.getText())) {
 
-                                int selectionStart = commentEdit
-                                        .getSelectionStart();// 获取光标的位置
-                                if (selectionStart > 0) {
-                                    String body = commentEdit.getText()
-                                            .toString();
-                                    String tempStr = body.substring(0,
+                            int selectionStart = commentEdit
+                                    .getSelectionStart();// 获取光标的位置
+                            if (selectionStart > 0) {
+                                String body = commentEdit.getText()
+                                        .toString();
+                                String tempStr = body.substring(0,
+                                        selectionStart);
+                                int i = tempStr.lastIndexOf("[");// 获取最后一个表情的位置
+                                if (i != -1) {
+                                    CharSequence cs = tempStr.substring(i,
                                             selectionStart);
-                                    int i = tempStr.lastIndexOf("[");// 获取最后一个表情的位置
-                                    if (i != -1) {
-                                        CharSequence cs = tempStr.substring(i,
-                                                selectionStart);
-                                        if (SmileUtils.containsKey(cs
-                                                .toString()))
-                                            commentEdit.getEditableText()
-                                                    .delete(i, selectionStart);
-                                        else
-                                            commentEdit.getEditableText()
-                                                    .delete(selectionStart - 1,
-                                                            selectionStart);
-                                    } else {
+                                    if (SmileUtils.containsKey(cs
+                                            .toString()))
+                                        commentEdit.getEditableText()
+                                                .delete(i, selectionStart);
+                                    else
                                         commentEdit.getEditableText()
                                                 .delete(selectionStart - 1,
                                                         selectionStart);
-                                    }
+                                } else {
+                                    commentEdit.getEditableText()
+                                            .delete(selectionStart - 1,
+                                                    selectionStart);
                                 }
                             }
-
                         }
+
+                    }
                 } catch (Exception e) {
                 }
 
@@ -295,7 +296,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_relation_me_tv);
-        dynamic_type_url_title_tv= (TextView) findViewById(R.id.dynamic_type_other_picture_url_tv);
+        dynamic_type_url_title_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_other_picture_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_other_picture_card_ll);
@@ -313,7 +314,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_relation_me_tv);
-        dynamic_type_url_title_tv= (TextView) findViewById(R.id.dynamic_type_two_picture_url_tv);
+        dynamic_type_url_title_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_url_tv);
 
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_two_picture_comment_count_tv);
@@ -333,7 +334,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_relation_me_tv);
-        dynamic_type_url_title_tv= (TextView) findViewById(R.id.dynamic_type_one_picture_url_tv);
+        dynamic_type_url_title_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_one_picture_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_one_picture_card_ll);
@@ -351,7 +352,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         dynamic_type_label_tv = (TextView) findViewById(R.id.dynamic_type_just_text_label_tv);
         dynamic_type_describe_tv = (TextView) findViewById(R.id.dynamic_type_just_text_describe_tv);
         dynamic_type_relation_me_tv = (TextView) findViewById(R.id.dynamic_type_just_text_relation_me_tv);
-        dynamic_type_url_title_tv= (TextView) findViewById(R.id.dynamic_type_just_text_url_tv);
+        dynamic_type_url_title_tv = (TextView) findViewById(R.id.dynamic_type_just_text_url_tv);
         dynamic_type_thumbs_count_tv = (TextView) findViewById(R.id.dynamic_type_just_text_thumbs_count_tv);
         dynamic_type_comment_count_tv = (TextView) findViewById(R.id.dynamic_type_just_text_comment_count_tv);
         dynamic_type_card_ll = (LinearLayout) findViewById(R.id.dynamic_type_just_text_card_ll);
@@ -406,11 +407,11 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         } else {
             dynamic_type_relation_me_tv.setVisibility(View.VISIBLE);
             dynamic_type_relation_me_tv.setText(SmileUtils.getSmiledText(mContext
-            ,mCircleDynamic.getStatus_content()));
+                    , mCircleDynamic.getStatus_content()));
         }
-        if(StringUtils.isEmpty(mCircleDynamic.getStatus_urlname())){
+        if (StringUtils.isEmpty(mCircleDynamic.getStatus_urlname())) {
             dynamic_type_url_title_tv.setVisibility(View.GONE);
-        }else{
+        } else {
             dynamic_type_url_title_tv.setText(mCircleDynamic.getStatus_urlname());
             dynamic_type_url_title_tv.setVisibility(View.VISIBLE);
         }
@@ -529,9 +530,9 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
                 if (!BtnUtils.getInstance().isFastDoubleClick()) {
                     return;
                 }
-                Bundle bundle =new Bundle();
-                bundle.putString("status_url",mCircleDynamic.getStatus_url());
-                UIHelper.startActivity(mContext,ArticleWebActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("status_url", mCircleDynamic.getStatus_url());
+                UIHelper.startActivity(mContext, ArticleWebActivity.class, bundle);
             }
         });
         dynamic_type_portrait_riv.setOnClickListener(new OnClickListener() {
@@ -680,6 +681,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
         }
 
     }
+
     /**
      * 隐藏软键盘
      */
@@ -976,13 +978,13 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if(ll_face_container.getVisibility()==View.VISIBLE){
+        if (ll_face_container.getVisibility() == View.VISIBLE) {
             ll_face_container.setVisibility(View.GONE);
             iv_emoticons_normal.setVisibility(View.VISIBLE);
             iv_emoticons_checked.setVisibility(View.GONE);
-        }else{
+        } else {
             super.onBackPressed();
-//            onBack();
+            onBack();
         }
     }
 
@@ -1064,7 +1066,7 @@ public class  CircleDynamicDetailActivity extends BaseActivity {
                     .getComment_time());
             vh.craftsman_details_comment_name.setText(mlist_test.get(position)
                     .getComment_name() + ":");
-            Spannable spannable = SmileUtils.getSmiledText(mContext,mlist_test.get(
+            Spannable spannable = SmileUtils.getSmiledText(mContext, mlist_test.get(
                     position).getComment_total());
             vh.craftsman_details_comment_content.setText(spannable);
             return convertView;

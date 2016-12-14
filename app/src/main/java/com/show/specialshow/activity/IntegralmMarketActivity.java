@@ -11,7 +11,9 @@ import com.show.specialshow.URLs;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.SPUtils;
+import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
+import com.umeng.comm.core.beans.ShareContent;
 
 public class IntegralmMarketActivity extends BaseBusCenWebActivity {
     private static final int SET_TRADING_PASSWORD = 251;
@@ -61,10 +63,36 @@ public class IntegralmMarketActivity extends BaseBusCenWebActivity {
         });
     }
 
+    @JavascriptInterface
+    public void share() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                inviteFriends();
+            }
+        });
+    }
+
+
+    /**
+     * 邀请好友
+     */
+    private void inviteFriends() {
+        ShareContent shareItem = new ShareContent();
+        shareItem.mText = "特秀美妆:美不曾离开，让你的美由此开始";
+        shareItem.mTargetUrl = "http://m.teshow.com/index.php?g=User&m=Merchant&a=zhuce&uid=" + TXApplication.getUserMess().getUid();
+        shareItem.mTitle = "特秀美妆:美不曾离开，让你的美由此开始";
+//                ShareSDKManager.getInstance().getCurrentSDK().share((Activity) mContext, shareItem);
+        ShareServiceFactory.getShareService().share(this, shareItem);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-            if(resultCode==RESULT_OK&&requestCode==SET_TRADING_PASSWORD&& TXApplication.setTradingpassword){
-                content.reload();
-            }
+        if (resultCode == RESULT_OK && requestCode == SET_TRADING_PASSWORD && TXApplication.setTradingpassword) {
+            content.reload();
+        }
+        if (requestCode != SET_TRADING_PASSWORD) {
+            ShareServiceFactory.getShareService().onActivityResult(mContext, requestCode, resultCode, data);
+        }
     }
 }

@@ -231,27 +231,28 @@ public class CircleDynamicAdapter extends BaseAdapter {
         holders[type].comment_count_ll.setOnClickListener(listener);
         holders[type].portrait.setOnClickListener(listener);
         holders[type].card_ll.setOnClickListener(listener);
-//        if (null != item.getStatus_user()) {
-//            if (null != item.getStatus_user().getUser_id()) {
-//                if (!item.getStatus_user().getUser_id()
-//                        .equals(TXApplication.filename.getString("uid", ""))) {
-//                    holders[type].attention.setVisibility(View.VISIBLE);
-//                    if (item.getStatus_user().getAttention().equals("1")
-//                            || cache_attention.contains(item.getStatus_user()
-//                            .getUser_id())) {
-//                        holders[type].attention.setText("已关注");
-//                        holders[type].attention.setEnabled(false);
-//                        holders[type].attention.setSelected(true);
-//                    } else {
-//                        holders[type].attention.setText("+关注");
-//                        holders[type].attention.setEnabled(true);
-//                        holders[type].attention.setSelected(false);
-//                    }
-//                } else {
-//                    holders[type].attention.setVisibility(View.GONE);
-//                }
-//            }
-//        }
+        if (null != item.getStatus_user()) {
+            if (null != item.getStatus_user().getUser_id()) {
+                if (!item.getStatus_user().getUser_id()
+                        .equals(TXApplication.filename.getString("uid", ""))) {
+                    holders[type].attention.setVisibility(View.VISIBLE);
+                    if (item.getStatus_user().getAttention().equals("1")
+                            || cache_attention.contains(item.getStatus_user()
+                            .getUser_id())) {
+                        holders[type].attention.setText("已关注");
+                        holders[type].attention.setVisibility(View.GONE);
+                        holders[type].attention.setEnabled(false);
+                        holders[type].attention.setSelected(true);
+                    } else {
+                        holders[type].attention.setText("+关注");
+                        holders[type].attention.setEnabled(true);
+                        holders[type].attention.setSelected(false);
+                    }
+                } else {
+                    holders[type].attention.setVisibility(View.GONE);
+                }
+            }
+        }
         switch (type) {
             case JUST_TEXT:
                 break;
@@ -548,7 +549,7 @@ public class CircleDynamicAdapter extends BaseAdapter {
                 case R.id.dynamic_type_two_picture_url_tv:
                 case R.id.dynamic_type_other_picture_url_tv:
                     bundle.putString("status_url", mList.get(holder.getPosition()).getStatus_url());
-                    UIHelper.startActivity((Activity) mContext, ArticleWebActivity.class,bundle);
+                    UIHelper.startActivity((Activity) mContext, ArticleWebActivity.class, bundle);
                     break;
                 default:
                     break;

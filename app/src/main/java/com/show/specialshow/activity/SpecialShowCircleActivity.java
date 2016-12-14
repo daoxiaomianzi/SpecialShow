@@ -20,6 +20,7 @@ import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
+import com.show.specialshow.utils.OnTabActivityResultListener;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
@@ -27,7 +28,7 @@ import com.show.specialshow.view.ActionItem;
 import com.show.specialshow.view.TitlePopup;
 import com.umeng.comm.core.beans.ShareContent;
 
-public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabActivityResultListener,AMapLocationListener*/ {
+public class SpecialShowCircleActivity extends BaseActivity implements OnTabActivityResultListener/*,AMapLocationListener*/ {
 
     private TabHost tabHost;
     private LocalActivityManager localActivityManager;
@@ -154,6 +155,7 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
 //                ShareSDKManager.getInstance().getCurrentSDK().share((Activity) mContext, shareItem);
         ShareServiceFactory.getShareService().share(this, shareItem);
     }
+
 
 //    /**
 //     * 判断是否有未读消息
@@ -310,6 +312,11 @@ public class SpecialShowCircleActivity extends BaseActivity /*implements OnTabAc
                 .setIndicator(getString(resLabel),
                         getResources().getDrawable(resIcon))
                 .setContent(content);
+    }
+
+    @Override
+    public void onTabActivityResult(int requestCode, int resultCode, Intent data) {
+        ShareServiceFactory.getShareService().onActivityResult(mContext, requestCode, resultCode, data);
     }
 
 //	@Override
