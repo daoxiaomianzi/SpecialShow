@@ -37,6 +37,7 @@ import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.IsMatcher;
+import com.show.specialshow.utils.JpushUtils;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.beans.CommUser;
@@ -188,7 +189,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                 LoginActivity.this.showMapInfo(map);
                 SocializeUtils.safeCloseDialog(progressDialog);
 //				LoginActivity.this.finish();
-                QQWexinLogin(map,platform);
+                QQWexinLogin(map, platform);
                 if (listener != null) {
                     Log.i("login", "logged in");
                     CommUser user = LoginActivity.this.createNewUser(map, platform);
@@ -298,7 +299,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                 params.addBodyParameter("y", mLat + "");//纬度
                 params.addBodyParameter("current_city", currentCity);
             }
-            params.addBodyParameter("openid",getString(info,"openid"));
+            params.addBodyParameter("openid", getString(info, "openid"));
             params.addBodyParameter("province", getString(info, "province"));
             params.addBodyParameter("city", getString(info, "city"));
 
@@ -322,7 +323,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
             TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
                 @Override
                 public void onStart() {
-                    loadIng("登录中...",false);
+                    loadIng("登录中...", false);
                 }
 
                 @Override
@@ -333,7 +334,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                     }
                     if (1 == result.getSuccess()) {
                         UserMessage userInfo = UserMessage.parse(result.getData());
-                        loginHX(userInfo,true,getString(info,"openid"));
+                        loginHX(userInfo, true, getString(info, "openid"));
                     } else {
                         if (dialog != null) {
                             dialog.dismiss();
@@ -400,7 +401,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                     }
                     if (1 == result.getSuccess()) {
                         UserMessage info = UserMessage.parse(result.getData());
-                        loginHX(info,false,"");
+                        loginHX(info, false, "");
                     } else {
                         if (dialog != null) {
                             dialog.dismiss();
@@ -421,21 +422,21 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
      *
      * @param //view
      */
-    public void loginHX(final UserMessage info, final boolean isThreePath,String openId) {
+    public void loginHX(final UserMessage info, final boolean isThreePath, String openId) {
         if (!CommonUtils.isNetWorkConnected(this)) {
             Toast.makeText(this, R.string.network_isnot_available, Toast.LENGTH_SHORT).show();
             if (dialog != null) {
                 dialog.dismiss();
             }
-            if(!isThreePath){
+            if (!isThreePath) {
                 login_login.setEnabled(true);
             }
             return;
         }
-        if(!isThreePath){
-             String password= login_password.getText().toString().trim();
+        if (!isThreePath) {
+            String password = login_password.getText().toString().trim();
             currentPassword = MD5Utils.getMd5Str(MD5Utils.getMd5Str(password));
-        }else{
+        } else {
             currentPassword = MD5Utils.getMd5Str(openId);
         }
         final String phone = login_phonenumber.getText().toString().trim();
@@ -446,7 +447,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
             if (dialog != null) {
                 dialog.dismiss();
             }
-            if(!isThreePath){
+            if (!isThreePath) {
                 login_login.setEnabled(true);
             }
             return;
@@ -456,7 +457,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
             if (dialog != null) {
                 dialog.dismiss();
             }
-            if(!isThreePath){
+            if (!isThreePath) {
                 login_login.setEnabled(true);
             }
             return;
@@ -474,10 +475,13 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                         info.setPhone(phone);
                         info.setLogin(true);
                         TXApplication.loginSuccess(info);
+                        //调用JPush API设置Alias
+                        JpushUtils jpushUtils = new JpushUtils(mContext);
+                        jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.obtainMessage(JpushUtils.MSG_SET_ALIAS, info.getUid()));
                         if (dialog != null) {
                             dialog.dismiss();
                         }
-                        if(!isThreePath){
+                        if (!isThreePath) {
                             login_login.setEnabled(true);
                         }
                         UIHelper.ToastMessage(mContext, "登录成功");
@@ -498,7 +502,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                                     if (dialog != null) {
                                         dialog.dismiss();
                                     }
-                                    if(!isThreePath){
+                                    if (!isThreePath) {
                                         login_login.setEnabled(true);
                                     }
                                 }
@@ -521,7 +525,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
                         if (dialog != null) {
                             dialog.dismiss();
                         }
-                        if(!isThreePath){
+                        if (!isThreePath) {
                             login_login.setEnabled(true);
                         }
                     }
@@ -545,6 +549,7 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
      * 登录成功的操作
      */
     private void loginSuccess() {
+
         if (FROM_MY == from_login) {
             Bundle bundle = new Bundle();
             bundle.putInt("index", 0);

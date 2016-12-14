@@ -175,7 +175,9 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 ////			}
 //                break;
             case R.id.contest_confirm_tv:
-
+                if (null != dialog) {
+                    dialog.dismiss();
+                }
                 break;
             case R.id.contest_cancel_tv:
 
