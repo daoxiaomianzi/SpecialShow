@@ -61,6 +61,7 @@ import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.utils.UpdateManager;
 import com.umeng.comm.core.utils.CommonUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,6 +97,10 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     public boolean isConflict = false;
     // 账号被移除
     private boolean isCurrentAccountRemoved = false;
+    //极光相关
+    private String url;
+    private int jpushFlag;
+    private String content;
 
     /**
      * 检查当前用户是否被删除
@@ -277,8 +282,26 @@ public class MainActivity extends BaseActivity implements EMEventListener {
         }
     }
 
+    /**
+     * 接受推送内容弹框显示
+     */
+    private void jpushContent() {
+        jpushFlag = getIntent().getIntExtra("jpushFlag", 0);
+        url = getIntent().getStringExtra("url");
+        if (1 == jpushFlag) {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", url);
+            UIHelper.startActivity(mContext, JpushWebView.class, bundle);
+        }
+        content = getIntent().getStringExtra("content");
+        if (!StringUtils.isEmpty(content)) {
+            createAffirmDialog(content, DIALOG_SINGLE_STPE, "推送内容", true);
+        }
+    }
+
     @Override
     public void initData() {
+        jpushContent();
         isToUpdataApp();
         if (getIntent().getBooleanExtra("conflict", false)
                 && !isConflictDialogShow) {

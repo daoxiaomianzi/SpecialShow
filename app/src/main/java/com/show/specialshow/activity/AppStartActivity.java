@@ -32,10 +32,12 @@ import com.show.specialshow.utils.MyBitmapUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.MyScrollLayout;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class AppStartActivity extends BaseActivity implements OnViewChangeListener,AMapLocationListener{
+public class AppStartActivity extends BaseActivity implements OnViewChangeListener, AMapLocationListener {
     private MyScrollLayout mScrollLayout;//滑动器
     private int count;
     private int currentItem;
@@ -55,11 +57,14 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
     // 当前定位坐标(起点)
-    private double mLat=0.0d;//纬度
-    private double mLon=0.0d;//经度
+    private double mLat = 0.0d;//纬度
+    private double mLon = 0.0d;//经度
     //当前定位城市
     private String currentCity;
-
+    //极光相关
+    private static int jpushFlag;
+    private static String url;
+    private static String content;
 
     static class MyHandler extends Handler {
         WeakReference<AppStartActivity> mActivity;
@@ -86,9 +91,20 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
                         activity.setContentView(R.layout.activity_app_start);
                         activity.initStartView();
                     } else {
-                        activity.setHome(activity.clazz);
-                        UIHelper.startActivity(activity,activity.clazz,bundle);
-                        activity.finish();
+                        if (1 == jpushFlag) {
+                            bundle.putString("url", url);
+                            bundle.putInt("jpushFlag", jpushFlag);
+                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            activity.finish();
+                        } else if (!StringUtils.isEmpty(content)) {
+                            bundle.putString("content", content);
+                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            activity.finish();
+                        } else {
+                            activity.setHome(activity.clazz);
+                            UIHelper.startActivity(activity, activity.clazz, bundle);
+                            activity.finish();
+                        }
                     }
                     break;
             }
@@ -110,13 +126,16 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        jpushFlag = getIntent().getIntExtra("jpushFlag", 0);
+        url = getIntent().getStringExtra("url");
+        content = getIntent().getStringExtra("content");
         setContentView(R.layout.activity_start);
         MyBitmapUtils.showBitmap(this, R.id.guide_pages, R.drawable.img_guide1);
         mHandler.sendEmptyMessageDelayed(1, 2000);
         mGestureDetector = new GestureDetector(this,
                 new GestureDetector.SimpleOnGestureListener() {
 
-                    @SuppressWarnings({ "unchecked", "rawtypes" })
+                    @SuppressWarnings({"unchecked", "rawtypes"})
                     @Override
                     public boolean onFling(MotionEvent e1, MotionEvent e2,
                                            float velocityX, float velocityY) {
@@ -142,7 +161,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
         count = mScrollLayout.getChildCount();
         currentItem = 0;
         mScrollLayout.SetOnViewChangeListener(this);
-        bannerPointUtils=new BannerPointUtils(mContext,ll_point,pointviews);
+        bannerPointUtils = new BannerPointUtils(mContext, ll_point, pointviews);
         bannerPointUtils.initPoint(2);
         bannerPointUtils.draw_Point(0);
     }
@@ -155,10 +174,10 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
             switch (v.getId()) {
                 case R.id.start_iv:
                     setHome(clazz);
-                    UIHelper.startActivity(AppStartActivity.this,clazz
-                    ,bundle);
+                    UIHelper.startActivity(AppStartActivity.this, clazz
+                            , bundle);
                     SharedPreferences.Editor editor = TXApplication.appConfig.edit();
-                    editor.putBoolean("isFirst",false);
+                    editor.putBoolean("isFirst", false);
                     editor.commit();
                     finish();
                     break;
@@ -209,7 +228,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
 
     @Override
     public void initData() {
-        if(TXApplication.login){
+        if (TXApplication.login) {
             InitLocation();
         }
 
@@ -238,18 +257,18 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
     /**
      * 更新用户当前所在坐标
      */
-    private void updateXy(){
+    private void updateXy() {
         RequestParams params = TXApplication.getParams();
         String url = URLs.USER_UPDATEXY;
-        if(0.0d==mLat||0.0d==mLon){
+        if (0.0d == mLat || 0.0d == mLon) {
             InitLocation();
             return;
-        }else{
-            params.addBodyParameter("x",mLon+"");//经度
-            params.addBodyParameter("y",mLat+"");//纬度
-            params.addBodyParameter("current_city",currentCity);
+        } else {
+            params.addBodyParameter("x", mLon + "");//经度
+            params.addBodyParameter("y", mLat + "");//纬度
+            params.addBodyParameter("current_city", currentCity);
         }
-        params.addBodyParameter("uid",TXApplication.getUserMess().getUid());
+        params.addBodyParameter("uid", TXApplication.getUserMess().getUid());
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
             @Override
@@ -263,8 +282,10 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
             }
         });
     }
+
     /**
      * 初始化地图定位
+     *
      * @param
      */
     private void InitLocation() {
@@ -288,22 +309,25 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
     }
+
     /**
      * 高德定位回调
+     *
      * @param aMapLocation
      */
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        if(null==aMapLocation){
-            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+        if (null == aMapLocation) {
+            UIHelper.ToastMessage(mContext, "获取当前位置失败");
             return;
         }
-        mLat=aMapLocation.getLatitude();
-        mLon=aMapLocation.getLongitude();
-        currentCity = aMapLocation.getCity().substring(0,aMapLocation.getCity().length()-1);
+        mLat = aMapLocation.getLatitude();
+        mLon = aMapLocation.getLongitude();
+        currentCity = aMapLocation.getCity().substring(0, aMapLocation.getCity().length() - 1);
         locationClient.stopLocation();
         updateXy();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
