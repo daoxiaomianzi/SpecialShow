@@ -1,6 +1,5 @@
 package com.show.specialshow.receiver;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
@@ -11,11 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.show.specialshow.TXApplication;
 import com.show.specialshow.activity.AppStartActivity;
 import com.show.specialshow.activity.JpushWebView;
 import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.activity.MyBookingActivity;
-import com.show.specialshow.utils.UIHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,7 +64,7 @@ public class JpushReceiver extends BroadcastReceiver {
                 int status_code = json.getInt("status_code");
                 switch (status_code) {
                     case 442:
-                        if (isForeground(context)) {
+                        if (isForeground(context) && TXApplication.login) {
                             Intent intent_WebView = new Intent(context, MyBookingActivity.class);
                             //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
                             intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

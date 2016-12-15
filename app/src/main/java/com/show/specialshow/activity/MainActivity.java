@@ -290,12 +290,17 @@ public class MainActivity extends BaseActivity implements EMEventListener {
     private void jpushContent() {
         jpushFlag = getIntent().getIntExtra("jpushFlag", 0);
         url = getIntent().getStringExtra("url");
+        Bundle bundle = new Bundle();
         if (1 == jpushFlag) {
-            Bundle bundle = new Bundle();
             bundle.putString("url", url);
             UIHelper.startActivity(mContext, JpushWebView.class, bundle);
         } else if (2 == jpushFlag) {
-            UIHelper.startActivity(mContext, MyBookingActivity.class);
+            if (TXApplication.login) {
+                UIHelper.startActivity(mContext, MyBookingActivity.class);
+            } else {
+                bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+            }
         }
         content = getIntent().getStringExtra("content");
         if (!StringUtils.isEmpty(content)) {
