@@ -11,6 +11,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.DataCleanManager;
+import com.show.specialshow.utils.JpushUtils;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.utils.CommonUtils;
@@ -102,6 +103,12 @@ public class SetActivity extends BaseActivity {
         }
         TXApplication.getInstance().logout(true, null);
         TXApplication.quitLogin();
+        if (!(boolean) SPUtils.get(mContext, "setAlias", false)) {
+            //调用JPush API设置Alias
+            JpushUtils jpushUtils = new JpushUtils(mContext);
+            jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
+                    obtainMessage(JpushUtils.MSG_SET_ALIAS, ""));
+        }
         startActivity();
     }
 

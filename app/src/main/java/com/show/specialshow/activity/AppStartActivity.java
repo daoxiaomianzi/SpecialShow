@@ -70,7 +70,7 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
         WeakReference<AppStartActivity> mActivity;
 
         MyHandler(AppStartActivity activity) {
-            mActivity = new WeakReference<AppStartActivity>(activity);
+            mActivity = new WeakReference<>(activity);
         }
 
         @SuppressWarnings("unchecked")
@@ -93,6 +93,10 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
                     } else {
                         if (1 == jpushFlag) {
                             bundle.putString("url", url);
+                            bundle.putInt("jpushFlag", jpushFlag);
+                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            activity.finish();
+                        } else if (2 == jpushFlag) {
                             bundle.putInt("jpushFlag", jpushFlag);
                             UIHelper.startActivity(activity, MainActivity.class, bundle);
                             activity.finish();

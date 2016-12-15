@@ -175,8 +175,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
 ////			}
 //                break;
             case R.id.contest_confirm_tv:
-                if (null != dialog) {
-                    dialog.dismiss();
+                if (null != affirmDialog) {
+                    affirmDialog.dismiss();
                 }
                 break;
             case R.id.contest_cancel_tv:
@@ -294,6 +294,8 @@ public class MainActivity extends BaseActivity implements EMEventListener {
             Bundle bundle = new Bundle();
             bundle.putString("url", url);
             UIHelper.startActivity(mContext, JpushWebView.class, bundle);
+        } else if (2 == jpushFlag) {
+            UIHelper.startActivity(mContext, MyBookingActivity.class);
         }
         content = getIntent().getStringExtra("content");
         if (!StringUtils.isEmpty(content)) {

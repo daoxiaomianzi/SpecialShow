@@ -34,7 +34,9 @@ import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.IsMatcher;
+import com.show.specialshow.utils.JpushUtils;
 import com.show.specialshow.utils.MD5Utils;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.TimeCount;
 import com.show.specialshow.utils.UIHelper;
 
@@ -43,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegisterActivity extends BaseActivity implements AMapLocationListener{
+public class RegisterActivity extends BaseActivity implements AMapLocationListener {
     //相关控件
     private EditText register_phonenumber;//输入手机号
     private EditText register_code;//输入验证码
@@ -59,8 +61,8 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
     // 当前定位坐标(起点)
-    private double mLat=0.0d;//纬度
-    private double mLon=0.0d;//经度
+    private double mLat = 0.0d;//纬度
+    private double mLon = 0.0d;//经度
     private String currentCity;
 
 
@@ -127,14 +129,14 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
         params.addBodyParameter("phone", phone);
         params.addBodyParameter("code", code);
         params.addBodyParameter("password", MD5Utils.getMd5Str(password));
-        if(0.0d==mLat||0.0d==mLon){
+        if (0.0d == mLat || 0.0d == mLon) {
             InitLocation();
             register_register.setEnabled(true);
             return;
-        }else{
-            params.addBodyParameter("x",mLon+"");//经度
-            params.addBodyParameter("y",mLat+"");//纬度
-            params.addBodyParameter("current_city",currentCity);
+        } else {
+            params.addBodyParameter("x", mLon + "");//经度
+            params.addBodyParameter("y", mLat + "");//纬度
+            params.addBodyParameter("current_city", currentCity);
         }
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
@@ -200,6 +202,12 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
                         info.setPhone(phone);
                         info.setLogin(true);
                         TXApplication.loginSuccess(info);
+                        if (!(boolean) SPUtils.get(mContext, "setAlias", false)) {
+                            //调用JPush API设置Alias
+                            JpushUtils jpushUtils = new JpushUtils(mContext);
+                            jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
+                                    obtainMessage(JpushUtils.MSG_SET_ALIAS, info.getUid()));
+                        }
                         register_register.setEnabled(true);
                         UIHelper.ToastMessage(mContext, "注册成功");
                         loginSuccess();
@@ -261,8 +269,8 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
             UIHelper.startActivity(mContext, MainActivity.class, bundle);
             AppManager.getAppManager().finishActivity(3);
         } else if (LoginActivity.FROM_OTHER == from_login) {
-            bundle.putInt("from_mode",0);
-            UIHelper.startActivity(mContext,PerfectDataActivity.class,bundle);
+            bundle.putInt("from_mode", 0);
+            UIHelper.startActivity(mContext, PerfectDataActivity.class, bundle);
 //            AppManager.getAppManager().finishActivity(2);
         }
     }
@@ -394,8 +402,10 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
             register_register.setEnabled(true);
         }
     }
+
     /**
      * 初始化地图定位
+     *
      * @param
      */
     private void InitLocation() {
@@ -419,22 +429,25 @@ public class RegisterActivity extends BaseActivity implements AMapLocationListen
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
     }
+
     /**
      * 高德定位回调
+     *
      * @param aMapLocation
      */
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
-        if(null==aMapLocation){
-            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+        if (null == aMapLocation) {
+            UIHelper.ToastMessage(mContext, "获取当前位置失败");
             return;
         }
-        mLat=aMapLocation.getLatitude();
-        mLon=aMapLocation.getLongitude();
-        currentCity = aMapLocation.getCity().substring(0,aMapLocation.getCity().length()-1);
+        mLat = aMapLocation.getLatitude();
+        mLon = aMapLocation.getLongitude();
+        currentCity = aMapLocation.getCity().substring(0, aMapLocation.getCity().length() - 1);
 
         locationClient.stopLocation();
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -690,6 +690,9 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                     if (StringUtils.isEmpty(bannerMess.getUrl())) {
                         return;
                     }
+                    if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                        return;
+                    }
                     Bundle bundle = new Bundle();
                     bundle.putString("banner_path", bannerMess.getUrl());
                     UIHelper.startActivity(getActivity(), BannerWebActivity.class, bundle);

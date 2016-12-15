@@ -1,5 +1,6 @@
 package com.show.specialshow.receiver;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
@@ -13,6 +14,8 @@ import android.util.Log;
 import com.show.specialshow.activity.AppStartActivity;
 import com.show.specialshow.activity.JpushWebView;
 import com.show.specialshow.activity.MainActivity;
+import com.show.specialshow.activity.MyBookingActivity;
+import com.show.specialshow.utils.UIHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,95 +55,87 @@ public class JpushReceiver extends BroadcastReceiver {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
-
-            //打开自定义的Activity
-//        	Intent i = new Intent(context, BannerWebActivity.class);
-//        	i.putExtras(bundle);
-//        	//i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//        	context.startActivity(i);
-            if (isForeground(context)) {
-                String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);//获取附加字段,是一个json数组
-                String content = bundle.getString(JPushInterface.EXTRA_ALERT);
-
-                try {
-                    JSONObject json = new JSONObject(extras);
-                    //进行json.getString("Article")操作时,要保证这里的Article与服务器上的Article一模一样,不然回报空指针异常
-                    String articleUrl = json.getString("url");//获取附加字段Article,对应的值为articleUrl
-                    Log.d("articleUrl:", articleUrl);
-//                    if(StringUtils.isEmpty(articleUrl)){
-//                    	UIHelper.showConfirmDialog(context, content, null, null, false);
-//                    }else{
-                    /**
-                     * 点击通知栏通知, 打开网页地址
-                     * 把articleUrl通过startActivity发送给WebViewActivity
-                     */
-                    Intent intent_WebView = new Intent(context, JpushWebView.class);
-                    //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
-                    intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Bundle bundle_WebView = new Bundle();
-                    bundle_WebView.putString("url", articleUrl);//文章url
-                    intent_WebView.putExtras(bundle_WebView);
-                    context.startActivity(intent_WebView);//打开WebViewActivity
-//                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Intent intent_WebView = new Intent(context, MainActivity.class);
-                    //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
-                    intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    Bundle bundle_WebView = new Bundle();
-                    bundle_WebView.putString("content", content);//文章url
-                    intent_WebView.putExtras(bundle_WebView);
-                    context.startActivity(intent_WebView);//打开WebViewActivity
+//            if (isForeground(context)) {
+            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);//获取附加字段,是一个json数组
+            String content = bundle.getString(JPushInterface.EXTRA_ALERT);
+            try {
+                JSONObject json = new JSONObject(extras);
+                //进行json.getString("Article")操作时,要保证这里的Article与服务器上的Article一模一样,不然回报空指针异常
+                String articleUrl = json.getString("url");//获取附加字段Article,对应的值为articleUrl
+                int status_code = json.getInt("status_code");
+                switch (status_code) {
+                    case 442:
+                        if (isForeground(context)) {
+                            Intent intent_WebView = new Intent(context, MyBookingActivity.class);
+                            //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent_WebView);//打开WebViewActivity
+                        } else {
+                            Intent intent_WebView = new Intent(context, AppStartActivity.class);
+                            //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Bundle bundle_WebView = new Bundle();
+                            bundle_WebView.putInt("jpushFlag", 2);
+                            intent_WebView.putExtras(bundle_WebView);
+                            context.startActivity(intent_WebView);//打开WebViewActivity
+                        }
+                        break;
+                    case 441:
+                    case 443:
+                    default:
+                        /**
+                         * 点击通知栏通知, 打开网页地址
+                         * 把articleUrl通过startActivity发送给WebViewActivity
+                         */
+                        if (isForeground(context)) {
+                            Intent intent_WebView = new Intent(context, JpushWebView.class);
+                            //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Bundle bundle_WebView = new Bundle();
+                            bundle_WebView.putString("url", articleUrl);//url
+                            intent_WebView.putExtras(bundle_WebView);
+                            context.startActivity(intent_WebView);//打开WebViewActivity
+                        } else {
+                            Intent intent_WebView = new Intent(context, AppStartActivity.class);
+                            //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            Bundle bundle_WebView = new Bundle();
+                            bundle_WebView.putString("url", articleUrl);//url
+                            bundle_WebView.putInt("jpushFlag", 1);
+                            intent_WebView.putExtras(bundle_WebView);
+                            context.startActivity(intent_WebView);//打开WebViewActivity
+                        }
+                        break;
                 }
-            } else {
-//            	UIHelper.ToastMessage(context, "2");
-                String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);//获取附加字段,是一个json数组
-                String content = bundle.getString(JPushInterface.EXTRA_ALERT);
 
-                try {
-                    JSONObject json = new JSONObject(extras);
-                    //进行json.getString("Article")操作时,要保证这里的Article与服务器上的Article一模一样,不然回报空指针异常
-                    String articleUrl = json.getString("url");//获取附加字段Article,对应的值为articleUrl
-                    Log.d("articleUrl:", articleUrl);
-//        if(StringUtils.isEmpty(articleUrl)){
-//        	UIHelper.showConfirmDialog(context, content, null, null, false);
-//        }else{
-                    /**
-                     * 点击通知栏通知, 打开网页地址
-                     * 把articleUrl通过startActivity发送给WebViewActivity
-                     */
-                    Intent intent_WebView = new Intent(context, AppStartActivity.class);
-                    //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
-                    intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    Bundle bundle_WebView = new Bundle();
-                    bundle_WebView.putString("url", articleUrl);//文章url
-                    bundle_WebView.putInt("jpushFlag", 1);//文章url
-                    intent_WebView.putExtras(bundle_WebView);
-                    context.startActivity(intent_WebView);//打开WebViewActivity
-//        }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Intent intent_WebView = new Intent(context, AppStartActivity.class);
-                    //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
-                    intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    Bundle bundle_WebView = new Bundle();
-                    bundle_WebView.putString("content", content);//文章url
-                    intent_WebView.putExtras(bundle_WebView);
-                    context.startActivity(intent_WebView);//打开WebViewActivity
+            } catch (JSONException e) {
+                e.printStackTrace();
+                if (isForeground(context)) {
+                    startApp(context, MainActivity.class, content);
+                } else {
+                    startApp(context, AppStartActivity.class, content);
                 }
             }
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
-//        	UIHelper.ToastMessage(context, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
         } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
             boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
             Log.w(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
         } else {
             Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
+    }
+
+    private void startApp(Context context, Class clazz, String content) {
+        Intent intent_WebView = new Intent(context, clazz);
+        //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+        intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Bundle bundle_WebView = new Bundle();
+        bundle_WebView.putString("content", content);//内容
+        intent_WebView.putExtras(bundle_WebView);
+        context.startActivity(intent_WebView);//打开WebViewActivity
     }
 
     // 打印所有的 intent extra 数据
