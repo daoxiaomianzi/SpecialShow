@@ -102,13 +102,12 @@ public class SetActivity extends BaseActivity {
             TXApplication.getInstance().umengLogout();
         }
         TXApplication.getInstance().logout(true, null);
+        //调用JPush API设置Alias
+        JpushUtils jpushUtils = new JpushUtils(mContext);
+        jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
+                obtainMessage(JpushUtils.MSG_SET_ALIAS, ""));
         TXApplication.quitLogin();
-        if (!(boolean) SPUtils.get(mContext, "setAlias", false)) {
-            //调用JPush API设置Alias
-            JpushUtils jpushUtils = new JpushUtils(mContext);
-            jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
-                    obtainMessage(JpushUtils.MSG_SET_ALIAS, ""));
-        }
+
         startActivity();
     }
 

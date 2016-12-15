@@ -3,8 +3,6 @@ package com.show.specialshow.utils;
 import android.content.Context;
 import android.os.Handler;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
@@ -39,11 +37,6 @@ public class JpushUtils {
         public void gotResult(int code, String alias, Set<String> tags) {
             switch (code) {
                 case 0:
-                    if (!StringUtils.isEmpty(alias)) {
-                        SPUtils.put(context, "setAlias", true);
-                    } else {
-                        SPUtils.put(context, "setAlias", false);
-                    }
                     break;
                 case 6002:
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);

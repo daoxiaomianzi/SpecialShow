@@ -257,12 +257,10 @@ public class GetbackPassActivity extends BaseActivity {
                         info.setPhone(phone);
                         info.setLogin(true);
                         TXApplication.loginSuccess(info);
-                        if (!(boolean) SPUtils.get(mContext, "setAlias", false)) {
-                            //调用JPush API设置Alias
-                            JpushUtils jpushUtils = new JpushUtils(mContext);
-                            jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
-                                    obtainMessage(JpushUtils.MSG_SET_ALIAS, info.getUid()));
-                        }
+                        //调用JPush API设置Alias
+                        JpushUtils jpushUtils = new JpushUtils(mContext);
+                        jpushUtils.mHandler.sendMessage(jpushUtils.mHandler.
+                                obtainMessage(JpushUtils.MSG_SET_ALIAS, info.getUid()));
                         getback_pass_finish.setEnabled(true);
                         UIHelper.ToastMessage(mContext, "找回密码成功");
                         loginSuccess();
