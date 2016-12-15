@@ -30,12 +30,14 @@ import java.util.List;
 public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
     private List<RedCoupon> mlist_coupon;
     private Context mContext;
+    private int isSelect;
     OnItemViewClickListener listener;
 
-    public RedCouponSwipeAdapter(List<RedCoupon> mlist_coupon, Context mContext) {
+    public RedCouponSwipeAdapter(List<RedCoupon> mlist_coupon, Context mContext, int isSelect) {
         super();
         this.mlist_coupon = mlist_coupon;
         this.mContext = mContext;
+        this.isSelect = isSelect;
     }
 
     @Override
@@ -135,14 +137,14 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
         holder.red_coupon_buy_btn = (TextView) convertView
                 .findViewById(R.id.red_coupon_buy_btn);
         holder.red_coupon_all = (LinearLayout) convertView.findViewById(R.id.red_coupon_all);
-        listener = new OnItemViewClickListener(holder);
+//        listener = new OnItemViewClickListener(holder);
 //        holder.red_coupon_all.setOnClickListener(listener);
         convertView.findViewById(R.id.trash).setOnClickListener(
                 new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        deleteCoupon(deletePosition, swipeLayout);
+//                        deleteCoupon(deletePosition, swipeLayout);
                     }
                 });
         bindData(holder);
@@ -152,7 +154,9 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
         RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
         holder.red_coupon_buy_btn.setText("立即\n使用");
         listener = new OnItemViewClickListener(holder);
-        holder.red_coupon_buy_btn.setOnClickListener(listener);
+        if (0 == isSelect) {
+            holder.red_coupon_buy_btn.setOnClickListener(listener);
+        }
         holder.red_coupon_type_item.setText("优惠劵");
         holder.red_coupon_value_tv.setText("" + coupon_item.getNum()
                 + "元");
@@ -228,7 +232,7 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
             switch (v.getId()) {
                 case R.id.red_coupon_buy_btn:
                     RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
-                    if (coupon_item.getIs_use() == 0
+                    if (0 == isSelect && coupon_item.getIs_use() == 0
                             && coupon_item.getEnddate() * 1000 > System
                             .currentTimeMillis()) {
                         Intent intent = new Intent(mContext, MainActivity.class);
