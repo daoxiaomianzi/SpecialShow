@@ -1,5 +1,6 @@
 package com.show.specialshow.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -92,17 +93,26 @@ public class AppStartActivity extends BaseActivity implements OnViewChangeListen
                         activity.initStartView();
                     } else {
                         if (1 == jpushFlag) {
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             bundle.putString("url", url);
                             bundle.putInt("jpushFlag", jpushFlag);
-                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            intent.putExtras(bundle);
+                            activity.startActivity(intent);
                             activity.finish();
                         } else if (2 == jpushFlag) {
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             bundle.putInt("jpushFlag", jpushFlag);
-                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            intent.putExtras(bundle);
+                            activity.startActivity(intent);
                             activity.finish();
                         } else if (!StringUtils.isEmpty(content)) {
+                            Intent intent = new Intent(activity, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             bundle.putString("content", content);
-                            UIHelper.startActivity(activity, MainActivity.class, bundle);
+                            intent.putExtras(bundle);
+                            activity.startActivity(intent);
                             activity.finish();
                         } else {
                             activity.setHome(activity.clazz);

@@ -13,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -31,10 +33,14 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.BannerWebActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
+import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.activity.StoresDetailsActivity;
+import com.show.specialshow.adapter.GridViewAdapter;
 import com.show.specialshow.adapter.ShowLaneAdapter;
+import com.show.specialshow.adapter.ViewPagerAdapter;
 import com.show.specialshow.contstant.ConstantValue;
 import com.show.specialshow.model.BannerMess;
+import com.show.specialshow.model.CenterButtonMess;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.ShopLaneList;
 import com.show.specialshow.model.ShopListMess;
@@ -85,10 +91,31 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     private int currentItem = 0;
     private ScheduledExecutorService scheduledExecutorService;
     private BannerPointUtils bannerPointUtils;//banner小点工具类
+    private BannerPointUtils centerPoint;//中间小点
     private ArrayList<ImageView> images = new ArrayList<>();
     private MyPagerAdapter banner_adapter;
     private ArrayList<ImageView> pointviews = new ArrayList<>();
+    //横向按钮相关
+    private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐"};
+    private View center_button;
+    private ViewPager mPager;
+    private List<View> mPagerList;
+    private List<CenterButtonMess> mDatas;
+    private LinearLayout mLlDot;
+    private ArrayList<ImageView> pointview = new ArrayList<>();
 
+    /**
+     * 总的页数
+     */
+    private int pageCount;
+    /**
+     * 每一页显示的个数
+     */
+    private int pageSize = 5;
+    /**
+     * 当前显示的是第几页
+     */
+    private int curIndex = 0;
 
     //banner数据
     private List<BannerMess> bannerList;
@@ -181,8 +208,50 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             dynamic_banner_describe_tv = (TextView) header_banner
                     .findViewById(R.id.dynamic_banner_describe_tv);
             search_result_lv.addHeaderView(header_banner);
+            initCenterView();
         }
         InitLocation();
+    }
+
+    /**
+     * 初始化数据源
+     */
+    private void initCenterView() {
+        mDatas = new ArrayList<>();
+        for (int i = 0; i < titles.length; i++) {
+            //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
+            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", mContext.getPackageName());
+            mDatas.add(new CenterButtonMess(titles[i], imageId));
+        }
+        center_button = View.inflate(mContext, R.layout.view_switch_class, null);
+        mPager = (ViewPager) center_button.findViewById(R.id.viewpager);
+        mLlDot = (LinearLayout) center_button.findViewById(R.id.ll_dot);
+        //总的页数=总数/每页数量，并取整
+        pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
+        mPagerList = new ArrayList<>();
+        for (int i = 0; i < pageCount; i++) {
+            //每个页面都是inflate出一个新实例
+            GridView gridView = (GridView) View.inflate(mContext, R.layout.gridview, null);
+            gridView.setAdapter(new GridViewAdapter(mContext, mDatas, i, pageSize));
+            mPagerList.add(gridView);
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int pos = position + curIndex * pageSize;
+                    Toast.makeText(mContext, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        //设置适配器
+        mPager.setAdapter(new ViewPagerAdapter(mPagerList));
+        centerPoint = new BannerPointUtils(mContext, mLlDot, pointview
+        );
+        if (0 != pageCount) {
+            centerPoint.initPoint(pageCount);
+            centerPoint.draw_Point(0);
+        }
+        search_result_lv.addHeaderView(center_button);
     }
 
     @Override
@@ -206,6 +275,23 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
                 }
             });
+            mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageSelected(int position) {
+                    curIndex = position;
+                    centerPoint.draw_Point(position % mPagerList.size());
+                }
+
+                @Override
+                public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int arg0) {
+
+                }
+            });
         }
         search_result_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -215,14 +301,13 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                 }
                 Bundle bundle = new Bundle();
                 if (StringUtils.isEmpty(key)) {
-                    bundle.putString("shop_id", mList.get(position - 2).getShop_id());
+                    bundle.putString("shop_id", mList.get(position - 3).getShop_id());
                 } else {
                     bundle.putString("shop_id", mList.get(position - 1).getShop_id());
                 }
                 UIHelper.startActivity((Activity) mContext, StoresDetailsActivity.class, bundle);
             }
         });
-
 
 //        show_lang_search_et.addTextChangedListener(new TextWatcher() {
 //            @Override

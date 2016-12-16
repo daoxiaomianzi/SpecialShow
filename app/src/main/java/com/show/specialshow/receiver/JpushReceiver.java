@@ -9,11 +9,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.activity.AppStartActivity;
 import com.show.specialshow.activity.JpushWebView;
-import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.activity.MyBookingActivity;
 
 import org.json.JSONException;
@@ -67,7 +75,7 @@ public class JpushReceiver extends BroadcastReceiver {
                         if (isForeground(context) && TXApplication.login) {
                             Intent intent_WebView = new Intent(context, MyBookingActivity.class);
                             //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
-                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             context.startActivity(intent_WebView);//打开WebViewActivity
                         } else {
                             Intent intent_WebView = new Intent(context, AppStartActivity.class);
@@ -110,7 +118,7 @@ public class JpushReceiver extends BroadcastReceiver {
             } catch (JSONException e) {
                 e.printStackTrace();
                 if (isForeground(context)) {
-                    startApp(context, MainActivity.class, content);
+                    showUpdateSuccessDialog(context, content);
                 } else {
                     startApp(context, AppStartActivity.class, content);
                 }
@@ -201,5 +209,46 @@ public class JpushReceiver extends BroadcastReceiver {
         return false;
     }
 
+    private void showUpdateSuccessDialog(Context context, String content) {
+        final WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+
+        WindowManager.LayoutParams para = new WindowManager.LayoutParams();
+        para.height = -2;//WRAP_CONTENT
+        para.width = -2;//WRAP_CONTENT
+        para.format = 1;
+
+        para.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        para.gravity = Gravity.CENTER;
+
+        para.type = WindowManager.LayoutParams.TYPE_TOAST;
+        final View contentView = LayoutInflater.from(context).inflate(R.layout.view_contest_dialog, null);
+        View content_ll = contentView.findViewById(R.id.content_ll);
+        TextView contest_cancel_tv = (TextView) contentView
+                .findViewById(R.id.contest_cancel_tv);
+        TextView confirm_dialog_tips = (TextView) contentView.findViewById(R.id.confirm_dialog_tips);
+        ImageView split_iv_vertical = (ImageView) contentView
+                .findViewById(R.id.split_iv_vertical);
+        TextView contest_confirm_tv = (TextView) contentView
+                .findViewById(R.id.contest_confirm_tv);
+
+        TextView confirm_dialog_content_tv = (TextView) contentView
+                .findViewById(R.id.confirm_dialog_content_tv);
+        contest_cancel_tv.setVisibility(View.GONE);
+        split_iv_vertical.setVisibility(View.GONE);
+        confirm_dialog_tips.setText("推送内容");
+        confirm_dialog_content_tv.setText(content);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                (int) (TXApplication.WINDOW_WIDTH * 0.7),
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        content_ll.setLayoutParams(params);
+        confirm_dialog_content_tv.setLayoutParams(params);
+        contest_confirm_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wm.removeView(contentView);
+            }
+        });
+        wm.addView(contentView, para);
+    }
 
 }

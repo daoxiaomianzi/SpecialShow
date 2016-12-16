@@ -32,10 +32,10 @@ public class BannerPointUtils {
         }
         for (int i = 0; i < size; i++) {
             imageView = new ImageView(mContext);
-            imageView.setBackgroundResource(R.drawable.point_normal);
+            imageView.setBackgroundResource(R.drawable.dot_normal);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
+                    new ViewGroup.LayoutParams(DensityUtil.dip2px(mContext,6),
+                            DensityUtil.dip2px(mContext,6)));
             layoutParams.leftMargin = 10;
             layoutParams.rightMargin = 10;
             ll_point.addView(imageView, layoutParams);
@@ -45,10 +45,10 @@ public class BannerPointUtils {
 
     public void draw_Point(int index) {
         for (int i = 0; i < pointviews.size(); i++) {
-            pointviews.get(i).setImageResource(R.drawable.point_normal);
+            pointviews.get(i).setImageResource(R.drawable.dot_normal);
         }
         if (pointviews.size() > index) {
-            pointviews.get(index).setImageResource(R.drawable.point_select);
+            pointviews.get(index).setImageResource(R.drawable.dot_selected);
         }
     }
 }
