@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +29,6 @@ import com.show.specialshow.URLs;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
 import com.show.specialshow.activity.CraftsmandetailsActivity;
 import com.show.specialshow.activity.ShowerDetailsActivity;
-import com.show.specialshow.adapter.ConstellationAdapter;
 import com.show.specialshow.adapter.CraftsmanAdapter;
 import com.show.specialshow.adapter.GirdDropDownAdapter;
 import com.show.specialshow.adapter.ListDropDownAdapter;
@@ -141,6 +139,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                 }
                 MessageResult result = MessageResult.parse(responseInfo.result);
                 if (null == result) {
+                    mDropDownMenu.setVisibility(View.GONE);
                     onError(getResources().getString(
                             R.string.net_work_error));
                     return;
@@ -158,6 +157,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                     orderingList = showVisitorList.getOrdering();
                     if (null != filterList && null != stafftypeList
                             && orderingList != null && isFirst) {
+                        ll_craftsman_content.removeView(fl_craftsman_content);
                         dropDownView();
                         isFirst = false;
                     }
@@ -205,6 +205,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                     changeListView(size);
                 } else {
                     changeListView(0);
+                    mDropDownMenu.setVisibility(View.GONE);
                     UIHelper.ToastMessage(mContext, result.getMessage());
                 }
             }
@@ -214,6 +215,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
                 if (null != dialog) {
                     dialog.dismiss();
                 }
+                mDropDownMenu.setVisibility(View.GONE);
                 onError(getResources().getString(R.string.net_work_error));
             }
         });
@@ -225,7 +227,6 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
         craftsman_nodata_tv = (TextView) findViewById(R.id.craftsman_nodata_tv);
         fl_craftsman_content = (FrameLayout) findViewById(R.id.fl_craftsman_content);
         ll_craftsman_content = (LinearLayout) findViewById(R.id.ll_craftsman_content);
-        ll_craftsman_content.removeView(fl_craftsman_content);
         adapter = new CraftsmanAdapter(mList, mContext);
         InitLocation();
     }
