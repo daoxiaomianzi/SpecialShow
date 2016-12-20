@@ -17,7 +17,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -33,7 +32,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.BannerWebActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
-import com.show.specialshow.activity.MainActivity;
+import com.show.specialshow.activity.SearchResultActivity;
 import com.show.specialshow.activity.StoresDetailsActivity;
 import com.show.specialshow.adapter.GridViewAdapter;
 import com.show.specialshow.adapter.ShowLaneAdapter;
@@ -96,7 +95,6 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     private MyPagerAdapter banner_adapter;
     private ArrayList<ImageView> pointviews = new ArrayList<>();
     //横向按钮相关
-    private String[] titles = {"美食", "电影", "酒店住宿", "休闲娱乐", "外卖", "自助餐"};
     private View center_button;
     private ViewPager mPager;
     private List<View> mPagerList;
@@ -119,13 +117,16 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     //banner数据
     private List<BannerMess> bannerList;
+    //类型
+    private int tag_id;
 
 
-    public static ShowLaneFragment newInstance(String key) {
+    public static ShowLaneFragment newInstance(String key, int tag_id) {
         final ShowLaneFragment f = new ShowLaneFragment();
 
         final Bundle args = new Bundle();
         args.putString("key", key);
+        args.putInt("tag_id", tag_id);
         f.setArguments(args);
 
         return f;
@@ -135,7 +136,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         key = getArguments() != null ? getArguments().getString("key") : null;
-
+        tag_id = getArguments() != null ? getArguments().getInt("tag_id", 0) : 0;
     }
 
     @Override
@@ -199,7 +200,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     public void initView() {
-        if (StringUtils.isEmpty(key)) {
+        if (StringUtils.isEmpty(key) && 0 == tag_id) {
             header_banner = View.inflate(mContext,
                     R.layout.view_dynamic_banner_page, null);
             dynamic_banner = (ViewPager) header_banner
@@ -208,7 +209,9 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             dynamic_banner_describe_tv = (TextView) header_banner
                     .findViewById(R.id.dynamic_banner_describe_tv);
             search_result_lv.addHeaderView(header_banner);
-            initCenterView();
+            center_button = View.inflate(mContext, R.layout.view_switch_class, null);
+            mPager = (ViewPager) center_button.findViewById(R.id.viewpager);
+            mLlDot = (LinearLayout) center_button.findViewById(R.id.ll_dot);
         }
         InitLocation();
     }
@@ -217,15 +220,6 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
      * 初始化数据源
      */
     private void initCenterView() {
-        mDatas = new ArrayList<>();
-        for (int i = 0; i < titles.length; i++) {
-            //动态获取资源ID，第一个参数是资源名，第二个参数是资源类型例如drawable，string等，第三个参数包名
-            int imageId = getResources().getIdentifier("ic_category_" + i, "drawable", mContext.getPackageName());
-            mDatas.add(new CenterButtonMess(titles[i], imageId));
-        }
-        center_button = View.inflate(mContext, R.layout.view_switch_class, null);
-        mPager = (ViewPager) center_button.findViewById(R.id.viewpager);
-        mLlDot = (LinearLayout) center_button.findViewById(R.id.ll_dot);
         //总的页数=总数/每页数量，并取整
         pageCount = (int) Math.ceil(mDatas.size() * 1.0 / pageSize);
         mPagerList = new ArrayList<>();
@@ -239,7 +233,13 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     int pos = position + curIndex * pageSize;
-                    Toast.makeText(mContext, mDatas.get(pos).getName(), Toast.LENGTH_SHORT).show();
+                    if (!BtnUtils.getInstance().isFastDoubleClick()) {
+                        return;
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("tag", mDatas.get(pos).getTag());
+                    bundle.putInt("tag_id", mDatas.get(pos).getTag_id());
+                    UIHelper.startActivity(getActivity(), SearchResultActivity.class, bundle);
                 }
             });
         }
@@ -256,7 +256,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     public void setListener() {
-        if (StringUtils.isEmpty(key)) {
+        if (StringUtils.isEmpty(key) && 0 == tag_id) {
             dynamic_banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
                 @Override
@@ -300,7 +300,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                     return;
                 }
                 Bundle bundle = new Bundle();
-                if (StringUtils.isEmpty(key)) {
+                if (StringUtils.isEmpty(key) && 0 == tag_id) {
                     bundle.putString("shop_id", mList.get(position - 3).getShop_id());
                 } else {
                     bundle.putString("shop_id", mList.get(position - 1).getShop_id());
@@ -500,7 +500,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     protected void getData() {
-        if (StringUtils.isEmpty(key) && bannerList == null) {
+        if (StringUtils.isEmpty(key) && 0 == tag_id && bannerList == null) {
             loadBanner();
         }
         RequestParams params = TXApplication.getParams();
@@ -514,6 +514,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             params.addBodyParameter("key", key);
         }
         params.addBodyParameter("index", pageIndex + "");
+        params.addBodyParameter("tag_id", tag_id + "");
         if (0.0d == mLat || 0.0d == mLon) {
             InitLocation();
             return;
@@ -744,6 +745,16 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                         bannerList = BannerMess.parse(info);
                         if (null != bannerList) {
                             initBanner();
+                        }
+                    }
+                    String tags = result.getTaglist();
+                    if (null != tags) {
+                        if (mDatas != null) {
+                            mDatas.clear();
+                        }
+                        mDatas = CenterButtonMess.parse(tags);
+                        if (mDatas != null) {
+                            initCenterView();
                         }
                     }
                 } else {

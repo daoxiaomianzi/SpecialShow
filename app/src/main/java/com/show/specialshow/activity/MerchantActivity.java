@@ -7,8 +7,6 @@ import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 
@@ -16,22 +14,12 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.RequestParams;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
-import com.show.specialshow.TXApplication;
-import com.show.specialshow.URLs;
-import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
 import com.show.specialshow.utils.OnTabActivityResultListener;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MerchantActivity extends BaseActivity implements OnTabActivityResultListener, AMapLocationListener {
     private TabHost tabHost;

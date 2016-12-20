@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.show.specialshow.R;
 import com.show.specialshow.model.CenterButtonMess;
 
@@ -72,8 +73,9 @@ public class GridViewAdapter extends BaseAdapter {
          * 在给View绑定显示的数据时，计算正确的position = position + curIndex * pageSize，
          */
         int pos = position + curIndex * pageSize;
-        viewHolder.tv.setText(mDatas.get(pos).name);
-        viewHolder.iv.setImageResource(mDatas.get(pos).iconRes);
+        viewHolder.tv.setText(mDatas.get(pos).getTag());
+        ImageLoader.getInstance().displayImage(mDatas.get(pos).getTag_ico(),
+                viewHolder.iv);
         return convertView;
     }
 
