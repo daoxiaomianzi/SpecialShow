@@ -845,10 +845,10 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
             show_stores_details_introduction.setVisibility(View.GONE);
         }
         if (shopServiceMesses != null) {
-            tv_stores_details_related_services.setText("相关服务" + "("
+            tv_stores_details_related_services.setText("秀坊推介" + "("
                     + shopServiceMesses.size() + ")");
         } else {
-            tv_stores_details_related_services.setText("相关服务(0)");
+            tv_stores_details_related_services.setText("秀坊推介(0)");
         }
         if (shopPeopleMesses != null) {
             tv_stores_details_craftsman_people.setText("手艺人" + "("

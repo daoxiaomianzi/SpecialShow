@@ -226,6 +226,89 @@
         <View
             android:layout_width="fill_parent"
             android:layout_height="0.8dp"
+            android:background="@color/app_line_bg"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_stores_details_related_services"
+            style="@style/user_info_container"
+            android:layout_marginTop="@dimen/text_size_26px">
+
+            <TextView
+                android:id="@+id/tv_stores_details_related_services"
+                style="@style/user_info_tv"
+                android:drawableLeft="@drawable/icon_about_server"
+                android:text="@string/related_services"
+                android:textColor="@color/color_999999" />
+
+            <ImageView style="@style/list_menu_next" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ling_0.8"
+            android:background="@color/app_line_bg" />
+
+        <ListView
+            android:id="@+id/stores_details_service_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_ffffff"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/app_line_bg"
+            android:dividerHeight="0dp"
+            android:listSelector="#00000000"
+            android:scrollbars="none"
+            android:visibility="visible"></ListView>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_stores_details_craftsman_people"
+            style="@style/user_info_container"
+            android:layout_marginTop="@dimen/text_size_30px">
+
+            <TextView
+                android:id="@+id/tv_stores_details_craftsman_people"
+                style="@style/user_info_tv"
+                android:drawableLeft="@drawable/icon_craftsman_people"
+                android:text="@string/craftsman_people"
+                android:textColor="@color/color_999999" />
+
+            <ImageView style="@style/list_menu_next" />
+            <!--   <ImageView style="@style/user_info_split"
+                  android:layout_marginRight="@dimen/text_size_28px" /> -->
+        </RelativeLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ling_0.8"
+            android:background="@color/app_line_bg" />
+
+        <GridView
+            android:id="@+id/stores_details_crafstm_gv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_ffffff"
+            android:horizontalSpacing="20dp"
+            android:listSelector="#00000000"
+            android:numColumns="4"
+            android:paddingBottom="@dimen/text_size_16px"
+            android:paddingLeft="@dimen/text_size_16px"
+            android:paddingRight="@dimen/text_size_16px"
+            android:paddingTop="@dimen/text_size_16px"
+            android:scrollbars="none"
+            android:verticalSpacing="10dp"></GridView>
+
+        <View
+            android:id="@+id/stores_details_vi"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ling_0.8"
+            android:background="@color/app_line_bg" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/ling_0.8"
+            android:layout_marginTop="@dimen/text_size_30px"
             android:background="@color/app_line_bg" />
 
         <RelativeLayout
@@ -392,86 +475,6 @@
             android:layout_width="fill_parent"
             android:layout_height="@dimen/ling_0.8"
             android:background="@color/app_line_bg" />
-
-        <RelativeLayout
-            android:id="@+id/rl_stores_details_craftsman_people"
-            style="@style/user_info_container"
-            android:layout_marginTop="@dimen/text_size_30px">
-
-            <TextView
-                android:id="@+id/tv_stores_details_craftsman_people"
-                style="@style/user_info_tv"
-                android:drawableLeft="@drawable/icon_craftsman_people"
-                android:text="@string/craftsman_people"
-                android:textColor="@color/color_999999" />
-
-            <ImageView style="@style/list_menu_next" />
-            <!--   <ImageView style="@style/user_info_split"
-                  android:layout_marginRight="@dimen/text_size_28px" /> -->
-        </RelativeLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/ling_0.8"
-            android:background="@color/app_line_bg" />
-
-        <GridView
-            android:id="@+id/stores_details_crafstm_gv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_ffffff"
-            android:horizontalSpacing="20dp"
-            android:listSelector="#00000000"
-            android:numColumns="4"
-            android:paddingBottom="@dimen/text_size_16px"
-            android:paddingLeft="@dimen/text_size_16px"
-            android:paddingRight="@dimen/text_size_16px"
-            android:paddingTop="@dimen/text_size_16px"
-            android:scrollbars="none"
-            android:verticalSpacing="10dp"></GridView>
-
-        <View
-            android:id="@+id/stores_details_vi"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/ling_0.8"
-            android:background="@color/app_line_bg" />
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/ling_0.8"
-            android:layout_marginTop="@dimen/text_size_30px"
-            android:background="@color/app_line_bg" />
-
-        <RelativeLayout
-            android:id="@+id/rl_stores_details_related_services"
-            style="@style/user_info_container">
-
-            <TextView
-                android:id="@+id/tv_stores_details_related_services"
-                style="@style/user_info_tv"
-                android:drawableLeft="@drawable/icon_about_server"
-                android:text="@string/related_services"
-                android:textColor="@color/color_999999" />
-
-            <ImageView style="@style/list_menu_next" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/ling_0.8"
-            android:background="@color/app_line_bg" />
-
-        <ListView
-            android:id="@+id/stores_details_service_lv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_ffffff"
-            android:cacheColorHint="#00000000"
-            android:divider="@color/app_line_bg"
-            android:dividerHeight="0dp"
-            android:listSelector="#00000000"
-            android:scrollbars="none"
-            android:visibility="visible"></ListView>
 
 
     </LinearLayout>
