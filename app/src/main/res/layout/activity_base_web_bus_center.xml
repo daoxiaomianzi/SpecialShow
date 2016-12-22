@@ -58,15 +58,31 @@
             android:textSize="@dimen/text_size_36px" />
     </RelativeLayout>
 
+
     <ImageView
         style="@style/split_iv_horizontal"
-        android:layout_below="@+id/web_head" />
+        android:layout_below="@id/web_head" />
 
-    <include
-        layout="@layout/view_source_detail_content"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/web_head" />
+        android:layout_below="@+id/web_head">
+
+        <RelativeLayout
+            android:id="@+id/web_all"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/view_source_detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/web_head" />
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/detail_load_progress_sb"

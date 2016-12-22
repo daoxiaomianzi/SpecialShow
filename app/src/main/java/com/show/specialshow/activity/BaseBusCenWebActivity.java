@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -26,6 +27,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
@@ -39,6 +41,7 @@ public class BaseBusCenWebActivity extends BaseActivity {
     private final static int FILECHOOSER_RESULTCODE = 1;// 表单的结果回调</span>
     private Uri imageUri;
     protected WebView content;
+    private RelativeLayout web_all;
     protected String path;
     protected Dialog dialog;
     protected ProgressBar detail_load_progress_sb;
@@ -63,6 +66,7 @@ public class BaseBusCenWebActivity extends BaseActivity {
     public void initView() {
         setContentView(R.layout.activity_base_web_bus_center);
         content = (WebView) findViewById(R.id.detail_content_wv);
+        web_all = (RelativeLayout) findViewById(R.id.web_all);
         detail_load_progress_sb = (ProgressBar) findViewById(R.id.detail_load_progress_sb);
         showLoadingDialog("加载中");
     }
@@ -214,6 +218,9 @@ public class BaseBusCenWebActivity extends BaseActivity {
                 // 加载页面报错时的处理
                 // isLoadFull = false;
                 super.onReceivedError(view, errorCode, description, failingUrl);
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
+                web_all.setVisibility(View.VISIBLE);
+                content.setVisibility(View.GONE);
                 hideLoadingDialog();
             }
 
