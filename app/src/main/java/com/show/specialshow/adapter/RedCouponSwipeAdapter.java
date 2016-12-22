@@ -118,7 +118,7 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
                 && mlist_coupon.get(position).getEnddate() > DateUtil.weeHours()) {
             swipeLayout.setSwipeEnabled(false);
         } else {
-            swipeLayout.setSwipeEnabled(true);
+            swipeLayout.setSwipeEnabled(false);
         }
         holder = new ViewHolder();
         holder.setPosition(position);

@@ -3,11 +3,17 @@ package com.show.specialshow.receiver;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,6 +38,8 @@ import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
+
 /**
  * 自定义接收器
  * <p>
@@ -54,7 +62,7 @@ public class JpushReceiver extends BroadcastReceiver {
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-//        	processCustomMessage(context, bundle);
+            processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知");
@@ -251,4 +259,90 @@ public class JpushReceiver extends BroadcastReceiver {
         wm.addView(contentView, para);
     }
 
+    /**
+     * 实现自定义推送声音
+     *
+     * @param context
+     * @param bundle
+     */
+
+    private void processCustomMessage(Context context, Bundle bundle) {
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+
+
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(context);
+        String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        String title = bundle.getString(JPushInterface.EXTRA_TITLE);
+        notification.setAutoCancel(true)
+                .setContentText(message)
+                .setContentTitle(title)
+                .setSmallIcon(R.drawable.ic_launcher);
+        Notification notify = notification.build();
+        notify.flags |= Notification.FLAG_AUTO_CANCEL; // 点击通知后通知栏消失
+        // 通知id需要唯一，要不然会覆盖前一条通知
+        int notifyId = (int) System.currentTimeMillis();
+        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+        if (!TextUtils.isEmpty(extras)) {
+            try {
+                JSONObject extraJson = new JSONObject(extras);
+                if (null != extraJson && extraJson.length() > 0) {
+
+                    String sound = extraJson.getString("sound");
+                    int status_code = extraJson.getInt("status_code");
+                    switch (status_code) {
+                        case 441:
+                            if ("neworder.mp3".equals(sound)) {
+                                notification.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.neworder));
+                            }
+                            break;
+                        case 442:
+                            if ("makesuccess.mp3".equals(sound)) {
+                                notification.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.makesuccess));
+                            }
+                            break;
+                        case 443:
+                            if ("paysuccess.mp3".equals(sound)) {
+                                notification.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.paysuccess));
+                            }
+                            break;
+                        case 444:
+                            if ("cancelorder.mp3".equals(sound)) {
+                                notification.setSound(Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.cancelorder));
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    Intent clickIntent = new Intent(context, JpushReceiver.class); //点击通知之后要发送的广播
+                    clickIntent.setAction(JPushInterface.ACTION_NOTIFICATION_OPENED);
+                    clickIntent.putExtras(bundle);
+                    PendingIntent pendingIntent = PendingIntent.getBroadcast(context, notifyId, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    notification.setContentIntent(pendingIntent);
+
+
+                }
+            } catch (JSONException e) {
+
+            }
+
+        } else {
+            if (isForeground(context)) {
+                showUpdateSuccessDialog(context, message);
+            } else {
+                Intent intent_WebView = new Intent(context, AppStartActivity.class);
+                //必须要写,不然出错,因为这是一个从非activity的类跳转到一个activity,需要一个flag来说明,这个flag就是Intent.FLAG_ACTIVITY_NEW_TASK
+                intent_WebView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Bundle bundle_WebView = new Bundle();
+                bundle_WebView.putString("content", message);//内容
+                intent_WebView.putExtras(bundle_WebView);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, notifyId, intent_WebView, 0);
+                notification.setContentIntent(pendingIntent);
+            }
+        }
+
+
+        notificationManager.notify(notifyId, notification.build());
+
+    }
 }

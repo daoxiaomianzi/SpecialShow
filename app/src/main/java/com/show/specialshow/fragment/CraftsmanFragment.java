@@ -65,7 +65,7 @@ public class CraftsmanFragment extends BaseSearch implements AMapLocationListene
     private double mLon = 0.0d;//经度
     private List<ShopVisitorListMess> mList = new ArrayList<>();
     private DropDownMenu mDropDownMenu;
-    private String headers[] = {"全部类型", "综合排序", "从业时间"};
+    private String headers[] = {"职业类型", "综合排序", "从业时间"};
     private List<View> popupViews = new ArrayList<>();
 
     private GirdDropDownAdapter cityAdapter;
