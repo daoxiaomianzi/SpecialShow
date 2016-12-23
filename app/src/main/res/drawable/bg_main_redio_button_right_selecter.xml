@@ -12,13 +12,20 @@
     </item>
 
     <item>
-        <shape>
-            <stroke android:width="0.8dp" android:color="#ffffff" />
+        <layer-list>
+            <item android:left="-1.6dp">
 
-            <solid android:color="#F47183" />
+                <shape>
+                    <stroke android:width="0.8dp" android:color="#ffffff" />
 
-            <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="5dp" />
-        </shape>
+                    <solid android:color="#F47183" />
+
+                    <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="5dp" />
+                </shape>
+            </item>
+
+        </layer-list>
+
     </item>
 
 

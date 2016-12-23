@@ -25,7 +25,7 @@ public class ShowVisitorActivity extends BaseActivity {
 
     @Override
     public void fillView() {
-
+        head_title_tv.setText("附近秀客");
     }
 
     @Override

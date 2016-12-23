@@ -11,13 +11,17 @@
         </shape>
     </item>
     <item>
-        <shape>
-            <stroke android:width="0.8dp" android:color="#ffffff" />
+        <layer-list>
+            <item  android:right="-1.6dp">
+                <shape>
+                    <stroke android:width="0.8dp" android:color="#ffffff" />
 
-            <solid android:color="#F47183" />
+                    <solid android:color="#F47183" />
 
-            <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="0dp" android:topLeftRadius="5dp" android:topRightRadius="0dp" />
-        </shape>
+                    <corners android:bottomLeftRadius="5dp" android:bottomRightRadius="0dp" android:topLeftRadius="5dp" android:topRightRadius="0dp" />
+                </shape>
+            </item>
+        </layer-list>
     </item>
 
 </selector>

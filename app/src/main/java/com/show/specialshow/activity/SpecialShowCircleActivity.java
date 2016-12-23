@@ -35,7 +35,7 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
 
     private RadioGroup show_circle_head_menu_rg;
     private RadioButton show_circle_head_dynamic_rb;
-    private RadioButton show_circle_head_nearby_rb;
+    //    private RadioButton show_circle_head_nearby_rb;
     private static final int SELECT_ADDRESS = 0x000002;//选择城市
     //	private TextView special_show_address;//城市
 //    private ImageView circle_red_small;//消息通知小红点
@@ -71,22 +71,22 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
 //        circle_red_small = (ImageView) findViewById(R.id.circle_red_small);
         show_circle_head_menu_rg = (RadioGroup) findViewById(R.id.show_circle_head_menu_rg);
         show_circle_head_dynamic_rb = (RadioButton) findViewById(R.id.show_circle_head_dynamic_rb);
-        show_circle_head_nearby_rb = (RadioButton) findViewById(R.id.show_circle_head_nearby_rb);
+//        show_circle_head_nearby_rb = (RadioButton) findViewById(R.id.show_circle_head_nearby_rb);
         tabHost = (TabHost) findViewById(R.id.myTabHost);
         localActivityManager = new LocalActivityManager(this, true);
         localActivityManager.dispatchResume();
         tabHost.setup(localActivityManager);
         Intent circleDynamicIntent = new Intent(mContext,
                 CircleDynamicActivity.class);
-        Intent circleNearbyIntent = new Intent(mContext,
-                ShowVisitorActivity.class);
+//        Intent circleNearbyIntent = new Intent(mContext,
+//                ShowVisitorActivity.class);
         Intent chatIntent = new Intent(mContext, MainHxActivity.class);
         tabHost.addTab(buildTabSpec("dynamic", R.string.circle_dynamic,
                 R.drawable.bg_main_redio_button_left_selecter,
                 circleDynamicIntent));
-        tabHost.addTab(buildTabSpec("nearby", R.string.circle_nearby,
-                R.drawable.bg_main_redio_button_center_selecter,
-                circleNearbyIntent));
+//        tabHost.addTab(buildTabSpec("nearby", R.string.circle_nearby,
+//                R.drawable.bg_main_redio_button_center_selecter,
+//                circleNearbyIntent));
         tabHost.addTab(buildTabSpec("chat", R.string.chat,
                 R.drawable.bg_main_redio_button_right_selecter,
                 chatIntent));
@@ -139,6 +139,9 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
                     break;
                 case 2://邀请好友
                     inviteFriends();
+                    break;
+                case 3://附近秀客
+                    UIHelper.startActivity(mContext, ShowVisitorActivity.class);
                     break;
                 default:
                     break;
@@ -209,10 +212,10 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
                                 index = 0;
                                 tabHost.setCurrentTabByTag("dynamic");
                                 break;
-                            case R.id.show_circle_head_nearby_rb:
-                                index = 1;
-                                tabHost.setCurrentTabByTag("nearby");
-                                break;
+//                            case R.id.show_circle_head_nearby_rb:
+//                                index = 1;
+//                                tabHost.setCurrentTabByTag("nearby");
+//                                break;
                             case R.id.show_circle_head_chat_rb:
                                 Bundle bundle = new Bundle();
                                 if (TXApplication.login) {
@@ -227,7 +230,7 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
                                                 show_circle_head_dynamic_rb.setChecked(true);
                                                 break;
                                             case 1:
-                                                show_circle_head_nearby_rb.setChecked(true);
+//                                                show_circle_head_nearby_rb.setChecked(true);
                                                 break;
                                             default:
                                                 break;
@@ -242,7 +245,7 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
                                             show_circle_head_dynamic_rb.setChecked(true);
                                             break;
                                         case 1:
-                                            show_circle_head_nearby_rb.setChecked(true);
+//                                            show_circle_head_nearby_rb.setChecked(true);
                                             break;
                                         default:
                                             break;
@@ -273,11 +276,10 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
 //                break;
             case R.id.send_dynamic://发布动态
                 switch (tabHost.getCurrentTab()) {
-                    case 2:
+                    case 1:
                         titlePopup.show(findViewById(R.id.send_dynamic));
                         break;
                     case 0:
-                    case 1:
                     default:
                         Bundle bundle = new Bundle();
                         bundle.putInt("send_type", SelectSendTypeActivity.SEND_STATE_CODE);

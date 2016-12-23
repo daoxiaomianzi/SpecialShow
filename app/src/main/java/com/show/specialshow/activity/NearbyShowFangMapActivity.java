@@ -426,7 +426,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      */
     @Override
     public void onMapLoaded() {
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     /**
