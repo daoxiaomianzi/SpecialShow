@@ -117,6 +117,8 @@ public class SpecialShowCircleActivity extends BaseActivity implements OnTabActi
                 R.drawable.icon_menu_myfriend));
         titlePopup.addAction(new ActionItem(this, R.string.invite_friend,
                 R.drawable.icon_invite_friends));
+        titlePopup.addAction(new ActionItem(this, R.string.nearby_show_visitor, R.drawable
+                .icon_nearby_show_vitior));
     }
 
     private TitlePopup.OnItemOnClickListener onitemClick = new TitlePopup.OnItemOnClickListener() {
