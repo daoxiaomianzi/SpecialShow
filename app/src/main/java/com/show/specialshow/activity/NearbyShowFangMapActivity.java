@@ -169,6 +169,12 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                             return;
                         } else {
                             insertData();
+                            if (null != aMap) {
+                                aMap.clear();
+                                if (null != markerList) {
+                                    markerList.clear();
+                                }
+                            }
                             addMarkersToMap(mapMessList);// 往地图上添加marker
                         }
                     }
@@ -492,6 +498,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
      * 在地图上添加marker
      */
     private void addMarkersToMap(List<NearMapMess> mapMessList) {
+
         for (int i = 0; i < mapMessList.size(); i++) {
 //            view = getLayoutInflater().from(mContext).inflate(R.layout.map_button, null);
 //            map_shop = (TextView) view.findViewById(R.id.map_shop);
@@ -510,7 +517,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
         }
         for (int i = markerList.size() - 1; i > 0; i--) {
             for (int j = i - 1; j >= 0; j--) {
-                if (markerList.get(j).getPosition().equals(markerList.get(i).getPosition())) {
+                if (markerList.get(j).equals(markerList.get(i))) {
                     markerList.remove(j);
                     break;
                 }
