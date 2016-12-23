@@ -26,11 +26,6 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.services.geocoder.GeocodeAddress;
-import com.amap.api.services.geocoder.GeocodeQuery;
-import com.amap.api.services.geocoder.GeocodeResult;
-import com.amap.api.services.geocoder.GeocodeSearch;
-import com.amap.api.services.geocoder.RegeocodeResult;
 import com.easemob.chatuidemo.activity.ChatActivity;
 import com.easemob.chatuidemo.utils.SmileUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -74,14 +69,13 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch.OnGeocodeSearchListener, AMapLocationListener {
+public class StoresDetailsActivity extends BaseActivity implements  AMapLocationListener {
     // 当前定位坐标(起点)
     double mLat1 = 0.0d;//纬度
     double mLon1 = 0.0d;//经度
     // 要到达的坐标(终点)
     double mLat2 = 0.0d;//纬度
     double mLon2 = 0.0d;//经度
-    private GeocodeSearch geocoderSearch; // 搜索模块，也可去掉地图模块独立使用
     // 定位相关
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
@@ -221,9 +215,6 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
     @Override
     public void fillView() {
         InitLocation();
-        // 初始化搜索模块，注册事件监听
-        geocoderSearch = new GeocodeSearch(this);
-        geocoderSearch.setOnGeocodeSearchListener(this);
         head_title_tv.setVisibility(View.GONE);
         getViewData();
     }
@@ -826,9 +817,8 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
         if (shopInfoMess != null) {
             tv_stores_details_address_name.setText(shopInfoMess.getShop_info_city() + shopInfoMess
                     .getShop_info_address());
-
-            GeocodeQuery query = new GeocodeQuery(shopInfoMess.getShop_info_city() + shopInfoMess.getShop_info_address(), null);// 第一个参数表示地址，第二个参数表示查询城市，中文或者中文全拼，citycode、adcode，
-            geocoderSearch.getFromLocationNameAsyn(query);// 设置同步地理编码请求
+            mLat2 = shopInfoMess.getShop_info_lat();
+            mLon2 = shopInfoMess.getShop_info_lon();
             tv_stores_details_phone_name.setText(shopInfoMess
                     .getShop_info_phoneNum());
             tv_stores_details_opening_time_name.setText(shopInfoMess
@@ -866,35 +856,6 @@ public class StoresDetailsActivity extends BaseActivity implements GeocodeSearch
         stores_details_crafstm_gv.setAdapter(new ArtisansAdapter());
         stores_details_review_lv.setVisibility(View.VISIBLE);
         stores_details_bottom_ll.setVisibility(View.VISIBLE);
-    }
-
-    /**
-     * 地理编码查询回调
-     * 把地点转换成经纬度
-     */
-    @Override
-    public void onGeocodeSearched(GeocodeResult result, int rCode) {
-        if (rCode == 1000) {
-            if (result != null && result.getGeocodeAddressList() != null
-                    && result.getGeocodeAddressList().size() > 0) {
-                GeocodeAddress address = result.getGeocodeAddressList().get(0);
-                mLat2 = address.getLatLonPoint().getLatitude();
-                mLon2 = address.getLatLonPoint().getLongitude();
-            } else {
-                UIHelper.ToastMessage(mContext, "对不起,没有搜索到相关数据");
-            }
-        } else {
-            UIHelper.ToastMessage(mContext, "" + rCode);
-        }
-    }
-
-    /**
-     * 逆地理编码回调
-     * 把经纬度转换成地点
-     */
-    @Override
-    public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
-
     }
 
 

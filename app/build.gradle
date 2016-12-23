@@ -120,7 +120,6 @@ dependencies {
     compile files('libs/pinyin4j-2.5.0.jar')
     compile files('libs/xUtils-2.6.14.jar')
     compile project(':umeng_community_discuss_library_project')
-    compile files('libs/AMap_Search_V3.4.0_20160811.jar')
     compile files('libs/AMap3DMap_3.3.3_AMapNavi_1.9.1_20160726.jar')
     compile files('libs/Msc.jar')
     compile 'com.google.zxing:core:3.2.1'
