@@ -3,6 +3,7 @@ package com.show.specialshow.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -33,8 +34,10 @@ import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.TeShowActivitiesMess;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.SPUtils;
+import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.SignUpDialog;
+import com.umeng.comm.core.beans.ShareContent;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,15 +71,15 @@ public class ActivitiesDetailActivity extends BaseActivity {
     //数据
     private String html;
     private TeShowActivitiesMess activitiesMess;//活动信息
-    private boolean isApply=false;
-    public static final String APPLY_ACTION_NAME= "发送广播到特秀活动页";
+    private boolean isApply = false;
+    public static final String APPLY_ACTION_NAME = "发送广播到特秀活动页";
 
 
     @Override
     public void initData() {
-        activitiesMess= (TeShowActivitiesMess) getIntent().getSerializableExtra("activities_data");
-        if(null!=activitiesMess){
-            html=activitiesMess.getPost_content();
+        activitiesMess = (TeShowActivitiesMess) getIntent().getSerializableExtra("activities_data");
+        if (null != activitiesMess) {
+            html = activitiesMess.getPost_content();
         }
         setContentView(R.layout.activity_activities_detail);
         ViewUtils.inject(mContext);
@@ -84,9 +87,9 @@ public class ActivitiesDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        content= (WebView)
+        content = (WebView)
                 findViewById(R.id.wv_activities_details_content);
-        tv_activities_detail_sign_up= (TextView)
+        tv_activities_detail_sign_up = (TextView)
                 findViewById(R.id.tv_activities_detail_sign_up);
 
     }
@@ -94,29 +97,35 @@ public class ActivitiesDetailActivity extends BaseActivity {
     @Override
     public void fillView() {
         head_title_tv.setText("详情");
-        if(activitiesMess!=null){
-            if(1==activitiesMess.getIsEnter()){
-            tv_activities_detail_sign_up.setEnabled(false);
+        head_right_tv.setVisibility(View.VISIBLE);
+        Drawable rightDrawable = getResources()
+                .getDrawable(R.drawable.icon_share);
+        rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(),
+                rightDrawable.getMinimumHeight());
+        head_right_tv.setCompoundDrawables(null, null, rightDrawable, null);
+        if (activitiesMess != null) {
+            if (1 == activitiesMess.getIsEnter()) {
+                tv_activities_detail_sign_up.setEnabled(false);
                 tv_activities_detail_sign_up.setBackgroundResource(R.color.gray);
                 tv_activities_detail_sign_up.setText("已报名");
             }
-            if(activitiesMess.isPost_isprogress()){
+            if (activitiesMess.isPost_isprogress()) {
                 tv_detail_activities_progress.setText("正在进行");
-            }else{
+            } else {
                 tv_activities_detail_sign_up.setVisibility(View.GONE);
                 tv_detail_activities_progress.setText("已结束");
                 tv_detail_activities_progress.setBackgroundResource(R.color.gray);
             }
-            ImageLoader.getInstance().displayImage(activitiesMess.getPost_smeta(),iv_activities_detail_img);
+            ImageLoader.getInstance().displayImage(activitiesMess.getPost_smeta(), iv_activities_detail_img);
             tv_detail_activities_title.setText(activitiesMess.getPost_title());
             tv_detail_activities_slogan.setText(activitiesMess.getPost_slogan());
-            if (0==activitiesMess.getPost_expense()) {
+            if (0 == activitiesMess.getPost_expense()) {
                 tv_detail_activities_is_free.setText("免费");
-            }else{
-                tv_detail_activities_is_free.setText(activitiesMess.getPost_expense()+"元");
+            } else {
+                tv_detail_activities_is_free.setText(activitiesMess.getPost_expense() + "元");
             }
-            tv_detail_activities_time.setText(MessageFormat.format("时间: {0}",activitiesMess.getPost_active_time()));
-            tv_detail_activities_address.setText(MessageFormat.format("地址: {0}",activitiesMess.getPost_place()));
+            tv_detail_activities_time.setText(MessageFormat.format("时间: {0}", activitiesMess.getPost_active_time()));
+            tv_detail_activities_address.setText(MessageFormat.format("地址: {0}", activitiesMess.getPost_place()));
             tv_detail_activities_excerpt.setText(activitiesMess.getPost_excerpt());
 
         }
@@ -130,44 +139,67 @@ public class ActivitiesDetailActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if(!BtnUtils.getInstance().isFastDoubleClick()){
+        if (!BtnUtils.getInstance().isFastDoubleClick()) {
             return;
         }
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_activities_detail_sign_up://报名
-                if(TXApplication.login){
-                    signUpDialog= new SignUpDialog(mContext);
-                    view=signUpDialog.signUpDialog();
-                }else{
-                    UIHelper.ToastMessage(mContext,"请先登录");
-                    Bundle bundle =new Bundle();
-                    bundle.putInt(LoginActivity.FROM_LOGIN,LoginActivity.FROM_OTHER);
-                    UIHelper.startActivity(mContext,LoginActivity.class,bundle);
+                if (TXApplication.login) {
+                    signUpDialog = new SignUpDialog(mContext);
+                    view = signUpDialog.signUpDialog();
+                } else {
+                    UIHelper.ToastMessage(mContext, "请先登录");
+                    Bundle bundle = new Bundle();
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
 
                 break;
             case R.id.apply_sign_up:
-                et_name= (EditText) view.findViewById(R.id.et_name);
-                et_iphone= (EditText) view.findViewById(R.id.et_iphone);
-                if(StringUtils.isEmpty(et_name.getText().toString().trim())){
-                    UIHelper.ToastMessage(mContext,"请填写姓名");
-                }else{
-                    if(StringUtils.isEmpty(et_iphone.getText().toString().toString())){
-                        UIHelper.ToastMessage(mContext,"请填写手机号");
-                    }else{
+                et_name = (EditText) view.findViewById(R.id.et_name);
+                et_iphone = (EditText) view.findViewById(R.id.et_iphone);
+                if (StringUtils.isEmpty(et_name.getText().toString().trim())) {
+                    UIHelper.ToastMessage(mContext, "请填写姓名");
+                } else {
+                    if (StringUtils.isEmpty(et_iphone.getText().toString().toString())) {
+                        UIHelper.ToastMessage(mContext, "请填写手机号");
+                    } else {
                         applyActivities();
                     }
                 }
+                break;
+            case R.id.head_right_tv:
+                share();
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * 分享回调
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ShareServiceFactory.getShareService().onActivityResult(mContext, requestCode, resultCode, data);
+    }
+
+    /**
+     * 分享
+     */
+    private void share() {
+        ShareContent shareItem = new ShareContent();
+        shareItem.mText = activitiesMess.getPost_excerpt();
+        shareItem.mTargetUrl = activitiesMess.getPost_share_url();
+        shareItem.mTitle = activitiesMess.getPost_title();
+        ShareServiceFactory.getShareService().share(this, shareItem);
+    }
+
     @Override
     public void goBack(View v) {
-        if(isApply){
-            Intent intent=new Intent(APPLY_ACTION_NAME);
+        if (isApply) {
+            Intent intent = new Intent(APPLY_ACTION_NAME);
             sendBroadcast(intent);
         }
         super.goBack(v);
@@ -175,8 +207,8 @@ public class ActivitiesDetailActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(isApply){
-            Intent intent=new Intent(APPLY_ACTION_NAME);
+        if (isApply) {
+            Intent intent = new Intent(APPLY_ACTION_NAME);
             sendBroadcast(intent);
         }
         return super.onKeyDown(keyCode, event);
@@ -185,53 +217,54 @@ public class ActivitiesDetailActivity extends BaseActivity {
     /**
      * 提交活动报名
      */
-    private void applyActivities(){
+    private void applyActivities() {
         RequestParams params = TXApplication.getParams();
-        String url= URLs.POSTS_ENTER;
-        params.addBodyParameter("uid", (String) SPUtils.get(mContext,"uid",""));
-        params.addBodyParameter("object_id",activitiesMess.getPost_id()+"");
-        params.addBodyParameter("name",et_name.getText().toString().trim());
-        params.addBodyParameter("phone",et_iphone.getText().toString().trim());
+        String url = URLs.POSTS_ENTER;
+        params.addBodyParameter("uid", (String) SPUtils.get(mContext, "uid", ""));
+        params.addBodyParameter("object_id", activitiesMess.getPost_id() + "");
+        params.addBodyParameter("name", et_name.getText().toString().trim());
+        params.addBodyParameter("phone", et_iphone.getText().toString().trim());
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
             public void onStart() {
                 super.onStart();
-                loadIng("报名中...",true);
+                loadIng("报名中...", true);
             }
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                if (dialog!=null) {
+                if (dialog != null) {
                     dialog.dismiss();
                 }
                 MessageResult result = MessageResult.parse(responseInfo.result);
-                if(null==result){
+                if (null == result) {
                     return;
                 }
-                if (1==result.getSuccess()) {
-                    if(null!=signUpDialog&&null!=signUpDialog.getDialog()){
+                if (1 == result.getSuccess()) {
+                    if (null != signUpDialog && null != signUpDialog.getDialog()) {
                         signUpDialog.getDialog().dismiss();
                     }
-                    isApply=true;
-                    UIHelper.ToastMessage(mContext,result.getMessage());
+                    isApply = true;
+                    UIHelper.ToastMessage(mContext, result.getMessage());
                     tv_activities_detail_sign_up.setText("已报名");
                     tv_activities_detail_sign_up.setBackgroundResource(R.color.gray);
                     tv_activities_detail_sign_up.setEnabled(false);
-                }else{
-                    UIHelper.ToastMessage(mContext,result.getMessage());
+                } else {
+                    UIHelper.ToastMessage(mContext, result.getMessage());
                 }
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                if (dialog!=null) {
+                if (dialog != null) {
                     dialog.dismiss();
                 }
-                UIHelper.ToastMessage(mContext,R.string.net_work_error);
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
             }
         });
 
     }
+
     @SuppressLint("SetJavaScriptEnabled")
     protected void loadNativeDetail() {
         content.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
@@ -244,7 +277,7 @@ public class ActivitiesDetailActivity extends BaseActivity {
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
         } else if (scale == 160) {
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-        } else if(scale==120){
+        } else if (scale == 120) {
             content.getSettings().setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
         }
 

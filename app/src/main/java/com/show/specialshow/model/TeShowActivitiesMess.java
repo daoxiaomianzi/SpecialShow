@@ -14,11 +14,19 @@ public class TeShowActivitiesMess implements Serializable {
     private int post_expense;
     private String post_smeta;
     private String post_excerpt;
-
+   private String post_share_url;
     private boolean post_isprogress;
     private String post_active_time;
     private String post_place;
     private int isEnter;//1:已报名，0：未报名
+
+    public String getPost_share_url() {
+        return post_share_url;
+    }
+
+    public void setPost_share_url(String post_share_url) {
+        this.post_share_url = post_share_url;
+    }
 
     public int getIsEnter() {
         return isEnter;
