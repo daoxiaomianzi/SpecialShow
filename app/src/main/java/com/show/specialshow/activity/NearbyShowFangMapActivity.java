@@ -170,7 +170,7 @@ public class NearbyShowFangMapActivity extends BaseActivity implements AMapLocat
                         } else {
                             insertData();
                             if (null != aMap) {
-                                aMap.clear();
+//                                aMap.clear();
                                 if (null != markerList) {
                                     markerList.clear();
                                 }
