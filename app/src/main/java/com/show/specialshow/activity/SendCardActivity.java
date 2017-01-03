@@ -1,5 +1,6 @@
 package com.show.specialshow.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -27,6 +28,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
@@ -559,25 +563,55 @@ public class SendCardActivity extends BaseActivity {
     }
 
     private void startPhotoAlbum() {
-        UIHelper.startActivity(mContext, AlbumActivity.class);
-        overridePendingTransition(R.anim.activity_translate_in,
-                R.anim.activity_translate_out);
+        Acp.getInstance(this).request(new AcpOptions.Builder()
+                        .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        UIHelper.startActivity(mContext, AlbumActivity.class);
+                        overridePendingTransition(R.anim.activity_translate_in,
+                                R.anim.activity_translate_out);
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "读取sd卡功能取消授权");
+                    }
+                });
+
     }
 
     String fileName;
     File out;
 
     private void startPhoto() {
-        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileName = "/TX_PHOTO/" + String.valueOf(System.currentTimeMillis());
-        out = new File(FileUtils.SDPATH, fileName + ".JPEG");
-        if (!out.getParentFile().exists()) {
-            out.getParentFile().mkdirs();
-        }
-        Uri uri = Uri.fromFile(out);
-        openCameraIntent.
-                putExtra(MediaStore.EXTRA_OUTPUT, uri);// 获取拍照后未压缩的原图片，并保存在uri路径中
-        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+        Acp.getInstance(this).request(new AcpOptions.Builder()
+                        .setPermissions(Manifest.permission.CAMERA
+                        )
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        fileName = "/TX_PHOTO/" + String.valueOf(System.currentTimeMillis());
+                        out = new File(FileUtils.SDPATH, fileName + ".JPEG");
+                        if (!out.getParentFile().exists()) {
+                            out.getParentFile().mkdirs();
+                        }
+                        Uri uri = Uri.fromFile(out);
+                        openCameraIntent.
+                                putExtra(MediaStore.EXTRA_OUTPUT, uri);// 获取拍照后未压缩的原图片，并保存在uri路径中
+                        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "相机功能取消授权");
+                    }
+                });
+
     }
 
     @Override

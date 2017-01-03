@@ -1,5 +1,7 @@
 package com.show.specialshow;
 
+import android.*;
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -24,11 +26,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
+import com.show.specialshow.activity.AlbumActivity;
 import com.show.specialshow.utils.ActionSheetDialog;
 import com.show.specialshow.utils.ActionSheetDialog.OnSheetItemClickListener;
 import com.show.specialshow.utils.ActionSheetDialog.SheetItemColor;
 import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.FileUtils;
+import com.show.specialshow.utils.UIHelper;
 import com.show.specialshow.view.CustomProgressDialog;
 
 import java.io.ByteArrayOutputStream;
@@ -37,6 +44,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public abstract class BaseActivity extends FragmentActivity {
     public static final int DIALOG_DEFAULT_STPE = 0;
@@ -271,28 +279,58 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     // 调用系统相机
-    protected void startCamera(int cameracode) {
-        // 调用系统的拍照功能
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra("camerasensortype", 2); // 调用前置摄像头
-        intent.putExtra("autofocus", true); // 自动对焦
-        intent.putExtra("fullScreen", false); // 全屏
-        intent.putExtra("showActionIcons", false);
-        // 指定调用相机拍照后照片的存储路径
-        tempFile = new File(FileUtils.SDPATH, getPhotoFileName());
-        if (!tempFile.getParentFile().exists()) {
-            tempFile.getParentFile().mkdirs();
-        }
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
-        startActivityForResult(intent, cameracode);
+    protected void startCamera(final int cameracode) {
+        Acp.getInstance(this).request(new AcpOptions.Builder()
+                        .setPermissions(Manifest.permission.CAMERA
+                        )
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        // 调用系统的拍照功能
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        intent.putExtra("camerasensortype", 2); // 调用前置摄像头
+                        intent.putExtra("autofocus", true); // 自动对焦
+                        intent.putExtra("fullScreen", false); // 全屏
+                        intent.putExtra("showActionIcons", false);
+                        // 指定调用相机拍照后照片的存储路径
+                        tempFile = new File(FileUtils.SDPATH, getPhotoFileName());
+                        if (!tempFile.getParentFile().exists()) {
+                            tempFile.getParentFile().mkdirs();
+                        }
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+                        startActivityForResult(intent, cameracode);
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "相机功能取消授权");
+                    }
+                });
+
     }
 
     // 调用系统相册
-    protected void startPick(int pickcode) {
-        Intent intent = new Intent(Intent.ACTION_PICK, null);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                "image/*");
-        startActivityForResult(intent, pickcode);
+    protected void startPick(final int pickcode) {
+        Acp.getInstance(this).request(new AcpOptions.Builder()
+                        .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        Intent intent = new Intent(Intent.ACTION_PICK, null);
+                        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                "image/*");
+                        startActivityForResult(intent, pickcode);
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "读取sd卡功能取消授权");
+                    }
+                });
+
     }
 
     // 调用系统裁剪
