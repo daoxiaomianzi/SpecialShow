@@ -33,6 +33,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
@@ -146,8 +149,28 @@ public class SwitchCityActivity extends BaseActivity implements
         setAdapter(allCity_lists, city_hot, city_history);
 
         mLocationClient = new AMapLocationClient(this.getApplicationContext());
-        InitLocation();
+        permissionLocation();
         mLocationClient.startLocation();
+    }
+
+    private void permissionLocation() {
+        Acp.getInstance(mContext).request(new AcpOptions.Builder()
+                        .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
     }
 
     @Override

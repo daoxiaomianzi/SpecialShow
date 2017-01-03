@@ -1,5 +1,6 @@
 package com.easemob.chatuidemo.activity;
 
+import android.*;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,12 +17,18 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.*;
 import com.show.specialshow.BaseActivity;
+import com.show.specialshow.R;
 import com.show.specialshow.utils.UIHelper;
 
-public class MapActivity extends BaseActivity implements AMapLocationListener,LocationSource
-,AMap.OnMapLoadedListener{
+import java.util.List;
+
+public class MapActivity extends BaseActivity implements AMapLocationListener, LocationSource
+        , AMap.OnMapLoadedListener {
     //相关控件
     private MapView chat_map_view;
     private AMap aMap;
@@ -41,14 +48,14 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
         super.onCreate(savedInstanceState);
         chat_map_view.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        double latitude = intent.getDoubleExtra("latitude",0);
+        double latitude = intent.getDoubleExtra("latitude", 0);
         if (aMap == null) {
-            aMap=chat_map_view.getMap();
+            aMap = chat_map_view.getMap();
         }
-        if(0==latitude){
+        if (0 == latitude) {
             setMap();
-        }else{
-            double longtitude = intent.getDoubleExtra("longitude",0);
+        } else {
+            double longtitude = intent.getDoubleExtra("longitude", 0);
             String address = intent.getStringExtra("address");
             LatLng marker1 = new LatLng(latitude, longtitude);
             //设置中心点和缩放比例
@@ -71,7 +78,8 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
 
 
     }
-    private void setMap(){
+
+    private void setMap() {
         aMap.setOnMapLoadedListener(this);// 设置amap加载成功事件监听器
         aMap.setLocationSource(this);// 设置定位监听
         aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
@@ -87,7 +95,7 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
 
     @Override
     public void initView() {
-        chat_map_view= (MapView) findViewById(R.id.chat_map_view);
+        chat_map_view = (MapView) findViewById(R.id.chat_map_view);
     }
 
     @Override
@@ -104,14 +112,14 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.head_right_tv:
                 Intent intent = mContext.getIntent();
-                intent.putExtra("latitude",mLat);
-                intent.putExtra("longitude",mLon);
-                intent.putExtra("address",address);
-                UIHelper.setResult(mContext,RESULT_OK,intent);
-                overridePendingTransition(R.anim.slide_in_from_left,R.anim.slide_in_from_right);
+                intent.putExtra("latitude", mLat);
+                intent.putExtra("longitude", mLon);
+                intent.putExtra("address", address);
+                UIHelper.setResult(mContext, RESULT_OK, intent);
+                overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_in_from_right);
                 break;
             default:
                 break;
@@ -121,6 +129,7 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
 
     /**
      * 高德地图回调
+     *
      * @param aMapLocation
      */
     @Override
@@ -146,6 +155,7 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
             }
         }
     }
+
     /**
      * 初始化地图定位
      *
@@ -173,7 +183,7 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
         locationOption.setOnceLocationLatest(true);
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
-        loadIng("正在定位位置...",false);
+        loadIng("正在定位位置...", false);
     }
 
     /**
@@ -213,11 +223,31 @@ public class MapActivity extends BaseActivity implements AMapLocationListener,Lo
         chat_map_view.onDestroy();
     }
 
+    private void permissionLocation() {
+        Acp.getInstance(mContext).request(new AcpOptions.Builder()
+                        .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
+    }
+
     @Override
     public void activate(OnLocationChangedListener listener) {
         mListener = listener;
         if (null == locationClient) {
-            InitLocation();
+            permissionLocation();
         }
     }
 

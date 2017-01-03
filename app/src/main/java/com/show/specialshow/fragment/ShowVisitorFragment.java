@@ -1,5 +1,6 @@
 package com.show.specialshow.fragment;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
@@ -63,9 +67,29 @@ public class ShowVisitorFragment extends BaseSearch implements AMapLocationListe
         return view;
     }
 
+    private void permissionLocation() {
+        Acp.getInstance(getActivity()).request(new AcpOptions.Builder()
+                        .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
+    }
+
     @Override
     public void initData() {
-        InitLocation();
+        permissionLocation();
         show_visitor_nodata_tv = (TextView) findViewById(R.id.show_visitor_nodata_tv);
         adapter = new ShowVisitorAdapter(mList, mContext);
     }

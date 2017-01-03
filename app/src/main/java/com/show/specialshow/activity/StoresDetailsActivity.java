@@ -32,6 +32,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
@@ -69,7 +72,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoresDetailsActivity extends BaseActivity implements  AMapLocationListener {
+public class StoresDetailsActivity extends BaseActivity implements AMapLocationListener {
     // 当前定位坐标(起点)
     double mLat1 = 0.0d;//纬度
     double mLon1 = 0.0d;//经度
@@ -212,9 +215,29 @@ public class StoresDetailsActivity extends BaseActivity implements  AMapLocation
         stores_details_review_lv.setVisibility(View.GONE);
     }
 
+    private void permissionLocation() {
+        Acp.getInstance(mContext).request(new AcpOptions.Builder()
+                        .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
+    }
+
     @Override
     public void fillView() {
-        InitLocation();
+        permissionLocation();
         head_title_tv.setVisibility(View.GONE);
         getViewData();
     }

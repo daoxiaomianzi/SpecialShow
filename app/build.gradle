@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.show.specialshow"
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 23
         multiDexEnabled true
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -127,4 +127,5 @@ dependencies {
     compile project(':library')
     compile 'cn.jiguang.sdk:jpush:3.0.0'
     compile 'cn.jiguang.sdk:jcore:1.0.0'
+    compile 'com.mylhyl:acp:1.1.7'
 }

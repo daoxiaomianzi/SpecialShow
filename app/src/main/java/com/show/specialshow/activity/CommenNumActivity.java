@@ -11,6 +11,9 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.BaseSearchActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
@@ -30,7 +33,7 @@ import java.util.List;
  * 好友,关注,粉丝列表页
  */
 
-public class CommenNumActivity extends BaseSearchActivity implements AMapLocationListener{
+public class CommenNumActivity extends BaseSearchActivity implements AMapLocationListener {
 
 
     private List<ShopVisitorListMess> mList = new ArrayList<ShopVisitorListMess>();
@@ -43,22 +46,22 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationOption = null;
     // 当前定位坐标(起点)
-    private double mLat=0.0d;//纬度
-    private double mLon=0.0d;//经度
+    private double mLat = 0.0d;//纬度
+    private double mLon = 0.0d;//经度
 
     @Override
     protected void getData() {
         RequestParams params = TXApplication.getParams();
-        String url= URLs.USER_USERNUM;
-        params.addBodyParameter("uid",TXApplication.getUserMess().getUid());
-        params.addBodyParameter("page",pageIndex+"");
-        if(0.0d==mLat||0.0d==mLon){
-            UIHelper.ToastMessage(mContext,"获取位置失败,请重试!");
-        }else{
-            params.addBodyParameter("longitude",mLon+"");//经度
-            params.addBodyParameter("latitude",mLat+"");//纬度
+        String url = URLs.USER_USERNUM;
+        params.addBodyParameter("uid", TXApplication.getUserMess().getUid());
+        params.addBodyParameter("page", pageIndex + "");
+        if (0.0d == mLat || 0.0d == mLon) {
+            UIHelper.ToastMessage(mContext, "获取位置失败,请重试!");
+        } else {
+            params.addBodyParameter("longitude", mLon + "");//经度
+            params.addBodyParameter("latitude", mLat + "");//纬度
         }
-        params.addBodyParameter("type",type);
+        params.addBodyParameter("type", type);
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
             @Override
@@ -69,30 +72,30 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 MessageResult result = MessageResult.parse(responseInfo.result);
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
-                if(null==result){
+                if (null == result) {
                     return;
                 }
-                if(1==result.getSuccess()){
+                if (1 == result.getSuccess()) {
                     ShowVisitorList showVisitorList = ShowVisitorList.parse(result.getData());
                     List<ShopVisitorListMess> list = showVisitorList.getList();
-                    if(null==showVisitorList){
+                    if (null == showVisitorList) {
                         search_result_lv.setVisibility(View.VISIBLE);
                         commen_num_nodata_tv.setVisibility(View.VISIBLE);
                         commen_num_nodata_tv.setText(noData);
                         changeListView(0);
                         return;
                     }
-                    if(null!=list){
-                        int size= list.size();
+                    if (null != list) {
+                        int size = list.size();
 
-                    totalRecord = showVisitorList.getTotal();
-                    if (search_result_lv.getState() == XListView.LOAD_REFRESH) {
-                        mList.clear();
-                    }
-                    mList.addAll(list);
+                        totalRecord = showVisitorList.getTotal();
+                        if (search_result_lv.getState() == XListView.LOAD_REFRESH) {
+                            mList.clear();
+                        }
+                        mList.addAll(list);
 //                    for (int i = 0; i < mList.size(); i++) {
 //                        for (int j = mList.size() - 1; j > i; j--) {
 //                            if (mList.get(j).getUser_id()
@@ -101,28 +104,28 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
 //                            }
 //                        }
 //                    }
-                        for(int i = mList.size() - 1; i > 0; i--) {
-                            for(int j = i - 1; j >= 0; j--) {
-                                if(mList.get(j).getUser_id().equals(mList.get(i).getUser_id())) {
+                        for (int i = mList.size() - 1; i > 0; i--) {
+                            for (int j = i - 1; j >= 0; j--) {
+                                if (mList.get(j).getUser_id().equals(mList.get(i).getUser_id())) {
                                     mList.remove(j);
                                     break;
                                 }
                             }
                         }
-                    if (mList == null || mList.isEmpty()) {
-                        search_result_lv.setVisibility(View.VISIBLE);
-                        commen_num_nodata_tv
-                                .setVisibility(View.VISIBLE);
-                        commen_num_nodata_tv.setText(noData);
-                        search_result_lv.setPullLoadEnable(false);
+                        if (mList == null || mList.isEmpty()) {
+                            search_result_lv.setVisibility(View.VISIBLE);
+                            commen_num_nodata_tv
+                                    .setVisibility(View.VISIBLE);
+                            commen_num_nodata_tv.setText(noData);
+                            search_result_lv.setPullLoadEnable(false);
+                        } else {
+                            search_result_lv.setVisibility(View.VISIBLE);
+                            commen_num_nodata_tv.setVisibility(View.GONE);
+                        }
+                        localRecord = mList.size();
+                        changeListView(size);
                     } else {
-                        search_result_lv.setVisibility(View.VISIBLE);
-                        commen_num_nodata_tv.setVisibility(View.GONE);
-                    }
-                    localRecord = mList.size();
-                    changeListView(size);
-                    }else{
-                        if(null!=mList){
+                        if (null != mList) {
                             mList.clear();
                         }
                         search_result_lv.setVisibility(View.VISIBLE);
@@ -133,50 +136,69 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
                         changeListView(0);
                     }
 
-                }else{
+                } else {
                     changeListView(0);
-                    UIHelper.ToastMessage(mContext,R.string.net_work_error);
+                    UIHelper.ToastMessage(mContext, R.string.net_work_error);
                 }
 
             }
 
             @Override
             public void onFailure(HttpException error, String msg) {
-                if(null!=dialog){
+                if (null != dialog) {
                     dialog.dismiss();
                 }
-                UIHelper.ToastMessage(mContext,R.string.net_work_error);
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
             }
         });
     }
 
     @Override
     public void initData() {
-        type=getIntent().getStringExtra("type");
+        type = getIntent().getStringExtra("type");
         setContentView(R.layout.activity_commen_num);
     }
 
     @Override
     public void initView() {
-        search_result_lv= (XListView) findViewById(R.id.search_result_lv);
-        commen_num_nodata_tv= (TextView) findViewById(R.id.commen_num_nodata_tv);
-        adapter=new ShowVisitorAdapter(mList,mContext);
+        search_result_lv = (XListView) findViewById(R.id.search_result_lv);
+        commen_num_nodata_tv = (TextView) findViewById(R.id.commen_num_nodata_tv);
+        adapter = new ShowVisitorAdapter(mList, mContext);
     }
 
     @Override
     public void fillView() {
-        if("attention".equals(type)){
+        if ("attention".equals(type)) {
             head_title_tv.setText("我的关注");
-            noData="暂无关注";
-        }else if("fans".equals(type)){
+            noData = "暂无关注";
+        } else if ("fans".equals(type)) {
             head_title_tv.setText("我的粉丝");
-            noData="暂无粉丝";
-        }else if("friend".equals(type)){
+            noData = "暂无粉丝";
+        } else if ("friend".equals(type)) {
             head_title_tv.setText("我的好友");
-            noData="暂无好友";
+            noData = "暂无好友";
         }
-        InitLocation();
+        permissionLocation();
+    }
 
+    private void permissionLocation() {
+        Acp.getInstance(mContext).request(new AcpOptions.Builder()
+                        .setPermissions(android.Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
     }
 
     @Override
@@ -191,6 +213,7 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
 
     /**
      * 初始化地图定位
+     *
      * @param
      */
 
@@ -214,26 +237,28 @@ public class CommenNumActivity extends BaseSearchActivity implements AMapLocatio
         locationOption.setOnceLocationLatest(true);
         locationClient.setLocationOption(locationOption);
         locationClient.startLocation();
-        loadIng("加载中",true);
+        loadIng("加载中", true);
     }
 
     /**
      * 高德地图定位回调
+     *
      * @param aMapLocation
      */
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation == null) {
-            UIHelper.ToastMessage(mContext,"获取当前位置失败");
+            UIHelper.ToastMessage(mContext, "获取当前位置失败");
             return;
         }
-        mLat=aMapLocation.getLatitude();
-        mLon=aMapLocation.getLongitude();
+        mLat = aMapLocation.getLatitude();
+        mLon = aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
         search_result_lv.setPullLoadEnable(true);
-        search_result_lv.setDividerHeight(DensityUtil.dip2px(mContext,8));
+        search_result_lv.setDividerHeight(DensityUtil.dip2px(mContext, 8));
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

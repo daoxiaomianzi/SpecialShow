@@ -1,6 +1,7 @@
 package com.show.specialshow.activity;
 
 
+import android.Manifest;
 import android.app.LocalActivityManager;
 import android.content.Intent;
 import android.os.Build;
@@ -14,12 +15,17 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.mylhyl.acp.Acp;
+import com.mylhyl.acp.AcpListener;
+import com.mylhyl.acp.AcpOptions;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
 import com.show.specialshow.utils.OnTabActivityResultListener;
 import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
+
+import java.util.List;
 
 public class MerchantActivity extends BaseActivity implements OnTabActivityResultListener, AMapLocationListener {
     private TabHost tabHost;
@@ -126,7 +132,27 @@ public class MerchantActivity extends BaseActivity implements OnTabActivityResul
         merchant_address.setText(SPUtils.get(mContext, "city", "上海").toString());
         SPUtils.put(mContext, "oldCity", merchant_address.getText().toString().trim());
 //        onListener();
-        InitLocation();
+        permissionLocation();
+    }
+
+    private void permissionLocation() {
+        Acp.getInstance(this).request(new AcpOptions.Builder()
+                        .setPermissions(Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+//                /*以下为自定义提示语、按钮文字
+                        .setRationalMessage("定位功能需要您授权，否则App将不能正常使用")
+                        .build(),
+                new AcpListener() {
+                    @Override
+                    public void onGranted() {
+                        InitLocation();
+                    }
+
+                    @Override
+                    public void onDenied(List<String> permissions) {
+                        UIHelper.ToastMessage(mContext, "定位功能取消授权");
+                    }
+                });
     }
 
     @Override
