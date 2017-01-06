@@ -127,5 +127,7 @@ dependencies {
     compile project(':library')
     compile 'cn.jiguang.sdk:jpush:3.0.0'
     compile 'cn.jiguang.sdk:jcore:1.0.0'
-    compile 'com.mylhyl:acp:1.1.7'
+    compile ('com.mylhyl:acp:1.1.7') {
+        exclude module: 'support-v4'
+    }
 }

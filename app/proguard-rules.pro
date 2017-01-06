@@ -164,7 +164,8 @@
 #------------------------zxing--------------------------------------------
 
 
-
+-keep class  com.mylhyl.acp.** {*;}
+-dontwarn  com.mylhyl.acp.**
 
 #-------------------------------------------------------------------------
 
@@ -189,6 +190,7 @@
 -keep class android.support.v4.** { *; }
 -keep public class * extends android.support.v4.**
 -keep public class * extends android.support.v4.app.Fragment
+-keep public class * extends android.support.v4.app.FragmentTransaction
 #v7包
 
 -dontwarn android.support.**
