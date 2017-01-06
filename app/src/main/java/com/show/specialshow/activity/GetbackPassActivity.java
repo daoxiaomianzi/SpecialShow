@@ -36,6 +36,8 @@ import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.TimeCount;
 import com.show.specialshow.utils.UIHelper;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -231,8 +233,12 @@ public class GetbackPassActivity extends BaseActivity {
         }
         final String phone = getback_pass_phonenumber.getText().toString().trim();
         currentUsername = info.getUid();
-        String password = getback_pass_password.getText().toString().trim();
-        currentPassword = MD5Utils.getMd5Str(MD5Utils.getMd5Str(password));
+        if (StringUtils.isEmpty(info.getOpenid())) {
+            String password = getback_pass_password.getText().toString().trim();
+            currentPassword = MD5Utils.getMd5Str(MD5Utils.getMd5Str(password));
+        } else {
+            currentPassword = MD5Utils.getMd5Str(info.getOpenid());
+        }
 
         if (TextUtils.isEmpty(currentUsername)) {
             Toast.makeText(this, R.string.User_name_cannot_be_empty, Toast.LENGTH_SHORT).show();

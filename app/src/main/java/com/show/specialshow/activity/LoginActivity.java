@@ -57,6 +57,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.common.ResContainer;
 import com.umeng.socialize.utils.SocializeUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -458,8 +460,12 @@ public class LoginActivity extends BaseActivity implements AMapLocationListener 
             return;
         }
         if (!isThreePath) {
-            String password = login_password.getText().toString().trim();
-            currentPassword = MD5Utils.getMd5Str(MD5Utils.getMd5Str(password));
+            if (StringUtils.isEmpty(info.getOpenid())) {
+                String password = login_password.getText().toString().trim();
+                currentPassword = MD5Utils.getMd5Str(MD5Utils.getMd5Str(password));
+            } else {
+                currentPassword = MD5Utils.getMd5Str(info.getOpenid());
+            }
         } else {
             currentPassword = MD5Utils.getMd5Str(openId);
         }
