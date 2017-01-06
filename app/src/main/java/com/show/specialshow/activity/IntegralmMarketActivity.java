@@ -17,6 +17,7 @@ import com.umeng.comm.core.beans.ShareContent;
 
 public class IntegralmMarketActivity extends BaseBusCenWebActivity {
     private static final int SET_TRADING_PASSWORD = 251;
+    private static final int SET_BINDING_PHONE = 252;
 
     @Override
     public void initData() {
@@ -49,6 +50,17 @@ public class IntegralmMarketActivity extends BaseBusCenWebActivity {
             default:
                 break;
         }
+    }
+
+    @JavascriptInterface
+    public void startSetPhone() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Bundle bundle = new Bundle();
+                UIHelper.startActivityForResult(mContext, BindingPhoneActivity.class, SET_BINDING_PHONE, bundle);
+            }
+        });
     }
 
     @JavascriptInterface
@@ -91,8 +103,11 @@ public class IntegralmMarketActivity extends BaseBusCenWebActivity {
         if (resultCode == RESULT_OK && requestCode == SET_TRADING_PASSWORD && TXApplication.setTradingpassword) {
             content.reload();
         }
-        if (requestCode != SET_TRADING_PASSWORD) {
+        if (requestCode != SET_TRADING_PASSWORD && requestCode != SET_BINDING_PHONE) {
             ShareServiceFactory.getShareService().onActivityResult(mContext, requestCode, resultCode, data);
+        }
+        if (resultCode == RESULT_OK && requestCode == SET_BINDING_PHONE) {
+            content.reload();
         }
     }
 }

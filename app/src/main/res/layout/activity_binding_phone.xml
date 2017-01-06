@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_binding_phone"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.BindingPhoneActivity">
+
+    <include layout="@layout/view_common_head" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/text_size_90px"
+        android:layout_marginLeft="@dimen/text_size_36px"
+        android:layout_marginRight="@dimen/text_size_36px"
+        android:layout_marginTop="@dimen/text_size_68px">
+
+        <com.show.specialshow.utils.ClearEditText
+            android:id="@+id/binging_phonenumber"
+            style="@style/edittext_custom"
+            android:hint="@string/input_eleven_phonenumber"
+            android:inputType="number"
+            android:textColorHint="@color/color_aaaaaa" />
+
+    </RelativeLayout>
+
+    <View style="@style/line_view" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/text_size_90px"
+        android:layout_marginLeft="@dimen/text_size_36px"
+        android:layout_marginRight="@dimen/text_size_36px"
+        android:layout_marginTop="@dimen/text_size_24px">
+
+        <Button
+            android:id="@+id/binging_sms_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_sms_code"
+            android:onClick="onClick"
+            android:paddingBottom="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="3dp"
+            android:text="@string/get_sms_code"
+            android:textColor="#F47183"
+            android:textSize="@dimen/text_size_22px" />
+
+        <com.show.specialshow.utils.ClearEditText
+            android:id="@+id/binging_code"
+            style="@style/edittext_custom"
+            android:layout_toLeftOf="@id/binging_sms_code"
+            android:hint="@string/input_code"
+            android:inputType="number"
+            android:paddingRight="@dimen/text_size_16px"
+            android:textColorHint="@color/color_aaaaaa" />
+    </RelativeLayout>
+
+    <View style="@style/line_view" />
+
+    <com.show.specialshow.utils.ClearEditText
+        android:id="@+id/binging_password"
+        style="@style/edittext_custom"
+        android:layout_marginLeft="@dimen/text_size_36px"
+        android:layout_marginRight="@dimen/text_size_36px"
+        android:layout_marginTop="@dimen/text_size_24px"
+        android:hint="@string/input_six_sixteen_password"
+        android:password="true"
+        android:textColorHint="@color/color_aaaaaa" />
+
+    <View style="@style/line_view" />
+
+    <Button
+        android:id="@+id/binging_complete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_size_90px"
+        android:layout_marginLeft="@dimen/text_size_68px"
+        android:layout_marginRight="@dimen/text_size_68px"
+        android:layout_marginTop="@dimen/text_size_114px"
+        android:background="@drawable/button_login"
+        android:enabled="false"
+        android:onClick="onClick"
+        android:text="@string/complete"
+        android:textColor="@color/color_ffffff"
+        android:textSize="@dimen/text_size_26px" />
+
+</LinearLayout>
