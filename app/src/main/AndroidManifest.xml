@@ -68,7 +68,11 @@
 
     <uses-permission android:name="com.easemob.chatuidemo.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--ping++-->
+    <uses-permission android:name="android.permission.NFC" />
 
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission-sdk-23 android:name="android.permission.NFC" />
     <!--
              <permission
         android:name="com.hyphenate.chatuidemo.permission.MIPUSH_RECEIVE"
@@ -878,6 +882,10 @@
         <activity android:name=".activity.ShowCraftsmanActivity" />
         <activity android:name=".activity.MyDiscountCouponActivity" />
         <activity android:name=".activity.JpushWebView" />
+        <activity android:name=".activity.BindingPhoneActivity">
+
+        </activity>
+
         <!-- 自己的页面等其他相关 -->
 
 
@@ -898,7 +906,48 @@
         </receiver>
         <!-- 极光推送 -->
 
-        <activity android:name=".activity.BindingPhoneActivity"></activity>
+        <!--ping++-->
+        <!-- Ping++ sdk -->
+        <activity
+            android:name="com.pingplusplus.android.PaymentActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="qwalletXXXXXXXX" />
+            </intent-filter>
+
+        </activity>
+
+
+        <!-- 微信支付 sdk ，也是 Ping++ sdk 调用入口 -->
+        <activity-alias
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+        <!-- 支付宝 sdk -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind">
+
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind">
+
+        </activity>
+        <!--ping++-->
+
     </application>
 
 </manifest>

@@ -13,10 +13,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.pingplusplus.android.Pingpp;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
@@ -64,6 +66,10 @@ public class PayActivity extends BaseActivity {
     private RedCoupon redCoupon;
     private int totalCoupon;
     private int type = 0;
+
+
+    private static String YOUR_URL = "http://218.244.151.190/demo/charge";
+    public static final String URL = YOUR_URL;
 
     @Override
     public void initData() {
@@ -120,11 +126,11 @@ public class PayActivity extends BaseActivity {
         genderGroup.setOnCheckedChangeListener(new PayRadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(PayRadioGroup group, int checkedId) {
-//                payRadioPurified = (PayRadioPurified) findViewById(checkedId);
-//                for (int i = 0; i < group.getChildCount(); i++) {
-                UIHelper.ToastMessage(mContext, "暂未开通");
-//                    ((PayRadioPurified) group.getChildAt(i)).setChangeImg(checkedId);
-//                }
+                payRadioPurified = (PayRadioPurified) findViewById(checkedId);
+                for (int i = 0; i < group.getChildCount(); i++) {
+//                UIHelper.ToastMessage(mContext, "暂未开通");
+                    ((PayRadioPurified) group.getChildAt(i)).setChangeImg(checkedId);
+                }
             }
         });
     }
@@ -139,6 +145,7 @@ public class PayActivity extends BaseActivity {
             case R.id.pay_confirm:
                 if (null != payRadioPurified) {
                     UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
+                    pingPay();
                 } else {
                     if (0 == isToShop) {
                         payPassWordDialog();
@@ -181,6 +188,26 @@ public class PayActivity extends BaseActivity {
                 break;
         }
 
+    }
+
+    private void pingPay() {
+        RequestParams params = TXApplication.getParams();
+//        PaymentRequest paymentRequest = new PaymentRequest("alipay", 1);
+        params.addBodyParameter("channel", "alipay");
+        params.addBodyParameter("amount", "1");
+        TXApplication.post(null, mContext, URL, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+//                MessageResult result = MessageResult.parse(responseInfo.result);
+                Pingpp.createPayment(mContext, responseInfo.result);
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+
+            }
+        });
     }
 
     private void canPay() {
@@ -338,5 +365,15 @@ public class PayActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    class PaymentRequest {
+        String channel;
+        int amount;
+
+        public PaymentRequest(String channel, int amount) {
+            this.channel = channel;
+            this.amount = amount;
+        }
     }
 }

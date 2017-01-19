@@ -1,1 +1,1 @@
-include ':app', ':umeng_community_discuss_library_project', ':library'
+include ':app', ':umeng_community_discuss_library_project', ':library', ':pingpp'
