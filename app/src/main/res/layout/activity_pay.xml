@@ -97,6 +97,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_border_selector"
+                my:checked="true"
+
                 my:desc="本次消费可获得1000积分"
                 my:logo_pay="@drawable/icon_pay_wx"
                 my:radio="@drawable/radio"

@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -28,7 +27,6 @@ import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.MyBookingMess;
 import com.show.specialshow.model.RedCoupon;
 import com.show.specialshow.model.RedCouponList;
-import com.show.specialshow.utils.AppManager;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.MD5Utils;
 import com.show.specialshow.utils.SPUtils;
@@ -38,7 +36,6 @@ import com.show.specialshow.view.PayRadioPurified;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.lang.reflect.Type;
 import java.text.MessageFormat;
 
 //相关控件
@@ -65,11 +62,26 @@ public class PayActivity extends BaseActivity {
 
     private RedCoupon redCoupon;
     private int totalCoupon;
-    private int type = 0;
+    private int type = 1000;
 
+    /**
+     * 微信支付渠道
+     */
+    private static final String CHANNEL_WECHAT = "wx";
+    /**
+     * 支付支付渠道
+     */
+    private static final String CHANNEL_ALIPAY = "alipay";
 
-    private static String YOUR_URL = "http://218.244.151.190/demo/charge";
-    public static final String URL = YOUR_URL;
+    /**
+     * 支付宝和微信的控件id
+     */
+    private int wxId, alipayId;
+
+    /**
+     * 支付回调码
+     */
+    private int payCode;
 
     @Override
     public void initData() {
@@ -92,7 +104,7 @@ public class PayActivity extends BaseActivity {
         genderGroup = (PayRadioGroup) findViewById(R.id.genderGroup);
         pay_confirm = (TextView) findViewById(R.id.pay_confirm);
         pay_shop_title = (TextView) findViewById(R.id.pay_shop_title);
-//        payRadioPurified = (PayRadioPurified) findViewById(R.id.p2);
+        payRadioPurified = (PayRadioPurified) findViewById(R.id.p2);
         tv_pay_amount = (TextView) findViewById(R.id.tv_pay_amount);
         ll_pay_coupon = (LinearLayout) findViewById(R.id.ll_pay_coupon);
         pay_red_coupon_tv = (TextView) findViewById(R.id.pay_red_coupon_tv);
@@ -119,6 +131,8 @@ public class PayActivity extends BaseActivity {
                 + pay_amount + "分");
         ((PayRadioPurified) genderGroup.getChildAt(1)).setTextDesc("本次消费可获得" + pay_amount + "积分");
         ((PayRadioPurified) genderGroup.getChildAt(2)).setTextDesc("本次消费可获得" + pay_amount + "积分");
+        wxId = genderGroup.getChildAt(1).getId();
+        alipayId = genderGroup.getChildAt(2).getId();
     }
 
     @Override
@@ -145,11 +159,13 @@ public class PayActivity extends BaseActivity {
             case R.id.pay_confirm:
                 if (null != payRadioPurified) {
                     UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
-                    pingPay();
-                } else {
                     if (0 == isToShop) {
                         payPassWordDialog();
                     }
+                } else {
+//                    if (0 == isToShop) {
+//                        payPassWordDialog();
+//                    }
                 }
                 break;
             case R.id.ll_pay_coupon://选择优惠劵
@@ -165,7 +181,17 @@ public class PayActivity extends BaseActivity {
                         UIHelper.ToastMessage(mContext, "请输入支付密码");
                     } else {
                         payPasswordDialog.dismiss();
-                        canPay();
+                        double pay_money = null != redCoupon ? coupon_amount : Double.parseDouble(pay_amount);
+                        if (0 == pay_money) {
+                            canPay();
+                        } else {
+                            if (payRadioPurified.getId() == wxId) {
+                                pingPay(CHANNEL_WECHAT, 1);
+                            } else if (payRadioPurified.getId() == alipayId) {
+                                pingPay(CHANNEL_ALIPAY, 1);
+                            }
+                        }
+
                     }
                 }
                 break;
@@ -178,11 +204,13 @@ public class PayActivity extends BaseActivity {
                 UIHelper.startActivity(mContext, SetTradingPasswordActivity.class);
                 break;
             case R.id.contest_confirm_tv:
-                if (null != dialog) {
-                    dialog.dismiss();
+                if (null != affirmDialog) {
+                    affirmDialog.dismiss();
                 }
-                Intent intent = new Intent();
-                UIHelper.setResult(mContext, RESULT_OK, intent);
+                if (payCode == 1) {
+                    Intent intent = new Intent();
+                    UIHelper.setResult(mContext, RESULT_OK, intent);
+                }
                 break;
             default:
                 break;
@@ -190,22 +218,42 @@ public class PayActivity extends BaseActivity {
 
     }
 
-    private void pingPay() {
+    private void pingPay(String channel, double amount) {
         RequestParams params = TXApplication.getParams();
-//        PaymentRequest paymentRequest = new PaymentRequest("alipay", 1);
-        params.addBodyParameter("channel", "alipay");
-        params.addBodyParameter("amount", "1");
-        TXApplication.post(null, mContext, URL, params, new RequestCallBack<String>() {
+        String url = URLs.PAYONLINE_PINGPAY;
+//        String url = "http://218.244.151.190/demo/charge";
+        params.addBodyParameter("channel", channel);
+        params.addBodyParameter("amount", amount + "");
+        TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
+            @Override
+            public void onStart() {
+                loadIng("支付中...", false);
+            }
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-//                MessageResult result = MessageResult.parse(responseInfo.result);
-                Pingpp.createPayment(mContext, responseInfo.result);
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                MessageResult result = MessageResult.parse(responseInfo.result);
+//                Pingpp.createPayment(mContext, responseInfo.result);
+
+                if (null == result) {
+                    return;
+                }
+                if (1 == result.getSuccess()) {
+                    Pingpp.createPayment(mContext, result.getData());
+                } else {
+                    UIHelper.ToastMessage(mContext, result.getMessage());
+                }
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
-
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+                UIHelper.ToastMessage(mContext, R.string.net_work_error);
             }
         });
     }
@@ -251,6 +299,7 @@ public class PayActivity extends BaseActivity {
                     return;
                 }
                 if (1 == result.getSuccess()) {
+                    payCode = 1;
                     createAffirmDialog(result.getMessage(), DIALOG_SINGLE_STPE, false);
                 } else {
                     UIHelper.ToastMessage(mContext, result.getMessage());
@@ -298,20 +347,52 @@ public class PayActivity extends BaseActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data == null) {
-            return;
-        }
-        switch (requestCode) {
-            case REQUEST_CODE_SELECT_RED_COUPON_PAY:
-                redCoupon = (RedCoupon) data
-                        .getSerializableExtra("select_red_coupon");
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_SELECT_RED_COUPON_PAY) {
+                if (data != null) {
+                    redCoupon = (RedCoupon) data
+                            .getSerializableExtra("select_red_coupon");
+                } else {
+                    redCoupon = null;
+                }
                 addRedCouponShow();
-                break;
-
-            default:
-                break;
+            } else if (requestCode == Pingpp.REQUEST_CODE_PAYMENT) {
+                if (data != null) {
+                    String payResult = data.getExtras().getString("pay_result");
+                    String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
+                    String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
+                    if ("success".equals(payResult)) {
+                        payCode = 1;
+                        createAffirmDialog("支付成功", DIALOG_SINGLE_STPE, false);
+                    } else if ("cancel".equals(payResult)) {
+                        payCode = 0;
+                        createAffirmDialog("支付取消", DIALOG_SINGLE_STPE, false);
+                    } else if ("fail".equals(payResult)) {
+                        payCode = -1;
+                        createAffirmDialog("支付失败", DIALOG_SINGLE_STPE, false);
+                    } else if ("invalid".equals(payResult)) {
+                        payCode = -2;
+                        if ("wx_app_not_installed".equals(errorMsg)) {
+                            errorMsg = "未安装微信";
+                        } else if ("wx_app_not_support".equals(errorMsg)) {
+                            errorMsg = "微信不支持";
+                        }
+                        showMsg(payResult, errorMsg, extraMsg);
+                    }
+                }
+            }
         }
+    }
+
+    public void showMsg(String title, String msg1, String msg2) {
+        String str = title;
+        if (null != msg1 && msg1.length() != 0) {
+            str = msg1;
+        }
+        if (null != msg2 && msg2.length() != 0) {
+            str = msg2;
+        }
+        createAffirmDialog(str, DIALOG_SINGLE_STPE, false);
     }
 
     double coupon_amount;
@@ -365,15 +446,5 @@ public class PayActivity extends BaseActivity {
                         }
                     }
                 });
-    }
-
-    class PaymentRequest {
-        String channel;
-        int amount;
-
-        public PaymentRequest(String channel, int amount) {
-            this.channel = channel;
-            this.amount = amount;
-        }
     }
 }

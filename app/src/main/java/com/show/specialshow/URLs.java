@@ -287,5 +287,9 @@ public interface URLs {
      * qq,微信绑定手机
      */
     String LOGIN_BINDPHONE = BASE_URL + "/login/bindphone";
+    /**
+     * ping++支付
+     */
+    String PAYONLINE_PINGPAY = BASE_URL + "/payonline/pingpay";
 }
 
