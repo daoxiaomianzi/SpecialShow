@@ -224,6 +224,24 @@ public class PayActivity extends BaseActivity {
 //        String url = "http://218.244.151.190/demo/charge";
         params.addBodyParameter("channel", channel);
         params.addBodyParameter("amount", amount + "");
+        params.addBodyParameter("subject_id", service_id);
+        params.addBodyParameter("subject", myBookingMess.getService_name());
+        params.addBodyParameter("body", myBookingMess.getService_name());
+        final String user_id = (String) SPUtils.get(mContext, "uid", "");
+        params.addBodyParameter("uid", user_id);
+        params.addBodyParameter("T_pin", MD5Utils.getMd5Str(payPassword_et.getText().toString().trim()));
+        params.addBodyParameter("target_mid", shop_id);
+        params.addBodyParameter("service_price", pay_amount);
+        if (null != redCoupon) {
+            params.addBodyParameter("coupon_id", redCoupon.getRed_id());
+            params.addBodyParameter("use_coupon", redCoupon.getNum() + "");
+        } else {
+            params.addBodyParameter("coupon_id", "");
+            params.addBodyParameter("use_coupon", "0");
+        }
+        params.addBodyParameter("re_number", myBookingMess.getPeople_num());
+        params.addBodyParameter("appointment_id", myBookingMess.getAppointment_id());
+        params.addBodyParameter("app_from", "1");
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
             public void onStart() {
