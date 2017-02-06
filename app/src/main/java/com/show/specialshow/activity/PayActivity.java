@@ -36,6 +36,7 @@ import com.show.specialshow.view.PayRadioPurified;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 
 //相关控件
@@ -82,6 +83,9 @@ public class PayActivity extends BaseActivity {
      * 支付回调码
      */
     private int payCode;
+
+    private DecimalFormat df = new DecimalFormat("0.00");
+
 
     @Override
     public void initData() {
@@ -158,7 +162,7 @@ public class PayActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.pay_confirm:
                 if (null != payRadioPurified) {
-                    UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
+//                    UIHelper.ToastMessage(mContext, payRadioPurified.getTextTitle());
                     if (0 == isToShop) {
                         payPassWordDialog();
                     }
@@ -181,14 +185,14 @@ public class PayActivity extends BaseActivity {
                         UIHelper.ToastMessage(mContext, "请输入支付密码");
                     } else {
                         payPasswordDialog.dismiss();
-                        double pay_money = null != redCoupon ? coupon_amount : Double.parseDouble(pay_amount);
+                        double pay_money = null != redCoupon ? Double.parseDouble(coupon_amount) : Double.parseDouble(pay_amount);
                         if (0 == pay_money) {
                             canPay();
                         } else {
                             if (payRadioPurified.getId() == wxId) {
-                                pingPay(CHANNEL_WECHAT, 1);
+                                pingPay(CHANNEL_WECHAT, pay_money);
                             } else if (payRadioPurified.getId() == alipayId) {
-                                pingPay(CHANNEL_ALIPAY, 1);
+                                pingPay(CHANNEL_ALIPAY, pay_money);
                             }
                         }
 
@@ -413,11 +417,11 @@ public class PayActivity extends BaseActivity {
         createAffirmDialog(str, DIALOG_SINGLE_STPE, false);
     }
 
-    double coupon_amount;
+    String coupon_amount;
 
     private void addRedCouponShow() {
         if (null != redCoupon) {
-            coupon_amount = Double.valueOf(pay_amount) - Double.valueOf(redCoupon.getNum());
+            coupon_amount = df.format(Double.valueOf(pay_amount) - Double.valueOf(redCoupon.getNum()));
             pay_confirm.setText("确认支付" + coupon_amount + "元");
             pay_red_coupon_tv.setText(MessageFormat.format("{0}元优惠劵", redCoupon.getNum()));
         } else {
