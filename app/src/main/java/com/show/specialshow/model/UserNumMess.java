@@ -15,6 +15,15 @@ public class UserNumMess implements Serializable {
     private int appointmentNum;//预约数量
     private int isMerchant;//返回2说明此用户同时是商户，1为普通用户
     private int userBiaoshi;//返回2说明此用户同时为手艺人，1为普通用户
+    private int isAgent;//返回1说明此用户可以邀请别人成为代理，0不是
+
+    public int getIsAgent() {
+        return isAgent;
+    }
+
+    public void setIsAgent(int isAgent) {
+        this.isAgent = isAgent;
+    }
 
     public int getCouponNum() {
         return couponNum;

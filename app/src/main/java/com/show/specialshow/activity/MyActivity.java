@@ -11,6 +11,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
@@ -62,6 +63,8 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
     private TextView tv_unReadMess;//未读消息数
     private TextView coupons_num;//优惠劵数量
     private TextView my_reservation_num;//我的预约数量
+    private ImageView my_two_code_split;
+    private RelativeLayout rl_my_agency;
     //
     private static final int BAS_INFORMATION = 0x000001;
     private static final int UNREADMESS = 0x000002;
@@ -118,6 +121,13 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                             vi_craftsman.setVisibility(View.GONE);
                             rl_craftsman.setVisibility(View.GONE);
                             my_craftsman_bottom_ll.setVisibility(View.GONE);
+                        }
+                        if (1 == userNumMess.getIsAgent()) {
+                            my_two_code_split.setVisibility(View.VISIBLE);
+                            rl_my_agency.setVisibility(View.VISIBLE);
+                        } else {
+                            my_two_code_split.setVisibility(View.GONE);
+                            rl_my_agency.setVisibility(View.GONE);
                         }
                     }
 
@@ -183,6 +193,8 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
         tv_unReadMess = (TextView) findViewById(R.id.tv_unReadMess);
         my_reservation_num = (TextView) findViewById(R.id.my_reservation_num);
         coupons_num = (TextView) findViewById(R.id.coupons_num);
+        my_two_code_split = (ImageView) findViewById(R.id.my_two_code_split);
+        rl_my_agency = (RelativeLayout) findViewById(R.id.rl_my_agency);
     }
 
     @Override
@@ -341,6 +353,18 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                     dialog.cancel();
                 }
                 dialog.show();
+                break;
+            case R.id.rl_my_agency://邀请成为代理
+                CreateQRImage createQRImage = new CreateQRImage(mContext);
+                Two_dimensionDialog agencyDialog;
+                agencyDialog = new Two_dimensionDialog(
+                        mContext,
+                        createQRImage.createQRImage("http://m.teshow.com/PublicClass/Agent/addAgent?aid="
+                                + SPUtils.get(mContext, "uid", "")));
+                if (agencyDialog != null) {
+                    agencyDialog.cancel();
+                }
+                agencyDialog.show();
                 break;
             case R.id.rl_craftsman://我的手艺人
 
