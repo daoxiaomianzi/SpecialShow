@@ -75,7 +75,7 @@ public class TeShowActivitiesFragment extends BaseSearch {
         search_result_lv.setDividerHeight(0);
         search_result_lv.setBackgroundResource(R.color.app_bg);
         search_result_lv.setPullLoadEnable(false);
-
+        registerBoradcastReceiver();
     }
 
     @Override
@@ -96,7 +96,6 @@ public class TeShowActivitiesFragment extends BaseSearch {
     @Override
     public void fillView() {
 
-        registerBoradcastReceiver();
     }
 
     public void registerBoradcastReceiver() {
@@ -125,14 +124,16 @@ public class TeShowActivitiesFragment extends BaseSearch {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mContext.unregisterReceiver(mBroadcastReceiver);
+        if (mBroadcastReceiver != null) {
+            mContext.unregisterReceiver(mBroadcastReceiver);
+        }
     }
 
     @Override
     protected void getData() {
         RequestParams params = TXApplication.getParams();
         String url = URLs.POSTS_POSTSLIST;
-        params.addBodyParameter("uid", (String) SPUtils.get(mContext,"uid",""));
+        params.addBodyParameter("uid", (String) SPUtils.get(mContext, "uid", ""));
         params.addBodyParameter("term_id", "1");
         params.addBodyParameter("pageSize", ConstantValue.PAGE_SIZE + "");
         params.addBodyParameter("pageNow", pageIndex + "");

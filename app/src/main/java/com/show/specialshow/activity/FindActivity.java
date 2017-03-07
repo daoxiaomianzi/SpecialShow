@@ -53,6 +53,7 @@ public class FindActivity extends BaseActivity {
         if (!BtnUtils.getInstance().isFastDoubleClick()) {
             return;
         }
+        Bundle bundle = new Bundle();
         switch (v.getId()) {
 //            case R.id.rll_texiu_community://特秀社区
 //                if (TXApplication.login) {
@@ -88,7 +89,8 @@ public class FindActivity extends BaseActivity {
 //                }
 //                break;
             case R.id.rll_texiu_activity://特秀活动
-                UIHelper.startActivity(mContext, TeShowActivitiesActivity.class);
+                bundle.putInt("type", 1);
+                UIHelper.startActivity(mContext, TexiuActivitiesActivity.class, bundle);
 //                if (TXApplication.login) {
 //                    if(CommonUtils.isLogin(mContext)){
 //                        UIHelper.startActivity(mContext,TexiuActivitiesActivity.class);
@@ -125,7 +127,6 @@ public class FindActivity extends BaseActivity {
                 if (TXApplication.login) {
                     UIHelper.startActivity(mContext, CaptureActivity.class);
                 } else {
-                    Bundle bundle = new Bundle();
                     bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
@@ -137,10 +138,13 @@ public class FindActivity extends BaseActivity {
                 if (TXApplication.login) {
                     UIHelper.startActivity(mContext, IntegralmMarketActivity.class);
                 } else {
-                    Bundle bundle = new Bundle();
                     bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
                     UIHelper.startActivity(mContext, LoginActivity.class, bundle);
                 }
+                break;
+            case R.id.rll_industry_dynamic://行业动态
+                bundle.putInt("type", 2);
+                UIHelper.startActivity(mContext, TexiuActivitiesActivity.class, bundle);
                 break;
 
             default:

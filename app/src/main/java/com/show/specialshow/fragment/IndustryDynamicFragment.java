@@ -69,10 +69,10 @@ public class IndustryDynamicFragment extends BaseSearch {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
+                MessageResult result = MessageResult.parse(responseInfo.result);
                 if (null != dialog) {
                     dialog.dismiss();
                 }
-                MessageResult result = MessageResult.parse(responseInfo.result);
                 if (null == result) {
 
                     onError(getResources().getString(R.string.net_server_error));
