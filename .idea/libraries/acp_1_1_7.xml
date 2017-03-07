@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="acp-1.1.7">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.mylhyl/acp/1.1.7/res" />
-      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.mylhyl/acp/1.1.7/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e116d4b05902e0c08e7230382bef2ecbaf1e9fbe/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/e116d4b05902e0c08e7230382bef2ecbaf1e9fbe/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
