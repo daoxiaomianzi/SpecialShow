@@ -20,6 +20,15 @@ public class RedCoupon implements Serializable {
     private String use_space;
     private String use_service;
     private String use_merchant;
+    private String use_merchant_id;//优惠劵使用店铺
+
+    public String getUse_merchant_id() {
+        return use_merchant_id;
+    }
+
+    public void setUse_merchant_id(String use_merchant_id) {
+        this.use_merchant_id = use_merchant_id;
+    }
 
     public String getUse_service() {
         return use_service;

@@ -1,7 +1,9 @@
 package com.show.specialshow.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.MainActivity;
+import com.show.specialshow.activity.StoresDetailsActivity;
 import com.show.specialshow.model.MessageResult;
 import com.show.specialshow.model.RedCoupon;
 import com.show.specialshow.utils.BtnUtils;
@@ -229,15 +232,28 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
             if (!BtnUtils.getInstance().isFastDoubleClick()) {
                 return;
             }
+            Bundle bundle = new Bundle();
             switch (v.getId()) {
                 case R.id.red_coupon_buy_btn:
                     RedCoupon coupon_item = mlist_coupon.get(holder.getPosition());
                     if (0 == isSelect && coupon_item.getIs_use() == 0
                             && coupon_item.getEnddate() * 1000 > System
                             .currentTimeMillis()) {
-                        Intent intent = new Intent(mContext, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        mContext.startActivity(intent);
+                        switch (coupon_item.getType()) {
+                            case 0:
+                                Intent intent = new Intent(mContext, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                mContext.startActivity(intent);
+                                break;
+                            case 1:
+                            case 2:
+                                bundle.putString("shop_id", coupon_item.getUse_merchant_id());
+                                UIHelper.startActivity((Activity) mContext, StoresDetailsActivity.class, bundle);
+                                break;
+                            default:
+                                break;
+                        }
+
                     }
                     break;
                 case R.id.red_coupon_all:

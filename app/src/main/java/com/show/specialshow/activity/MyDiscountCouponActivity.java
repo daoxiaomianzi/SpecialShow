@@ -49,7 +49,7 @@ public class MyDiscountCouponActivity extends BaseSearchActivity {
         shop_id = getIntent().getStringExtra("shop_id");
         service_id = getIntent().getStringExtra("service_id");
         service_price = getIntent().getStringExtra("service_price");
-        adapter = new RedCouponSwipeAdapter(mlist_coupon, mContext,isSelect);
+        adapter = new RedCouponSwipeAdapter(mlist_coupon, mContext, isSelect);
     }
 
     @Override
