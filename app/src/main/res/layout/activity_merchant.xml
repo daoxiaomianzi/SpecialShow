@@ -113,7 +113,7 @@
                 android:textColor="@color/color_999999"
 
                 android:textColorHint="@color/white"
-                android:textSize="@dimen/text_size_26px" />
+                android:textSize="@dimen/text_size_24px" />
             <!--<ImageView-->
             <!--android:id="@+id/circle_red_small"-->
             <!--android:layout_width="@dimen/text_size_16px"-->

@@ -34,8 +34,8 @@ public class BannerPointUtils {
             imageView = new ImageView(mContext);
             imageView.setBackgroundResource(R.drawable.dot_normal);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    new ViewGroup.LayoutParams(DensityUtil.dip2px(mContext,6),
-                            DensityUtil.dip2px(mContext,6)));
+                    new ViewGroup.LayoutParams(DensityUtil.dip2px(mContext,7),
+                            DensityUtil.dip2px(mContext,7)));
             layoutParams.leftMargin = 10;
             layoutParams.rightMargin = 10;
             ll_point.addView(imageView, layoutParams);

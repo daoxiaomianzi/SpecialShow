@@ -53,6 +53,7 @@
     <dimen name="text_size_16px">10dp</dimen>
     <!-- 字体16px -->
     <dimen name="text_size_10px">8dp</dimen>
+    <dimen name="text_size_9px">7dp</dimen>
     <!-- 字体 -->
     <dimen name="text_size_8px">6dp</dimen>
     <dimen name="ling_0.8">0.8dp</dimen>

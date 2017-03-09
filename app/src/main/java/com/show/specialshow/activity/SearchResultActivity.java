@@ -33,6 +33,8 @@ public class SearchResultActivity extends BaseActivity {
             head_title_tv.setText("搜索结果");
         } else {
             head_title_tv.setText(tag);
+            head_right_tv.setVisibility(View.VISIBLE);
+            head_right_tv.setText("筛选");
         }
     }
 

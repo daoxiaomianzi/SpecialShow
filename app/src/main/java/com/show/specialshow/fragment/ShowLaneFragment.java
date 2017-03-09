@@ -63,10 +63,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import cn.bingoogolapple.bgabanner.BGABanner;
+
 public class ShowLaneFragment extends BaseSearch implements AMapLocationListener {
 
-    private List<ShopListMess> mList = new ArrayList<ShopListMess>();
+    private List<ShopListMess> mList = new ArrayList<>();
     private List<ShopListTagsMess> mTagsMesses = new ArrayList<>();
+    private BGABanner mBanner;
+
     //相关控件
     private TextView show_lang_nodata_tv;
     //    private EditText show_lang_search_et;//搜索框
@@ -87,9 +91,9 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     private String key;
     //banner相关
     private View header_banner;
-    private ViewPager dynamic_banner;
+    //    private ViewPager dynamic_banner;
     private TextView dynamic_banner_describe_tv;
-    private LinearLayout dynamic_banner_show_adddot;//banner小点
+    //    private LinearLayout dynamic_banner_show_adddot;//banner小点
     private int currentItem = 0;
     private ScheduledExecutorService scheduledExecutorService;
     private BannerPointUtils bannerPointUtils;//banner小点工具类
@@ -122,6 +126,8 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     private List<BannerMess> bannerList;
     //类型
     private int tag_id;
+
+    private boolean isFristTag = true;
 
 
     public static ShowLaneFragment newInstance(String key, int tag_id) {
@@ -160,57 +166,64 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
         adapter = new ShowLaneAdapter(mList, mContext);
     }
 
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            dynamic_banner.setCurrentItem(currentItem);
-        }
-    };
+//    private Handler handler = new Handler() {
+//        public void handleMessage(android.os.Message msg) {
+//            dynamic_banner.setCurrentItem(currentItem);
+//        }
+//    };
 
-    @Override
-    public void onStart() {
-        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        // 当Activity显示出来后，每两秒钟切换一次图片显示
-        scheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 5, 5,
-                TimeUnit.SECONDS);
-        super.onStart();
-    }
-
-    @Override
-    public void onStop() {
-        // 当Activity不可见的时候停止切换
-        scheduledExecutorService.shutdown();
-        super.onStop();
-    }
+//    @Override
+//    public void onStart() {
+//        scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+//        // 当Activity显示出来后，每两秒钟切换一次图片显示
+//        scheduledExecutorService.scheduleAtFixedRate(new ScrollTask(), 5, 5,
+//                TimeUnit.SECONDS);
+//        super.onStart();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        // 当Activity不可见的时候停止切换
+//        scheduledExecutorService.shutdown();
+//        super.onStop();
+//    }
 
     /**
      * 换行切换任务
      *
      * @author Administrator
      */
-    private class ScrollTask implements Runnable {
-
-        public void run() {
-            synchronized (header_banner) {
-                // System.out.println("currentItem: " + currentItem);
-                // currentItem = (currentItem + 1) % images.size();
-                currentItem = currentItem + 1;
-                // handler.obtainMessage().sendToTarget(); // 通过Handler切换图片
-                handler.sendEmptyMessage(-1);
-            }
-        }
-
-    }
-
+//    private class ScrollTask implements Runnable {
+//
+//        public void run() {
+//            synchronized (header_banner) {
+//                // System.out.println("currentItem: " + currentItem);
+//                // currentItem = (currentItem + 1) % images.size();
+//                currentItem = currentItem + 1;
+//                // handler.obtainMessage().sendToTarget(); // 通过Handler切换图片
+//                handler.sendEmptyMessage(-1);
+//            }
+//        }
+//
+//    }
     @Override
     public void initView() {
         if (StringUtils.isEmpty(key) && 0 == tag_id) {
             header_banner = View.inflate(mContext,
-                    R.layout.view_dynamic_banner_page, null);
-            dynamic_banner = (ViewPager) header_banner
-                    .findViewById(R.id.dynamic_banner_show_vp);
-            dynamic_banner_show_adddot = (LinearLayout) header_banner.findViewById(R.id.dynamic_banner_show_adddot);
-            dynamic_banner_describe_tv = (TextView) header_banner
-                    .findViewById(R.id.dynamic_banner_describe_tv);
+                    R.layout.view_banner, null);
+            mBanner = (BGABanner) header_banner.findViewById(R.id.banner);
+            mBanner.setAdapter(new BGABanner.Adapter() {
+                @Override
+                public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
+                    ImageLoader.getInstance().displayImage((String) model, (ImageView) view);
+
+                }
+            });
+//            dynamic_banner = (ViewPager) header_banner
+//                    .findViewById(R.id.dynamic_banner_show_vp);
+//            dynamic_banner_show_adddot = (LinearLayout) header_banner.findViewById(R.id.dynamic_banner_show_adddot);
+//            dynamic_banner_describe_tv = (TextView) header_banner
+//                    .findViewById(R.id.dynamic_banner_describe_tv);
             search_result_lv.addHeaderView(header_banner);
             center_button = View.inflate(mContext, R.layout.view_switch_class, null);
             mPager = (ViewPager) center_button.findViewById(R.id.viewpager);
@@ -280,24 +293,24 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     @Override
     public void setListener() {
         if (StringUtils.isEmpty(key) && 0 == tag_id) {
-            dynamic_banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-                @Override
-                public void onPageSelected(int position) {
-                    currentItem = position;
-                    bannerPointUtils.draw_Point(position % images.size());
-                }
-
-                @Override
-                public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int arg0) {
-
-                }
-            });
+//            dynamic_banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//                @Override
+//                public void onPageSelected(int position) {
+//                    currentItem = position;
+//                    bannerPointUtils.draw_Point(position % images.size());
+//                }
+//
+//                @Override
+//                public void onPageScrolled(int arg0, float arg1, int arg2) {
+//
+//                }
+//
+//                @Override
+//                public void onPageScrollStateChanged(int arg0) {
+//
+//                }
+//            });
             mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageSelected(int position) {
@@ -523,7 +536,10 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     protected void getData() {
-        if (StringUtils.isEmpty(key) && 0 == tag_id && bannerList == null) {
+        String oldCity = SPUtils.get(mContext, "oldCity", "上海").toString();
+        String city = SPUtils.get(mContext, "city", "上海").toString();
+        if (StringUtils.isEmpty(key) && 0 == tag_id /*&& (bannerList == null*//* || (bannerList != null
+                && (!oldCity.equals(city)))*/) {
             loadBanner();
         }
         RequestParams params = TXApplication.getParams();
@@ -749,8 +765,11 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
 
     private void loadBanner() {
+//        scheduledExecutorService.shutdown();
         RequestParams params = TXApplication.getParams();
         String url = URLs.LOGIN_BANNER;
+        String city = SPUtils.get(mContext, "city", "上海").toString();
+        params.addBodyParameter("city", city);
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
 
             @Override
@@ -767,17 +786,26 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                         }
                         bannerList = BannerMess.parse(info);
                         if (null != bannerList) {
-                            initBanner();
+//                            initBanner();
+                            List<String> tips = new ArrayList<>();
+                            List<String> banners = new ArrayList<>();
+                            for (int i = 0; i < bannerList.size(); i++) {
+                                banners.add(bannerList.get(i).getImagePath());
+                            }
+                            mBanner.setData(R.layout.view_image, banners, tips);
                         }
                     }
                     String tags = result.getTaglist();
-                    if (null != tags) {
-                        if (mDatas != null) {
-                            mDatas.clear();
-                        }
-                        mDatas = CenterButtonMess.parse(tags);
-                        if (mDatas != null) {
-                            initCenterView();
+                    if (isFristTag) {
+                        if (null != tags) {
+                            if (mDatas != null) {
+                                mDatas.clear();
+                            }
+                            mDatas = CenterButtonMess.parse(tags);
+                            if (mDatas != null) {
+                                initCenterView();
+                                isFristTag = false;
+                            }
                         }
                     }
                 } else {
@@ -821,10 +849,10 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             images.add(imageView);
         }
         banner_adapter = new MyPagerAdapter();
-        dynamic_banner.setCurrentItem(300);
-        dynamic_banner.setAdapter(banner_adapter);
-        bannerPointUtils = new BannerPointUtils(mContext, dynamic_banner_show_adddot, pointviews
-        );
+//        dynamic_banner.setCurrentItem(300);
+//        dynamic_banner.setAdapter(banner_adapter);
+//        bannerPointUtils = new BannerPointUtils(mContext, dynamic_banner_show_adddot, pointviews
+//        );
         if (null != bannerList) {
             bannerPointUtils.initPoint(bannerList.size());
             bannerPointUtils.draw_Point(0);

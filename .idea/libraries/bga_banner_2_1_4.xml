@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="bga-banner-2.1.4">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/e1263f8883ceb2ca47e7a35d25f56ab86c01f824/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e1263f8883ceb2ca47e7a35d25f56ab86c01f824/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.bingoogolapple/bga-banner/2.1.4/4fa807504c116cafcb2a92b72e0f9af394f90d0d/bga-banner-2.1.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
