@@ -35,6 +35,7 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.BannerWebActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
+import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.activity.SearchResultActivity;
 import com.show.specialshow.activity.StoresDetailsActivity;
 import com.show.specialshow.adapter.GridViewAdapter;
@@ -65,7 +66,7 @@ import java.util.concurrent.TimeUnit;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 
-public class ShowLaneFragment extends BaseSearch implements AMapLocationListener {
+public class ShowLaneFragment extends BaseSearch implements AMapLocationListener, BGABanner.Delegate {
 
     private List<ShopListMess> mList = new ArrayList<>();
     private List<ShopListTagsMess> mTagsMesses = new ArrayList<>();
@@ -215,7 +216,8 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             mBanner.setAdapter(new BGABanner.Adapter() {
                 @Override
                 public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
-                    ImageLoader.getInstance().displayImage((String) model, (ImageView) view);
+                    BannerMess bannerMess = (BannerMess) model;
+                    ImageLoader.getInstance().displayImage(bannerMess.getImagePath(), (ImageView) view);
 
                 }
             });
@@ -293,6 +295,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
     @Override
     public void setListener() {
         if (StringUtils.isEmpty(key) && 0 == tag_id) {
+            mBanner.setDelegate(this);
 //            dynamic_banner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 //
 //                @Override
@@ -786,13 +789,8 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                         }
                         bannerList = BannerMess.parse(info);
                         if (null != bannerList) {
-//                            initBanner();
                             List<String> tips = new ArrayList<>();
-                            List<String> banners = new ArrayList<>();
-                            for (int i = 0; i < bannerList.size(); i++) {
-                                banners.add(bannerList.get(i).getImagePath());
-                            }
-                            mBanner.setData(R.layout.view_image, banners, tips);
+                            mBanner.setData(R.layout.view_image, bannerList, tips);
                         }
                     }
                     String tags = result.getTaglist();
@@ -857,6 +855,17 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             bannerPointUtils.initPoint(bannerList.size());
             bannerPointUtils.draw_Point(0);
         }
+    }
+
+    @Override
+    public void onBannerItemClick(BGABanner banner, View itemView, Object model, int position) {
+        BannerMess bannerMess = (BannerMess) model;
+        Bundle bundle = new Bundle();
+        if (!StringUtils.isEmpty(bannerMess.getUrl())) {
+            bundle.putString("banner_path", bannerMess.getUrl());
+            UIHelper.startActivity(getActivity(), BannerWebActivity.class, bundle);
+        }
+
     }
 
     private class MyPagerAdapter extends PagerAdapter {
