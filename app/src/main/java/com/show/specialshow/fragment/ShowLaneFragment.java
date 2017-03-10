@@ -232,6 +232,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
             mPager = (ViewPager) center_button.findViewById(R.id.viewpager);
             mLlDot = (LinearLayout) center_button.findViewById(R.id.ll_dot);
         }
+        registerBoradcastReceiver();
         InitLocation();
     }
 
@@ -541,10 +542,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
 
     @Override
     protected void getData() {
-        String oldCity = SPUtils.get(mContext, "oldCity", "上海").toString();
-        String city = SPUtils.get(mContext, "city", "上海").toString();
-        if (StringUtils.isEmpty(key) && 0 == tag_id /*&& (bannerList == null*//* || (bannerList != null
-                && (!oldCity.equals(city)))*/) {
+        if (StringUtils.isEmpty(key) && 0 == tag_id) {
             loadBanner();
         }
         RequestParams params = TXApplication.getParams();
@@ -686,7 +684,6 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
         mLon = aMapLocation.getLongitude();
         locationClient.stopLocation();
         initListView();
-        registerBoradcastReceiver();
         search_result_lv.setDividerHeight(0);
         search_result_lv.setBackgroundColor(Color.WHITE);
         search_result_lv.setPullLoadEnable(true);
