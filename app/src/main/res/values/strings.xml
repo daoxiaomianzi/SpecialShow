@@ -138,6 +138,7 @@
     <string name="collection">收藏</string>
     <string name="address">地址:</string>
     <string name="phone">电话:</string>
+    <string name="activity">活动:</string>
     <string name="iphone">手机:</string>
     <string name="opening_time">营业时间:</string>
     <string name="monetary">消费总额</string>
@@ -532,6 +533,8 @@
     <string name="follow_topic">话题搜索</string>
     <string name="official_event">官方赛事</string>
     <string name="industry_dynamic">行业动态</string>
+    <string name="industry_competition">美业大赛</string>
+    <string name="makeup_tutorial">美妆教程</string>
     <!-- 地图相关-->
     <string name="preference_default_tts_role">xiaoyan</string>
     <string name="preference_key_tts_speed">tts_speed</string>

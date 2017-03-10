@@ -81,10 +81,24 @@
         android:layout_height="@dimen/ling_0.8"
         android:background="@color/color_ededed" />
 
+    <RelativeLayout
+        android:id="@+id/rll_industry_competition"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        android:paddingLeft="@dimen/text_size_26px">
+
+        <TextView
+            style="@style/user_info_tv"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_industry_competition"
+            android:drawablePadding="@dimen/text_size_20px"
+            android:text="@string/industry_competition" />
+    </RelativeLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/ling_0.8"
-        android:layout_marginTop="@dimen/text_size_26px"
         android:background="@color/color_ededed" />
 
     <RelativeLayout
@@ -100,6 +114,27 @@
             android:drawablePadding="@dimen/text_size_20px"
             android:text="@string/industry_dynamic" />
     </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ling_0.8"
+        android:background="@color/color_ededed" />
+
+    <RelativeLayout
+        android:id="@+id/rll_makeup_tutorial"
+        style="@style/user_info_container"
+        android:layout_height="45dp"
+        android:paddingLeft="@dimen/text_size_26px">
+
+        <TextView
+            style="@style/user_info_tv"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_makeup_tutorial"
+            android:drawablePadding="@dimen/text_size_20px"
+            android:text="@string/makeup_tutorial" />
+    </RelativeLayout>
+
 
     <View
         android:layout_width="match_parent"

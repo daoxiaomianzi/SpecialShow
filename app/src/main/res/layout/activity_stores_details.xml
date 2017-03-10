@@ -412,6 +412,32 @@
             <ImageView style="@style/list_menu_next" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_stores_details_activity"
+            style="@style/user_info_container">
+
+            <TextView
+                android:id="@+id/tv_stores_details_activity"
+                style="@style/user_info_tv"
+                android:text="@string/activity"
+                android:textColor="@color/color_999999" />
+
+            <TextView
+                android:id="@+id/tv_stores_details_activity_name"
+                style="@style/user_info_tv"
+                android:layout_marginLeft="@dimen/text_size_10px"
+                android:layout_toRightOf="@id/tv_stores_details_activity"
+                android:singleLine="true"
+                android:textColor="@color/color_F47183"
+                android:text="注册就送旅行套装" />
+
+            <ImageView
+                style="@style/user_info_split"
+                android:layout_marginRight="@dimen/text_size_28px" />
+
+            <ImageView style="@style/list_menu_next" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/rl_stores_details_introduction"
