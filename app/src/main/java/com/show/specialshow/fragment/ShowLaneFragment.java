@@ -58,6 +58,7 @@ import com.show.specialshow.xlistview.XListView;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -277,6 +278,7 @@ public class ShowLaneFragment extends BaseSearch implements AMapLocationListener
                     Bundle bundle = new Bundle();
                     bundle.putString("tag", mDatas.get(pos).getTag());
                     bundle.putInt("tag_id", mDatas.get(pos).getTag_id());
+                    bundle.putSerializable("mData", (Serializable) mDatas);
                     UIHelper.startActivity(getActivity(), SearchResultActivity.class, bundle);
                 }
             });

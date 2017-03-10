@@ -13,6 +13,14 @@ public class ConditionMess implements Serializable {
     private int key;
     private String name;
 
+    public ConditionMess() {
+    }
+
+    public ConditionMess(int key, String name) {
+        this.key = key;
+        this.name = name;
+    }
+
     public int getKey() {
         return key;
     }
