@@ -369,7 +369,7 @@ public class BusinessCardInformationActivity extends BaseActivity {
         WeakReference<BusinessCardInformationActivity> mActivity;
 
         BasicHandler(BusinessCardInformationActivity activity) {
-            mActivity = new WeakReference<BusinessCardInformationActivity>(activity);
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override

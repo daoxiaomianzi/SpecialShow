@@ -628,7 +628,6 @@ public class SendCardActivity extends BaseActivity {
                 message.setData(bundle);//bundle传值，耗时，效率低
                 message.what = 1;//标志是哪个线程传数据
                 sendHandle.sendMessage(message);//发送message信息
-
                 break;
             case TAKE_STORE:
                 mShop = (ShopItem) data.getSerializableExtra("select_store");
