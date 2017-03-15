@@ -146,6 +146,10 @@ public class FindActivity extends BaseActivity {
                 bundle.putInt("type", 2);
                 UIHelper.startActivity(mContext, TexiuActivitiesActivity.class, bundle);
                 break;
+            case R.id.rll_makeup_tutorial://美妆教程
+                bundle.putInt("type", 3);
+                UIHelper.startActivity(mContext, TexiuActivitiesActivity.class, bundle);
+                break;
 
             default:
                 break;
