@@ -885,6 +885,7 @@
         <activity android:name=".activity.BindingPhoneActivity">
 
         </activity>
+        <activity android:name=".activity.CommonActivityActivity"/>
 
         <!-- 自己的页面等其他相关 -->
 

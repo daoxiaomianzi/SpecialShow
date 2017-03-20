@@ -1,9 +1,7 @@
 package com.show.specialshow.activity;
 
-import android.view.KeyEvent;
 import android.view.View;
 
-import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 

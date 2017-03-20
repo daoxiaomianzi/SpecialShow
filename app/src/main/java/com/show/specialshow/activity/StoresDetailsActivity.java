@@ -347,6 +347,10 @@ public class StoresDetailsActivity extends BaseActivity implements AMapLocationL
                 whoClick = 1;
                 createAffirmDialog("拔打电话？", 2, true);
                 break;
+            case R.id.rl_stores_details_activity://活动
+                bundle.putString("status_url", URLs.COMMON_ACTIVITY + SPUtils.get(mContext, "uid", ""));
+                UIHelper.startActivity(mContext, CommonActivityActivity.class, bundle);
+                break;
             case R.id.rl_stores_details_branch_stores://分店
                 bundle.putString("shop_id", mShopListMess.getShop_id());
                 UIHelper.startActivity(mContext, ShopBranchActivity.class, bundle);

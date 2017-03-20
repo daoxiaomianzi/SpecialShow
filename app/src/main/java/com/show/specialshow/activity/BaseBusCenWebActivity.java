@@ -173,7 +173,10 @@ public class BaseBusCenWebActivity extends BaseActivity {
             // showSelectDialog(PHOTO_PICK,PHOTO_CARMERA);
             // }
             public void onProgressChanged(WebView view, int progress) {
+                detail_load_progress_sb.setVisibility(View.VISIBLE);
+
                 detail_load_progress_sb.setProgress(progress);
+
                 if (progress == 100) {
                     head_title_tv.setText(view.getTitle());
                     hideLoadingDialog();

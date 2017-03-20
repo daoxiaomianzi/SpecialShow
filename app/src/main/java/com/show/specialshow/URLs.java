@@ -291,5 +291,9 @@ public interface URLs {
      * ping++支付
      */
     String PAYONLINE_PINGPAY = BASE_URL + "/payonline/pingpay";
+    /**
+     * 通用活动链接
+     */
+    String COMMON_ACTIVITY = BASE_IMAGE_URL + "index.php?g=portal&m=article&a=index&id=135&from=22&uid=";
 }
 
