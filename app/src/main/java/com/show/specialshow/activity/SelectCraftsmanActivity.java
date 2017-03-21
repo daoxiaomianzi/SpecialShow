@@ -57,7 +57,7 @@ public class SelectCraftsmanActivity extends BaseActivity {
 
 		@Override
 		public int getCount() {
-			return shopPeopleMesses==null?0:(shopPeopleMesses.size()>4?4:shopPeopleMesses.size());
+			return shopPeopleMesses==null?0:(shopPeopleMesses.size());
 		}
 
 		@Override

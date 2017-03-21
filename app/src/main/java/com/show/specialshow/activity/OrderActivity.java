@@ -62,12 +62,15 @@ public class OrderActivity extends BaseActivity {
     private ShopServiceMess shopServiceMess;// 服务的信息
     private ShopPeopleMess shopPeopleMess;// 手艺人信息
     private CraftsmanIntroduceMess craftsmanIntroduceMess;// 手艺人信息
-    private List<ShopPeopleMess> shopPeopleMesses = new ArrayList<ShopPeopleMess>();
-    private List<ShopServiceMess> shopServiceMesses = new ArrayList<ShopServiceMess>();
+    private List<ShopPeopleMess> shopPeopleMesses = new ArrayList<>();
+    private List<ShopServiceMess> shopServiceMesses = new ArrayList<>();
     private String shop_id;
     private String staff_id;//手艺人id
     private String service_name;//服务名字
     private String service_id;//服务id
+    private String service_price_now;
+    private String service_price_old;
+    private String service_price_discount;
     // 相关控件
     private RelativeLayout rl_order_service;
     private TextView order_service_name;// 服务名
@@ -121,6 +124,14 @@ public class OrderActivity extends BaseActivity {
                 service_id = bookingMess.getService_id();
                 service_name = bookingMess.getService_name();
             }
+        } else if (4 == whree_from) {
+            shop_id = getIntent().getStringExtra("shop_id");
+            service_id = getIntent().getStringExtra("service_id");
+            service_name = getIntent().getStringExtra("service_name");
+            service_price_now = getIntent().getStringExtra("service_price_now");
+            service_price_old = getIntent().getStringExtra("service_price_old");
+            service_price_discount = getIntent().getStringExtra("service_price_discount");
+            shopPeopleMesses = ShopPeopleMess.parse(getIntent().getStringExtra("staff_list"));
         } else {
             if (2 == whree_from) {
                 craftsmanIntroduceMess = (CraftsmanIntroduceMess) getIntent()
@@ -245,6 +256,8 @@ public class OrderActivity extends BaseActivity {
             } else {
                 commonJudge();
             }
+        } else if (4 == whree_from) {
+            commonJudge();
         } else {
             if (shopServiceMess == null) {
                 UIHelper.showConfirmDialog(mContext, "请选择服务", null, null, true);
@@ -302,6 +315,10 @@ public class OrderActivity extends BaseActivity {
         params.addBodyParameter("servicename", service_name);
         params.addBodyParameter("serviceid", service_id);
         params.addBodyParameter("uid", user.getUid());
+        if (4 == whree_from) {
+            params.addBodyParameter("discount", "1");
+            params.addBodyParameter("service_price_now", service_price_now);
+        }
         TXApplication.post(null, mContext, url, params, new RequestCallBack<String>() {
             @Override
             public void onStart() {
@@ -610,6 +627,16 @@ public class OrderActivity extends BaseActivity {
             order_service_price_num.setVisibility(View.GONE);
             findViewById(R.id.rl_order_switch_service).setVisibility(View.GONE);
             iv_order_craftsman_people_right.setVisibility(View.INVISIBLE);
+        } else if (4 == whree_from) {
+            rl_order_service.setVisibility(View.VISIBLE);
+            order_service_vi.setVisibility(View.VISIBLE);
+            order_service_name.setText(service_name);
+            order_service_cheap_price.setText(service_price_now);
+            order_service_price.setText(service_price_old);
+//            findViewById(R.id.rll_order_service_price).setVisibility(View.GONE);
+            order_service_price_num.setText(service_price_discount);
+            findViewById(R.id.rl_order_switch_service).setVisibility(View.GONE);
+//            iv_order_craftsman_people_right.setVisibility(View.INVISIBLE);
         } else {
             if (shopServiceMess == null) {
                 rl_order_service.setVisibility(View.GONE);

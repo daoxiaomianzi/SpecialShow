@@ -52,10 +52,21 @@ public class CommonActivityActivity extends BaseBusCenWebActivity {
     }
 
     @JavascriptInterface
-    public void offerPay(String shop_id, String service_id, String service_name) {
+    public void offerPay(final String shop_id, final String service_id, final String service_name, final String service_price_now
+            , final String service_price_old, final String service_price_discount, final String staff_list) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
+                Bundle bundle = new Bundle();
+                bundle.putInt(CraftsmandetailsActivity.WHERR_FROM, 4);
+                bundle.putString("shop_id", shop_id);
+                bundle.putString("service_id", service_id);
+                bundle.putString("service_name", service_name);
+                bundle.putString("service_price_now", service_price_now);
+                bundle.putString("service_price_old", service_price_old);
+                bundle.putString("service_price_discount", service_price_discount);
+                bundle.putString("staff_list", staff_list);
+                UIHelper.startActivity(mContext, OrderActivity.class, bundle);
             }
         });
     }
