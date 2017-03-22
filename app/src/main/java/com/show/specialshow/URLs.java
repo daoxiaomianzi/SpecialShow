@@ -295,5 +295,9 @@ public interface URLs {
      * 通用活动链接
      */
     String COMMON_ACTIVITY = BASE_IMAGE_URL + "index.php?g=portal&m=article&a=index&id=135&from=22&uid=";
+    /**
+     * 美业大赛链接
+     */
+    String INDUSTRY_COMPETITION = BASE_IMAGE_URL + "User/Vote/index?uid=";
 }
 

@@ -7,10 +7,12 @@ import android.view.View;
 import com.show.specialshow.BaseActivity;
 import com.show.specialshow.R;
 import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
 import com.show.specialshow.fragment.TeShowActivitiesFragment;
 import com.show.specialshow.model.UserMessage;
 import com.show.specialshow.utils.BtnUtils;
 import com.show.specialshow.utils.ImmersedStatusbarUtils;
+import com.show.specialshow.utils.SPUtils;
 import com.show.specialshow.utils.UIHelper;
 import com.umeng.comm.core.CommunitySDK;
 import com.umeng.comm.core.beans.CommUser;
@@ -149,6 +151,16 @@ public class FindActivity extends BaseActivity {
             case R.id.rll_makeup_tutorial://美妆教程
                 bundle.putInt("type", 3);
                 UIHelper.startActivity(mContext, TexiuActivitiesActivity.class, bundle);
+                break;
+            case R.id.rll_industry_competition://美业大赛
+                if (TXApplication.login) {
+                    bundle.putString("status_url", URLs.INDUSTRY_COMPETITION +
+                            SPUtils.get(mContext, "uid", ""));
+                    UIHelper.startActivity(mContext, CommonActivityActivity.class, bundle);
+                } else {
+                    bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);
+                    UIHelper.startActivity(mContext, LoginActivity.class, bundle);
+                }
                 break;
 
             default:
