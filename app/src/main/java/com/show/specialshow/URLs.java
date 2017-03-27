@@ -299,5 +299,9 @@ public interface URLs {
      * 美业大赛链接
      */
     String INDUSTRY_COMPETITION = BASE_IMAGE_URL + "User/Vote/index?uid=";
+    /**
+     * 特秀代理系统链接
+     */
+    String USER_AGENT = BASE_IMAGE_URL + "User/Agent/index?uid=";
 }
 

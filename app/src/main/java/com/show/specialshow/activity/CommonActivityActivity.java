@@ -71,5 +71,15 @@ public class CommonActivityActivity extends BaseBusCenWebActivity {
         });
     }
 
+    @JavascriptInterface
+    public void inviteStart() {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                UIHelper.startActivity(mContext, MyInviteActivity.class);
+            }
+        });
+    }
+
 
 }

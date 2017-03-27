@@ -428,8 +428,9 @@
                 android:layout_marginLeft="@dimen/text_size_10px"
                 android:layout_toRightOf="@id/tv_stores_details_activity"
                 android:singleLine="true"
+                android:text="注册就送旅行套装"
                 android:textColor="@color/color_F47183"
-                android:text="注册就送旅行套装" />
+                android:visibility="gone" />
 
             <ImageView
                 style="@style/user_info_split"

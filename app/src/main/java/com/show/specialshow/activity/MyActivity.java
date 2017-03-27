@@ -122,13 +122,13 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                             rl_craftsman.setVisibility(View.GONE);
                             my_craftsman_bottom_ll.setVisibility(View.GONE);
                         }
-                        if (1 == userNumMess.getIsAgent()) {
-                            my_two_code_split.setVisibility(View.VISIBLE);
-                            rl_my_agency.setVisibility(View.VISIBLE);
-                        } else {
-                            my_two_code_split.setVisibility(View.GONE);
-                            rl_my_agency.setVisibility(View.GONE);
-                        }
+//                        if (1 == userNumMess.getIsAgent()) {
+//                            my_two_code_split.setVisibility(View.VISIBLE);
+//                            rl_my_agency.setVisibility(View.VISIBLE);
+//                        } else {
+//                            my_two_code_split.setVisibility(View.GONE);
+//                            rl_my_agency.setVisibility(View.GONE);
+//                        }
                     }
 
                 } else {
@@ -355,16 +355,19 @@ public class MyActivity extends BaseActivity implements OnTabActivityResultListe
                 dialog.show();
                 break;
             case R.id.rl_my_agency://邀请成为代理
-                CreateQRImage createQRImage = new CreateQRImage(mContext);
-                Two_dimensionDialog agencyDialog;
-                agencyDialog = new Two_dimensionDialog(
-                        mContext,
-                        createQRImage.createQRImage("http://m.teshow.com/PublicClass/Agent/addAgent?aid="
-                                + SPUtils.get(mContext, "uid", "")));
-                if (agencyDialog != null) {
-                    agencyDialog.cancel();
-                }
-                agencyDialog.show();
+//                CreateQRImage createQRImage = new CreateQRImage(mContext);
+//                Two_dimensionDialog agencyDialog;
+//                agencyDialog = new Two_dimensionDialog(
+//                        mContext,
+//                        createQRImage.createQRImage("http://m.teshow.com/PublicClass/Agent/addAgent?aid="
+//                                + SPUtils.get(mContext, "uid", "")));
+//                if (agencyDialog != null) {
+//                    agencyDialog.cancel();
+//                }
+//                agencyDialog.show();
+                bundle.putString("status_url", URLs.USER_AGENT +
+                        SPUtils.get(mContext, "uid", ""));
+                UIHelper.startActivity(mContext, CommonActivityActivity.class, bundle);
                 break;
             case R.id.rl_craftsman://我的手艺人
 
