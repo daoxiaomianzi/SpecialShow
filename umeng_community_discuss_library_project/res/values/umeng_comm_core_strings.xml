@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="umeng_comm_login_user_invalid">登录用户必须包含用户id、昵称、source</string>
     <string name="umeng_comm_duplicate_name">昵称已存在，请修改昵称&#8230;</string>
     <string name="umeng_comm_user_name_tips">非法昵称,昵称只能由2~20个中文、数字、英文字母以及下划线组成</string>

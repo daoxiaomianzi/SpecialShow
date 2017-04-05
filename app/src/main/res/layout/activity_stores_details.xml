@@ -414,7 +414,8 @@
 
         <RelativeLayout
             android:id="@+id/rl_stores_details_activity"
-            style="@style/user_info_container">
+            style="@style/user_info_container"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_stores_details_activity"
