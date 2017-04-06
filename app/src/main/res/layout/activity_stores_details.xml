@@ -3,92 +3,6 @@
     android:layout_height="match_parent"
     android:background="@color/app_bg">
 
-    <!--       <include
-              android:id="@+id/stores_details_head"
-              layout="@layout/view_common_head" />
-        <LinearLayout
-            android:id="@+id/stores_details_bottom_ll"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/height_50"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal" >
-
-            <RelativeLayout
-               android:id="@+id/rl_bottom_show_card"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="onClick" >
-
-                <TextView
-                    style="@style/main_menu_btn"
-                    android:text="@string/show_card"
-                    android:textColor="@color/color_656565"
-                    android:textSize="@dimen/text_size_30px" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_bottom_ceng_card"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="onClick" >
-
-                <TextView
-                    style="@style/main_menu_btn"
-                    android:text="@string/ceng_card"
-                    android:textColor="@color/color_656565"
-                    android:textSize="@dimen/text_size_30px" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_bottom_review"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="onClick" >
-
-                <TextView
-                    style="@style/main_menu_btn"
-                    android:text="@string/review"
-                    android:textColor="@color/color_656565"
-                    android:textSize="@dimen/text_size_30px" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_bottom_collection"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="onClick" >
-
-                <TextView
-                    style="@style/main_menu_btn"
-                    android:text="@string/collection"
-                    android:textColor="@color/color_656565"
-                    android:textSize="@dimen/text_size_30px" />
-            </RelativeLayout>
-        </LinearLayout>
-
-        <View
-            android:id="@+id/stores_details_bottom_vi"
-            android:layout_width="fill_parent"
-            android:layout_height="0.5dp"
-            android:layout_above="@id/stores_details_bottom_ll"
-            android:background="@color/color_999999" /> -->
-
-    <!--     <ScrollView
-            android:id="@+id/scroll_stores_details"
-            android:layout_below="@id/stores_details_head"
-            android:layout_above="@id/stores_details_bottom_vi"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none" > -->
-
     <LinearLayout
         android:id="@+id/ll_stores_details_content"
         android:layout_width="fill_parent"
@@ -415,7 +329,7 @@
         <RelativeLayout
             android:id="@+id/rl_stores_details_activity"
             style="@style/user_info_container"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/tv_stores_details_activity"

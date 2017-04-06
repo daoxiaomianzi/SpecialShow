@@ -1,20 +1,11 @@
 package com.show.specialshow.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
 import com.show.specialshow.R;
-import com.show.specialshow.TXApplication;
-import com.show.specialshow.URLs;
-import com.show.specialshow.contstant.ConstantValue;
-import com.show.specialshow.utils.BtnUtils;
-import com.show.specialshow.utils.MD5Utils;
-import com.show.specialshow.utils.SPUtils;
-import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
-import com.umeng.comm.core.beans.ShareContent;
 
 public class CommonActivityActivity extends BaseBusCenWebActivity {
     private static final int SET_TRADING_PASSWORD = 251;
