@@ -78,19 +78,7 @@
             android:layout_height="wrap_content"
             my:orientation="vertical">
 
-            <com.show.specialshow.view.PayRadioPurified
-                android:id="@+id/p1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_border_selector"
-                android:visibility="gone"
-                my:checked="false"
-                my:desc="支付银行卡支付，支付更安全"
-                my:logo_pay="@drawable/icon_pay_integral"
-                my:radio="@drawable/radio"
-                my:title_pay="@string/pay_integral"
 
-                />
 
             <com.show.specialshow.view.PayRadioPurified
                 android:id="@+id/p2"
@@ -114,6 +102,19 @@
                 my:logo_pay="@drawable/icon_alipay_plugin"
                 my:radio="@drawable/radio"
                 my:title_pay="@string/pay_alipay" />
+
+            <com.show.specialshow.view.PayRadioPurified
+                android:id="@+id/p1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_border_selector"
+                my:checked="false"
+                my:desc="支付银行卡支付，支付更安全"
+                my:logo_pay="@drawable/icon_pay_integral"
+                my:radio="@drawable/radio"
+                my:title_pay="@string/pay_integral"
+
+                />
 
         </com.show.specialshow.view.PayRadioGroup>
 

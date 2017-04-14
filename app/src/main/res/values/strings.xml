@@ -146,7 +146,7 @@
     <string name="confirm_pay">确认支付</string>
     <string name="submit">提交</string>
     <string name="pay_way">选择支付方式</string>
-    <string name="pay_integral">积分支付</string>
+    <string name="pay_integral">线下支付</string>
     <string name="pay_wx">微信支付</string>
     <string name="pay_alipay">支付宝</string>
     <string name="consume_introduction">您可以使用积分和在线支付进行消费，在线支付消费可以累积积分</string>

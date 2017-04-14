@@ -75,9 +75,13 @@ public class PayActivity extends BaseActivity {
     private static final String CHANNEL_ALIPAY = "alipay";
 
     /**
+     * 线下支付渠道
+     */
+    private static final String CHANNEL_XXPAY = "xxpay";
+    /**
      * 支付宝和微信的控件id
      */
-    private int wxId, alipayId;
+    private int wxId, alipayId, xxpayId;
 
     /**
      * 支付回调码
@@ -131,12 +135,12 @@ public class PayActivity extends BaseActivity {
         }
         tv_pay_amount.setText("¥ " + pay_amount);
         pay_confirm.setText("确认支付" + pay_amount + "元");
-        ((PayRadioPurified) genderGroup.getChildAt(0)).setTextDesc("您的可用积分为20000分，本次扣除"
-                + pay_amount + "分");
+        ((PayRadioPurified) genderGroup.getChildAt(0)).setTextDesc("本次消费可获得" + pay_amount + "积分");
         ((PayRadioPurified) genderGroup.getChildAt(1)).setTextDesc("本次消费可获得" + pay_amount + "积分");
         ((PayRadioPurified) genderGroup.getChildAt(2)).setTextDesc("本次消费可获得" + pay_amount + "积分");
-        wxId = genderGroup.getChildAt(1).getId();
-        alipayId = genderGroup.getChildAt(2).getId();
+        wxId = genderGroup.getChildAt(0).getId();
+        alipayId = genderGroup.getChildAt(1).getId();
+        xxpayId = genderGroup.getChildAt(2).getId();
     }
 
     @Override
@@ -193,6 +197,8 @@ public class PayActivity extends BaseActivity {
                                 pingPay(CHANNEL_WECHAT, pay_money);
                             } else if (payRadioPurified.getId() == alipayId) {
                                 pingPay(CHANNEL_ALIPAY, pay_money);
+                            } else if (payRadioPurified.getId() == xxpayId) {
+                                pingPay(CHANNEL_XXPAY, pay_money);
                             }
                         }
 
@@ -265,6 +271,9 @@ public class PayActivity extends BaseActivity {
                 }
                 if (1 == result.getSuccess()) {
                     Pingpp.createPayment(mContext, result.getData());
+                } else if (10000 == result.getSuccess()) {
+                    payCode = 1;
+                    createAffirmDialog(result.getMessage(), DIALOG_SINGLE_STPE, false);
                 } else {
                     UIHelper.ToastMessage(mContext, result.getMessage());
                 }
