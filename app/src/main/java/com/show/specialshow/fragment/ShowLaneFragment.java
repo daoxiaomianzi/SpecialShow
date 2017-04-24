@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -35,7 +34,6 @@ import com.show.specialshow.TXApplication;
 import com.show.specialshow.URLs;
 import com.show.specialshow.activity.BannerWebActivity;
 import com.show.specialshow.activity.CircleDynamicDetailActivity;
-import com.show.specialshow.activity.MainActivity;
 import com.show.specialshow.activity.SearchResultActivity;
 import com.show.specialshow.activity.StoresDetailsActivity;
 import com.show.specialshow.adapter.GridViewAdapter;
@@ -61,9 +59,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 

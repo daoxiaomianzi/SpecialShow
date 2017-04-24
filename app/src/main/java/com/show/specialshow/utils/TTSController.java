@@ -251,7 +251,6 @@ public class TTSController implements SynthesizerListener, AMapNaviListener {
     public void onNaviInfoUpdate(NaviInfo arg0) {
 
 
-
     }
 
     @Override

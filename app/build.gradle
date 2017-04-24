@@ -6,6 +6,14 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi'//只打包armeabi平台的，就算有其他文件夹也不管
+//                include 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'mips', 'x86', 'x86_64'
+        }
+    }
     defaultConfig {
         applicationId "com.show.specialshow"
         minSdkVersion 14
@@ -137,4 +145,5 @@ dependencies {
     //    }
     compile project(':pingpp')
     compile 'cn.bingoogolapple:bga-banner:2.1.4@aar'
+//    compile files('libs/Native_Libs2.jar')
 }

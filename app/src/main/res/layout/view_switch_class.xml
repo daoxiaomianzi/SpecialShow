@@ -29,20 +29,4 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/text_size_20px"
         android:background="@color/app_bg" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:paddingBottom="@dimen/text_size_10px"
-        android:paddingTop="@dimen/text_size_10px"
-        android:text="为你推荐"
-        android:textColor="@color/color_333333"
-        android:textSize="@dimen/text_size_26px" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/app_bg" />
 </LinearLayout>
