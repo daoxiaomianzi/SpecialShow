@@ -206,6 +206,7 @@ public class BaseBusCenWebActivity extends BaseActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 // 设置点击网页里面的链接还是在当前的webview里跳转
                 view.loadUrl(url);
+
                 return true;
             }
 
@@ -231,7 +232,12 @@ public class BaseBusCenWebActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 hideLoadingDialog();
-
+                if (url.contains("http://m.teshow.com/Android/Goodslist/cogoods_list")) {
+                    head_right_tv.setVisibility(View.VISIBLE);
+                    UIHelper.leftDrawable(R.drawable.icon_share, mContext, head_right_tv);
+                } else {
+                    head_right_tv.setVisibility(View.GONE);
+                }
             }
         });
     }

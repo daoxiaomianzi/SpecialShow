@@ -349,7 +349,7 @@ public class StoresDetailsActivity extends BaseActivity implements AMapLocationL
                 break;
             case R.id.rl_stores_details_activity://活动
                 if (TXApplication.login) {
-                    bundle.putString("status_url", URLs.COMMON_ACTIVITY + SPUtils.get(mContext, "uid", ""));
+                    bundle.putString("status_url", URLs.COMMON_ACTIVITY);
                     UIHelper.startActivity(mContext, CommonActivityActivity.class, bundle);
                 } else {
                     bundle.putInt(LoginActivity.FROM_LOGIN, LoginActivity.FROM_OTHER);

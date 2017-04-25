@@ -7,7 +7,6 @@ import com.show.specialshow.R;
 import com.show.specialshow.fragment.IndustryDynamicFragment;
 import com.show.specialshow.fragment.OfficialEventFragment;
 import com.show.specialshow.fragment.TeShowActivitiesFragment;
-import com.umeng.commm.ui.fragments.RecommendTopicSearchFragment;
 
 public class TexiuActivitiesActivity extends BaseActivity {
     //相关控件

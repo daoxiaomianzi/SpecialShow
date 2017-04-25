@@ -1,15 +1,20 @@
 package com.show.specialshow.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
 
 import com.show.specialshow.R;
+import com.show.specialshow.utils.SPUtils;
+import com.show.specialshow.utils.ShareServiceFactory;
 import com.show.specialshow.utils.UIHelper;
+import com.umeng.comm.core.beans.ShareContent;
 
 public class CommonActivityActivity extends BaseBusCenWebActivity {
     private static final int SET_TRADING_PASSWORD = 251;
     private static final int SET_BINDING_PHONE = 252;
+    private String shareLink, shareLinkTitle, id;
 
     @Override
     public void initData() {
@@ -35,6 +40,9 @@ public class CommonActivityActivity extends BaseBusCenWebActivity {
                 if (null != affirmDialog) {
                     affirmDialog.dismiss();
                 }
+                break;
+            case R.id.head_right_tv:
+                share();
                 break;
 
             default:
@@ -70,6 +78,39 @@ public class CommonActivityActivity extends BaseBusCenWebActivity {
                 UIHelper.startActivity(mContext, MyInviteActivity.class);
             }
         });
+    }
+
+    @JavascriptInterface
+    public void transmit(final String link, final String link_title, final String activityId) {
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                id = activityId;
+                shareLink = link;
+                shareLinkTitle = link_title;
+            }
+        });
+    }
+
+    /**
+     * 分享回调
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ShareServiceFactory.getShareService().onActivityResult(mContext, requestCode, resultCode, data);
+    }
+
+    /**
+     * 分享
+     */
+    private void share() {
+        ShareContent shareItem = new ShareContent();
+        shareItem.mText = shareLinkTitle;
+        shareItem.mTargetUrl = shareLink.equals("http://m.teshow.com/index.php?g=User&m=Merchant&a=zhuce")
+                ? shareLink + "&uid=" + SPUtils.get(mContext, "uid", "") : shareLink;
+        shareItem.mTitle = shareLinkTitle;
+        ShareServiceFactory.getShareService().share(id, this, shareItem);
     }
 
 

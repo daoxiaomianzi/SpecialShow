@@ -56,6 +56,21 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_36px" />
+
+        <TextView
+            android:id="@+id/head_right_tv"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:clickable="true"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingLeft="15dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_32px"
+            android:visibility="gone" />
     </RelativeLayout>
 
 
