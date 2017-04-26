@@ -6,7 +6,13 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.show.specialshow.R;
+import com.show.specialshow.TXApplication;
+import com.show.specialshow.URLs;
 import com.show.specialshow.listener.Shareable;
 import com.umeng.comm.core.beans.ShareContent;
 import com.umeng.comm.core.impl.CommunityFactory;
@@ -115,8 +121,8 @@ public class ShareServiceImpl implements Shareable {
 
         (new ShareAction(activity)).withText(shareItem.mText).withTitle(title).withMedia(image).withTargetUrl(shareItem.mTargetUrl).setCallback(new UMShareListener() {
             public void onResult(SHARE_MEDIA platform) {
-//                ToastMsg.showShortMsgByResName("umeng_comm_share_success");
-                UIHelper.ToastMessage(activity, id);
+                ToastMsg.showShortMsgByResName("umeng_comm_share_success");
+                notifyShareSuccess(id, SPUtils.get(activity, "uid", "").toString(), activity);
                 String platformKeyWorld = "";
                 if (platform == SHARE_MEDIA.WEIXIN) {
                     platformKeyWorld = "wxsession";
@@ -142,4 +148,28 @@ public class ShareServiceImpl implements Shareable {
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         UMShareAPI.get(activity).onActivityResult(requestCode, resultCode, data);
     }
+
+    /**
+     * 通知服务器
+     */
+    private void notifyShareSuccess(final String id, final String uid, final Activity activity) {
+        RequestParams params = TXApplication.getParams();
+        String url = URLs.NOTIFY_SHARE_SUCCESS;
+        params.addBodyParameter("id", id);
+        params.addBodyParameter("uid", uid);
+        TXApplication.post(null, activity, url, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                notifyShareSuccess(id, uid, activity);
+            }
+        });
+    }
+
+
 }

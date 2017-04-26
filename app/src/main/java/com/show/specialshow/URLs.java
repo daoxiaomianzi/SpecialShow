@@ -303,5 +303,9 @@ public interface URLs {
      * 特秀代理系统链接
      */
     String USER_AGENT = BASE_IMAGE_URL + "User/Agent/index?uid=";
+    /**
+     * 分享成功通知服务器
+     */
+    String NOTIFY_SHARE_SUCCESS = BASE_IMAGE_URL + "index.php?g=Android&m=Service&a=coupon_get";
 }
 
