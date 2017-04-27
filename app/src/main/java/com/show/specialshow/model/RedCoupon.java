@@ -13,6 +13,7 @@ public class RedCoupon implements Serializable {
 
     private long enddate;
     private int is_use;
+    private int statue;
     private double num;
     private String red_id;
     private int type;
@@ -21,6 +22,14 @@ public class RedCoupon implements Serializable {
     private String use_service;
     private String use_merchant;
     private String use_merchant_id;//优惠劵使用店铺
+
+    public int getStatue() {
+        return statue;
+    }
+
+    public void setStatue(int statue) {
+        this.statue = statue;
+    }
 
     public String getUse_merchant_id() {
         return use_merchant_id;

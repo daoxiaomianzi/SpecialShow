@@ -185,7 +185,8 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
                         + DateUtil.getOnlytoDayByMilli(coupon_item
                         .getEnddate() * 1000));
         if (coupon_item.getIs_use() == 0 &&
-                coupon_item.getEnddate() > DateUtil.weeHours()) {
+                coupon_item.getEnddate() > DateUtil.weeHours() && coupon_item
+                .getStatue() == 0) {
             holder.red_coupon_value_tv.setTextColor(mContext.getResources()
                     .getColor(R.color.novice_label_text));
             holder.red_coupon_usefull_life_tv.setTextColor(mContext.getResources()
@@ -200,8 +201,13 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
             holder.red_coupon_type_bg_item
                     .setBackgroundResource(R.drawable.icon_red_coupon_available_title);
         } else {
+
             if (coupon_item.getIs_use() == 0) {
-                holder.red_coupon_buy_btn.setText("已过期");
+                if (coupon_item.getStatue() == 1) {
+                    holder.red_coupon_buy_btn.setText("待激活");
+                } else {
+                    holder.red_coupon_buy_btn.setText("已过期");
+                }
             } else {
                 holder.red_coupon_buy_btn.setText("已使用");
             }
