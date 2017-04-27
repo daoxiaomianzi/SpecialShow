@@ -188,6 +188,8 @@ public class RedCouponSwipeAdapter extends BaseSwipeAdapter {
                 coupon_item.getEnddate() > DateUtil.weeHours()) {
             holder.red_coupon_value_tv.setTextColor(mContext.getResources()
                     .getColor(R.color.novice_label_text));
+            holder.red_coupon_usefull_life_tv.setTextColor(mContext.getResources()
+                    .getColor(R.color.color_656565));
             holder.red_coupon_use_sill_tv.setTextColor(mContext.getResources()
                     .getColor(R.color.color_656565));
             holder.red_coupon_validity_date_tv
